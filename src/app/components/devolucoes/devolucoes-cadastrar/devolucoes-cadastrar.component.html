@@ -1,0 +1,105 @@
+<nb-card>
+  <nb-card-body>
+
+    <nb-stepper #stepper [linear]="linearMode">
+      <!-- Primeira Etapa do Formulario ABAIXO:-->
+      <nb-step [stepControl]="nameForm" label="Devolução">
+        <form #nameForm="ngForm" class="step-container">
+          <div class="row">
+
+            <!-- Filial - Serie - CTE -->
+            <div class="col-sm-6">
+              <div class="labelcte">
+                <label for="inputEmail" class="label">Filial</label>
+
+                <label for="inputEmail" class="label">Serie</label>
+
+                <label for="inputEmail" class="label">CTE</label>
+
+              </div>
+
+              <div class="form-group-cte">
+                <input type="number" nbInput  id="inputLastName" placeholder="" name="Filial"
+                ngModel required>
+                <input type="number" nbInput  id="inputLastName" placeholder="" name="Serie"
+                ngModel required>
+                <input type="number" nbInput  id="inputLastName" placeholder="" name="CTE"
+                ngModel required>
+              </div>
+            </div>
+
+            <!-- Numero NFd -->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputEmail" class="label">Número NFd</label>
+              </div>
+
+              <div class="form-group">
+                <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="numero-nfd"
+                ngModel required  class="input-nfd">
+              </div>
+            </div>
+
+            <!-- Opções de Armazem -->
+
+
+              <div class="form-group">
+                <nb-select fullWidth placeholder="Armazem" class="nb-select-armazem" ngModel required>
+                  <nb-option>Reset</nb-option>
+                  <nb-option value="1">Finalizado</nb-option>
+                  <nb-option value="2">Devolução</nb-option>
+                  <nb-option value="3">Option 3</nb-option>
+                </nb-select>
+
+                <!-- Opções de Status-->
+
+                <nb-select fullWidth placeholder="Status da Devolução" class="nb-select-status" ngModel required>
+                  <nb-option>Reset</nb-option>
+                  <nb-option value="1">Finalizado</nb-option>
+                  <nb-option value="2">Devolução</nb-option>
+                  <nb-option value="3">Option 3</nb-option>
+                </nb-select>
+
+              </div>
+            </div>
+           <!--    -->
+
+          <button nbButton nbStepperNext [disabled]="!nameForm.valid">Continuar</button>
+        </form>
+      </nb-step>
+
+
+      <!-- Segunda etapa do formulario-->
+      <nb-step [stepControl]="movieForm" label="Cliente">
+        <!-- Definindo os campos no formulario da segunda etapa-->
+        <form #movieForm="ngForm" class="step-container">
+          <div class="input-group">
+            <input type="text" placeholder="Enter your favorite movie" class="form-control" name="movie" required
+              nbInput ngModel #movie="ngModel">
+          </div>
+          <button nbButton nbStepperNext>Continuar</button>
+        </form>
+
+      </nb-step>
+
+      <!-- Terceira Etapa do Formulario -->
+      <nb-step [stepControl]="somethingForm" label="Produtos">
+        <!-- Definindo os campos no formulario da terceira etapa-->
+        <form #somethingForm="ngForm" class="step-container">
+          <div class="input-group">
+            <input type="text" placeholder="Enter something" class="form-control" name="something" required nbInput
+              ngModel #somethingInput="ngModel">
+          </div>
+          <button nbButton nbStepperNext>Concluir</button>
+        </form>
+      </nb-step>
+      <!-- Ultima etapa do formulario e a solicitação de cadastro novamente-->
+      <nb-step [hidden]="true">
+        <div class="step-container">
+          <h3>Cadastro completo!</h3>
+          <button nbButton (click)="stepper.reset()">Cadastrar novamente?</button>
+        </div>
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>

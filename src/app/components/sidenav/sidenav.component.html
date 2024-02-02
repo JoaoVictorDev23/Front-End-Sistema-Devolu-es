@@ -1,0 +1,19 @@
+<nb-layout class="full">
+
+  <nb-layout-header fixed>
+    <img src="/assets/img/tdmtransporte.png" alt="teste">
+  </nb-layout-header>
+
+  <nb-sidebar>
+    <nb-menu [items]="items"></nb-menu>
+  </nb-sidebar>
+
+  <nb-layout-column>
+ <!-- renderização dos component filhos-->
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+    © 2024 João Victor S. de F. Todos os direitos reservados.
+  </nb-layout-footer>
+</nb-layout>
