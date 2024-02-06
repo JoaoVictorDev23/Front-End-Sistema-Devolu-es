@@ -23,30 +23,33 @@ label {
   margin-left: 4px;
   margin-right: 155px;
   font-weight: bold;
+  color: #676060;
 }
 
-input[type="number"],
+input[type="number"],input[type="text"],
 nb-select {
   width: 100%;
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #a59e9e;
   border-radius: 8px;
   margin-top: 5px;
   margin-bottom: 10px;
   margin-right: 5px;
+  color: #a59e9e;
 }
 
 /* Botão */
 button {
   width: 100%;
   padding: 10px 20px;
-  background-color: #009944; /* Correção para o botão "Continuar" */
+  background-color: #004a45; /* Correção para o botão "Continuar" */
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
 }
+
 
 /* Layout Responsivo para rótulos e inputs */
 @media (min-width: 768px) {
@@ -67,23 +70,6 @@ button {
     flex-basis: 32.45%; /* Ajuste conforme necessário para larguras dos rótulos */
   }
 }
-
-/* Estilização específica para certos elementos */
-.input-nfd {
-
-  width: 50%;
-}
-
-/* Estilização específica para certos elementos */
-.nb-select-status,
-.nb-select-armazem {
-  border: 0.5;
-  width: 80%; /* Reduzindo a largura do nb-select */
-  margin: 2 auto; /* Centralizando o nb-select */
-}
-
-
-
 /* Responsividade do Formulário */
 @media (max-width: 768px) {
   .step-container {
@@ -94,3 +80,28 @@ button {
     flex-direction: row;
   }
 }
+
+.custom-textarea {
+  resize: none; // Impede a redimensionamento
+  max-width: 100%; // Largura máxima
+  max-height: 150px; // Altura máxima (ajuste conforme necessário)
+
+  // Estilos adicionais, se necessário
+  border: 1px solid #a59e9e;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  color:#666363;
+
+}
+
+.render
+ {
+
+    margin-bottom:2rem
+
+  }
+
+
+

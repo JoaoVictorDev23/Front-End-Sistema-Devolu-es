@@ -7,5 +7,23 @@ import { Component } from '@angular/core';
 })
 export class DevolucoesCadastrarComponent {
 
-  linearMode = true;
+  linearMode = false;
+
+  products: any[] = [
+    {
+      name: 'Produto 1',
+      price: 100,
+      category: 'Categoria 1',
+    },
+    {
+      name: 'Produto 2',
+      price: 200,
+      category: 'Categoria 2',
+    },
+    {
+      name: 'Produto 3',
+      price: 300,
+      category: 'Categoria 3',
+    },
+  ];
 }

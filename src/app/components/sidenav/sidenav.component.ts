@@ -35,6 +35,17 @@ export class SidenavComponent {
         { title: 'Excluir uma devolução', link: 'devolucao/excluir' },
       ],
     },
+    {
+      title: 'Armazém',
+      icon: 'cube-outline',
+      link: 'armazem', // Link para a página
+      children: [
+        { title: 'Ver Todos', link: 'devolucoes/lista' },
+        { title: 'Cadastrar novo armazém', link: 'armazem/cadastrar' },
+        { title: 'Atualizar um armazém', link: 'armazem/update' },
+        { title: 'Excluir um armazem', link: 'armazem/excluir' },
+      ],
+    },
     // ... outros itens do menu
   ];
 

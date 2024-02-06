@@ -19,12 +19,9 @@
               </div>
 
               <div class="form-group-cte">
-                <input type="number" nbInput  id="inputLastName" placeholder="" name="Filial"
-                ngModel required>
-                <input type="number" nbInput  id="inputLastName" placeholder="" name="Serie"
-                ngModel required>
-                <input type="number" nbInput  id="inputLastName" placeholder="" name="CTE"
-                ngModel required>
+                <input type="number" nbInput id="inputLastName" placeholder="" name="Filial" ngModel required>
+                <input type="number" nbInput id="inputLastName" placeholder="" name="Serie" ngModel required>
+                <input type="number" nbInput id="inputLastName" placeholder="" name="CTE" ngModel required>
               </div>
             </div>
 
@@ -35,49 +32,103 @@
               </div>
 
               <div class="form-group">
-                <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="numero-nfd"
-                ngModel required  class="input-nfd">
+                <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="numero-nfd" ngModel
+                  required class="input-nfd">
               </div>
+              <!-- Observação -->
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="inputEmail" class="label">Observações</label>
+                </div>
+              </div>
+
+              <textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" required nbInput
+                ngModel #observacaoInput="ngModel" class="custom-textarea"></textarea>
+
+
             </div>
 
             <!-- Opções de Armazem -->
 
 
-              <div class="form-group">
-                <nb-select fullWidth placeholder="Armazem" class="nb-select-armazem" ngModel required>
-                  <nb-option>Reset</nb-option>
-                  <nb-option value="1">Finalizado</nb-option>
-                  <nb-option value="2">Devolução</nb-option>
-                  <nb-option value="3">Option 3</nb-option>
-                </nb-select>
+            <div class="form-group">
+              <nb-select fullWidth placeholder="Armazem" class="nb-select-armazem" ngModel required>
+                <nb-option>Reset</nb-option>
+                <nb-option value="1">Finalizado</nb-option>
+                <nb-option value="2">Devolução</nb-option>
+                <nb-option value="3">Option 3</nb-option>
+              </nb-select>
 
-                <!-- Opções de Status-->
+              <!-- Opções de Status-->
 
-                <nb-select fullWidth placeholder="Status da Devolução" class="nb-select-status" ngModel required>
-                  <nb-option>Reset</nb-option>
-                  <nb-option value="1">Finalizado</nb-option>
-                  <nb-option value="2">Devolução</nb-option>
-                  <nb-option value="3">Option 3</nb-option>
-                </nb-select>
+              <nb-select fullWidth placeholder="Status da Devolução" class="nb-select-status" ngModel required>
+                <nb-option>Reset</nb-option>
+                <nb-option value="1">Finalizado</nb-option>
+                <nb-option value="2">Devolução</nb-option>
+                <nb-option value="3">Option 3</nb-option>
+              </nb-select>
 
-              </div>
+
+
             </div>
-           <!--    -->
+          </div>
+          <!--    -->
 
-          <button nbButton nbStepperNext [disabled]="!nameForm.valid">Continuar</button>
+          <button nbButton nbStepperNext [disabled]="!nameForm.valid" status="primary">Continuar</button>
         </form>
       </nb-step>
 
 
-      <!-- Segunda etapa do formulario-->
+      <!-- SEGUNDA etapa do formulario-->
       <nb-step [stepControl]="movieForm" label="Cliente">
         <!-- Definindo os campos no formulario da segunda etapa-->
         <form #movieForm="ngForm" class="step-container">
-          <div class="input-group">
-            <input type="text" placeholder="Enter your favorite movie" class="form-control" name="movie" required
-              nbInput ngModel #movie="ngModel">
+          <div class="row">
+
+            <!-- Filial - Serie - CTE -->
+            <div class="col-sm-6">
+              <div class="labelcte">
+                <label for="inputEmail" class="label">CNPJ</label>
+
+                <label for="inputEmail" class="label">Contato</label>
+
+                <label for="inputEmail" class="label">Email</label>
+
+              </div>
+
+              <div class="form-group-cte">
+                <input type="number" nbInput id="inputLastName" placeholder="" name="CNPJ" ngModel required>
+                <input type="number" nbInput id="inputLastName" placeholder="" name="Tel" ngModel required>
+                <input type="number" nbInput id="inputLastName" placeholder="" name="Email" ngModel required>
+              </div>
+            </div>
+            <!-- Nome do Cliente -->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputEmail" class="label">Cliente</label>
+              </div>
+
+              <div class="form-group">
+                <input type="text" nbInput fullWidth id="inputLastName" placeholder="" name="nome-cliente" ngModel
+                  required class="input-nfd">
+              </div>
+            </div>
+
+
+            <!-- Motorista-->
+            <div class="form-group">
+              <nb-select fullWidth placeholder="Motorista" class="nb-select-motorista" ngModel required>
+                <nb-option>Nenhuma das alternativas</nb-option>
+                <nb-option value="1">Jose</nb-option>
+                <nb-option value="2">Jaun</nb-option>
+                <nb-option value="3">Option 3</nb-option>
+              </nb-select>
+            </div>
+            <!-- botao de continuar-->
+            <button nbButton nbStepperNext [disabled]="!movieForm.valid" status="primary">Continuar</button>
+
           </div>
-          <button nbButton nbStepperNext>Continuar</button>
         </form>
 
       </nb-step>
@@ -86,18 +137,41 @@
       <nb-step [stepControl]="somethingForm" label="Produtos">
         <!-- Definindo os campos no formulario da terceira etapa-->
         <form #somethingForm="ngForm" class="step-container">
-          <div class="input-group">
-            <input type="text" placeholder="Enter something" class="form-control" name="something" required nbInput
-              ngModel #somethingInput="ngModel">
+          <div class="row">
+
+            <!-- Filial - Serie - CTE -->
+            <div class="col-sm-6">
+              <button nbButton  class="render">Cadastrar produto<nb-icon icon="plus-circle-outline"></nb-icon></button>
+
+              <div class="labelcte">
+                <label for="inputEmail" class="label">CNPJ</label>
+
+                <label for="inputEmail" class="label">Contato</label>
+
+                <label for="inputEmail" class="label">Email</label>
+
+              </div>
+
+              <div class="form-group-cte">
+                <input type="number" nbInput id="inputLastName" placeholder="" name="CNPJ" ngModel required>
+                <input type="number" nbInput id="inputLastName" placeholder="" name="Tel" ngModel required>
+                <input type="number" nbInput id="inputLastName" placeholder="" name="Email" ngModel required>
+
+              </div>
+            </div>
+
+            <!-- botao de continuar-->
+
+            <button nbButton nbStepperNext status="success">Concluir</button>
+
           </div>
-          <button nbButton nbStepperNext>Concluir</button>
         </form>
       </nb-step>
       <!-- Ultima etapa do formulario e a solicitação de cadastro novamente-->
       <nb-step [hidden]="true">
         <div class="step-container">
           <h3>Cadastro completo!</h3>
-          <button nbButton (click)="stepper.reset()">Cadastrar novamente?</button>
+          <button nbButton status="success" (click)="stepper.reset()" >Cadastrar novamente?</button>
         </div>
       </nb-step>
     </nb-stepper>
