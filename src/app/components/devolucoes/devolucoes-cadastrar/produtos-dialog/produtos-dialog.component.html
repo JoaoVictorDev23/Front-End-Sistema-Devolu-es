@@ -1,0 +1,14 @@
+<nb-card>
+  <nb-card-header>Adicione produtos a sua nota:</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <input [(ngModel)]="produto.nome" nbInput placeholder="Nome do Produto">
+      <input [(ngModel)]="produto.valor" type="number" nbInput placeholder="Valor do Produto">
+      <input [(ngModel)]="produto.quantidade" type="number" nbInput placeholder="Quantidade">
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="cancel" nbButton status="danger" (click)="cancel()">Cancelar</button>
+    <button nbButton status="success" (click)="submit()">Cadastrar</button>
+  </nb-card-footer>
+</nb-card>

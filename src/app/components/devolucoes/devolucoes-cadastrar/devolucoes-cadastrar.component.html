@@ -35,22 +35,16 @@
                 <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="numero-nfd" ngModel
                   required class="input-nfd">
               </div>
-              <!-- Observação -->
-
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="inputEmail" class="label">Observações</label>
-                </div>
-              </div>
-
-              <textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" required nbInput
-                ngModel #observacaoInput="ngModel" class="custom-textarea"></textarea>
-
 
             </div>
 
             <!-- Opções de Armazem -->
 
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputEmail" class="label">Armazém</label>
+              </div>
+            </div>
 
             <div class="form-group">
               <nb-select fullWidth placeholder="Armazem" class="nb-select-armazem" ngModel required>
@@ -62,12 +56,29 @@
 
               <!-- Opções de Status-->
 
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="inputEmail" class="label">Status</label>
+                </div>
+              </div>
+
               <nb-select fullWidth placeholder="Status da Devolução" class="nb-select-status" ngModel required>
                 <nb-option>Reset</nb-option>
                 <nb-option value="1">Finalizado</nb-option>
                 <nb-option value="2">Devolução</nb-option>
                 <nb-option value="3">Option 3</nb-option>
               </nb-select>
+
+              <!-- Observação -->
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="inputEmail" class="label">Observações</label>
+                </div>
+              </div>
+
+              <textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" required nbInput
+                ngModel #observacaoInput="ngModel" class="custom-textarea"></textarea>
 
 
 
@@ -117,6 +128,12 @@
 
 
             <!-- Motorista-->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputEmail" class="label">Motorista</label>
+              </div>
+            </div>
+
             <div class="form-group">
               <nb-select fullWidth placeholder="Motorista" class="nb-select-motorista" ngModel required>
                 <nb-option>Nenhuma das alternativas</nb-option>
@@ -126,7 +143,8 @@
               </nb-select>
             </div>
             <!-- botao de continuar-->
-            <button nbButton nbStepperNext [disabled]="!movieForm.valid" status="primary">Continuar</button>
+            <button nbButton nbStepperNext [disabled]="!movieForm.valid" status="primary"
+              class="button-step2">Continuar</button>
 
           </div>
         </form>
@@ -136,42 +154,65 @@
       <!-- Terceira Etapa do Formulario -->
       <nb-step [stepControl]="somethingForm" label="Produtos">
         <!-- Definindo os campos no formulario da terceira etapa-->
-        <form #somethingForm="ngForm" class="step-container">
-          <div class="row">
+        <form #somethingForm="ngForm">
+          <div>
+            <button nbButton status="info" class="button-adicionar-prod" (click)="openDialog()">Adicionar
+              Produto</button>
+            <input type="text" nbInput fullWidth (keyup)="applyFilter($event)" placeholder="Buscar:" #input>
 
-            <!-- Filial - Serie - CTE -->
-            <div class="col-sm-6">
-              <button nbButton  class="render">Cadastrar produto<nb-icon icon="plus-circle-outline"></nb-icon></button>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
 
-              <div class="labelcte">
-                <label for="inputEmail" class="label">CNPJ</label>
 
-                <label for="inputEmail" class="label">Contato</label>
+              <!-- Nome do Produto -->
+              <ng-container matColumnDef="nome">
+                <th mat-header-cell *matHeaderCellDef> Nome Produto </th>
+                <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+              </ng-container>
 
-                <label for="inputEmail" class="label">Email</label>
+              <!-- Adicione uma nova coluna para o ícone de exclusão -->
+              <ng-container matColumnDef="acao">
+                <th mat-header-cell *matHeaderCellDef> Ação </th>
+                <td mat-cell *matCellDef="let element">
 
-              </div>
+                  <button nbButton status="danger" (click)="excluirProduto(element)" class="button-excluir-prod">
+                    <i class="material-icons delete">delete</i>
+                  </button>
+                </td>
+              </ng-container>
 
-              <div class="form-group-cte">
-                <input type="number" nbInput id="inputLastName" placeholder="" name="CNPJ" ngModel required>
-                <input type="number" nbInput id="inputLastName" placeholder="" name="Tel" ngModel required>
-                <input type="number" nbInput id="inputLastName" placeholder="" name="Email" ngModel required>
 
-              </div>
-            </div>
+              <!-- Quantidade do Produto -->
+              <ng-container matColumnDef="quantidade">
+                <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+                <td mat-cell *matCellDef="let element"> {{element.quantidade}} </td>
+              </ng-container>
 
+              <!-- Valor do Produto -->
+              <ng-container matColumnDef="valor">
+                <th mat-header-cell *matHeaderCellDef> Valor Unitário </th>
+                <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+
+                <td class="mat-cell" colspan="3">  Adicione produtos!</td>
+              </tr>
+            </table>
             <!-- botao de continuar-->
-
-            <button nbButton nbStepperNext status="success">Concluir</button>
-
+            <button nbButton nbStepperNext status="success" class="button-concluir">Concluir</button>
           </div>
         </form>
       </nb-step>
+
       <!-- Ultima etapa do formulario e a solicitação de cadastro novamente-->
       <nb-step [hidden]="true">
         <div class="step-container">
           <h3>Cadastro completo!</h3>
-          <button nbButton status="success" (click)="stepper.reset()" >Cadastrar novamente?</button>
+          <button nbButton status="success" (click)="stepper.reset()">Cadastrar novamente?</button>
         </div>
       </nb-step>
     </nb-stepper>
