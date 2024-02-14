@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
-import { NB_WINDOW, NbMenuService } from '@nebular/theme';
-import { filter, map } from 'rxjs/operators';
-
-
 
 @Component({
   selector: 'app-sidenav',
@@ -13,33 +9,84 @@ import { filter, map } from 'rxjs/operators';
 export class SidenavComponent {
 
   items: NbMenuItem[] = [
-
     {
       title: 'Página Inicial',
       icon: 'home-outline',
-      link: 'home', // Link para a página
+      link: '/home',
+
     },
     {
-      title: 'Devoluções',
-      icon: 'undo-outline',
-      link: 'devolucao',
+      title: 'Cadastros',
+      icon: 'list-outline',
       children: [
-        { title: 'Ver Todos', link: 'devolucoes/listar' },
-        { title: 'Cadastrar nova devolução', link: 'devolucao/cadastrar' }
+        {
+          title: 'Devolução',
+          icon: 'undo-outline',
+          children: [
+            { title: 'Vizualizar devoluções', link: '/devolucoes/listar' },
+            { title: 'Cadastrar nova devolução', link: '/devolucao/cadastrar' }
+
+          ]
+        },
+        {
+          title: 'Armazém',
+          icon: 'cube-outline',
+          link: 'armazem',
+          children: [
+            { title: 'Vizualizar armazéns', link: '/armazem/listar' },
+            { title: 'Cadastrar novo armazém', link: '/armazem/cadastrar' }
+          ]
+        },
+        {title:'Pessoa',
+        icon: 'person-add-outline',
+        link: '/pessoa'
+
+       },
+       { title:'Motivos Devolutivos',
+         icon: 'message-circle-outline',
+         link: '/motivo/cadastrar'
+       },
       ],
     },
     {
-      title: 'Armazém',
-      icon: 'cube-outline',
-      link: 'armazem', // Link para a página
+      title: 'Validar Notas',
+      icon: 'file-text-outline',
       children: [
-        { title: 'Ver Todos', link: 'armazem/listar' },
-        { title: 'Cadastrar novo armazém', link: 'armazem/cadastrar' }
+        { title: 'Gerar validação', link: '/aprovacao', icon: 'checkmark-circle-outline' },
+        {
+          title: 'Vizualizar notas',
+          link: '/aprovacao/list',
+          icon: 'eye-outline',
+          children: [
+            { title: 'Aprovadas', link: '/aprovacao/aprovados', icon: 'done-all-outline' },
+            { title: 'Em correção', link: '/aprovacao/correcao', icon: 'refresh-outline' },
+            { title: 'Rejeitadas', link: '/aprovacao/rejeitadas', icon: 'close-outline' },
+          ]
+        }
       ],
     },
-    // ... outros itens do menu
+
+    {
+      title: 'Informações',
+      icon: 'alert-circle-outline',
+      children:[
+        {
+          title: 'Sobre',
+          icon: 'info-outline',
+          link: '/sobre'
+        },
+        {
+          title: 'Ajuda',
+          icon: 'question-mark-circle-outline',
+          link: '/ajuda'
+        },
+      ]
+    },
+    {
+      title: 'Sair',
+      icon: 'log-out-outline',
+      link: '/ajuda'
+    },
+
   ];
-
-  //Denominando validações dos campos da etapa 1
-
 }

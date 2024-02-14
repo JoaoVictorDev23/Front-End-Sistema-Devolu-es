@@ -1,0 +1,34 @@
+
+<nb-card size="large">
+  <nb-card-header  style="margin: auto;">Cadastro de Armazém</nb-card-header>
+  <nb-card-body>
+
+    <form #nameForm="ngForm" class="step-container">
+      <div class="row">
+
+        <!-- CADASTRO DE ARMAZENS ONDE SERÁ ARMAZENADO CARGAS EM AVARIAS  -->
+        <div class="col-sm-6">
+
+          <div class="form-group-cte">
+            <label for="inputEmail" class="label">Nome</label>
+            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="Nome do armazém" ngModel required>
+
+            <label for="inputEmail" class="label">Endereço</label>
+            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="Endereço" ngModel required>
+
+            <label for="inputEmail" class="label">Filial</label>
+            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="Filial" ngModel required>
+
+          </div>
+
+          <div>
+            <button nbButton fullWidth status="success">Success</button>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+  </nb-card-body>
+</nb-card>

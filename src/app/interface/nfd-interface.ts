@@ -1,4 +1,4 @@
-import { Produto } from "../components/devolucoes/devolucoes-cadastrar/produtos-dialog/produtos.interface";
+import { Produto } from "./produtos.interface";
 import { Cliente } from "./cliente-interface";
 import { Motorista } from "./motorista-interface";
 

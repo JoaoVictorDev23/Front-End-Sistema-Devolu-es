@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NbDialogService } from '@nebular/theme';
 import { ProdutosDialogComponent } from './produtos-dialog/produtos-dialog.component';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
-import { Produto } from './produtos-dialog/produtos.interface';
+import { Produto } from '../../../interface/produtos.interface';
 
 
 

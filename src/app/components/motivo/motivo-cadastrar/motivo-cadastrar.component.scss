@@ -1,0 +1,38 @@
+nb-card {
+  width: 50%;
+  height: 88%;
+  margin: auto;
+
+  @media screen and (max-width: 768px) {
+    width: 90%;  // Altere o valor conforme necessário para tamanhos menores
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 90%;  // Altere o valor conforme necessário para tamanhos ainda menores
+  }
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+
+  .label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  input {
+    margin-bottom: 10px;
+  }
+}
+
+button{
+  margin-top: 2rem;
+}
+
+/* Adicione mais estilos conforme necessário */
+.custom-textarea {
+  resize: none; // Impede a redimensionamento
+  max-width: 100%; // Largura máxima
+  max-height: 150px; // Altura máxima (ajuste conforme necessário)
+}

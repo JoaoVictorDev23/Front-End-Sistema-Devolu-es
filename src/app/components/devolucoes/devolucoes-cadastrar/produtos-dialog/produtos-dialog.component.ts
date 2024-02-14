@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
-import { Produto } from './produtos.interface';
+import { Produto } from '../../../../interface/produtos.interface';
 
 
 @Component({

@@ -1,0 +1,60 @@
+table {
+  width: 100%;
+  margin-top: -2rem;
+
+}
+.container{
+
+
+  width: 90%;
+  margin:auto;
+  margin-top:1rem;
+
+
+}
+mat-form-field{
+width:30%;
+margin-bottom: 1.8rem;
+
+}
+button {
+margin-top:0.3rem;
+width: 20%;
+float: right;
+background-color: #549d8b;
+color:rgb(235,235,235);
+}
+
+h1{
+border: none;
+box-shadow: none;
+width: 100%; /* Ajuste conforme necessário para centralizar o card */
+color: #4c8678;
+background: none;
+font-size: large;
+font-family: 'Luminari', fantasy;
+text-align: left;
+margin:auto;
+}
+
+.edit{
+color: #549d8b;
+margin-right:0.4rem;
+}
+.delete{
+color: red;
+
+}
+.view{
+color: #464646;
+}
+
+mat-radio-button {
+  margin:20px;
+
+
+}
+mat-radio-group{
+  margin-left:4rem;
+}
+
