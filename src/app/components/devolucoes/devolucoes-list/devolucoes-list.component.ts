@@ -2,6 +2,9 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { ModalViewArmazemComponent } from '../../modals/modal-view-armazem/modal-view-armazem.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalViewDevolucoesComponent } from '../../modals/modal-view-devolucoes/modal-view-devolucoes.component';
 
 
 export interface PeriodicElement {
@@ -51,5 +54,16 @@ export class DevolucoesListComponent implements AfterViewInit {
 
 
   }
+  constructor(public dialog: MatDialog) {}
 
+  openDialog() {
+    const dialogRef = this.dialog.open(ModalViewDevolucoesComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
+
+
+

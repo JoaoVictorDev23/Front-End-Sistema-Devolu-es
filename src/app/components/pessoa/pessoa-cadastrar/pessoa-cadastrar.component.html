@@ -1,1 +1,48 @@
-<p>pessoa-cadastrar works!</p>
+<nb-card size="large">
+  <nb-card-header style="margin: auto;">Cadastro de Pessoa</nb-card-header>
+  <nb-card-body>
+
+    <form #nameForm="ngForm" class="step-container">
+      <div class="row">
+
+        <!-- CADASTRO DE ARMAZENS ONDE SERÁ ARMAZENADO CARGAS EM AVARIAS  -->
+        <div class="col-sm-6">
+
+          <div class="form-group-cte">
+            <label for="inputEmail" class="label">Nome</label>
+            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="nomepessoa" ngModel required>
+
+            <label for="inputEmail" class="label">CPF</label>
+            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="cpf" ngModel required>
+
+            <label for="inputEmail" class="label">E-mail</label>
+            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="email" ngModel required>
+
+            <!-- Opções de Status-->
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputEmail" class="label">Motivo</label>
+              </div>
+            </div>
+
+            <nb-select fullWidth placeholder="Selecione o motivo" class="nb-select-status" ngModel required>
+              <nb-option>Nenhuma das alternativas</nb-option>
+              <nb-option value="1">Avaria</nb-option>
+              <nb-option value="2">Falta</nb-option>
+              <nb-option value="3">Devolucao</nb-option>
+            </nb-select>
+
+          </div>
+
+          <div>
+            <button nbButton fullWidth status="success">Cadastrar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+  </nb-card-body>
+</nb-card>

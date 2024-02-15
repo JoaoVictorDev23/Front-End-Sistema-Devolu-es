@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -44,6 +46,7 @@ import { MotivoCadastrarComponent } from './components/motivo/motivo-cadastrar/m
 import { AjudaComponent } from './components/ajuda/ajuda.component';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { PessoaCadastrarComponent } from './components/pessoa/pessoa-cadastrar/pessoa-cadastrar.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -76,11 +79,11 @@ import { PessoaCadastrarComponent } from './components/pessoa/pessoa-cadastrar/p
   imports: [
     BrowserModule,
     AppRoutingModule,RouterModule,
-    MatTableModule,
+    MatTableModule,MatIconModule,
     NbDialogModule.forRoot(),
     NbSidebarModule.forRoot(),NbMenuModule.forRoot(),NbIconModule,MatPaginatorModule,
     NbLayoutModule, NbButtonModule, BrowserAnimationsModule,NbStepperModule,
-    NbThemeModule.forRoot({ name: 'default' }), NbEvaIconsModule, NbCardModule,
+    NbThemeModule.forRoot({ name: 'default' }), NbEvaIconsModule, NbCardModule,MatDialogModule,
     FormsModule,MatInputModule,NbInputModule,NbSelectModule,CommonModule,MatFormFieldModule
 
   ],

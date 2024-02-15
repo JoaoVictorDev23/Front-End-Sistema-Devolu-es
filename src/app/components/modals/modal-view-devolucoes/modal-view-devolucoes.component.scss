@@ -1,0 +1,80 @@
+.mat-dialog-container {
+  background-color: #fff; // Cor de fundo
+  padding: 20px; // Espaçamento interno
+
+  h2.mat-dialog-title {
+    font-size: 1.5em; // Tamanho do título
+    margin-bottom: 10px; // Espaçamento inferior do título
+  }
+
+  .mat-dialog-content {
+    font-size: 1em; // Tamanho do conteúdo
+    margin-bottom: 20px; // Espaçamento inferior do conteúdo
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end; // Alinhar botões no final
+
+
+  }
+}
+
+input[type="number"],input[type="text"] {
+  width: 99%;
+  padding: 5px;
+  border: 1px solid #a59e9e;
+  border-radius: 8px;
+  margin-top: 1px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  color: #a59e9e;
+}
+nb-select {
+  width: 99% !important;
+  padding: 2px;
+  border: 1px solid #a59e9e;
+  border-radius: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  color: #a59e9e;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  margin-left: 4px;
+  margin-right: 185px;
+  font-weight: bold;
+  color: #676060;
+}
+
+@media (max-width: 768px) {
+
+  .labelcte {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .labelcte {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1px; /* Ajuste para espaçamento */
+    align-items: center;
+  }
+
+  .form-group-cte {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .form-group-cte > input,
+  .form-group-cte > nb-select {
+    flex-basis: 32.45%; /* Ajuste conforme necessário para larguras dos rótulos */
+  }
+}
+table{
+  margin-top: 3rem;
+}

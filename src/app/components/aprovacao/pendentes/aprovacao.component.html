@@ -1,12 +1,10 @@
 
-    <mat-form-field>
-      <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-    </mat-form-field>
+<input nbInput (keyup)="applyFilter($event)" placeholder="Ex. '123'" #input style="margin-bottom:1rem; background-color: #ffffff; border: 1px solid #e2dfdf; height: 2.5rem; width: 55rem;" class="mat-elevation-z1">
 
-    <div class="mat-elevation-z8">
 
-      <table mat-table [dataSource]="dataSource" matSort>
+    <div class="mat-elevation-z4">
+
+      <table mat-table [dataSource]="dataSource" matSort style="border: 1px solid  #e2dfdf; ">
 
 
         <!-- ID Column -->
@@ -42,6 +40,6 @@
         </tr>
       </table>
 
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" aria-label="Select page of users"></mat-paginator>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" aria-label="Select page of users" style="border: 1px solid  #e2dfdf; "></mat-paginator>
     </div>
 
