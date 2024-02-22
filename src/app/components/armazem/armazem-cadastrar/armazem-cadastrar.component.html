@@ -11,18 +11,18 @@
 
           <div class="form-group-cte">
             <label for="inputEmail" class="label">Nome</label>
-            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="Nome do armazém" ngModel required>
+            <input type="text" nbInput fullWidth id="inputLastName" placeholder="" name="nomeArmazem" [(ngModel)]="armazem.nome" required>
 
             <label for="inputEmail" class="label">Endereço</label>
-            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="Endereço" ngModel required>
+            <input type="text" nbInput fullWidth id="inputLastName" placeholder="" name="enderecoArmazem" [(ngModel)]="armazem.endereco" required>
 
             <label for="inputEmail" class="label">Filial</label>
-            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="Filial" ngModel required>
+            <input type="text" nbInput fullWidth id="inputLastName" placeholder="" name="filialArmazem" [(ngModel)]="armazem.filial" required>
 
           </div>
 
           <div>
-            <button nbButton fullWidth status="success">Success</button>
+            <button nbButton fullWidth (click)="create()" status="success">Success</button>
           </div>
 
         </div>

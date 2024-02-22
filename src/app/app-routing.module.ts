@@ -15,6 +15,8 @@ import { AjudaComponent } from './components/ajuda/ajuda.component';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { PessoaCadastrarComponent } from './components/pessoa/pessoa-cadastrar/pessoa-cadastrar.component';
 import { MinhasnotasComponent } from './components/minhasnotas/minhasnotas.component';
+import { MinhasnotasReprovadasComponent } from './components/minhasnotas/minhasnotas-reprovadas/minhasnotas-reprovadas.component';
+import { MinhasnotasCorrecaoComponent } from './components/minhasnotas/minhasnotas-correcao/minhasnotas-correcao.component';
 
 const routes: Routes = [
   {
@@ -37,7 +39,9 @@ const routes: Routes = [
       {path:'aprovacao/rejeitadas', component:RejeitadasComponent},
       {path:'aprovacao/correcao', component:CorrecaoComponent},
 
-      {path:'minhasnotas', component:MinhasnotasComponent},
+      {path:'minhasnotas-aprovadas', component:MinhasnotasComponent},
+      {path:'minhasnotas-reprovadas',component:MinhasnotasReprovadasComponent},
+      {path:'minhasnotas-correcao',component:MinhasnotasCorrecaoComponent},
 
       {path:'ajuda', component:AjudaComponent},
       {path:'sobre', component: SobreComponent}

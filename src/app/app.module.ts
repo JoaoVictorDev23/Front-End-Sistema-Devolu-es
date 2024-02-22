@@ -60,6 +60,10 @@ import { ModalAprovarNfdComponent } from './components/modals/modal-aprovar-nfd/
 import { ClienteCadastrarComponent } from './components/cliente/cliente-cadastrar/cliente-cadastrar.component';
 import { MinhasnotasComponent } from './components/minhasnotas/minhasnotas.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MinhasnotasReprovadasComponent } from './components/minhasnotas/minhasnotas-reprovadas/minhasnotas-reprovadas.component';
+import { MinhasnotasCorrecaoComponent } from './components/minhasnotas/minhasnotas-correcao/minhasnotas-correcao.component';
+import { ModalViewDevolucaoCorrecaoComponent } from './components/modals/modal-view-devolucao-correcao/modal-view-devolucao-correcao.component';
+import { ModalViewDevolucaoCorrecaoGestorComponent } from './components/modals/modal-view-devolucao-correcao-gestor/modal-view-devolucao-correcao-gestor.component';
 
 
 
@@ -93,6 +97,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     ModalAprovarNfdComponent,
     ClienteCadastrarComponent,
     MinhasnotasComponent,
+    MinhasnotasReprovadasComponent,
+    MinhasnotasCorrecaoComponent,
+    ModalViewDevolucaoCorrecaoComponent,
+    ModalViewDevolucaoCorrecaoGestorComponent,
 
 
   ],

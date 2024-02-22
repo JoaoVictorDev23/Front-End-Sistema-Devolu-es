@@ -15,16 +15,16 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {numeronfd: 1, filial: 'Hydrogen',serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
-  {numeronfd: 2, filial: 'Helium',  serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
-  {numeronfd: 3, filial: 'Lithium', serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
-  {numeronfd: 4, filial:'Beryllium',serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
-  {numeronfd: 5, filial: 'Boron',   serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
-  {numeronfd: 6, filial: 'Carbon',  serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
-  {numeronfd: 7, filial: 'Nitrogen',serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
-  {numeronfd: 8, filial: 'Oxygen',  serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
-  {numeronfd: 9, filial: 'Fluorine',serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
-  {numeronfd: 10,filial: 'Neon',    serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
+  {numeronfd: 1, filial: 'Hydrogen',serie:'22',cte:'123', situacao: 'Aprovado', acoes: ''},
+  {numeronfd: 2, filial: 'Helium',  serie:'22',cte:'123', situacao: 'Aprovado', acoes: ''},
+  {numeronfd: 3, filial: 'Lithium', serie:'22',cte:'123', situacao: 'Aprovado', acoes: ''},
+  {numeronfd: 4, filial:'Beryllium',serie:'22',cte:'123', situacao: 'Aprovado', acoes: ''},
+  {numeronfd: 5, filial: 'Boron',   serie:'22',cte:'123', situacao: 'Aprovado', acoes: ''},
+  {numeronfd: 6, filial: 'Carbon',  serie:'22',cte:'123', situacao: 'Aprovado', acoes: ''},
+  {numeronfd: 7, filial: 'Nitrogen',serie:'22',cte:'123', situacao: 'Aprovado', acoes: ''},
+  {numeronfd: 8, filial: 'Oxygen',  serie:'22',cte:'123', situacao: 'Aprovado', acoes: ''},
+  {numeronfd: 9, filial: 'Fluorine',serie:'22',cte:'123', situacao: 'Aprovado', acoes: ''},
+  {numeronfd: 10,filial: 'Neon',    serie:'22',cte:'123', situacao: 'Aprovado', acoes: ''},
 ];
 
 @Component({

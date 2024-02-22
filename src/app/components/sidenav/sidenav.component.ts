@@ -71,7 +71,24 @@ export class SidenavComponent {
     {
       title: 'Minhas notas',
       icon: 'file-text',
-      link: '/minhasnotas'
+      children:[{
+        title:'Aprovadas',
+        link:'/minhasnotas-aprovadas',
+        icon: 'done-all-outline'
+      },
+
+      {
+        title:'Correção',
+        link:'/minhasnotas-correcao',
+        icon: 'refresh-outline'
+
+      },
+      {
+        title:'Rejeitadas',
+        link:'/minhasnotas-reprovadas',
+        icon: 'close-outline'
+      },
+      ]
     },
 
     {

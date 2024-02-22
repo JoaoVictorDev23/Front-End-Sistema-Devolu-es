@@ -1,3 +1,4 @@
+import { Armazem } from './../../../interface/armazem-interface';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class ArmazemCadastrarComponent {
 
+  armazem: Armazem = {
+    nome: '',
+    endereco: '',
+    filial: ''
+  }
+
+  create(){
+    console.log(this.armazem);
+  }
 }

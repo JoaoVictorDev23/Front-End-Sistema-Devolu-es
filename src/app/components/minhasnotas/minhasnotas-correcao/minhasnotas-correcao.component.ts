@@ -1,3 +1,4 @@
+import { ModalViewDevolucaoCorrecaoComponent } from './../../modals/modal-view-devolucao-correcao/modal-view-devolucao-correcao.component';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -5,8 +6,6 @@ import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { ModalDevolucoesViewComponent } from '../../modals/modal-view-devolucoes/modal-devolucoes-view/modal-devolucoes-view.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalViewDevolucaoCorrecaoComponent } from '../../modals/modal-view-devolucao-correcao/modal-view-devolucao-correcao.component';
-import { ModalViewDevolucaoCorrecaoGestorComponent } from '../../modals/modal-view-devolucao-correcao-gestor/modal-view-devolucao-correcao-gestor.component';
 
 
 
@@ -31,13 +30,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {numeronfd: 9, filial: 'Fluorine',serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
   {numeronfd: 10,filial: 'Neon',    serie:'22',cte:'123', situacao: 'Correção', acoes: ''},
 ];
-
 @Component({
-  selector: 'app-correcao',
-  templateUrl: './correcao.component.html',
-  styleUrls: ['./correcao.component.scss']
+  selector: 'app-minhasnotas-correcao',
+  templateUrl: './minhasnotas-correcao.component.html',
+  styleUrls: ['./minhasnotas-correcao.component.scss']
 })
-export class CorrecaoComponent implements AfterViewInit{
+export class MinhasnotasCorrecaoComponent implements AfterViewInit{
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -59,7 +57,7 @@ applyFilter(event: Event) {
 constructor(public dialog: MatDialog) {}
 
 openDialog() {
-  const dialogRef = this.dialog.open(ModalViewDevolucaoCorrecaoGestorComponent);
+  const dialogRef = this.dialog.open(ModalViewDevolucaoCorrecaoComponent);
 
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);
@@ -67,4 +65,3 @@ openDialog() {
 }
 
 }
-
