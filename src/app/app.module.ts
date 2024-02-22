@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,7 +23,13 @@ import {
   NbSidebarModule,
   NbStepperModule,
   NbThemeModule,
-  NbTreeGridModule,
+  NbAutocompleteModule,
+  NbUserModule,
+  NbContextMenuModule,
+  NbWindowModule,
+  NbToastrModule,
+  NbChatModule,
+  NbToggleModule
 
 } from '@nebular/theme';
 
@@ -34,19 +41,26 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ProdutosDialogComponent } from './components/devolucoes/devolucoes-cadastrar/produtos-dialog/produtos-dialog.component';
 import { DevolucoesListComponent } from './components/devolucoes/devolucoes-list/devolucoes-list.component';
 import { AprovacaoComponent } from './components/aprovacao/pendentes/aprovacao.component';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { AprovadosComponent } from './components/aprovacao/aprovados/aprovados.component';
 import { RejeitadasComponent } from './components/aprovacao/rejeitadas/rejeitadas.component';
 import { CorrecaoComponent } from './components/aprovacao/correcao/correcao.component';
 import { ArmazemCadastrarComponent } from './components/armazem/armazem-cadastrar/armazem-cadastrar.component';
 import { ArmazemListarComponent } from './components/armazem/armazem-listar/armazem-listar.component';
 import { ModalViewArmazemComponent } from './components/modals/modal-view-armazem/modal-view-armazem.component';
-import { ModalViewDevolucoesComponent } from './components/modals/modal-view-devolucoes/modal-view-devolucoes.component';
 import { MotivoCadastrarComponent } from './components/motivo/motivo-cadastrar/motivo-cadastrar.component';
 import { AjudaComponent } from './components/ajuda/ajuda.component';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { PessoaCadastrarComponent } from './components/pessoa/pessoa-cadastrar/pessoa-cadastrar.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ModalDevolucoesViewComponent } from './components/modals/modal-view-devolucoes/modal-devolucoes-view/modal-devolucoes-view.component';
+import { ModalDevolucaoEditComponent } from './components/modals/modal-devolucao-edit/modal-devolucao-edit.component';
+import { ModalViewDevolucaoExcluirComponent } from './components/modals/modal-view-devolucao-excluir/modal-view-devolucao-excluir.component';
+import { ModalAprovarNfdComponent } from './components/modals/modal-aprovar-nfd/modal-aprovar-nfd.component';
+import { ClienteCadastrarComponent } from './components/cliente/cliente-cadastrar/cliente-cadastrar.component';
+import { MinhasnotasComponent } from './components/minhasnotas/minhasnotas.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -69,22 +83,28 @@ import { MatIconModule } from '@angular/material/icon';
     ArmazemCadastrarComponent,
     ArmazemListarComponent,
     ModalViewArmazemComponent,
-    ModalViewDevolucoesComponent,
     MotivoCadastrarComponent,
     AjudaComponent,
     SobreComponent,
     PessoaCadastrarComponent,
+    ModalDevolucoesViewComponent,
+    ModalDevolucaoEditComponent,
+    ModalViewDevolucaoExcluirComponent,
+    ModalAprovarNfdComponent,
+    ClienteCadastrarComponent,
+    MinhasnotasComponent,
+
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,RouterModule,
-    MatTableModule,MatIconModule,
-    NbDialogModule.forRoot(),
+    MatTableModule,MatIconModule,NbChatModule,
+    NbDialogModule.forRoot(),    NbToastrModule.forRoot(),MatTabsModule,NbToggleModule,ReactiveFormsModule,
     NbSidebarModule.forRoot(),NbMenuModule.forRoot(),NbIconModule,MatPaginatorModule,
-    NbLayoutModule, NbButtonModule, BrowserAnimationsModule,NbStepperModule,
-    NbThemeModule.forRoot({ name: 'default' }), NbEvaIconsModule, NbCardModule,MatDialogModule,
-    FormsModule,MatInputModule,NbInputModule,NbSelectModule,CommonModule,MatFormFieldModule
+    NbLayoutModule, NbButtonModule, BrowserAnimationsModule,NbStepperModule,NbContextMenuModule ,NbWindowModule,
+    NbThemeModule.forRoot({ name: 'default' }), NbEvaIconsModule, NbCardModule,MatDialogModule,NbUserModule,
+    FormsModule,MatInputModule,NbInputModule,NbSelectModule,CommonModule,MatFormFieldModule,NbAutocompleteModule
 
   ],
   providers: [],

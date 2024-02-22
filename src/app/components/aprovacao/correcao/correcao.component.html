@@ -41,9 +41,9 @@
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef> Ações </th>
       <td mat-cell *matCellDef="let element">
-        <i class="material-icons edit delete">delete</i>
-        <i class="material-icons edit">edit</i>
-        <i class="material-icons edit view">visibility</i>
+        <button mat-icon-button (click)="openDialog()">
+          <i class="material-icons edit view">visibility</i>
+        </button>
       </td>
     </ng-container>
 
@@ -55,6 +55,57 @@
       <td class="mat-cell" colspan="4">Pesquisa não localizada</td>
     </tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" style="border: 1px solid  #e2dfdf; "></mat-paginator>
+  <table mat-table [dataSource]="dataSource" style="border: 1px solid  #e2dfdf;">
+
+    <!--  Numero NFD Column -->
+    <ng-container matColumnDef="numeronfd">
+      <th mat-header-cell *matHeaderCellDef> Número NFd </th>
+      <td mat-cell *matCellDef="let element"> {{element.numeronfd}} </td>
+    </ng-container>
+
+    <!-- Filial Column -->
+    <ng-container matColumnDef="filial">
+      <th mat-header-cell *matHeaderCellDef> Filial </th>
+      <td mat-cell *matCellDef="let element"> {{element.filial}} </td>
+    </ng-container>
+
+    <!-- Filial Column -->
+    <ng-container matColumnDef="serie">
+      <th mat-header-cell *matHeaderCellDef> Serie </th>
+      <td mat-cell *matCellDef="let element"> {{element.serie}} </td>
+    </ng-container>
+
+    <!-- Filial Column -->
+    <ng-container matColumnDef="cte">
+      <th mat-header-cell *matHeaderCellDef> CTE </th>
+      <td mat-cell *matCellDef="let element"> {{element.cte}} </td>
+    </ng-container>
+
+
+    <!-- Valor Venda Column -->
+    <ng-container matColumnDef="situacao">
+      <th mat-header-cell *matHeaderCellDef> Situação </th>
+      <td mat-cell *matCellDef="let element"> {{element.situacao}} </td>
+    </ng-container>
+
+
+    <!-- Ações Column -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="openDialog()">
+          <i class="material-icons edit view">visibility</i>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Pesquisa não localizada</td>
+    </tr>
+  </table>
 
 </div>

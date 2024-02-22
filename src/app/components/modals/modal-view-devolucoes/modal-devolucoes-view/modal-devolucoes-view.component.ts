@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+
+import { MatDialogRef } from '@angular/material/dialog';
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -18,12 +21,17 @@ const ELEMENT_DATA2: PeriodicElement[] = [
   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
 ];
 @Component({
-  selector: 'app-modal-view-devolucoes',
-  templateUrl: './modal-view-devolucoes.component.html',
-  styleUrls: ['./modal-view-devolucoes.component.scss']
+  selector: 'app-modal-devolucoes-view',
+  templateUrl: './modal-devolucoes-view.component.html',
+  styleUrls: ['./modal-devolucoes-view.component.scss']
 })
-export class ModalViewDevolucoesComponent {
+export class ModalDevolucoesViewComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA2;
+
+  constructor(private dialogRef: MatDialogRef<ModalDevolucoesViewComponent>) { }
+  voltar(): void {
+    this.dialogRef.close();
+  }
 
 }

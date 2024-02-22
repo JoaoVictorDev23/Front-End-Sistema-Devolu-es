@@ -1,0 +1,51 @@
+.mat-dialog-container {
+  max-width: 800px; /* Ajuste o valor conforme necessário */
+}
+
+.modalarmazem {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%; /* Garante que a classe modalarmazem ocupe 100% da largura */
+}
+
+.col-sm-12 {
+  flex: 0 calc(100%);
+  margin-bottom: 3rem;
+}
+
+.col-sm-6 {
+  flex: 0 0 calc(50% - 15px); /* Isso cria duas colunas com margem entre elas */
+  margin-bottom: 15px; /* Adicione margem inferior entre as linhas */
+}
+
+.input-nome-armazem,
+.input-valor-armazenado,
+.input-endereco,
+.nb-select-motorista {
+  width: 100%; /* Garante largura total para os campos de entrada e select */
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.mat-row,
+.mat-header-row {
+  display: flex;
+  width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  flex: 1;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+
+img{
+  margin-top: 1rem;
+  margin-left: 24rem;
+  margin-bottom: 1rem;
+}

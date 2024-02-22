@@ -1,5 +1,8 @@
-<h2 mat-dialog-title>Dados da Nota Fiscal de</h2>
+
+<img src="/assets/img/dadosnfd.png" alt="Imagem em erro!">
+
 <mat-dialog-content class="mat-typography">
+
   <div class="col-sm-6">
     <div class="labelcte">
       <label for="inputEmail" class="label">Filial</label>
@@ -75,7 +78,7 @@
 
     <!-- TABELA PRODUTOS-->
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z4">
 
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -113,5 +116,5 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button nbButton fullWidth status="primary">Voltar</button>
+  <button nbButton fullWidth status="primary" (click)="voltar()">Voltar</button>
 </mat-dialog-actions>

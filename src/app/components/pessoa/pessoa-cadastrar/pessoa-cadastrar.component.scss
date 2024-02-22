@@ -21,8 +21,9 @@ nb-card {
     margin-bottom: 5px;
   }
 
-  input {
+  input, nb-select {
     margin-bottom: 5px;
+    height: 2.5rem;
   }
 }
 
@@ -31,3 +32,6 @@ button{
 }
 
 /* Adicione mais estilos conforme necessário */
+.nb-select{
+  margin-top: 4px;
+}

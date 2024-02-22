@@ -1,12 +1,28 @@
+nb-layout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 img {
-  width: 12rem ;
-  margin-left: -1.8rem
-
-}
-.form-control{
-  margin-top: .5rem;
-  margin-bottom: 1rem;
-
+  width: 12rem;
+  margin-left: -1rem;
 }
 
+nb-card-body {
+  display: flex;
+  align-items: center;
+}
 
+nb-user {
+  margin-left: auto; // Move o nbuser para a extrema direita dentro do nb-card-body
+}
+
+
+nb-layout-column{
+  background-image:url('/assets/img/background5.jpg');
+}
+
+nb-menu{
+  width: 115%;
+}

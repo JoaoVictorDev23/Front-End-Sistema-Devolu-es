@@ -39,9 +39,9 @@
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef> Ações </th>
       <td mat-cell *matCellDef="let element">
-        <i class="material-icons edit delete">delete</i>
-        <i class="material-icons edit">edit</i>
-        <i class="material-icons edit view">visibility</i>
+        <button mat-icon-button (click)="openDialog()">
+          <i class="material-icons edit view">visibility</i>
+        </button>
       </td>
     </ng-container>
 

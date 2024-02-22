@@ -2,16 +2,21 @@
 
   <nb-layout-header fixed>
     <img src="/assets/img/tdmtransporte.png" alt="teste">
+    <nb-card-body>
+
+      <nb-user name="João Victor Souza" title="FullStack Developer" [nbContextMenu]="items2"
+        nbContextMenuTag="my-context-menu">
+      </nb-user>
+
+    </nb-card-body>
   </nb-layout-header>
 
-  <nb-sidebar>
-
-      <nb-menu [items]="items"></nb-menu>
-
+  <nb-sidebar style="border-right: 1px solid rgb(228, 222, 222);">
+    <nb-menu [items]="items"></nb-menu>
   </nb-sidebar>
 
   <nb-layout-column>
- <!-- renderização dos component filhos-->
+    <!-- renderização dos component filhos-->
     <router-outlet></router-outlet>
   </nb-layout-column>
 

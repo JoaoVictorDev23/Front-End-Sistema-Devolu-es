@@ -9,7 +9,9 @@ import { Produto } from '../../../../interface/produtos.interface';
   styleUrls: ['./produtos-dialog.component.scss']
 })
 export class ProdutosDialogComponent {
-  produto: Produto = { nome: '', quantidade: 0, valor: 0 };
+  produto: Produto = { nome: '', quantidade: 0, valor: 0 , situacao: ''};
+  isFormValid = false; // Add this variable
+
 
   @Output() produtoAdicionado = new EventEmitter<Produto>();
 
@@ -22,5 +24,10 @@ export class ProdutosDialogComponent {
   submit() {
     this.ref.close(this.produto);
   }
+  checkFormValidity() {
+    this.isFormValid = !!(this.produto.nome && this.produto.valor && this.produto.quantidade && this.produto.situacao);
+  }
+
+
 
 }

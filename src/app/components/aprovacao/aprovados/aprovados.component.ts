@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { ModalDevolucoesViewComponent } from '../../modals/modal-view-devolucoes/modal-devolucoes-view/modal-devolucoes-view.component';
 
 
 export interface PeriodicElement {
@@ -50,5 +52,16 @@ export class AprovadosComponent implements AfterViewInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ModalDevolucoesViewComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
 
 }

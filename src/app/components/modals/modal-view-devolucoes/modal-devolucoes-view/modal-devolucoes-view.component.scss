@@ -2,10 +2,7 @@
   background-color: #fff; // Cor de fundo
   padding: 20px; // Espaçamento interno
 
-  h2.mat-dialog-title {
-    font-size: 1.5em; // Tamanho do título
-    margin-bottom: 10px; // Espaçamento inferior do título
-  }
+
 
   .mat-dialog-content {
     font-size: 1em; // Tamanho do conteúdo
@@ -78,3 +75,31 @@ label {
 table{
   margin-top: 3rem;
 }
+.custom-textarea {
+  resize: none; // Impede a redimensionamento
+  max-width: 100%; // Largura máxima
+  max-height: 150px; // Altura máxima (ajuste conforme necessário)
+
+  // Estilos adicionais, se necessário
+  border: 1px solid #a59e9e;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  color:#666363;
+
+}
+h1 {
+  font-size: 1.5em; // Tamanho do título
+  margin-bottom: 10px; // Espaçamento inferior do título
+  margin-left: 10rem;
+}
+
+
+//IMG SCSS
+img{
+ margin-bottom: 1rem;
+ margin-left: 13rem;
+ margin-top: 2rem;
+}
+

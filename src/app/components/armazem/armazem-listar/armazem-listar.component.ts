@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
+import { ModalViewArmazemComponent } from "../../modals/modal-view-armazem/modal-view-armazem.component";
+import { MatDialog } from "@angular/material/dialog";
 
 export interface PeriodicElement {
   armazem: string;
@@ -34,6 +36,30 @@ export class ArmazemListarComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  constructor(public dialog: MatDialog) {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ModalViewArmazemComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openDialogExcluir() {
+    const dialogRef = this.dialog.open(ModalViewArmazemComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  openDialogAtualizar() {
+    const dialogRef = this.dialog.open(ModalViewArmazemComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 

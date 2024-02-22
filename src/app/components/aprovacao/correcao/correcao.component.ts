@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { ModalDevolucoesViewComponent } from '../../modals/modal-view-devolucoes/modal-devolucoes-view/modal-devolucoes-view.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -51,6 +53,15 @@ dataSource = new MatTableDataSource(ELEMENT_DATA);
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
+}
+constructor(public dialog: MatDialog) {}
+
+openDialog() {
+  const dialogRef = this.dialog.open(ModalDevolucoesViewComponent);
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
 }
 
 }

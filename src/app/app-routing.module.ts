@@ -14,6 +14,7 @@ import { MotivoCadastrarComponent } from './components/motivo/motivo-cadastrar/m
 import { AjudaComponent } from './components/ajuda/ajuda.component';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { PessoaCadastrarComponent } from './components/pessoa/pessoa-cadastrar/pessoa-cadastrar.component';
+import { MinhasnotasComponent } from './components/minhasnotas/minhasnotas.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,8 @@ const routes: Routes = [
       {path:'aprovacao/aprovados', component:AprovadosComponent},
       {path:'aprovacao/rejeitadas', component:RejeitadasComponent},
       {path:'aprovacao/correcao', component:CorrecaoComponent},
+
+      {path:'minhasnotas', component:MinhasnotasComponent},
 
       {path:'ajuda', component:AjudaComponent},
       {path:'sobre', component: SobreComponent}

@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { ModalDevolucoesViewComponent } from '../../modals/modal-view-devolucoes/modal-devolucoes-view/modal-devolucoes-view.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 export interface PeriodicElement {
@@ -33,6 +35,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class RejeitadasComponent implements AfterViewInit{
 
+  constructor(public dialog: MatDialog) {}
+
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -48,6 +53,13 @@ export class RejeitadasComponent implements AfterViewInit{
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(ModalDevolucoesViewComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }

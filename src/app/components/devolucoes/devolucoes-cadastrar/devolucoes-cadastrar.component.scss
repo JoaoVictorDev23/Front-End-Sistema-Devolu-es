@@ -17,6 +17,8 @@ nb-card-body {
   flex-wrap: wrap;
 }
 
+
+
 /* Rótulos e Inputs */
 label {
   display: block;
@@ -86,11 +88,28 @@ button {
     margin-bottom: 10px; /* Ajuste para espaçamento */
     align-items: center;
   }
+  .labelvendas {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Ajuste para espaçamento */
+    align-items: center;
+  }
+
+
+
+  .labelcliente {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Ajuste para espaçamento */
+    align-items: center;
+  }
+
 
   .form-group-cte {
     display: flex;
     flex-wrap: wrap;
   }
+
 
   .form-group-cte > input,
   .form-group-cte > nb-select {
@@ -104,6 +123,9 @@ button {
   }
 
   .labelcte {
+    flex-direction: row;
+  }
+  .labelvendas {
     flex-direction: row;
   }
 }
@@ -133,3 +155,23 @@ button {
   mat-table{
     width: 100%;
   }
+
+/* Adicione estas regras ao seu arquivo SCSS */
+
+/* Ajuste de tamanho para input e nb-select na segunda etapa */
+.step-container2 {
+  .form-group-cliente > input,
+  .nb-select-motorista {
+    width: 97% !important; /* Reduzindo 2% do tamanho original */
+  }
+  button{
+    width: 97% !important;
+    margin-top: 10px;
+  }
+
+  nb-toggle{
+    margin-bottom: 5px !important;
+
+  }
+
+}

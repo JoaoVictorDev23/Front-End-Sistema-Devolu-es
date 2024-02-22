@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { NbMenuItem } from '@nebular/theme';
+import { Component, Inject } from '@angular/core';
+import { NB_WINDOW, NbMenuItem, NbMenuService,NbToastrService } from '@nebular/theme';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { filter, map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-sidenav',
@@ -23,7 +26,7 @@ export class SidenavComponent {
           title: 'Devolução',
           icon: 'undo-outline',
           children: [
-            { title: 'Vizualizar devoluções', link: '/devolucoes/listar' },
+            { title: 'Visualizar devoluções', link: '/devolucoes/listar' },
             { title: 'Cadastrar nova devolução', link: '/devolucao/cadastrar' }
 
           ]
@@ -33,7 +36,7 @@ export class SidenavComponent {
           icon: 'cube-outline',
           link: 'armazem',
           children: [
-            { title: 'Vizualizar armazéns', link: '/armazem/listar' },
+            { title: 'Visualizar armazéns', link: '/armazem/listar' },
             { title: 'Cadastrar novo armazém', link: '/armazem/cadastrar' }
           ]
         },
@@ -54,7 +57,7 @@ export class SidenavComponent {
       children: [
         { title: 'Gerar validação', link: '/aprovacao', icon: 'checkmark-circle-outline' },
         {
-          title: 'Vizualizar notas',
+          title: 'Visualizar notas',
           link: '/aprovacao/list',
           icon: 'eye-outline',
           children: [
@@ -64,6 +67,11 @@ export class SidenavComponent {
           ]
         }
       ],
+    },
+    {
+      title: 'Minhas notas',
+      icon: 'file-text',
+      link: '/minhasnotas'
     },
 
     {
@@ -89,4 +97,39 @@ export class SidenavComponent {
     },
 
   ];
+
+
+
+  items2 = [
+    { title: 'Minhas notas', link:'/minhasnotas' },
+    { title: 'Logout' },
+  ];
+
+  constructor(private nbMenuService: NbMenuService,    private toastrService: NbToastrService, // Adicione NbToastrService aqui
+  ) {
+  }
+  ngOnInit() {
+    this.nbMenuService.onItemClick()
+      .pipe(
+        filter(({ tag }) => tag === 'my-context-menu'),
+        map(({ item: { title } }) => title),
+      )
+      .subscribe(title => {
+        let toastrMessage: string;
+
+        if (title === 'Logout') {
+          toastrMessage = 'Você escolheu sair do sistema!';
+          this.showAlert('Alerta', toastrMessage, 'warning');
+        } else {
+          toastrMessage = `${title}!`;
+          this.showAlert('Redirecionando para:', toastrMessage, 'success');
+        }
+      });
+  }
+
+  private showAlert(title: string, message: string, status: string): void {
+    this.toastrService.show(message, title, { status });
+  }
+
+
 }

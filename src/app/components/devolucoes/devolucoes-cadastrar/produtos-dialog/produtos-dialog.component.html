@@ -2,13 +2,20 @@
   <nb-card-header>Adicione produtos a sua nota:</nb-card-header>
   <nb-card-body>
     <div class="row">
-      <input [(ngModel)]="produto.nome" nbInput placeholder="Nome do Produto">
-      <input [(ngModel)]="produto.valor" type="number" nbInput placeholder="Valor do Produto">
-      <input [(ngModel)]="produto.quantidade" type="number" nbInput placeholder="Quantidade">
+      <input [(ngModel)]="produto.nome" nbInput placeholder="Nome do Produto" required (ngModelChange)="checkFormValidity()">
+      <input [(ngModel)]="produto.valor" type="number" nbInput placeholder="Valor do Produto" required (ngModelChange)="checkFormValidity()">
+      <input [(ngModel)]="produto.quantidade" type="number" nbInput placeholder="Quantidade" required (ngModelChange)="checkFormValidity()">
+      <nb-select [(ngModel)]="produto.situacao" placeholder="Situação" class="nb-select-motorista" name="situacao" ngModel required (ngModelChange)="checkFormValidity()">
+        <nb-option>Nenhuma das alternativas</nb-option>
+        <nb-option value="Em armazem">Em Armazem</nb-option>
+        <nb-option value="Venda">Venda</nb-option>
+        <nb-option value="Prejuizo">Prejuizo</nb-option>
+      </nb-select>
+
     </div>
   </nb-card-body>
   <nb-card-footer>
     <button class="cancel" nbButton status="danger" (click)="cancel()">Cancelar</button>
-    <button nbButton status="success" (click)="submit()">Cadastrar</button>
+    <button nbButton status="success" (click)="submit()" [disabled]="!isFormValid">Cadastrar</button>
   </nb-card-footer>
 </nb-card>

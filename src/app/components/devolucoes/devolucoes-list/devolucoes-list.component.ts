@@ -4,7 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { ModalViewArmazemComponent } from '../../modals/modal-view-armazem/modal-view-armazem.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalViewDevolucoesComponent } from '../../modals/modal-view-devolucoes/modal-view-devolucoes.component';
+import { ModalDevolucoesViewComponent } from '../../modals/modal-view-devolucoes/modal-devolucoes-view/modal-devolucoes-view.component';
+import { ModalViewDevolucaoExcluirComponent } from '../../modals/modal-view-devolucao-excluir/modal-view-devolucao-excluir.component';
+import { ModalDevolucaoEditComponent } from '../../modals/modal-devolucao-edit/modal-devolucao-edit.component';
 
 
 export interface PeriodicElement {
@@ -57,7 +59,22 @@ export class DevolucoesListComponent implements AfterViewInit {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
-    const dialogRef = this.dialog.open(ModalViewDevolucoesComponent);
+    const dialogRef = this.dialog.open(ModalDevolucoesViewComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openDialogExcluir() {
+    const dialogRef = this.dialog.open(ModalViewDevolucaoExcluirComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  openDialogAtualizar() {
+    const dialogRef = this.dialog.open(ModalDevolucaoEditComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

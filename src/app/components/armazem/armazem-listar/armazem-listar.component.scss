@@ -17,12 +17,19 @@ width:30%;
 margin-bottom: 1.8rem;
 
 }
-button {
-margin-top:0.3rem;
-width: 20%;
-float: right;
-background-color: #549d8b;
-color:rgb(235,235,235);
+button{
+  background-color: transparent; /* Remove o fundo */
+  border: none; /* Remove a borda */
+  box-shadow: none; /* Remove qualquer sombra */
+
+  /* Ajusta o espaçamento e a cor do ícone */
+  margin: 0;
+  padding: 0;
+  color: #464646;
+
+  /* ajuste de ponteiro*/
+  cursor: pointer;
+
 }
 
 h1{

@@ -1,51 +1,21 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ModalAprovarNfdComponent } from '../../modals/modal-aprovar-nfd/modal-aprovar-nfd.component';
+import { MatDialog } from '@angular/material/dialog';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
+export interface AprovacaoInterface {
+  numeroNFD: string;
+  filial: string;
+  serie: string;
+  cte: string;
+  valorPrejuizo: string;
+  valorVenda: string;
+  valorArmazenado: string;
 }
 
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
-/**
- *  Data table with sorting, pagination, and filtering.
- */
+const FAKE_DATA: AprovacaoInterface[] = Array.from({ length: 10 }, (_, index) => createFakeData(index + 1));
 
 @Component({
   selector: 'app-aprovacao',
@@ -53,27 +23,19 @@ const NAMES: string[] = [
   styleUrls: ['./aprovacao.component.scss']
 })
 export class AprovacaoComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
-  dataSource: MatTableDataSource<UserData>;
+  displayedColumns: string[] = ['numeroNFD', 'filial','serie','cte', 'valorPrejuizo', 'valorVenda', 'valorArmazenado', 'aprovar'];
+  dataSource: MatTableDataSource<AprovacaoInterface>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-
-
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  constructor(public dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource(FAKE_DATA);
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
-
   }
 
   applyFilter(event: Event) {
@@ -84,21 +46,30 @@ export class AprovacaoComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ModalAprovarNfdComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  aprovar(row: AprovacaoInterface) {
+    this.openDialog();
+
+    console.log('Aprovando:', row);
+  }
 }
 
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
-
+function createFakeData(id: number): AprovacaoInterface {
   return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+    numeroNFD: 'NFD' + id,
+    filial: (Math.random() * 1000).toFixed(2),
+    serie:(Math.random() * 1000).toFixed(2),
+    cte:(Math.random() * 1000).toFixed(2),
+    valorPrejuizo: (Math.random() * 1000).toFixed(2),
+    valorVenda: (Math.random() * 2000).toFixed(2),
+    valorArmazenado: (Math.random() * 500).toFixed(2),
   };
-
 }
