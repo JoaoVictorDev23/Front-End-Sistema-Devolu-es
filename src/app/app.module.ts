@@ -32,6 +32,7 @@ import {
   NbToggleModule
 
 } from '@nebular/theme';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -105,7 +106,7 @@ import { ModalViewDevolucaoCorrecaoGestorComponent } from './components/modals/m
 
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,NgxMaskDirective,
     AppRoutingModule,RouterModule,
     MatTableModule,MatIconModule,NbChatModule,
     NbDialogModule.forRoot(),    NbToastrModule.forRoot(),MatTabsModule,NbToggleModule,ReactiveFormsModule,
@@ -115,7 +116,7 @@ import { ModalViewDevolucaoCorrecaoGestorComponent } from './components/modals/m
     FormsModule,MatInputModule,NbInputModule,NbSelectModule,CommonModule,MatFormFieldModule,NbAutocompleteModule
 
   ],
-  providers: [],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

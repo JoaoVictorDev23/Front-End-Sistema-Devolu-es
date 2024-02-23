@@ -31,6 +31,8 @@ export class DevolucoesCadastrarComponent {
     valorPrejuizo: 0,
     valorArmazem: 0,
 
+    situacao: 'Pendente',
+
     comprador:{} as Comprador,
     motivo:{} as Motivo,
     armazem: {} as Armazem,
@@ -41,7 +43,7 @@ export class DevolucoesCadastrarComponent {
 
   debitarValorCliente = false;
   debitarValorMotorista = false;
-  linearMode = true;
+  linearMode = false;
 
   displayedColumns: string[] = ['nome', 'quantidade', 'valor', 'situacao', 'acao'];
   dataSource = new MatTableDataSource<Produto>();

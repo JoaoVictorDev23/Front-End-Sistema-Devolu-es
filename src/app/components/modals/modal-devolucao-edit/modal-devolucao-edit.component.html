@@ -2,40 +2,40 @@
 <mat-dialog-content class="mat-typography">
   <div class="col-sm-6">
     <div class="labelcte">
-      <label for="inputEmail" class="label">Filial</label>
+      <label for="filial" class="label">Filial</label>
 
-      <label for="inputEmail" class="label">Serie</label>
+      <label for="serie" class="label">Serie</label>
 
-      <label for="inputEmail" class="label">CTE</label>
+      <label for="cte" class="label">CTE</label>
 
     </div>
 
     <div class="form-group-cte">
-      <input type="number" nbInput id="inputLastName" placeholder="" name="Filial" ngModel disabled [disabled]="true">
-      <input type="number" nbInput id="inputLastName" placeholder="" name="Serie" ngModel disabled>
-      <input type="number" nbInput id="inputLastName" placeholder="" name="CTE" ngModel disabled>
+      <input type="number" nbInput id="filial" placeholder="" name="Filial" ngModel disabled [disabled]="true">
+      <input type="number" nbInput id="serie" placeholder="" name="Serie" ngModel disabled>
+      <input type="number" nbInput id="cte" placeholder="" name="CTE" ngModel disabled>
     </div>
   </div>
 
   <div class="col-sm-6">
     <div class="form-group">
-      <label for="inputEmail" class="label">Número NFd</label>
+      <label for="numero-nfd" class="label">Número NFd</label>
     </div>
 
     <div class="form-group">
-      <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="numero-nfd" ngModel disabled
+      <input type="number" nbInput fullWidth id="numero-nfd" placeholder="" name="numero-nfd" ngModel disabled
         class="input-nfd" [disabled]="true">
     </div>
   </div>
   <!-- Motivos -->
   <div class="col-sm-6">
     <div class="form-group">
-      <label for="inputEmail" class="label">Motivo</label>
+      <label class="label">Motivo</label>
     </div>
   </div>
 
 
-  <nb-select fullWidth placeholder="Selecione o motivo" class="nb-select-motivo" name="motivo" required>
+  <nb-select fullWidth placeholder="Selecione o motivo" class="nb-select-motivo"name="motivo" required>
     <nb-option>Nenhuma das alternativas</nb-option>
     <nb-option value="1">Avaria</nb-option>
     <nb-option value="2">Falta</nb-option>
@@ -45,27 +45,44 @@
 
   <div class="col-sm-6">
     <div class="form-group">
-      <label for="inputEmail" class="label">Observações</label>
+      <label for="observacao" class="label">Observações</label>
     </div>
   </div>
 
-  <textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" nbInput ngModel
+  <textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" nbInput id="observacao" ngModel
     #observacaoInput="ngModel" class="custom-textarea"></textarea>
 
 
   <!--  Cliente -->
   <div class="col-sm-6">
     <div class="form-group">
-      <label for="inputEmail" class="label">Cliente</label>
+      <label  class="label">Cliente</label>
     </div>
+
+    <nb-select fullWidth placeholder="Comprador" id="comprador" class="nb-select-motorista" name="comprador.id"
+    required>
+    <nb-option>Nenhuma das alternativas</nb-option>
+    <nb-option value="1">Jose</nb-option>
+    <nb-option value="2">Jaun</nb-option>
+    <nb-option value="3">Option 3</nb-option>
+  </nb-select>
+
   </div>
 
 
   <!-- Motorista-->
   <div class="col-sm-6">
     <div class="form-group">
-      <label for="inputEmail" class="label">Motorista</label>
+      <label  class="label">Motorista</label>
     </div>
+
+    <nb-select fullWidth placeholder="Motorista" class="nb-select-motorista" id="motorista" name="motorista.id"
+    required>
+    <nb-option>Nenhuma das alternativas</nb-option>
+    <nb-option value="1">Jose</nb-option>
+    <nb-option value="2">Jaun</nb-option>
+    <nb-option value="3">Option 3</nb-option>
+  </nb-select>
   </div>
 
 

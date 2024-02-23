@@ -1,5 +1,5 @@
 export interface Comprador{
-  id: number;
+  id?: number;
   nome: string;
   cpf: number;
 }

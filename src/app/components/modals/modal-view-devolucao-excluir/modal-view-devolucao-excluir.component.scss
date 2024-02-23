@@ -29,7 +29,7 @@ input[type="number"],input[type="text"] {
 }
 nb-select {
   width: 99% !important;
-  padding: 1px;
+  padding: 2px;
   border: 1px solid #a59e9e;
   border-radius: 8px;
   margin-top: 5px;
@@ -39,6 +39,7 @@ nb-select {
 }
 
 label {
+  display: block;
   margin-bottom: 0.4rem;
   margin-left: 4px;
   margin-right: 185px;
@@ -81,7 +82,7 @@ table{
 
   // Estilos adicionais, se necessário
   border: 1px solid #a59e9e;
-  padding: 5px;
+  padding: 10px;
   font-size: 16px;
   margin-top: 0.3rem;
   margin-bottom: 1rem;
@@ -94,4 +95,11 @@ h1 {
   margin-left: 10rem;
 }
 
-button{ margin-bottom: 0.3rem;}
+
+//IMG SCSS
+img{
+ margin-bottom: 1rem;
+ margin-left: 13rem;
+ margin-top: 2rem;
+}
+

@@ -7,29 +7,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDevolucoesViewComponent } from '../../modals/modal-view-devolucoes/modal-devolucoes-view/modal-devolucoes-view.component';
 import { ModalViewDevolucaoExcluirComponent } from '../../modals/modal-view-devolucao-excluir/modal-view-devolucao-excluir.component';
 import { ModalDevolucaoEditComponent } from '../../modals/modal-devolucao-edit/modal-devolucao-edit.component';
+import { NotaFiscal } from 'src/app/interface/nfd-interface';
 
 
-export interface PeriodicElement {
-  filial: string;
-  serie: string;
-  cte: string;
-  numeronfd: number;
-  ValorVenda: number;
-  acoes: string;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {numeronfd: 1, filial: 'Hydrogen',serie:'22',cte:'123', ValorVenda: 1.0079,  acoes: 'H'},
-  {numeronfd: 2, filial: 'Helium',  serie:'22',cte:'123', ValorVenda: 4.0026,  acoes: 'He'},
-  {numeronfd: 3, filial: 'Lithium', serie:'22',cte:'123', ValorVenda: 6.941,   acoes: 'Li'},
-  {numeronfd: 4, filial:'Beryllium',serie:'22',cte:'123', ValorVenda: 9.0122,  acoes: 'Be'},
-  {numeronfd: 5, filial: 'Boron',   serie:'22',cte:'123', ValorVenda: 10.811,  acoes: 'B'},
-  {numeronfd: 6, filial: 'Carbon',  serie:'22',cte:'123', ValorVenda: 12.0107, acoes: 'C'},
-  {numeronfd: 7, filial: 'Nitrogen',serie:'22',cte:'123', ValorVenda: 14.0067, acoes: 'N'},
-  {numeronfd: 8, filial: 'Oxygen',  serie:'22',cte:'123', ValorVenda: 15.9994, acoes: 'O'},
-  {numeronfd: 9, filial: 'Fluorine',serie:'22',cte:'123', ValorVenda: 18.9984, acoes: 'F'},
-  {numeronfd: 10,filial: 'Neon',    serie:'22',cte:'123', ValorVenda: 20.1797, acoes: 'Ne'},
-];
 @Component({
   selector: 'app-devolucoes-list',
   templateUrl: './devolucoes-list.component.html',
@@ -38,14 +19,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 })
 export class DevolucoesListComponent implements AfterViewInit {
+  notasFiscais: NotaFiscal[] = []; // Adicione esta propriedade
 
-  displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'ValorVenda', 'acoes'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -56,31 +32,84 @@ export class DevolucoesListComponent implements AfterViewInit {
 
 
   }
-  constructor(public dialog: MatDialog) {}
 
-  openDialog() {
-    const dialogRef = this.dialog.open(ModalDevolucoesViewComponent);
+displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','valorVenda','valorPrejuizo','valorArmazem', 'acoes'];
+dataSource = new MatTableDataSource();
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+}
+constructor(public dialog: MatDialog) {
 
-  openDialogExcluir() {
-    const dialogRef = this.dialog.open(ModalViewDevolucaoExcluirComponent);
+  this.notasFiscais = [
+    {     filial: 1,
+      serie: 100,
+      cte: 12345,
+      numeroNfd: 123,
+      numeroNfo: 101,
+      observacao: 'Nota fiscal de exemplo 1',
+      valorVenda: 1500,
+      valorPrejuizo: 50,
+      valorArmazem: 100,
+      situacao: 'Correção',
+      comprador: { nome: 'João', cpf: 1234567 },
+      motivo: { codigo: 'M001', descricao: 'Erro de digitação' },
+      armazem: { nome: 'Armazém A', endereco: 'Rua A, 123', filial:'Goiania'},
+      motorista: { nome: 'Carlos', cpf: 'ABC123', valorDebitado:100 },
+      cliente: { nome: 'Cliente 1', cnpj: '123.456.789/0001-01', valorDebitado:250 },
+      produtos: [
+        { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500 },
+        { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200 }
+      ]
+    },
+    {
+      filial: 2,
+      serie: 200,
+      cte: 67890,
+      numeroNfd: 456,
+      numeroNfo: 202,
+      observacao: 'Nota fiscal de exemplo 2',
+      valorVenda: 2000,
+      valorPrejuizo: 100,
+      valorArmazem: 150,
+      situacao: 'Aprovada',
+      comprador: { nome: 'Maria', cpf: 7654321 },
+      motivo: { codigo: 'M002', descricao: 'Produto danificado' },
+      armazem: { nome: 'Armazém B', endereco: 'Rua B, 456', filial: 'São Paulo' },
+      motorista: { nome: 'Ana', cpf: 'XYZ789', valorDebitado: 80 },
+      cliente: { nome: 'Cliente 2', cnpj: '987.654.321/0001-02', valorDebitado: 300 },
+      produtos: [
+        { nome: 'P003', situacao: 'Produto 3', quantidade: 3, valor: 700 },
+        { nome: 'P004', situacao: 'Produto 4', quantidade: 1, valor: 400 }
+      ]
+    },
+    // Adicione mais notas fiscais conforme necessário
+  ];
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-  openDialogAtualizar() {
-    const dialogRef = this.dialog.open(ModalDevolucaoEditComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+  // Inicialize o dataSource.data com a lista de notas fiscais
+  this.dataSource.data = this.notasFiscais;
 }
 
+openDialog(notaFiscal: NotaFiscal) {
+  const dialogRef = this.dialog.open(ModalDevolucoesViewComponent, {data:{notaFiscal: notaFiscal}});
 
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
+}
+openDialogExcluir(notaFiscal: NotaFiscal) {
+  const dialogRef = this.dialog.open(ModalViewDevolucaoExcluirComponent, {data:{notaFiscal: notaFiscal}});
 
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
+}
+openDialogAtualizar(notaFiscal: NotaFiscal) {
+  const dialogRef = this.dialog.open(ModalDevolucaoEditComponent, {data:{notaFiscal: notaFiscal}});
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
+}
+}

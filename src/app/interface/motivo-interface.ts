@@ -1,6 +1,6 @@
 export interface Motivo{
-  id:number;
-  nome:string;
-  endereco:string;
+  id?:number;
+  codigo:string;
+  descricao:string;
 
 }

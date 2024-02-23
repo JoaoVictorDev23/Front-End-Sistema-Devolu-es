@@ -21,6 +21,8 @@ export interface NotaFiscal {
   valorPrejuizo:number;
   valorArmazem:number;
 
+  situacao:string;
+
   motivo:Motivo,
   armazem: Armazem;
   motorista: Motorista;

@@ -19,9 +19,9 @@
               </div>
 
               <div class="form-group-cte">
-                <input type="number" nbInput placeholder="" name="filial" [(ngModel)]="notaFiscal.filial"  required>
-                <input type="number" nbInput placeholder="" name="serie" [(ngModel)]="notaFiscal.serie" required>
-                <input type="number" nbInput placeholder="" name="cte" [(ngModel)]="notaFiscal.cte" required>
+                <input type="number" nbInput placeholder="" id="filial" name="filial" [(ngModel)]="notaFiscal.filial"  required>
+                <input type="number" nbInput placeholder="" id="serie" name="serie" [(ngModel)]="notaFiscal.serie" required>
+                <input type="number" nbInput placeholder="" id="cte" name="cte" [(ngModel)]="notaFiscal.cte" required>
               </div>
             </div>
 
@@ -32,7 +32,7 @@
               </div>
 
               <div class="form-group">
-                <input type="number" nbInput fullWidth  placeholder=""  [(ngModel)]="notaFiscal.numeroNfd" name="numeroNfd"
+                <input type="number" nbInput fullWidth id="numeroNfd" placeholder=""  [(ngModel)]="notaFiscal.numeroNfd" name="numeroNfd"
                   required class="input-nfd">
               </div>
 
@@ -46,7 +46,7 @@
               </div>
 
               <div class="form-group">
-                <input type="number" nbInput fullWidth  placeholder="" name="numeroNfo" [(ngModel)]="notaFiscal.numeroNfo"
+                <input type="number" nbInput fullWidth id="numeroNfo" placeholder="" name="numeroNfo" [(ngModel)]="notaFiscal.numeroNfo"
                   required class="input-nfd">
               </div>
 
@@ -56,12 +56,12 @@
 
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="armazem" class="label">Armazém</label>
+                <label  class="label">Armazém</label>
               </div>
             </div>
 
             <div class="form-group">
-              <nb-select fullWidth placeholder="Selecione o Armazém" class="nb-select-armazem" name="armazem" [(ngModel)]="notaFiscal.armazem" required>
+              <nb-select fullWidth placeholder="Selecione o Armazém" class="nb-select-armazem" id="armazem" name="armazem" [(ngModel)]="notaFiscal.armazem" required>
                 <nb-option>Reset</nb-option>
                 <nb-option value="1">Finalizado</nb-option>
                 <nb-option value="2">Devolução</nb-option>
@@ -72,11 +72,11 @@
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="motivo" class="label">Motivo</label>
+                  <label class="label">Motivo</label>
                 </div>
               </div>
 
-              <nb-select fullWidth placeholder="Selecione o motivo" class="nb-select-motivo" name="motivo" [(ngModel)]="notaFiscal.motivo" required>
+              <nb-select fullWidth placeholder="Selecione o motivo" class="nb-select-motivo" name="motivo" id="motivo" [(ngModel)]="notaFiscal.motivo" required>
                 <nb-option>Nenhuma das alternativas</nb-option>
                 <nb-option value="1">Avaria</nb-option>
                 <nb-option value="2">Falta</nb-option>
@@ -90,7 +90,7 @@
                   <label for="observacao" class="label">Observações</label>
                 </div>
               </div>
-              <textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" required nbInput
+              <textarea rows="5" nbInput fullWidth shape="round" id="observacao" placeholder="" name="observacao" required nbInput
                 [(ngModel)]="notaFiscal.observacao" #observacaoInput="ngModel" class="custom-textarea"></textarea>
 
 
@@ -118,14 +118,14 @@
               </div>
 
               <div class="form-group-cliente">
-                <input type="number" nbInput  placeholder="" name="cliente.cnpj" [(ngModel)]="notaFiscal.cliente.cnpj" required>
-                <input type="text" nbInput  placeholder="" name="cliente.nome" [(ngModel)]="notaFiscal.cliente.nome" required>
+                <input type="number" nbInput  placeholder="" id="cliente.cnpj" name="cliente.cnpj" [(ngModel)]="notaFiscal.cliente.cnpj" required>
+                <input type="text" nbInput  placeholder=""  id="cliente.nome" name="cliente.nome" [(ngModel)]="notaFiscal.cliente.nome" required>
 
                 <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorCliente" style="margin-bottom: 0.7rem !important;">
-                  <label for="cliente.valorDebitado" class="label">Debitado valor do Cliente?</label>
+                  <label  class="label">Debitado valor do Cliente?</label>
                 </nb-toggle>
 
-                <input *ngIf="debitarValorCliente" type="number" nbInput  placeholder="Digite o valor"
+                <input *ngIf="debitarValorCliente" type="number" nbInput id="cliente.valorDebitado" placeholder="Digite o valor"
                   name="cliente.valorDebitado" [(ngModel)]="notaFiscal.cliente.valorDebitado" required>
 
               </div>
@@ -134,20 +134,21 @@
             <!-- Motorista-->
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="motorista.nome" class="label">Motorista</label>
+                <label  class="label">Motorista</label>
               </div>
             </div>
 
             <div class="form-group">
-              <nb-select fullWidth placeholder="Motorista" class="nb-select-motorista" name="motorista.id" [(ngModel)]="notaFiscal.motorista.id"
+              <nb-select fullWidth placeholder="Motorista" class="nb-select-motorista" id="motorista.nome" name="motorista.id" [(ngModel)]="notaFiscal.motorista.id"
                 required>
                 <nb-option>Nenhuma das alternativas</nb-option>
                 <nb-option value="1">Jose</nb-option>
                 <nb-option value="2">Jaun</nb-option>
                 <nb-option value="3">Option 3</nb-option>
               </nb-select>
+
               <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorMotorista" style="margin-bottom: 0.7rem !important;">
-                <label for="motorista.valorDebitado" class="label">Debitado valor do Motorista?</label>
+                <label class="label">Debitado valor do Motorista?</label>
               </nb-toggle>
 
               <input *ngIf="debitarValorMotorista" type="number" nbInput  placeholder="Digite o valor"
@@ -158,12 +159,12 @@
             <!-- Comprador-->
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="comprador" class="label">Comprador</label>
+                <label  class="label">Comprador</label>
               </div>
             </div>
 
             <div class="form-group">
-              <nb-select fullWidth placeholder="Comprador" class="nb-select-motorista" name="comprador.id" [(ngModel)]="notaFiscal.comprador.id"
+              <nb-select fullWidth placeholder="Comprador" id="comprador" class="nb-select-motorista" name="comprador.id" [(ngModel)]="notaFiscal.comprador.id"
                 required>
                 <nb-option>Nenhuma das alternativas</nb-option>
                 <nb-option value="1">Jose</nb-option>
@@ -245,20 +246,20 @@
                   <!-- Venda-prejuizo-estoque -->
                   <div class="col-sm-6">
                     <div class="labelvendas">
-                      <label for="inputEmail" class="label" style="margin-right: 170px;">Valor Venda</label>
+                      <label for="valorVenda" class="label" style="margin-right: 170px;">Valor Venda</label>
 
-                      <label for="inputEmail" class="label" style="margin-right: 158px;">Valor Prejuizo</label>
+                      <label for="valorPrejuizo" class="label" style="margin-right: 158px;">Valor Prejuizo</label>
 
-                      <label for="inputEmail" class="label">Valor em Armazém</label>
+                      <label for="valorArmazem" class="label">Valor em Armazém</label>
 
                     </div>
 
                     <div class="form-group-cte">
-                      <input type="number" nbInput  placeholder="" name="valorVenda" disabled [(ngModel)]="notaFiscal.valorVenda"
+                      <input type="number" nbInput  placeholder="" name="valorVenda" disabled id="valorVenda" [(ngModel)]="notaFiscal.valorVenda"
                         required>
-                      <input type="number" nbInput  placeholder="" name="valorPrejuizo" disabled [(ngModel)]="notaFiscal.valorPrejuizo"
+                      <input type="number" nbInput  placeholder="" name="valorPrejuizo" disabled id="valorPrejuizo" [(ngModel)]="notaFiscal.valorPrejuizo"
                         required>
-                      <input type="number" nbInput  placeholder="" name="valorArmazem" disabled [(ngModel)]="notaFiscal.valorArmazem"
+                      <input type="number" nbInput  placeholder="" name="valorArmazem" disabled id="valorArmazem" [(ngModel)]="notaFiscal.valorArmazem"
                         required>
                     </div>
                   </div>

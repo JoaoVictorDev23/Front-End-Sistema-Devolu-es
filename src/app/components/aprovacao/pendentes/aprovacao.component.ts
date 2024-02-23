@@ -4,18 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalAprovarNfdComponent } from '../../modals/modal-aprovar-nfd/modal-aprovar-nfd.component';
 import { MatDialog } from '@angular/material/dialog';
+import { NotaFiscal } from 'src/app/interface/nfd-interface';
+import { ModalViewDevolucaoCorrecaoGestorComponent } from '../../modals/modal-view-devolucao-correcao-gestor/modal-view-devolucao-correcao-gestor.component';
 
-export interface AprovacaoInterface {
-  numeroNFD: string;
-  filial: string;
-  serie: string;
-  cte: string;
-  valorPrejuizo: string;
-  valorVenda: string;
-  valorArmazenado: string;
-}
-
-const FAKE_DATA: AprovacaoInterface[] = Array.from({ length: 10 }, (_, index) => createFakeData(index + 1));
 
 @Component({
   selector: 'app-aprovacao',
@@ -23,53 +14,83 @@ const FAKE_DATA: AprovacaoInterface[] = Array.from({ length: 10 }, (_, index) =>
   styleUrls: ['./aprovacao.component.scss']
 })
 export class AprovacaoComponent implements AfterViewInit {
-  displayedColumns: string[] = ['numeroNFD', 'filial','serie','cte', 'valorPrejuizo', 'valorVenda', 'valorArmazenado', 'aprovar'];
-  dataSource: MatTableDataSource<AprovacaoInterface>;
+  notasFiscais: NotaFiscal[] = []; // Adicione esta propriedade
+
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource(FAKE_DATA);
-  }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','valorVenda','valorPrejuizo','valorArmazem', 'acoes'];
+dataSource = new MatTableDataSource();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+}
+constructor(public dialog: MatDialog) {
 
-  openDialog() {
-    const dialogRef = this.dialog.open(ModalAprovarNfdComponent);
+  this.notasFiscais = [
+    {     filial: 1,
+      serie: 100,
+      cte: 12345,
+      numeroNfd: 123,
+      numeroNfo: 101,
+      observacao: 'Nota fiscal de exemplo 1',
+      valorVenda: 1500,
+      valorPrejuizo: 50,
+      valorArmazem: 100,
+      situacao: 'Correção',
+      comprador: { nome: 'João', cpf: 1234567 },
+      motivo: { codigo: 'M001', descricao: 'Erro de digitação' },
+      armazem: { nome: 'Armazém A', endereco: 'Rua A, 123', filial:'Goiania'},
+      motorista: { nome: 'Carlos', cpf: 'ABC123', valorDebitado:100 },
+      cliente: { nome: 'Cliente 1', cnpj: '123.456.789/0001-01', valorDebitado:250 },
+      produtos: [
+        { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500 },
+        { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200 }
+      ]
+    },
+    {
+      filial: 2,
+      serie: 200,
+      cte: 67890,
+      numeroNfd: 456,
+      numeroNfo: 202,
+      observacao: 'Nota fiscal de exemplo 2',
+      valorVenda: 2000,
+      valorPrejuizo: 100,
+      valorArmazem: 150,
+      situacao: 'Aprovada',
+      comprador: { nome: 'Maria', cpf: 7654321 },
+      motivo: { codigo: 'M002', descricao: 'Produto danificado' },
+      armazem: { nome: 'Armazém B', endereco: 'Rua B, 456', filial: 'São Paulo' },
+      motorista: { nome: 'Ana', cpf: 'XYZ789', valorDebitado: 80 },
+      cliente: { nome: 'Cliente 2', cnpj: '987.654.321/0001-02', valorDebitado: 300 },
+      produtos: [
+        { nome: 'P003', situacao: 'Produto 3', quantidade: 3, valor: 700 },
+        { nome: 'P004', situacao: 'Produto 4', quantidade: 1, valor: 400 }
+      ]
+    },
+    // Adicione mais notas fiscais conforme necessário
+  ];
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
-  aprovar(row: AprovacaoInterface) {
-    this.openDialog();
-
-    console.log('Aprovando:', row);
-  }
+  // Inicialize o dataSource.data com a lista de notas fiscais
+  this.dataSource.data = this.notasFiscais;
 }
 
-function createFakeData(id: number): AprovacaoInterface {
-  return {
-    numeroNFD: 'NFD' + id,
-    filial: (Math.random() * 1000).toFixed(2),
-    serie:(Math.random() * 1000).toFixed(2),
-    cte:(Math.random() * 1000).toFixed(2),
-    valorPrejuizo: (Math.random() * 1000).toFixed(2),
-    valorVenda: (Math.random() * 2000).toFixed(2),
-    valorArmazenado: (Math.random() * 500).toFixed(2),
-  };
+aprovar(notaFiscal: NotaFiscal) {
+  const dialogRef = this.dialog.open(ModalViewDevolucaoCorrecaoGestorComponent, {data:{notaFiscal: notaFiscal}});
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
+}
 }

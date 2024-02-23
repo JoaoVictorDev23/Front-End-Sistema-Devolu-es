@@ -9,24 +9,31 @@
         <div class="col-sm-6">
 
           <div class="form-group-cte">
-            <label for="inputEmail" class="label">Nome</label>
-            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="nomepessoa" ngModel required>
+            <label for="pessoa.nome" class="label">Nome</label>
+            <input type="text"  nbInput fullWidth id="pessoa.nome" placeholder="" name="nomepessoa" [(ngModel)]="pessoa.nome" required>
 
-            <label for="inputEmail" class="label">CPF</label>
-            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="cpf" ngModel required>
+            <label for="pessoa.cpf" class="label">CPF</label>
+            <input      inputmode="numeric"
+            nbInput
+            fullWidth
+            id="pessoa.cpf"
+            placeholder=""
+            name="cpf"
+            [(ngModel)]="pessoa.cpf" required
+            mask="000.000.000-00"          >
 
-            <label for="inputEmail" class="label">E-mail</label>
-            <input type="number" nbInput fullWidth id="inputLastName" placeholder="" name="email" ngModel required>
+            <label for="pessoa.email" class="label">E-mail</label>
+            <input type="text" nbInput fullWidth id="pessoa.email" placeholder="" name="email" [(ngModel)]="pessoa.email" required>
 
             <!-- Opções de Status-->
 
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="inputEmail" class="label">Perfil de:</label>
+                <label class="label">Perfil de:</label>
               </div>
             </div>
 
-            <nb-select fullWidth placeholder="Selecione o tipo" class="nb-select" ngModel required style>
+            <nb-select fullWidth id="pessoa.perfil" placeholder="Selecione o tipo" class="nb-select" [(ngModel)]="pessoa.perfil" name="perfil" required>
               <nb-option>Nenhuma das alternativas</nb-option>
               <nb-option value="1">Cliente</nb-option>
               <nb-option value="2">Motorista</nb-option>
@@ -36,7 +43,7 @@
           </div>
 
           <div>
-            <button nbButton fullWidth status="success">Cadastrar</button>
+            <button nbButton fullWidth (click)="create()" status="success">Cadastrar</button>
           </div>
 
         </div>
