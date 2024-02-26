@@ -6,4 +6,5 @@ export interface Produto {
   quantidade: number;
   valor: number;
   situacao: string;
+  armazem:number;
 }

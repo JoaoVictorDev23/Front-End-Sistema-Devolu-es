@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NbToastrService } from '@nebular/theme';
+import { NotaFiscal } from 'src/app/interface/nfd-interface';
 
 export interface PeriodicElement {
   name: string;
@@ -45,9 +46,16 @@ const ELEMENT_DATA2: PeriodicElement[] = [
 })
 export class ModalViewDevolucaoCorrecaoComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA2;
+  dataSource = this.data.notaFiscal.produtos;
 
-  constructor(private dialogRef: MatDialogRef<ModalViewDevolucaoCorrecaoComponent>,  private toastrService: NbToastrService) { }
+  constructor(private dialogRef: MatDialogRef<ModalViewDevolucaoCorrecaoComponent>,
+    private toastrService: NbToastrService,
+    @Inject(MAT_DIALOG_DATA) public data: { notaFiscal: NotaFiscal } ) {
+
+     }
+
+
+
   voltar(): void {
     this.dialogRef.close();
   }
@@ -83,6 +91,4 @@ export class ModalViewDevolucaoCorrecaoComponent {
   }
 
 
-
 }
-

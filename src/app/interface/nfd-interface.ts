@@ -8,11 +8,11 @@ import { Comprador } from "./comprador-interface";
 
 export interface NotaFiscal {
 
+  numeroNfd: number;
 
   filial: number;
   serie: number;
   cte: number;
-  numeroNfd: number;
   numeroNfo:number;
 
   observacao: string;

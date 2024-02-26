@@ -54,8 +54,8 @@ constructor(public dialog: MatDialog) {
       motorista: { nome: 'Carlos', cpf: 'ABC123', valorDebitado:100 },
       cliente: { nome: 'Cliente 1', cnpj: '123.456.789/0001-01', valorDebitado:250 },
       produtos: [
-        { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500 },
-        { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200 }
+        { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500 ,armazem:1},
+        { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200,armazem:1 }
       ]
     },
     {
@@ -75,8 +75,8 @@ constructor(public dialog: MatDialog) {
       motorista: { nome: 'Ana', cpf: 'XYZ789', valorDebitado: 80 },
       cliente: { nome: 'Cliente 2', cnpj: '987.654.321/0001-02', valorDebitado: 300 },
       produtos: [
-        { nome: 'P003', situacao: 'Produto 3', quantidade: 3, valor: 700 },
-        { nome: 'P004', situacao: 'Produto 4', quantidade: 1, valor: 400 }
+        { nome: 'P003', situacao: 'Produto 3', quantidade: 3, valor: 700,armazem:1 },
+        { nome: 'P004', situacao: 'Produto 4', quantidade: 1, valor: 400,armazem:1 }
       ]
     },
     // Adicione mais notas fiscais conforme necessário

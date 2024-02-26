@@ -69,6 +69,7 @@ export class DevolucoesCadastrarComponent {
           'quantidade': produto.quantidade,
           'valor': produto.valor,
           'situacao': produto.situacao,
+          'armazem':produto.armazem
         });
 
         this.dataSource.data = [...this.notaFiscal.produtos];
