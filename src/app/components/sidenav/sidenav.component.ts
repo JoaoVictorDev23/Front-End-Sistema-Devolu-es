@@ -27,7 +27,8 @@ export class SidenavComponent {
           icon: 'undo-outline',
           children: [
             { title: 'Visualizar devoluções', link: '/devolucoes/listar' },
-            { title: 'Cadastrar nova devolução', link: '/devolucao/cadastrar' }
+            { title: 'Cadastrar nova devolução', link: '/devolucao/cadastrar' },
+            { title: 'Gerar Financeiro', link: '/gerarfinancas'},
 
           ]
         },
@@ -68,6 +69,7 @@ export class SidenavComponent {
         }
       ],
     },
+
     {
       title: 'Minhas notas',
       icon: 'file-text',

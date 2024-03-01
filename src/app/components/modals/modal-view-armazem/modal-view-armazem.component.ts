@@ -19,10 +19,13 @@ import { Armazem } from 'src/app/interface/armazem-interface';
   ],
 })
 export class ModalViewArmazemComponent {
+
+  valorArmazenado: number=0;
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSourceProd: Produto[] = [];
   dataSource: NotaFiscal[] = [];
-  columnsToDisplay = ['Numeronfd', 'filial', 'serie', 'cte', 'valorArmazenado', 'valorVenda', 'valorPrejuizo'];
+  columnsToDisplay = ['numeroNfd', 'filial', 'serie', 'cte', 'valorArmazem', 'valorVenda', 'valorPrejuizo'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: NotaFiscal | null = null;
 
@@ -35,26 +38,42 @@ export class ModalViewArmazemComponent {
   ngOnInit() {
     console.log(this.data.armazem);
     if (this.data.armazem.notasfiscais) {
-      // Limpe dataSourceProd antes de preenchê-lo novamente
-      this.dataSourceProd = [];
-
-      // Iterar sobre cada nota fiscal
-      this.data.armazem.notasfiscais.forEach((notaFiscal) => {
-        console.log(`Produtos da Nota Fiscal ${notaFiscal.numeroNfd}:`);
-        if (notaFiscal.produtos) {
-          // Adicionar a lista de produtos da nota fiscal à dataSourceProd
-          this.dataSourceProd.push(...notaFiscal.produtos);
-
-          // Imprimir produtos para esta nota fiscal no console
-          notaFiscal.produtos.forEach((produto) => {
-            console.log(produto);
-          });
-        }
-      });
-
-      // Preencha dataSource com as notas fiscais do armazém
       this.dataSource = this.data.armazem.notasfiscais;
+      this.valorArmazenado = this.calcularTotalArmazenado();
+
     }
+  }
+
+  expandRow(element: NotaFiscal) {
+    this.expandedElement = this.expandedElement === element ? null : element;
+
+    if (this.expandedElement) {
+      // Filtrar produtos com base na notaFiscal selecionada
+      const filteredProducts = this.expandedElement.produtos.filter(
+        (produto) => this.expandedElement && produto.numeronfd === this.expandedElement.numeroNfd
+        );
+      this.dataSourceProd = [...filteredProducts];
+        // Atualizar valorArmazenado do armazem
+
+    this.valorArmazenado = this.calcularTotalArmazenado();
+
+      // Imprimir produtos para esta nota fiscal no console
+      this.expandedElement.produtos.forEach((produto) => {
+        console.log(produto);
+      });
+    } else {
+      // Se a nota fiscal estiver fechada, limpar a lista de produtos
+      this.dataSourceProd = [];
+    }
+  }
+  calcularTotalArmazenado(): number {
+    let totalArmazenado = 0;
+
+    if (this.dataSource && this.dataSource.length > 0) {
+      totalArmazenado = this.dataSource.reduce((acc, nf) => acc + nf.valorArmazem, 0);
+    }
+
+    return totalArmazenado;
   }
 
   voltar(): void {

@@ -19,8 +19,10 @@
               </div>
 
               <div class="form-group-cte">
-                <input type="number" nbInput placeholder="" id="filial" name="filial" [(ngModel)]="notaFiscal.filial"  required>
-                <input type="number" nbInput placeholder="" id="serie" name="serie" [(ngModel)]="notaFiscal.serie" required>
+                <input type="number" nbInput placeholder="" id="filial" name="filial" [(ngModel)]="notaFiscal.filial"
+                  required>
+                <input type="number" nbInput placeholder="" id="serie" name="serie" [(ngModel)]="notaFiscal.serie"
+                  required>
                 <input type="number" nbInput placeholder="" id="cte" name="cte" [(ngModel)]="notaFiscal.cte" required>
               </div>
             </div>
@@ -32,8 +34,8 @@
               </div>
 
               <div class="form-group">
-                <input type="number" nbInput fullWidth id="numeroNfd" placeholder=""  [(ngModel)]="notaFiscal.numeroNfd" name="numeroNfd"
-                  required class="input-nfd">
+                <input type="number" nbInput fullWidth id="numeroNfd" placeholder="" [(ngModel)]="notaFiscal.numeroNfd"
+                  name="numeroNfd" required class="input-nfd">
               </div>
 
             </div>
@@ -46,8 +48,8 @@
               </div>
 
               <div class="form-group">
-                <input type="number" nbInput fullWidth id="numeroNfo" placeholder="" name="numeroNfo" [(ngModel)]="notaFiscal.numeroNfo"
-                  required class="input-nfd">
+                <input type="number" nbInput fullWidth id="numeroNfo" placeholder="" name="numeroNfo"
+                  [(ngModel)]="notaFiscal.numeroNfo" required class="input-nfd">
               </div>
 
             </div>
@@ -56,12 +58,13 @@
 
             <div class="col-sm-6">
               <div class="form-group">
-                <label  class="label">Armazém</label>
+                <label class="label">Armazém</label>
               </div>
             </div>
 
             <div class="form-group">
-              <nb-select fullWidth placeholder="Selecione o Armazém" class="nb-select-armazem" id="armazem" name="armazem" [(ngModel)]="notaFiscal.armazem" required>
+              <nb-select fullWidth placeholder="Selecione o Armazém" class="nb-select-armazem" id="armazem"
+                name="armazem" [(ngModel)]="notaFiscal.armazem" required>
                 <nb-option>Reset</nb-option>
                 <nb-option value="1">Finalizado</nb-option>
                 <nb-option value="2">Devolução</nb-option>
@@ -76,7 +79,8 @@
                 </div>
               </div>
 
-              <nb-select fullWidth placeholder="Selecione o motivo" class="nb-select-motivo" name="motivo" id="motivo" [(ngModel)]="notaFiscal.motivo" required>
+              <nb-select fullWidth placeholder="Selecione o motivo" class="nb-select-motivo" name="motivo" id="motivo"
+                [(ngModel)]="notaFiscal.motivo" required>
                 <nb-option>Nenhuma das alternativas</nb-option>
                 <nb-option value="1">Avaria</nb-option>
                 <nb-option value="2">Falta</nb-option>
@@ -90,8 +94,9 @@
                   <label for="observacao" class="label">Observações</label>
                 </div>
               </div>
-              <textarea rows="5" nbInput fullWidth shape="round" id="observacao" placeholder="" name="observacao" required nbInput
-                [(ngModel)]="notaFiscal.observacao" #observacaoInput="ngModel" class="custom-textarea"></textarea>
+              <textarea rows="5" nbInput fullWidth shape="round" id="observacao" placeholder="" name="observacao"
+                required nbInput [(ngModel)]="notaFiscal.observacao" #observacaoInput="ngModel"
+                class="custom-textarea"></textarea>
 
 
 
@@ -99,93 +104,14 @@
           </div>
           <!--    -->
 
-          <button nbButton nbStepperNext (click)="verdados()" [disabled]="!nameForm.valid" status="primary" >Continuar</button>
+          <button nbButton nbStepperNext (click)="verdados()" [disabled]="!nameForm.valid"
+            status="primary">Continuar</button>
         </form>
       </nb-step>
 
-
-      <!-- SEGUNDA etapa do formulario-->
-      <nb-step [stepControl]="movieForm">
-        <!-- Definindo os campos no formulario da segunda etapa-->
-        <form #movieForm="ngForm" class="step-container2">
-          <div class="row">
-
-            <!-- CLIENTES/PESSOA/MOTORISTA -->
-            <div class="col-sm-6">
-              <div class="labelcliente">
-                <label for="cliente.cnpj" class="label" style="margin-right: 290px;">CNPJ</label>
-                <label for="cliente.nome" class="label">Nome do Cliente</label>
-              </div>
-
-              <div class="form-group-cliente">
-                <input type="number" nbInput  placeholder="" id="cliente.cnpj" name="cliente.cnpj" [(ngModel)]="notaFiscal.cliente.cnpj" required>
-                <input type="text" nbInput  placeholder=""  id="cliente.nome" name="cliente.nome" [(ngModel)]="notaFiscal.cliente.nome" required>
-
-                <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorCliente" style="margin-bottom: 0.7rem !important;">
-                  <label  class="label">Debitado valor do Cliente?</label>
-                </nb-toggle>
-
-                <input *ngIf="debitarValorCliente" type="number" nbInput id="cliente.valorDebitado" placeholder="Digite o valor"
-                  name="cliente.valorDebitado" [(ngModel)]="notaFiscal.cliente.valorDebitado" required>
-
-              </div>
-            </div>
-
-            <!-- Motorista-->
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label  class="label">Motorista</label>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <nb-select fullWidth placeholder="Motorista" class="nb-select-motorista" id="motorista.nome" name="motorista.id" [(ngModel)]="notaFiscal.motorista.id"
-                required>
-                <nb-option>Nenhuma das alternativas</nb-option>
-                <nb-option value="1">Jose</nb-option>
-                <nb-option value="2">Jaun</nb-option>
-                <nb-option value="3">Option 3</nb-option>
-              </nb-select>
-
-              <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorMotorista" style="margin-bottom: 0.7rem !important;">
-                <label class="label">Debitado valor do Motorista?</label>
-              </nb-toggle>
-
-              <input *ngIf="debitarValorMotorista" type="number" nbInput  placeholder="Digite o valor"
-              name="motorista.valorDebitado" [(ngModel)]="notaFiscal.motorista.valorDebitado" required>
-
-            </div>
-
-            <!-- Comprador-->
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label  class="label">Comprador</label>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <nb-select fullWidth placeholder="Comprador" id="comprador" class="nb-select-motorista" name="comprador.id" [(ngModel)]="notaFiscal.comprador.id"
-                required>
-                <nb-option>Nenhuma das alternativas</nb-option>
-                <nb-option value="1">Jose</nb-option>
-                <nb-option value="2">Jaun</nb-option>
-                <nb-option value="3">Option 3</nb-option>
-              </nb-select>
-
-            </div>
-
-            <!-- botao de continuar-->
-            <button nbButton nbStepperNext (click)="verdados()" [disabled]="!movieForm.valid" status="primary"
-              class="button-step2">Continuar</button>
-
-          </div>
-        </form>
-
-      </nb-step>
-
-      <!-- Terceira Etapa do Formulario -->
+      <!-- Segunda Etapa do Formulario -->
       <nb-step [stepControl]="somethingForm">
-        <!-- Definindo os campos no formulario da terceira etapa-->
+        <!-- Definindo os campos no formulario da Segunda etapa-->
         <form #somethingForm="ngForm">
           <div>
             <button nbButton status="info" class="button-adicionar-prod" (click)="openDialog()">Adicionar
@@ -239,41 +165,90 @@
               </tr>
             </table>
 
-            <nb-card style="margin-top: 2rem !important;" class="mat-elevation-z2">
-              <nb-card-body>
-                <div class="row">
-
-                  <!-- Venda-prejuizo-estoque -->
-                  <div class="col-sm-6">
-                    <div class="labelvendas">
-                      <label for="valorVenda" class="label" style="margin-right: 170px;">Valor Venda</label>
-
-                      <label for="valorPrejuizo" class="label" style="margin-right: 158px;">Valor Prejuizo</label>
-
-                      <label for="valorArmazem" class="label">Valor em Armazém</label>
-
-                    </div>
-
-                    <div class="form-group-cte">
-                      <input type="number" nbInput  placeholder="" name="valorVenda" disabled id="valorVenda" [(ngModel)]="notaFiscal.valorVenda"
-                        required>
-                      <input type="number" nbInput  placeholder="" name="valorPrejuizo" disabled id="valorPrejuizo" [(ngModel)]="notaFiscal.valorPrejuizo"
-                        required>
-                      <input type="number" nbInput  placeholder="" name="valorArmazem" disabled id="valorArmazem" [(ngModel)]="notaFiscal.valorArmazem"
-                        required>
-                    </div>
-                  </div>
-                </div>
-
-              </nb-card-body>
-            </nb-card>
-
-
-
             <!-- botao de continuar-->
-            <button nbButton nbStepperNext status="success " (click)="verdados()" class="button-concluir">Concluir</button>
+            <button nbButton nbStepperNext status="success " (click)="verdados()"
+              class="button-concluir">Concluir</button>
           </div>
         </form>
+      </nb-step>
+
+      <!-- Terceira etapa do formulario-->
+      <nb-step [stepControl]="movieForm">
+        <!-- Definindo os campos no formulario da segunda etapa-->
+        <form #movieForm="ngForm" class="step-container2">
+          <div class="row">
+
+            <!-- CLIENTES/PESSOA/MOTORISTA -->
+            <div class="col-sm-6">
+              <div class="labelcliente">
+                <label for="cliente.cnpj" class="label" style="margin-right: 290px;">CNPJ</label>
+                <label for="cliente.nome" class="label">Nome do Cliente</label>
+              </div>
+
+              <div class="form-group-cliente">
+                <input type="number" nbInput placeholder="" id="cliente.cnpj" name="cliente.cnpj"
+                  [(ngModel)]="notaFiscal.cliente.cnpj" required>
+                <input type="text" nbInput placeholder="" id="cliente.nome" name="cliente.nome"
+                  [(ngModel)]="notaFiscal.cliente.nome" required>
+
+
+              </div>
+            </div>
+
+            <!-- Motorista-->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="label">Motorista</label>
+              </div>
+            </div>
+
+            <div class="form-group3">
+              <nb-select fullWidth placeholder="Motorista" class="nb-select-motorista" id="motorista.nome"
+                name="motorista.id" [(ngModel)]="notaFiscal.motorista.id" required>
+                <nb-option>Nenhuma das alternativas</nb-option>
+                <nb-option value="1">Jose</nb-option>
+                <nb-option value="2">Jaun</nb-option>
+                <nb-option value="3">Option 3</nb-option>
+              </nb-select>
+
+              <div class="form-group-toggle">
+                <label class="label" style="margin-bottom: 5px;">Motorista alertou Avaria?</label>
+
+                <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorMotorista" style="margin-bottom: 0.7rem !important;">
+                  <span *ngIf="!debitarValorMotorista" class="visual-text">Valor em débito: R${{calcularSomaProdutos()}}</span>
+                </nb-toggle>
+
+              </div>
+
+
+
+            </div>
+
+            <!-- Comprador-->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="label">Comprador</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <nb-select fullWidth placeholder="Comprador" id="comprador" class="nb-select-motorista"
+                name="comprador.id" [(ngModel)]="notaFiscal.comprador.id" required>
+                <nb-option>Nenhuma das alternativas</nb-option>
+                <nb-option value="1">Jose</nb-option>
+                <nb-option value="2">Jaun</nb-option>
+                <nb-option value="3">Option 3</nb-option>
+              </nb-select>
+
+            </div>
+
+            <!-- botao de continuar-->
+            <button nbButton nbStepperNext (click)="verdados()" [disabled]="!movieForm.valid" status="primary"
+              class="button-step2">Continuar</button>
+
+          </div>
+        </form>
+
       </nb-step>
 
       <!-- Ultima etapa do formulario e a solicitação de cadastro novamente-->

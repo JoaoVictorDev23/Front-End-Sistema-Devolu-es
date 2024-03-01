@@ -125,9 +125,8 @@ button {
   .labelcte {
     flex-direction: row;
   }
-  .labelvendas {
-    flex-direction: row;
-  }
+
+
 }
 
 .custom-textarea {
@@ -174,4 +173,16 @@ button {
 
   }
 
+
+}
+.visual-text {
+  font-family: 'Arial', sans-serif; // Substitua 'Arial' pelo nome da fonte desejada
+  font-size: 12px; // Ajuste o tamanho da fonte conforme necessário
+  color: #333;
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  margin-top: 5px;
 }

@@ -36,13 +36,17 @@ label {
   display: block;
   margin-bottom: 0.4rem;
   margin-left: 4px;
-  margin-right: 185px;
+  margin-right: 200px;
   font-weight: bold;
   color: #676060;
 }
 
 @media (max-width: 768px) {
   .labelcte {
+    flex-direction: row;
+  }
+
+  .labelvendas {
     flex-direction: row;
   }
 }
@@ -55,7 +59,12 @@ label {
     /* Ajuste para espaçamento */
     align-items: center;
   }
-
+  .labelvendas {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Ajuste para espaçamento */
+    align-items: center;
+  }
   .form-group-cte {
     display: flex;
     flex-wrap: wrap;
@@ -74,7 +83,7 @@ table {
 
 .custom-textarea {
   resize: none; // Impede a redimensionamento
-  max-width: 100%; // Largura máxima
+  max-width: 99%; // Largura máxima
   max-height: 150px; // Altura máxima (ajuste conforme necessário)
 
   // Estilos adicionais, se necessário
@@ -95,14 +104,14 @@ h1 {
 // Estilos da imagem
 .img-aba1 {
   margin-bottom: 1rem;
-  margin-left: 13rem;
+  margin-left: 16rem;
   margin-top: 2rem;
 }
 
 
 nb-chat {
   width: 700px;
-  height: 100%;
+  height: 80%;
   margin-top: 1rem;
 
 }
@@ -124,5 +133,5 @@ mat-dialog-actions {
 }
 .img-chat{
   margin-top: 2rem;
-  margin-left: 20rem;
+  margin-left: 23rem;
 }

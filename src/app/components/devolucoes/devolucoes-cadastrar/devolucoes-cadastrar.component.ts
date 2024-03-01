@@ -19,6 +19,11 @@ import { Comprador } from 'src/app/interface/comprador-interface';
 })
 export class DevolucoesCadastrarComponent {
 
+  calcularSomaProdutos(): number {
+    return this.notaFiscal.produtos.reduce((total, produto) => total + (produto.valor * produto.quantidade), 0);
+  }
+
+
 
   notaFiscal: NotaFiscal = {
     filial: 0,
@@ -42,22 +47,22 @@ export class DevolucoesCadastrarComponent {
   };
 
   debitarValorCliente = false;
-  debitarValorMotorista = false;
+  debitarValorMotorista = true;
   linearMode = false;
 
   displayedColumns: string[] = ['nome', 'quantidade', 'valor', 'situacao', 'acao'];
   dataSource = new MatTableDataSource<Produto>();
 
-  totalVenda: number = 0;
-  totalPrejuizo: number = 0;
-  totalArmazem: number = 0;
+
 
   constructor(private dialogService: NbDialogService) {}
   verdados(){
     console.log(this.notaFiscal);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.calcularSomaProdutos();
+  }
 
   openDialog(): void {
     const dialogRef = this.dialogService.open(ProdutosDialogComponent);
@@ -69,12 +74,12 @@ export class DevolucoesCadastrarComponent {
           'quantidade': produto.quantidade,
           'valor': produto.valor,
           'situacao': produto.situacao,
-          'armazem':produto.armazem
+          'armazem':produto.armazem,
+          'numeronfd':produto.numeronfd
         });
 
         this.dataSource.data = [...this.notaFiscal.produtos];
 
-        this.calcularValoresTotais();
       }
     });
   }
@@ -91,40 +96,9 @@ export class DevolucoesCadastrarComponent {
     if (index >= 0) {
       this.notaFiscal.produtos.splice(index, 1);
       this.dataSource.data = [...this.notaFiscal.produtos];
-      this.calcularValoresTotais();
     }
   }
 
-//calcular
-calcularValoresTotais() {
-  let valorVenda = 0;
-  let valorPrejuizo = 0;
-  let valorArmazem = 0;
-
-  this.notaFiscal.produtos.forEach((produto: Produto) => {
-    switch (produto.situacao) {
-      case 'Em armazem':
-        valorArmazem += produto.quantidade * produto.valor;
-        break;
-      case 'Venda':
-        valorVenda += produto.quantidade * produto.valor;
-        break;
-      case 'Prejuizo':
-        valorPrejuizo += produto.quantidade * produto.valor;
-        break;
-      default:
-        break;
-    }
-  });
-
-  this.notaFiscal.valorArmazem = valorArmazem;
-  this.notaFiscal.valorVenda = valorVenda;
-  this.notaFiscal.valorPrejuizo = valorPrejuizo;
-
-  this.totalArmazem = valorArmazem;
-  this.totalVenda = valorVenda;
-  this.totalPrejuizo = valorPrejuizo;
-}
 
 
   adicionarNotaFiscal(): void {

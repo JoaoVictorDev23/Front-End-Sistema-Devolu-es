@@ -5,12 +5,7 @@
       <input [(ngModel)]="produto.nome" nbInput placeholder="Nome do Produto" required (ngModelChange)="checkFormValidity()">
       <input [(ngModel)]="produto.valor" type="number" nbInput placeholder="Valor do Produto" required (ngModelChange)="checkFormValidity()">
       <input [(ngModel)]="produto.quantidade" type="number" nbInput placeholder="Quantidade" required (ngModelChange)="checkFormValidity()">
-      <nb-select [(ngModel)]="produto.situacao" placeholder="Situação" class="nb-select-motorista" name="situacao" ngModel required (ngModelChange)="checkFormValidity()">
-        <nb-option>Nenhuma das alternativas</nb-option>
-        <nb-option value="Em armazem">Em Armazem</nb-option>
-        <nb-option value="Venda">Venda</nb-option>
-        <nb-option value="Prejuizo">Prejuizo</nb-option>
-      </nb-select>
+      <input [(ngModel)]="produto.situacao" type="text" nbInput placeholder="Pendente" disabled value="Pendente">
 
     </div>
   </nb-card-body>

@@ -1,5 +1,7 @@
 // produto.interface.ts
 
+import { NotaFiscal } from "./nfd-interface";
+
 export interface Produto {
   id?: string;
   nome: string;
@@ -7,4 +9,5 @@ export interface Produto {
   valor: number;
   situacao: string;
   armazem:number;
+  numeronfd: NotaFiscal['numeroNfd'];  // Corrigir esta linha
 }

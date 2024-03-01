@@ -54,8 +54,8 @@ export class ArmazemListarComponent implements AfterViewInit {
           motorista: { nome: 'Carlos', cpf: 'ABC123', valorDebitado: 100 },
           cliente: { nome: 'Cliente 1', cnpj: '123.456.789/0001-01', valorDebitado: 250 },
           produtos: [
-            { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500, armazem: 1 },
-            { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200, armazem: 1 }
+            { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500, armazem: 1,numeronfd:123 },
+            { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200, armazem: 1,numeronfd:123  }
           ]
         }
         // Adicione mais notas fiscais conforme necessário
@@ -81,8 +81,8 @@ export class ArmazemListarComponent implements AfterViewInit {
           motorista: { nome: 'Carlos', cpf: 'ABC123', valorDebitado: 100 },
           cliente: { nome: 'Cliente 1', cnpj: '123.456.789/0001-01', valorDebitado: 250 },
           produtos: [
-            { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500, armazem: 1 },
-            { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200, armazem: 1 }
+            { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500, armazem: 1, numeronfd:12444444443 },
+            { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200, armazem: 1, numeronfd:12444444443 }
           ]
         },
         {
@@ -102,8 +102,8 @@ export class ArmazemListarComponent implements AfterViewInit {
           motorista: { nome: 'Carlos', cpf: 'ABC123', valorDebitado: 100 },
           cliente: { nome: 'Cliente 1', cnpj: '123.456.789/0001-01', valorDebitado: 250 },
           produtos: [
-            { nome: 'P005', situacao: 'Produto 5', quantidade: 5, valor: 500, armazem: 1 },
-            { nome: 'P006', situacao: 'Produto 6', quantidade: 5, valor: 200, armazem: 1 }
+            { nome: 'P005', situacao: 'Produto 5', quantidade: 5, valor: 500, armazem: 1, numeronfd:12444444441231231233 },
+            { nome: 'P006', situacao: 'Produto 6', quantidade: 5, valor: 200, armazem: 1, numeronfd:12444444441231231233 }
           ]
         }
         // Adicione mais notas fiscais conforme necessário

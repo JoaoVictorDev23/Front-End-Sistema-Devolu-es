@@ -65,6 +65,7 @@ import { MinhasnotasReprovadasComponent } from './components/minhasnotas/minhasn
 import { MinhasnotasCorrecaoComponent } from './components/minhasnotas/minhasnotas-correcao/minhasnotas-correcao.component';
 import { ModalViewDevolucaoCorrecaoComponent } from './components/modals/modal-view-devolucao-correcao/modal-view-devolucao-correcao.component';
 import { ModalViewDevolucaoCorrecaoGestorComponent } from './components/modals/modal-view-devolucao-correcao-gestor/modal-view-devolucao-correcao-gestor.component';
+import { FinancaSolicitarComponent } from './components/financas/financa-solicitar/financa-solicitar.component';
 
 
 
@@ -102,6 +103,7 @@ import { ModalViewDevolucaoCorrecaoGestorComponent } from './components/modals/m
     MinhasnotasCorrecaoComponent,
     ModalViewDevolucaoCorrecaoComponent,
     ModalViewDevolucaoCorrecaoGestorComponent,
+    FinancaSolicitarComponent,
 
 
   ],
