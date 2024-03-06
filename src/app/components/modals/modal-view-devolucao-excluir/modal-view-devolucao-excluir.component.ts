@@ -13,7 +13,7 @@ import { NotaFiscal } from 'src/app/interface/nfd-interface';
 })
 export class ModalViewDevolucaoExcluirComponent {
   displayedColumns: string[] = ['nomeprod','situacaoprod','valorprod','quantidadeprod'];
-  dataSource = this.data.notaFiscal.produtos;
+  dataSource = this.data.notaFiscal.dados.produtos;
 
   constructor(private dialogRef: MatDialogRef<ModalViewDevolucaoExcluirComponent>,
     private toastrService: NbToastrService,

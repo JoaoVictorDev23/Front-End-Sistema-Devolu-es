@@ -9,5 +9,5 @@ export interface Produto {
   valor: number;
   situacao: string;
   armazem:number;
-  numeronfd: NotaFiscal['numeroNfd'];  // Corrigir esta linha
+  numeronfd: NotaFiscal['dados']['numeroNfd'];
 }

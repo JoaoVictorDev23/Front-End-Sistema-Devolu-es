@@ -36,52 +36,97 @@ applyFilter(event: Event) {
 constructor(public dialog: MatDialog) {
 
   this.notasFiscais = [
-    {     filial: 1,
-      serie: 100,
-      cte: 12345,
-      numeroNfd: 123,
-      numeroNfo: 101,
-      observacao: 'Nota fiscal de exemplo 1',
-      valorVenda: 1500,
-      valorPrejuizo: 50,
-      valorArmazem: 100,
-      situacao: 'Aprovada',
-      comprador: { nome: 'João', cpf: 1234567 },
-      motivo: { codigo: 'M001', descricao: 'Erro de digitação' },
-      armazem: { nome: 'Armazém A', endereco: 'Rua A, 123', filial:'Goiania'},
-      motorista: { nome: 'Carlos', cpf: 'ABC123', valorDebitado:100 },
-      cliente: { nome: 'Cliente 1', cnpj: '123.456.789/0001-01', valorDebitado:250 },
-      produtos: [
-        { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500, armazem:1,numeronfd: 123 },
-        { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200 , armazem:1,numeronfd: 123}
-      ]
+    {
+      dados: {
+        filial: 1,
+        serie: 100,
+        cte: 12345,
+        situacao: 'Pendente',
+        numeroNfd: 123,
+        numeroNfo: 101,
+        observacao: 'Nota fiscal de exemplo 1',
+        motivo: { codigo: 'M001', descricao: 'Erro de digitação' },
+        produtos: [
+          { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500, armazem: 1, numeronfd: 123 },
+          { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200, armazem: 1, numeronfd: 123 }
+        ]
+      },
+      valores: {
+        valorVenda: 1500,
+        valorPrejuizo: 50,
+        valorArmazem: 100,
+        situacao: 'Aprovada',
+        comprador: { nome: 'João', cpf: 1234567 },
+        armazem: { nome: 'Armazém A', endereco: 'Rua A, 123', filial: 'Goiania' },
+        motorista: { nome: 'Carlos', cpf: 'ABC123', valorDebitado: 100 },
+        cliente: { nome: 'Cliente 1', cnpj: '123.456.789/0001-01', valorDebitado: 250 }
+      }
     },
     {
-      filial: 2,
-      serie: 200,
-      cte: 67890,
-      numeroNfd: 456,
-      numeroNfo: 202,
-      observacao: 'Nota fiscal de exemplo 2',
-      valorVenda: 2000,
-      valorPrejuizo: 100,
-      valorArmazem: 150,
-      situacao: 'Aprovada',
-      comprador: { nome: 'Maria', cpf: 7654321 },
-      motivo: { codigo: 'M002', descricao: 'Produto danificado' },
-      armazem: { nome: 'Armazém B', endereco: 'Rua B, 456', filial: 'São Paulo' },
-      motorista: { nome: 'Ana', cpf: 'XYZ789', valorDebitado: 80 },
-      cliente: { nome: 'Cliente 2', cnpj: '987.654.321/0001-02', valorDebitado: 300 },
-      produtos: [
-        { nome: 'P003', situacao: 'Produto 3', quantidade: 3, valor: 700 , armazem:1,numeronfd: 456},
-        { nome: 'P004', situacao: 'Produto 4', quantidade: 1, valor: 400, armazem:1,numeronfd: 456 }
-      ]
-    },
+      dados: {
+        filial: 1,
+        serie: 100,
+        cte: 12345,
+        situacao: "Pendente",
+        numeroNfd: 123,
+        numeroNfo: 101,
+        observacao: "Nota fiscal de exemplo 1",
+        motivo: {
+          codigo: "M001",
+          descricao: "Erro de digitação"
+        },
+        produtos: [
+          {
+            nome: "P001",
+            situacao: "Produto 1",
+            quantidade: 2,
+            valor: 500,
+            armazem: 1,
+            numeronfd: 123
+          },
+          {
+            nome: "P002",
+            situacao: "Produto 2",
+            quantidade: 1,
+            valor: 200,
+            armazem: 1,
+            numeronfd: 123
+          }
+        ]
+      },
+      valores: {
+        valorVenda: 1500,
+        valorPrejuizo: 50,
+        valorArmazem: 100,
+        situacao: "Aprovada",
+        armazem: {
+          nome: "Armazém A",
+          endereco: "Rua A, 123",
+          filial: "Goiania"
+        },
+        comprador: {
+          nome: "João",
+          cpf: 1234567
+        },
+        motorista: {
+          nome: "Carlos",
+          cpf: "ABC123",
+          valorDebitado: 100
+        },
+        cliente: {
+          nome: "Cliente 1",
+          cnpj: "123.456.789/0001-01",
+          valorDebitado: 250
+        }
+      }
+
+    }
+
     // Adicione mais notas fiscais conforme necessário
   ];
 
   // Inicialize o dataSource.data com a lista de notas fiscais
-  this.dataSource.data = this.notasFiscais;
+  this.dataSource.data = this.notasFiscais.filter(notaFiscal => notaFiscal.dados.situacao === 'Pendente' || notaFiscal.valores.situacao === 'Pendente');
 }
 
 openDialog(notaFiscal: NotaFiscal) {

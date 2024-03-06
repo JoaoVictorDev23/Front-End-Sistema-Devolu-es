@@ -49,18 +49,15 @@ export class ModalViewArmazemComponent {
 
     if (this.expandedElement) {
       // Filtrar produtos com base na notaFiscal selecionada
-      const filteredProducts = this.expandedElement.produtos.filter(
-        (produto) => this.expandedElement && produto.numeronfd === this.expandedElement.numeroNfd
+      const filteredProducts = this.expandedElement.dados.produtos.filter(
+        (produto) => this.expandedElement && produto.numeronfd === this.expandedElement.dados.numeroNfd
         );
       this.dataSourceProd = [...filteredProducts];
         // Atualizar valorArmazenado do armazem
 
     this.valorArmazenado = this.calcularTotalArmazenado();
 
-      // Imprimir produtos para esta nota fiscal no console
-      this.expandedElement.produtos.forEach((produto) => {
-        console.log(produto);
-      });
+
     } else {
       // Se a nota fiscal estiver fechada, limpar a lista de produtos
       this.dataSourceProd = [];
@@ -70,7 +67,7 @@ export class ModalViewArmazemComponent {
     let totalArmazenado = 0;
 
     if (this.dataSource && this.dataSource.length > 0) {
-      totalArmazenado = this.dataSource.reduce((acc, nf) => acc + nf.valorArmazem, 0);
+      totalArmazenado = this.dataSource.reduce((acc, nf) => acc + nf.valores.valorArmazem, 0);
     }
 
     return totalArmazenado;

@@ -32,9 +32,10 @@ export class ModalViewDevolucaoCorrecaoGestorComponent {
 
   debitarValorCliente = false;
 
+  selectedItem = '2';
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = this.data.notaFiscal.produtos;
+  dataSource = this.data.notaFiscal.dados.produtos;
 
   constructor(private dialogRef: MatDialogRef<ModalViewDevolucaoCorrecaoGestorComponent>,
     private toastrService: NbToastrService,
@@ -91,7 +92,7 @@ calcularValoresTotais() {
   let valorPrejuizo = 0;
   let valorArmazem = 0;
 
-  this.data.notaFiscal.produtos.forEach((produto: Produto) => {
+  this.data.notaFiscal.dados.produtos.forEach((produto: Produto) => {
     switch (produto.situacao) {
       case 'Em armazem':
         valorArmazem += produto.quantidade * produto.valor;
@@ -107,9 +108,9 @@ calcularValoresTotais() {
     }
   });
 
-  this.data.notaFiscal.valorArmazem = valorArmazem;
-  this.data.notaFiscal.valorVenda = valorVenda;
-  this.data.notaFiscal.valorPrejuizo = valorPrejuizo;
+  this.data.notaFiscal.valores.valorArmazem = valorArmazem;
+  this.data.notaFiscal.valores.valorVenda = valorVenda;
+  this.data.notaFiscal.valores.valorPrejuizo = valorPrejuizo;
 
 
 }

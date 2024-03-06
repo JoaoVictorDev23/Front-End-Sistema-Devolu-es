@@ -23,13 +23,12 @@ export class SidenavComponent {
       icon: 'list-outline',
       children: [
         {
-          title: 'Devolução',
+          title: 'Notas de Devoluções',
           icon: 'undo-outline',
           children: [
-            { title: 'Visualizar devoluções', link: '/devolucoes/listar' },
-            { title: 'Cadastrar nova devolução', link: '/devolucao/cadastrar' },
-            { title: 'Gerar Financeiro', link: '/gerarfinancas'},
-
+            { title: 'Visualizar NF-D', link: '/devolucoes/listar', icon: 'eye-outline'},
+            { title: 'Cadastrar NF-D', link: '/devolucao/cadastrar',icon:'plus-circle-outline'},
+            { title: 'Validação NF-D',  link: '/gerarfinancas',      icon:'checkmark-square-outline'},
           ]
         },
         {
@@ -37,59 +36,53 @@ export class SidenavComponent {
           icon: 'cube-outline',
           link: 'armazem',
           children: [
-            { title: 'Visualizar armazéns', link: '/armazem/listar' },
-            { title: 'Cadastrar novo armazém', link: '/armazem/cadastrar' }
+            { title: 'Listar Armazéns', link: '/armazem/listar',icon: 'eye-outline'},
+            { title: 'Novo Armazém', link: '/armazem/cadastrar',icon:'plus-circle-outline'}
           ]
         },
-        {title:'Pessoa',
+        {title:'Cadastro de Pessoa',
         icon: 'person-add-outline',
         link: '/pessoa'
 
        },
-       { title:'Motivos Devolutivos',
+       { title:'Cadastro de Motivos',
          icon: 'message-circle-outline',
          link: '/motivo/cadastrar'
        },
       ],
     },
     {
-      title: 'Validar Notas',
+      title: 'Painel de Aprovação',
       icon: 'file-text-outline',
       children: [
-        { title: 'Gerar validação', link: '/aprovacao', icon: 'checkmark-circle-outline' },
         {
-          title: 'Visualizar notas',
-          link: '/aprovacao/list',
+          title: 'NFs Validadas',
           icon: 'eye-outline',
-          children: [
-            { title: 'Aprovadas', link: '/aprovacao/aprovados', icon: 'done-all-outline' },
-            { title: 'Em correção', link: '/aprovacao/correcao', icon: 'refresh-outline' },
-            { title: 'Rejeitadas', link: '/aprovacao/rejeitadas', icon: 'close-outline' },
-          ]
-        }
+          link: '/aprovacao/correcao',
+
+        },
+        { title: 'Validações Pendentes', link: '/aprovacao',icon:'checkmark-square-outline' },
+
       ],
     },
 
     {
-      title: 'Minhas notas',
-      icon: 'file-text',
-      children:[{
-        title:'Aprovadas',
-        link:'/minhasnotas-aprovadas',
-        icon: 'done-all-outline'
+      title: 'Área Pessoal',
+      icon: 'person-outline',
+      children:[
+        {
+          title:'Minhas NFs',
+          link: '/minhasnotas',
+          icon: 'list-outline'
+
+        },
+        {
+        title: 'NF-D Pendentes',
+        link: '/minhasnotas-correcao',
+        icon:'question-mark-circle-outline'
       },
 
-      {
-        title:'Correção',
-        link:'/minhasnotas-correcao',
-        icon: 'refresh-outline'
 
-      },
-      {
-        title:'Rejeitadas',
-        link:'/minhasnotas-reprovadas',
-        icon: 'close-outline'
-      },
       ]
     },
 
@@ -120,8 +113,8 @@ export class SidenavComponent {
 
 
   items2 = [
-    { title: 'Minhas notas', link:'/minhasnotas' },
-    { title: 'Logout' },
+    { title: 'Minhas NFs', link:'/minhasnotas-correcao' },
+    { title: 'Sair' },
   ];
 
   constructor(private nbMenuService: NbMenuService,    private toastrService: NbToastrService, // Adicione NbToastrService aqui

@@ -1,0 +1,82 @@
+
+<div class="col-sm-6">
+  <div class="labelcte">
+    <label for="filial" class="label">Filial</label>
+
+    <label for="serie" class="label">Serie</label>
+
+    <label for="cte" class="label">CTE</label>
+
+  </div>
+
+  <div class="form-group-cte" style="margin-left:0.2rem">
+    <input type="number" nbInput id="filial" placeholder="" fullWidth name="filial"
+      [(ngModel)]="data.notaFiscal.dados.filial" disabled>
+    <input type="number" nbInput id="serie" placeholder="" fullWidth name="serie"
+      [(ngModel)]="data.notaFiscal.dados.serie" disabled>
+    <input type="number" nbInput id="cte" placeholder="" fullWidth name="CTE" [(ngModel)]="data.notaFiscal.dados.cte"
+      disabled>
+  </div>
+</div>
+<!-- Numero NFD-->
+
+<div style="display: flex; width: 768px; ">
+  <label for="motivo" class="label">Motivo</label>
+  <label for="numero-nfd" class="label" style="margin-left: 8.5rem;">Número NFd</label>
+</div>
+
+<div style="display: flex; width: 750px;">
+  <input type="text" nbInput style="max-width: 49.5%; min-width: 40%;" id="motivo" placeholder="" name="motivo"
+    [(ngModel)]="data.notaFiscal.dados.motivo.descricao" disabled class="input-motivo">
+  <input type="number" nbInput id="numero-nfd" placeholder="" name="numero-nfd"
+    [(ngModel)]="data.notaFiscal.dados.numeroNfd" disabled class="input-nfd">
+</div>
+
+<!-- Observação -->
+
+<div class="col-sm-6">
+  <div class="form-group" style="margin-bottom: -1px;">
+    <label for="observacao" class="label">Observações</label>
+  </div>
+</div>
+
+<textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" disabled nbInput
+  id="observacao" [(ngModel)]="data.notaFiscal.dados.observacao" #observacaoInput=""
+  class="custom-textarea"></textarea>
+
+
+<!-- Nome do Cliente -->
+<div class="col-sm-6">
+  <div class="form-group">
+    <label for="cliente" class="label">Cliente</label>
+  </div>
+
+  <div class="form-group">
+    <input type="text" nbInput fullWidth id="cliente" placeholder="" name="nome-cliente"
+      [(ngModel)]="data.notaFiscal.valores.cliente.nome" disabled class="input-nfd">
+  </div>
+</div>
+
+
+<!-- Motorista-->
+<div class="col-sm-6">
+  <div class="form-group">
+    <label for="motorista" class="label">Motorista</label>
+  </div>
+</div>
+
+<div class="form-group">
+  <input type="text" nbInput fullWidth id="motorista" placeholder="" name="select-motorista"
+    [(ngModel)]="data.notaFiscal.valores.motorista.nome" disabled class="nb-select-motorista">
+</div>
+
+
+
+<mat-dialog-actions align="end" class="configurationbutton">
+  <!-- Botões-->
+  <button nbButton status="danger"  style="border: 2px solid white;">Rejeitar</button>
+  <button nbButton status="warning"  style="border: 2px solid white;">Correção</button>
+  <button nbButton status="success"  style="border: 2px solid white;">Aprovar</button>
+</mat-dialog-actions>
+
+

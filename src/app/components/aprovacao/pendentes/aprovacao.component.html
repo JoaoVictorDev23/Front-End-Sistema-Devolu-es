@@ -59,8 +59,8 @@
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef> Ações </th>
       <td mat-cell *matCellDef="let element">
-        <button nbButton status="success" (click)="aprovar(element)">
-          <nb-icon icon="checkmark-outline"></nb-icon>
+        <button nbButton shape="semi-round" outline status="success" (click)="aprovar(element)" style="padding: 5px;">
+          <nb-icon icon="checkmark-square-outline"></nb-icon>
         </button>
       </td>
     </ng-container>

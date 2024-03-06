@@ -29,7 +29,8 @@ import {
   NbWindowModule,
   NbToastrModule,
   NbChatModule,
-  NbToggleModule
+  NbToggleModule,
+  NbBadgeModule
 
 } from '@nebular/theme';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
@@ -57,15 +58,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { ModalDevolucoesViewComponent } from './components/modals/modal-view-devolucoes/modal-devolucoes-view/modal-devolucoes-view.component';
 import { ModalDevolucaoEditComponent } from './components/modals/modal-devolucao-edit/modal-devolucao-edit.component';
 import { ModalViewDevolucaoExcluirComponent } from './components/modals/modal-view-devolucao-excluir/modal-view-devolucao-excluir.component';
-import { ModalAprovarNfdComponent } from './components/modals/modal-aprovar-nfd/modal-aprovar-nfd.component';
-import { ClienteCadastrarComponent } from './components/cliente/cliente-cadastrar/cliente-cadastrar.component';
 import { MinhasnotasComponent } from './components/minhasnotas/minhasnotas.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MinhasnotasReprovadasComponent } from './components/minhasnotas/minhasnotas-reprovadas/minhasnotas-reprovadas.component';
 import { MinhasnotasCorrecaoComponent } from './components/minhasnotas/minhasnotas-correcao/minhasnotas-correcao.component';
 import { ModalViewDevolucaoCorrecaoComponent } from './components/modals/modal-view-devolucao-correcao/modal-view-devolucao-correcao.component';
 import { ModalViewDevolucaoCorrecaoGestorComponent } from './components/modals/modal-view-devolucao-correcao-gestor/modal-view-devolucao-correcao-gestor.component';
 import { FinancaSolicitarComponent } from './components/financas/financa-solicitar/financa-solicitar.component';
+import { SubmodalNfdComponent } from './components/modals/modal-view-validacao/submodal-nfd/submodal-nfd.component';
+import { SubmodalFinanceiroComponent } from './components/modals/modal-view-validacao/submodal-financeiro/submodal-financeiro.component';
 
 
 
@@ -96,14 +96,13 @@ import { FinancaSolicitarComponent } from './components/financas/financa-solicit
     ModalDevolucoesViewComponent,
     ModalDevolucaoEditComponent,
     ModalViewDevolucaoExcluirComponent,
-    ModalAprovarNfdComponent,
-    ClienteCadastrarComponent,
     MinhasnotasComponent,
-    MinhasnotasReprovadasComponent,
     MinhasnotasCorrecaoComponent,
     ModalViewDevolucaoCorrecaoComponent,
     ModalViewDevolucaoCorrecaoGestorComponent,
     FinancaSolicitarComponent,
+    SubmodalNfdComponent,
+    SubmodalFinanceiroComponent,
 
 
   ],
@@ -112,7 +111,7 @@ import { FinancaSolicitarComponent } from './components/financas/financa-solicit
     AppRoutingModule,RouterModule,
     MatTableModule,MatIconModule,NbChatModule,
     NbDialogModule.forRoot(),    NbToastrModule.forRoot(),MatTabsModule,NbToggleModule,ReactiveFormsModule,
-    NbSidebarModule.forRoot(),NbMenuModule.forRoot(),NbIconModule,MatPaginatorModule,
+    NbSidebarModule.forRoot(),NbMenuModule.forRoot(),NbIconModule,MatPaginatorModule,NbBadgeModule,
     NbLayoutModule, NbButtonModule, BrowserAnimationsModule,NbStepperModule,NbContextMenuModule ,NbWindowModule,
     NbThemeModule.forRoot({ name: 'default' }), NbEvaIconsModule, NbCardModule,MatDialogModule,NbUserModule,
     FormsModule,MatInputModule,NbInputModule,NbSelectModule,CommonModule,MatFormFieldModule,NbAutocompleteModule

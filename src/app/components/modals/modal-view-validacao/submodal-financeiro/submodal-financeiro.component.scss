@@ -2,15 +2,22 @@
   background-color: #fff; // Cor de fundo
   padding: 20px; // Espaçamento interno
 
+
+
   .mat-dialog-content {
     font-size: 1em; // Tamanho do conteúdo
     margin-bottom: 20px; // Espaçamento inferior do conteúdo
   }
 
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end; // Alinhar botões no final
+
+
+  }
 }
 
-input[type="number"],
-input[type="text"] {
+input[type="number"],input[type="text"] {
   width: 99%;
   padding: 5px;
   border: 1px solid #a59e9e;
@@ -20,7 +27,6 @@ input[type="text"] {
   margin-right: 5px;
   color: #a59e9e;
 }
-
 nb-select {
   width: 99% !important;
   padding: 2px;
@@ -42,6 +48,7 @@ label {
 }
 
 @media (max-width: 768px) {
+
   .labelcte {
     flex-direction: row;
   }
@@ -51,8 +58,7 @@ label {
   .labelcte {
     display: flex;
     flex-direction: row;
-    margin-bottom: 1px;
-    /* Ajuste para espaçamento */
+    margin-bottom: 1px; /* Ajuste para espaçamento */
     align-items: center;
   }
 
@@ -61,17 +67,14 @@ label {
     flex-wrap: wrap;
   }
 
-  .form-group-cte>input,
-  .form-group-cte>nb-select {
-    flex-basis: 32.45%;
-    /* Ajuste conforme necessário para larguras dos rótulos */
+  .form-group-cte > input,
+  .form-group-cte > nb-select {
+    flex-basis: 32.45%; /* Ajuste conforme necessário para larguras dos rótulos */
   }
 }
-
-table {
+table{
   margin-top: 3rem;
 }
-
 .custom-textarea {
   resize: none; // Impede a redimensionamento
   max-width: 100%; // Largura máxima
@@ -83,28 +86,21 @@ table {
   font-size: 16px;
   margin-top: 0.3rem;
   margin-bottom: 1rem;
-  color: #666363;
-}
+  color:#666363;
 
+}
 h1 {
   font-size: 1.5em; // Tamanho do título
   margin-bottom: 10px; // Espaçamento inferior do título
   margin-left: 10rem;
 }
 
-// Estilos da imagem
-.img-aba1 {
-  margin-bottom: 1rem;
-  margin-left: 13rem;
-  margin-top: 2rem;
-}
 
-
-nb-chat {
-  width: 700px;
-  height: 100%;
-  margin-top: 1rem;
-
+//IMG SCSS
+img{
+ margin-bottom: 1rem;
+ margin-left: 13rem;
+ margin-top: 2rem;
 }
 
 // Adicione esta parte para centralizar os botões
@@ -122,7 +118,6 @@ mat-dialog-actions {
     margin-right: 1px;
   }
 }
-.img-chat{
-  margin-top: 2rem;
-  margin-left: 20rem;
+.flex{
+  display: flex;
 }

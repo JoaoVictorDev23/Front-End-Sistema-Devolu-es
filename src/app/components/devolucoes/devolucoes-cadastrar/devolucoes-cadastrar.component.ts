@@ -20,32 +20,34 @@ import { Comprador } from 'src/app/interface/comprador-interface';
 export class DevolucoesCadastrarComponent {
 
   calcularSomaProdutos(): number {
-    return this.notaFiscal.produtos.reduce((total, produto) => total + (produto.valor * produto.quantidade), 0);
+    return this.notaFiscal.dados.produtos.reduce((total, produto) => total + (produto.valor * produto.quantidade), 0);
   }
 
 
 
   notaFiscal: NotaFiscal = {
-    filial: 0,
-    serie: 0,
-    cte: 0,
-    numeroNfd: 0,
-    numeroNfo:0,
-    observacao: '',
-    valorVenda: 0,
-    valorPrejuizo: 0,
-    valorArmazem: 0,
-
-    situacao: 'Pendente',
-
-    comprador:{} as Comprador,
-    motivo:{} as Motivo,
-    armazem: {} as Armazem,
-    motorista: {} as Motorista,
-    cliente: {} as Cliente,
-    produtos: [] as Produto[]
+    dados: {
+      filial: 0,
+      serie: 0,
+      cte: 0,
+      situacao: 'Pendente',
+      numeroNfd: 0,
+      numeroNfo: 0,
+      observacao: '',
+      motivo: { codigo: '', descricao: '' },
+      produtos: [] as Produto[]
+    },
+    valores: {
+      valorVenda: 0,
+      valorPrejuizo: 0,
+      valorArmazem: 0,
+      situacao: 'Pendente',
+      comprador: { nome: '', cpf: 0 },
+      armazem: { nome: '', endereco: '', filial: '' },
+      motorista: { nome: '', cpf: '', valorDebitado: 0 },
+      cliente: { nome: '', cnpj: '', valorDebitado: 0 }
+    }
   };
-
   debitarValorCliente = false;
   debitarValorMotorista = true;
   linearMode = false;
@@ -69,7 +71,7 @@ export class DevolucoesCadastrarComponent {
 
     dialogRef.onClose.subscribe((produto: Produto) => {
       if (produto) {
-        this.notaFiscal.produtos.push({
+        this.notaFiscal.dados.produtos.push({
           'nome': produto.nome,
           'quantidade': produto.quantidade,
           'valor': produto.valor,
@@ -78,7 +80,7 @@ export class DevolucoesCadastrarComponent {
           'numeronfd':produto.numeronfd
         });
 
-        this.dataSource.data = [...this.notaFiscal.produtos];
+        this.dataSource.data = [...this.notaFiscal.dados.produtos];
 
       }
     });
@@ -91,18 +93,18 @@ export class DevolucoesCadastrarComponent {
   }
 
   excluirProduto(produto: Produto): void {
-    const index = this.notaFiscal.produtos.indexOf(produto);
+    const index = this.notaFiscal.dados.produtos.indexOf(produto);
 
     if (index >= 0) {
-      this.notaFiscal.produtos.splice(index, 1);
-      this.dataSource.data = [...this.notaFiscal.produtos];
+      this.notaFiscal.dados.produtos.splice(index, 1);
+      this.dataSource.data = [...this.notaFiscal.dados.produtos];
     }
   }
 
 
 
   adicionarNotaFiscal(): void {
-    this.notaFiscal.produtos = this.dataSource.data;
+    this.notaFiscal.dados.produtos = this.dataSource.data;
 
     // Aqui você pode simular o envio para o backend, por enquanto apenas imprima no console
     console.log('Nota Fiscal:', this.notaFiscal);
