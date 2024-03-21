@@ -1,7 +1,8 @@
 export interface Usuario{
   id?: any;
   nome: string;
-  cpf: number;
-  login: string;
-  permissao: string;
+  cpf: string;
+  email: string;
+  senha: string;
+  perfil: string;
 }

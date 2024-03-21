@@ -1,0 +1,116 @@
+
+
+
+
+<div class="col-sm-6">
+  <div class="labelcte">
+    <label for="filial" class="label">Filial</label>
+
+    <label for="serie" class="label">Serie</label>
+
+    <label for="cte" class="label">CTE</label>
+
+  </div>
+
+  <div class="form-group-cte" style="margin-left:0.2rem">
+    <input type="number" nbInput id="filial" placeholder="" fullWidth name="filial"
+      [(ngModel)]="data.notaFiscal.dados.filial" disabled>
+    <input type="number" nbInput id="serie" placeholder="" fullWidth name="serie"
+      [(ngModel)]="data.notaFiscal.dados.serie" disabled>
+    <input type="number" nbInput id="cte" placeholder="" fullWidth name="CTE" [(ngModel)]="data.notaFiscal.dados.cte"
+      disabled>
+  </div>
+</div>
+<!-- Numero NFD-->
+
+<div style="display: flex; width: 700px; ">
+  <label for="motivo" class="label">Motivo</label>
+  <label for="numero-nfd" class="label" style="margin-left: 6.5rem;">Número NFd</label>
+</div>
+
+<div style="display: flex; width: 700px;">
+  <input type="text" nbInput style="max-width: 49.5%; min-width: 40%;" id="motivo" placeholder="" name="motivo"
+    [(ngModel)]="data.notaFiscal.dados.motivo.descricao" disabled class="input-motivo">
+  <input type="number" nbInput style="max-width: 49.5%; min-width: 40%;" id="numero-nfd" placeholder="" name="numero-nfd"
+    [(ngModel)]="data.notaFiscal.dados.numeroNfd" disabled class="input-nfd">
+</div>
+
+<!-- Observação -->
+
+<div class="col-sm-6">
+  <div class="form-group" style="margin-bottom: -1px;">
+    <label for="observacao" class="label">Observações</label>
+  </div>
+</div>
+
+<textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" disabled nbInput
+  id="observacao" [(ngModel)]="data.notaFiscal.dados.observacao" #observacaoInput=""
+  class="custom-textarea"></textarea>
+
+
+<!-- Nome do Cliente -->
+<div class="col-sm-6">
+  <div class="form-group">
+    <label for="cliente" class="label">Cliente</label>
+  </div>
+
+  <div class="form-group">
+    <input type="text" nbInput fullWidth id="cliente" placeholder="" name="nome-cliente"
+      [(ngModel)]="data.notaFiscal.valores.cliente.nome" disabled class="input-nfd">
+  </div>
+</div>
+
+
+<!-- Motorista-->
+<div class="col-sm-6">
+  <div class="form-group">
+    <label for="motorista" class="label">Motorista</label>
+  </div>
+</div>
+
+<div class="form-group">
+  <input type="text" nbInput fullWidth id="motorista" placeholder="" name="select-motorista"
+    [(ngModel)]="data.notaFiscal.valores.motorista.nome" disabled class="nb-select-motorista">
+</div>
+<div style="display: flex;">
+
+  <!--Cliente Nome-->
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="numero-nfd" class="label">Cliente</label>
+    </div>
+
+    <div class="form-group">
+      <input type="text" nbInput id="cliente-nome" placeholder="" name="cliente-nome"
+        [(ngModel)]="data.notaFiscal.valores.cliente.nome" disabled class="input-nfd">
+    </div>
+  </div>
+
+  <!-- Cliente Debitado -->
+  <div style="margin-left:2.8rem; margin-top: 3px;">
+    <label class="label" style="margin-bottom: 5px;">Débitado do cliente?</label>
+
+    <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorCliente"
+      style="margin-bottom: 0.7rem !important;" disabled>
+      <input nbInput type="number" id="valorDebitadoCliente" *ngIf="debitarValorCliente" class="visual-text" >
+    </nb-toggle>
+
+  </div>
+
+</div>
+
+
+
+<div class="flex">
+  <label class="label" style="margin-bottom: 5px; margin-right: 18rem !important;" *ngIf="debitarValorMotorista">Motorista</label>
+  <label class="label" style="margin-bottom: 5px;" *ngIf="debitarValorMotorista">Debitado do Motorista</label>
+</div>
+<div class="flex">
+  <input type="text" nbInput fullWidth *ngIf="debitarValorMotorista" placeholder="Digite o valor" id="motorista-debitado"
+    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valores.motorista.nome" required disabled>
+  <input type="number" nbInput fullWidth *ngIf="debitarValorMotorista" placeholder="Digite o valor" id="motorista-debitado"
+    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valores.motorista.valorDebitado" required disabled>
+</div>
+
+
+

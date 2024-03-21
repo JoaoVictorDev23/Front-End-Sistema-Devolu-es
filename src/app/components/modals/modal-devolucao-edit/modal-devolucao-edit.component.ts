@@ -1,72 +1,124 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+import { Produto } from 'src/app/interface/produtos.interface';
+import { NbToastrService } from '@nebular/theme';
+import { NotaFiscal } from 'src/app/interface/nfd-interface';
 
-export interface PeriodicElement {
-  nome: string;
-  situacao: string;
-  quantidade: number;
-  valor: number;
+
+
+export interface ChatMessage {
+  text: string;
+  date: Date;
+  reply: boolean;
+  type: 'text' | 'file';
+  files?: {
+    url: string;
+    type: string;
+    icon: string;
+  }[];
+  user: {
+    name: string;
+    avatar: string;
+  };
 }
-const ELEMENT_DATA2: PeriodicElement[] = [
-  {nome: '1', situacao: 'Hydrogen', quantidade: 1.0079, valor: 2},
-  {nome: '2', situacao: 'Helium', quantidade: 4.0026, valor: 3},
-  {nome: '3', situacao: 'Lithium', quantidade: 6.941, valor: 4},
-  {nome: '4', situacao: 'Beryllium', quantidade: 9.0122, valor: 5},
-  {nome: '5', situacao: 'Boron', quantidade: 10.811, valor: 6},
-  {nome: '6', situacao: 'Carbon', quantidade: 12.0107, valor: 7},
-  {nome: '7', situacao: 'Nitrogen', quantidade: 14.0067, valor: 8},
-  {nome: '8', situacao: 'Oxygen', quantidade: 15.9994, valor: 9},
-  {nome: '9', situacao: 'Fluorine', quantidade: 18.9984, valor: 10},
-  {nome: '10', situacao: 'Neon', quantidade: 20.1797, valor: 11},
-];
+
 @Component({
   selector: 'app-modal-devolucao-edit',
   templateUrl: './modal-devolucao-edit.component.html',
   styleUrls: ['./modal-devolucao-edit.component.scss']
 })
-export class ModalDevolucaoEditComponent  implements OnInit{
-  displayedColumns: string[] = ['nome', 'quantidade', 'valor', 'situacao'];
-  dataSource = ELEMENT_DATA2;
+export class ModalDevolucaoEditComponent  {
 
-  constructor(private dialogRef: MatDialogRef<ModalDevolucaoEditComponent>) { }
+
+  debitarValorCliente = false;
+
+  selectedItem = '2';
+
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = this.data.notaFiscal.dados.produtos;
+
+  constructor(private dialogRef: MatDialogRef<ModalDevolucaoEditComponent>,
+    private toastrService: NbToastrService,
+    @Inject(MAT_DIALOG_DATA) public data: { notaFiscal: NotaFiscal } ) {
+
+     }
+
+
+
+
   voltar(): void {
     this.dialogRef.close();
   }
 
-  options: string[] = [];  // Inicializando a propriedade 'options'
-  filteredControlOptions$: Observable<string[]> = of([]);  // Inicializando 'filteredControlOptions$'
-  filteredNgModelOptions$: Observable<string[]> = of([]);  // Inicializando 'filteredNgModelOptions$'
-  inputFormControl: FormControl = new FormControl();  // Inicializando 'inputFormControl'
-  value: string = '';  // Inicializando 'value'
+  showChat: boolean = false;
 
-
-  ngOnInit() {
-
-    this.options = ['Option 1', 'Option 2', 'Option 3'];
-    this.filteredControlOptions$ = of(this.options);
-    this.filteredNgModelOptions$ = of(this.options);
-
-    this.inputFormControl = new FormControl();
-    this.filteredControlOptions$ = this.inputFormControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(filterString => this.filter(filterString)),
-      );
+  toggleChat(): void {
+    this.showChat = !this.showChat;
   }
 
-  private filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.options.filter(optionValue => optionValue.toLowerCase().includes(filterValue));
+  aprovar(): void {
+    // Lógica de aprovação
   }
 
-  onModelChange(value: string) {
-    this.filteredNgModelOptions$ = of(this.filter(value));
+  ngOnInit(): void {
+
   }
+  //Logica de envio de mensagem e Mecanismos do CHat
+
+
+  messages: ChatMessage[] = [];
+
+  sendMessage(event: any): void {
+    if (event.message) {
+      this.messages.push({
+        text: event.message,
+        date: new Date(),
+        type: 'text',
+        reply: false, // Add this line to fix the error
+        user: {
+          name: 'User', // Replace with actual user name
+          avatar: '', // Leave it empty for now
+        },
+      });
+    } else {
+      this.toastrService.danger('Please enter a message', 'Error');
+    }
+  }
+
+
+//calcular
+calcularValoresTotais() {
+  let valorVenda = 0;
+  let valorPrejuizo = 0;
+  let valorArmazem = 0;
+
+  this.data.notaFiscal.dados.produtos.forEach((produto: Produto) => {
+    switch (produto.situacao) {
+      case 'Em armazem':
+        valorArmazem += produto.quantidade * produto.valor;
+        break;
+      case 'Venda':
+        valorVenda += produto.quantidade * produto.valor;
+        break;
+      case 'Prejuizo':
+        valorPrejuizo += produto.quantidade * produto.valor;
+        break;
+      default:
+        break;
+    }
+  });
+
+  this.data.notaFiscal.valores.valorArmazem = valorArmazem;
+  this.data.notaFiscal.valores.valorVenda = valorVenda;
+  this.data.notaFiscal.valores.valorPrejuizo = valorPrejuizo;
+
 
 }
+}
+

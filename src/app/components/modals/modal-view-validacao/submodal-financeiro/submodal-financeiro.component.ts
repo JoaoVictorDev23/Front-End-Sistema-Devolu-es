@@ -14,9 +14,6 @@ export class SubmodalFinanceiroComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = this.data.notaFiscal.dados.produtos;
 
-  debitarValorMotorista = true;
-  debitarValorCliente = false;
-
 
   constructor(private dialogRef: MatDialogRef<SubmodalFinanceiroComponent>,
     private toastrService: NbToastrService,private dialogService: NbDialogService,

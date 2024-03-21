@@ -10,6 +10,10 @@ import { NotaFiscal } from 'src/app/interface/nfd-interface';
 })
 export class SubmodalNfdComponent {
 
+  debitarValorMotorista = true;
+  debitarValorCliente = false;
+
+
   constructor(private dialogRef: MatDialogRef<SubmodalNfdComponent>,
     private toastrService: NbToastrService,
     @Inject(MAT_DIALOG_DATA) public data: { notaFiscal: NotaFiscal } ) {

@@ -19,11 +19,12 @@
               </div>
 
               <div class="form-group-cte">
-                <input type="number" nbInput placeholder="" id="filial" name="filial" [(ngModel)]="notaFiscal.dados.filial"
-                  required>
+                <input type="number" nbInput placeholder="" id="filial" name="filial"
+                  [(ngModel)]="notaFiscal.dados.filial" required>
                 <input type="number" nbInput placeholder="" id="serie" name="serie" [(ngModel)]="notaFiscal.dados.serie"
                   required>
-                <input type="number" nbInput placeholder="" id="cte" name="cte" [(ngModel)]="notaFiscal.dados.cte" required>
+                <input type="number" nbInput placeholder="" id="cte" name="cte" [(ngModel)]="notaFiscal.dados.cte"
+                  required>
               </div>
             </div>
 
@@ -34,8 +35,8 @@
               </div>
 
               <div class="form-group">
-                <input type="number" nbInput fullWidth id="numeroNfd" placeholder="" [(ngModel)]="notaFiscal.dados.numeroNfd"
-                  name="numeroNfd" required class="input-nfd">
+                <input type="number" nbInput fullWidth id="numeroNfd" placeholder=""
+                  [(ngModel)]="notaFiscal.dados.numeroNfd" name="numeroNfd" required class="input-nfd">
               </div>
 
             </div>
@@ -57,19 +58,7 @@
             <!-- Opções de Armazem -->
 
             <div class="col-sm-6">
-              <div class="form-group">
-                <label class="label">Armazém</label>
-              </div>
-            </div>
 
-            <div class="form-group">
-              <nb-select fullWidth placeholder="Selecione o Armazém" class="nb-select-armazem" id="armazem"
-                name="armazem" [(ngModel)]="notaFiscal.valores.armazem" required>
-                <nb-option>Reset</nb-option>
-                <nb-option value="1">Finalizado</nb-option>
-                <nb-option value="2">Devolução</nb-option>
-                <nb-option value="3">Option 3</nb-option>
-              </nb-select>
 
               <!-- Opções de Motivo-->
 
@@ -104,7 +93,7 @@
           </div>
           <!--    -->
 
-          <button nbButton nbStepperNext (click)="verdados()" [disabled]="!nameForm.valid"
+          <button nbButton outline shape="semi-round" nbStepperNext (click)="verdados()" [disabled]="!nameForm.valid"
             status="primary">Continuar</button>
         </form>
       </nb-step>
@@ -114,7 +103,8 @@
         <!-- Definindo os campos no formulario da Segunda etapa-->
         <form #somethingForm="ngForm">
           <div>
-            <button nbButton outline shape="semi-round" status="info" class="button-adicionar-prod" (click)="openDialog()">Adicionar
+            <button nbButton outline shape="semi-round" status="info" class="button-adicionar-prod"
+              (click)="openDialog()">Adicionar
               Produto</button>
 
             <table mat-table [dataSource]="dataSource">
@@ -166,7 +156,7 @@
             </table>
 
             <!-- botao de continuar-->
-            <button nbButton nbStepperNext  status="success" (click)="verdados()"
+            <button nbButton nbStepperNext status="success" (click)="verdados()"
               class="button-concluir">Continuar</button>
           </div>
         </form>
@@ -195,6 +185,7 @@
               </div>
             </div>
 
+
             <!-- Motorista-->
             <div class="col-sm-6">
               <div class="form-group">
@@ -203,7 +194,7 @@
             </div>
 
             <div class="form-group3">
-              <nb-select fullWidth placeholder="Motorista" class="nb-select-motorista" id="motorista.nome"
+              <nb-select fullWidth placeholder="Selecione um Motorista" class="nb-select-motorista" id="motorista.nome"
                 name="motorista.id" [(ngModel)]="notaFiscal.valores.motorista.id" required>
                 <nb-option>Nenhuma das alternativas</nb-option>
                 <nb-option value="1">Jose</nb-option>
@@ -212,17 +203,22 @@
               </nb-select>
 
               <div class="form-group-toggle">
-                <div  style="display: flex;">
+                <div style="display: flex;">
                   <label class="label" style="margin-bottom: 5px;">Motorista alertou Avaria?</label>
-                  <label class="label" style="margin-bottom: 5px;" *ngIf="debitarValorMotorista">Debitar Valor do Motorista?</label>
+                  <label class="label" style="margin-bottom: 5px;" *ngIf="debitarValorMotorista">Debitar Valor do
+                    Motorista?</label>
                 </div>
 
-                <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorMotorista" style="margin-bottom: 0.7rem !important;">
-                    <span nbSpan *ngIf="!debitarValorMotorista" class="visual-text" [(ngModel)]="notaFiscal.valores.motorista.valorDebitado">Debitar do Motorista: R${{calcularSomaProdutos()}}</span>
+                <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorMotorista"
+                  style="margin-bottom: 0.7rem !important;">
+                  <span nbSpan *ngIf="!debitarValorMotorista" class="visual-text"
+                    [(ngModel)]="notaFiscal.valores.motorista.valorDebitado">Debitar do Motorista:
+                    R${{calcularSomaProdutos()}}</span>
 
-                    <input type="number" nbInput *ngIf="debitarValorMotorista"
-                    placeholder="Digite o valor" id="motorista-debitado" name="motorista-debitado"
-                    [(ngModel)]="notaFiscal.valores.motorista.valorDebitado" required style="margin-left:265px; width: 70%">
+                  <input type="number" nbInput *ngIf="debitarValorMotorista" placeholder="Digite o valor"
+                    id="motorista-debitado" name="motorista-debitado"
+                    [(ngModel)]="notaFiscal.valores.motorista.valorDebitado" required
+                    style="margin-left:265px; width: 70%">
                 </nb-toggle>
 
               </div>
@@ -231,7 +227,7 @@
 
             </div>
 
-            <!-- Comprador-->
+            <!-- Armazem-->
             <div class="col-sm-6">
               <div class="form-group">
                 <label class="label">Comprador</label>
@@ -239,8 +235,27 @@
             </div>
 
             <div class="form-group">
-              <nb-select fullWidth placeholder="Comprador" id="comprador" class="nb-select-motorista"
+              <nb-select fullWidth placeholder="Selecione um Comprador" id="comprador" class="nb-select-motorista"
                 name="comprador.id" [(ngModel)]="notaFiscal.valores.comprador.id" required>
+                <nb-option>Nenhuma das alternativas</nb-option>
+                <nb-option value="1">Jose</nb-option>
+                <nb-option value="2">Jaun</nb-option>
+                <nb-option value="3">Option 3</nb-option>
+              </nb-select>
+
+            </div>
+
+
+            <!-- Comprador-->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="label">Armazem</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <nb-select fullWidth placeholder="Selecione um Armazem" id="armazem" class="nb-select-motorista"
+                name="armazem.id" [(ngModel)]="notaFiscal.valores.armazem.id" required>
                 <nb-option>Nenhuma das alternativas</nb-option>
                 <nb-option value="1">Jose</nb-option>
                 <nb-option value="2">Jaun</nb-option>

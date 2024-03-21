@@ -1,134 +1,75 @@
-<h1>Dados da Nota Fiscal de Devolução</h1>
-<mat-dialog-content class="mat-typography">
-  <div class="col-sm-6">
-    <div class="labelcte">
-      <label for="filial" class="label">Filial</label>
-
-      <label for="serie" class="label">Serie</label>
-
-      <label for="cte" class="label">CTE</label>
-
-    </div>
-
-    <div class="form-group-cte">
-      <input type="number" nbInput id="filial" placeholder="" name="Filial" ngModel disabled [disabled]="true">
-      <input type="number" nbInput id="serie" placeholder="" name="Serie" ngModel disabled>
-      <input type="number" nbInput id="cte" placeholder="" name="CTE" ngModel disabled>
-    </div>
-  </div>
-
-  <div class="col-sm-6">
-    <div class="form-group">
-      <label for="numero-nfd" class="label">Número NFd</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" nbInput fullWidth id="numero-nfd" placeholder="" name="numero-nfd" ngModel disabled
-        class="input-nfd" [disabled]="true">
-    </div>
-  </div>
-  <!-- Motivos -->
-  <div class="col-sm-6">
-    <div class="form-group">
-      <label class="label">Motivo</label>
-    </div>
-  </div>
-
-
-  <nb-select fullWidth placeholder="Selecione o motivo" class="nb-select-motivo"name="motivo" required>
-    <nb-option>Nenhuma das alternativas</nb-option>
-    <nb-option value="1">Avaria</nb-option>
-    <nb-option value="2">Falta</nb-option>
-    <nb-option value="3">Devolucao</nb-option>
-  </nb-select>
-  <!-- Observações -->
-
-  <div class="col-sm-6">
-    <div class="form-group">
-      <label for="observacao" class="label">Observações</label>
-    </div>
-  </div>
-
-  <textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" nbInput id="observacao" ngModel
-    #observacaoInput="ngModel" class="custom-textarea"></textarea>
-
-
-  <!--  Cliente -->
-  <div class="col-sm-6">
-    <div class="form-group">
-      <label  class="label">Cliente</label>
-    </div>
-
-    <nb-select fullWidth placeholder="Comprador" id="comprador" class="nb-select-motorista" name="comprador.id"
-    required>
-    <nb-option>Nenhuma das alternativas</nb-option>
-    <nb-option value="1">Jose</nb-option>
-    <nb-option value="2">Jaun</nb-option>
-    <nb-option value="3">Option 3</nb-option>
-  </nb-select>
-
-  </div>
-
-
-  <!-- Motorista-->
-  <div class="col-sm-6">
-    <div class="form-group">
-      <label  class="label">Motorista</label>
-    </div>
-
-    <nb-select fullWidth placeholder="Motorista" class="nb-select-motorista" id="motorista" name="motorista.id"
-    required>
-    <nb-option>Nenhuma das alternativas</nb-option>
-    <nb-option value="1">Jose</nb-option>
-    <nb-option value="2">Jaun</nb-option>
-    <nb-option value="3">Option 3</nb-option>
-  </nb-select>
-  </div>
+<div style="max-width: 768px; min-width: 768px;">
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Aprovação
+      </ng-template>
+      <img src="/assets/img/dadosnfd.png" alt="Imagem em erro!" class="img-aba1">
 
 
 
-  <!-- TABELA PRODUTOS-->
+      <mat-dialog-content class="mat-typography">
 
-  <table mat-table [dataSource]="dataSource">
+        <!-- Numero NFD-->
 
+        <div style="display: flex; width: 100%; ">
+          <label for="numero-nfd" class="label" style="margin-right:15rem;">Selecione uma Validação</label>
+        </div>
 
-    <!-- Nome do Produto -->
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef> Nome Produto </th>
-      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
-    </ng-container>
-
-    <!-- Quantidade do Produto -->
-    <ng-container matColumnDef="quantidade">
-      <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-      <td mat-cell *matCellDef="let element"> {{element.quantidade}} </td>
-    </ng-container>
-
-    <!-- Valor do Produto -->
-    <ng-container matColumnDef="valor">
-      <th mat-header-cell *matHeaderCellDef> Valor Unitário </th>
-      <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
-    </ng-container>
-
-    <!--Situacao do Produto -->
-    <ng-container matColumnDef="situacao">
-      <th mat-header-cell *matHeaderCellDef> Situação </th>
-      <td mat-cell *matCellDef="let element"> {{element.situacao}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-
-    </tr>
-  </table>
+        <div style="display: flex; width: 100%;">
+          <nb-select placeholder="Validações" [(selected)]="selectedItem">
+            <nb-option value="">Selecione uma opção</nb-option>
+            <nb-option value="nfd">Editar NF-D</nb-option>
+            <nb-option value="valores">Editar Valores</nb-option>
+          </nb-select>
+        </div>
 
 
-</mat-dialog-content>
+        <div *ngIf="selectedItem === 'nfd'" style="margin-top:1rem">
+          <app-submodal-editar-nfd></app-submodal-editar-nfd>
+        </div>
 
-<mat-dialog-actions align="end">
-  <button nbButton fullWidth status="success" (click)="voltar()">Atualizar</button>
-  <button nbButton fullWidth status="primary" (click)="voltar()">Voltar</button>
-</mat-dialog-actions>
+        <div *ngIf="selectedItem === 'valores'" style="margin-top:1rem">
+          <app-submodal-editar-financeiro></app-submodal-editar-financeiro>
+        </div>
+      </mat-dialog-content>
+    </mat-tab>
+    <!-- chat -->
+    <mat-tab class="custom-tab">
+      <ng-template mat-tab-label>
+        Chat
+      </ng-template>
+
+      <img src="/assets/img/CHAT.png" alt="Imagem em erro!" class="img-chat">
+
+      <mat-dialog-content class="mat-typography">
+
+        <nb-chat title="Comentários & Correções" size="large" style="text-align: center;"
+          noMessagesPlaceholder="Envie a primeira mensagem.">
+
+
+          <nb-chat-message *ngFor="let msg of messages" [type]="msg.type" [message]="msg.text" [sender]="msg.user.name"
+            [date]="msg.date"></nb-chat-message>
+
+
+          <nb-chat-form (send)="sendMessage($event)" [dropFiles]="false" messagePlaceholder="Digite sua mensagem">
+          </nb-chat-form>
+        </nb-chat>
+
+      </mat-dialog-content>
+
+    </mat-tab>
+
+
+
+  </mat-tab-group>
+
+
+
+  <mat-dialog-actions align="end" class="configurationbutton">
+    <!-- Botões-->
+
+    <button nbButton status="info" shape="semi-round" fullWidth (click)="voltar()" style="border: 2px solid white;">Voltar</button>
+  </mat-dialog-actions>
+
+</div>

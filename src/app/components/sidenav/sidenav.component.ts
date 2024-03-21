@@ -45,6 +45,11 @@ export class SidenavComponent {
         link: '/pessoa'
 
        },
+       {title:'Cadastro de Usuário',
+       icon: 'person-add',
+       link: '/usuario'
+
+      },
        { title:'Cadastro de Motivos',
          icon: 'message-circle-outline',
          link: '/motivo/cadastrar'
@@ -105,7 +110,7 @@ export class SidenavComponent {
     {
       title: 'Sair',
       icon: 'log-out-outline',
-      link: '/ajuda'
+      link:'/login'
     },
 
   ];
@@ -114,7 +119,7 @@ export class SidenavComponent {
 
   items2 = [
     { title: 'Minhas NFs', link:'/minhasnotas-correcao' },
-    { title: 'Sair' },
+    { title: 'Sair', link:'/login' },
   ];
 
   constructor(private nbMenuService: NbMenuService,    private toastrService: NbToastrService, // Adicione NbToastrService aqui

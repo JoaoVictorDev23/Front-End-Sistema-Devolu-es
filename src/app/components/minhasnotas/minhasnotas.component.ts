@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
+import { ModalViewDevolucaoExcluirComponent } from '../modals/modal-view-devolucao-excluir/modal-view-devolucao-excluir.component';
+import { ModalDevolucaoEditComponent } from '../modals/modal-devolucao-edit/modal-devolucao-edit.component';
 
 @Component({
   selector: 'app-minhasnotas',
@@ -131,6 +133,20 @@ constructor(public dialog: MatDialog) {
 
 openDialog(notaFiscal: NotaFiscal) {
   const dialogRef = this.dialog.open(ModalDevolucoesViewComponent, {data:{notaFiscal: notaFiscal}});
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
+}
+openDialogExcluir(notaFiscal: NotaFiscal) {
+  const dialogRef = this.dialog.open(ModalViewDevolucaoExcluirComponent, {data:{notaFiscal: notaFiscal}});
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
+}
+openDialogAtualizar(notaFiscal: NotaFiscal) {
+  const dialogRef = this.dialog.open(ModalDevolucaoEditComponent, {data:{notaFiscal: notaFiscal}});
 
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);

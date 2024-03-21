@@ -1,7 +1,7 @@
 export interface Pessoa{
   id?: string,
   nome: string,
-  cpf: number,
+  cpf: string,
   email: string,
   perfil: string
 }

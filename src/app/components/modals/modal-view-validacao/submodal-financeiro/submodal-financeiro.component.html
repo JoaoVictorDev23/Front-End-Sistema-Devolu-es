@@ -1,44 +1,3 @@
-<div style="display: flex;">
-
-  <!--Cliente Nome-->
-  <div class="col-sm-6">
-    <div class="form-group">
-      <label for="numero-nfd" class="label">Cliente</label>
-    </div>
-
-    <div class="form-group">
-      <input type="text" nbInput id="cliente-nome" placeholder="" name="cliente-nome"
-        [(ngModel)]="data.notaFiscal.valores.cliente.nome" disabled class="input-nfd">
-    </div>
-  </div>
-
-  <!-- Cliente Debitado -->
-  <div style="margin-left:3.6rem; margin-top: 3px;">
-    <label class="label" style="margin-bottom: 5px;">Débitado do cliente?</label>
-
-    <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorCliente"
-      style="margin-bottom: 0.7rem !important;">
-      <input nbInput type="number" id="valorDebitadoCliente" *ngIf="debitarValorCliente" class="visual-text" >
-    </nb-toggle>
-
-  </div>
-
-</div>
-
-
-
-<div class="flex">
-  <label class="label" style="margin-bottom: 5px; margin-right: 16rem !important;" *ngIf="debitarValorMotorista">Motorista</label>
-  <label class="label" style="margin-bottom: 5px;" *ngIf="debitarValorMotorista">Debitado do Motorista</label>
-</div>
-<div class="flex">
-  <input type="text" nbInput fullWidth *ngIf="debitarValorMotorista" placeholder="Digite o valor" id="motorista-debitado"
-    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valores.motorista.nome" required>
-  <input type="number" nbInput fullWidth *ngIf="debitarValorMotorista" placeholder="Digite o valor" id="motorista-debitado"
-    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valores.motorista.valorDebitado" required>
-</div>
-
-
 
 
 <!-- Comprador-->
@@ -140,7 +99,7 @@
 
 <mat-dialog-actions align="end" class="configurationbutton">
   <!-- Botões-->
-  <button nbButton status="danger" style="border: 2px solid white;">Rejeitar</button>
-  <button nbButton status="warning" style="border: 2px solid white;">Correção</button>
-  <button nbButton status="success" style="border: 2px solid white;">Aprovar</button>
+  <button nbButton status="danger" shape="semi-round" style="border: 2px solid white;">Rejeitar</button>
+  <button nbButton status="warning"  shape="semi-round" style="border: 2px solid white;">Correção</button>
+  <button nbButton status="success"   shape="semi-round" style="border: 2px solid white;">Aprovar</button>
 </mat-dialog-actions>

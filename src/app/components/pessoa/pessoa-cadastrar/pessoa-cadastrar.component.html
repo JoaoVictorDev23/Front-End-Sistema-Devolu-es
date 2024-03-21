@@ -1,5 +1,5 @@
 <nb-card size="large">
-  <nb-card-header style="margin: auto;">Cadastro de Pessoa</nb-card-header>
+  <nb-card-header style="margin: auto;"><img src="/assets/img/cadastrodeparceiro.png" alt=""></nb-card-header>
   <nb-card-body>
 
     <form #nameForm="ngForm" class="step-container">
@@ -19,7 +19,7 @@
             id="pessoa.cpf"
             placeholder=""
             name="cpf"
-            [(ngModel)]="pessoa.cpf" required
+            (ngModel)="pessoa.cpf" required
             mask="000.000.000-00"          >
 
             <label for="pessoa.email" class="label">E-mail</label>
@@ -43,7 +43,7 @@
           </div>
 
           <div>
-            <button nbButton fullWidth (click)="create()" status="success">Cadastrar</button>
+            <button nbButton shape="semi-round" fullWidth (click)="create()" status="success">Cadastrar</button>
           </div>
 
         </div>

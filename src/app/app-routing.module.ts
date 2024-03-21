@@ -17,10 +17,28 @@ import { PessoaCadastrarComponent } from './components/pessoa/pessoa-cadastrar/p
 import { MinhasnotasComponent } from './components/minhasnotas/minhasnotas.component';
 import { MinhasnotasCorrecaoComponent } from './components/minhasnotas/minhasnotas-correcao/minhasnotas-correcao.component';
 import { FinancaSolicitarComponent } from './components/financas/financa-solicitar/financa-solicitar.component';
+import { UsuarioCadastrarComponent } from './components/usuarios/usuario-cadastrar/usuario-cadastrar.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
+  path: '',
+  children: [
+    {
+      path: '',
+      redirectTo:'login',
+      pathMatch: 'prefix'
+    },
+    {
+      path: 'login',
+      component: LoginComponent,
+    }
+  ],
+  },
+  {
     path:'', component:SidenavComponent,
+    canActivate:[AuthGuard],
     children:[
       {path: 'home',component: HomeComponent},
       {path: 'devolucoes/listar', component:DevolucoesListComponent},
@@ -28,14 +46,13 @@ const routes: Routes = [
 
       {path:'motivo/cadastrar', component:MotivoCadastrarComponent},
 
-
       {path:'pessoa', component: PessoaCadastrarComponent},
 
       {path:'armazem/cadastrar', component:ArmazemCadastrarComponent},
       {path:'armazem/listar', component:ArmazemListarComponent},
 
       {path:'aprovacao', component: AprovacaoComponent},
-      {path:'aprovacao/aprovados', component:AprovadosComponent},
+      {path:'aprovacao/aprovadas', component:AprovadosComponent},
       {path:'aprovacao/rejeitadas', component:RejeitadasComponent},
       {path:'aprovacao/correcao', component:CorrecaoComponent},
 
@@ -43,6 +60,8 @@ const routes: Routes = [
       {path:'minhasnotas-correcao',component:MinhasnotasCorrecaoComponent},
 
       {path:'gerarfinancas', component:FinancaSolicitarComponent},
+
+      {path:'usuario', component:UsuarioCadastrarComponent},
 
       {path:'ajuda', component:AjudaComponent},
       {path:'sobre', component: SobreComponent}

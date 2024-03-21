@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+    "@auth0/angular-jwt": "^5.2.0",
+    "@nebular/auth": "^11.0.1",
     "@nebular/eva-icons": "11.0.1",
     "@nebular/theme": "^11.0.1",
     "@vamidicreations/ng2-smart-table": "^15.0.0",

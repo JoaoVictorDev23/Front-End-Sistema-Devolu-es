@@ -30,7 +30,10 @@ import {
   NbToastrModule,
   NbChatModule,
   NbToggleModule,
-  NbBadgeModule
+  NbBadgeModule,
+  NbAlertModule,
+  NbCheckboxModule,
+  NbFormFieldModule
 
 } from '@nebular/theme';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
@@ -66,12 +69,15 @@ import { ModalViewDevolucaoCorrecaoGestorComponent } from './components/modals/m
 import { FinancaSolicitarComponent } from './components/financas/financa-solicitar/financa-solicitar.component';
 import { SubmodalNfdComponent } from './components/modals/modal-view-validacao/submodal-nfd/submodal-nfd.component';
 import { SubmodalFinanceiroComponent } from './components/modals/modal-view-validacao/submodal-financeiro/submodal-financeiro.component';
-
-
-
-
-
-
+import { SubmodalSolicitarFinanceiroComponent } from './components/modals/modals-view-solicitar-validacao/submodal-solicitar-financeiro/submodal-solicitar-financeiro.component';
+import { SubmodalSolicitarNfdComponent } from './components/modals/modals-view-solicitar-validacao/submodal-solicitar-nfd/submodal-solicitar-nfd.component';
+import { SubmodalVerNfdComponent } from './components/modals/modals-view-solicitar-validacao/submodal-ver-nfd/submodal-ver-nfd.component';
+import { SubmodalVerFinanceiroComponent } from './components/modals/modals-view-solicitar-validacao/submodal-ver-financeiro/submodal-ver-financeiro.component';
+import { SubmodalEditarFinanceiroComponent } from './components/modals/modals-view-solicitar-validacao/submodal-editar-financeiro/submodal-editar-financeiro.component';
+import { SubmodalEditarNfdComponent } from './components/modals/modals-view-solicitar-validacao/submodal-editar-nfd/submodal-editar-nfd.component';
+import { UsuarioCadastrarComponent } from './components/usuarios/usuario-cadastrar/usuario-cadastrar.component';
+import { LoginComponent } from './components/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -103,6 +109,15 @@ import { SubmodalFinanceiroComponent } from './components/modals/modal-view-vali
     FinancaSolicitarComponent,
     SubmodalNfdComponent,
     SubmodalFinanceiroComponent,
+    SubmodalSolicitarFinanceiroComponent,
+    SubmodalSolicitarNfdComponent,
+    SubmodalVerNfdComponent,
+    SubmodalVerFinanceiroComponent,
+    SubmodalEditarFinanceiroComponent,
+    SubmodalEditarNfdComponent,
+    UsuarioCadastrarComponent,
+    LoginComponent,
+
 
 
   ],
@@ -114,7 +129,14 @@ import { SubmodalFinanceiroComponent } from './components/modals/modal-view-vali
     NbSidebarModule.forRoot(),NbMenuModule.forRoot(),NbIconModule,MatPaginatorModule,NbBadgeModule,
     NbLayoutModule, NbButtonModule, BrowserAnimationsModule,NbStepperModule,NbContextMenuModule ,NbWindowModule,
     NbThemeModule.forRoot({ name: 'default' }), NbEvaIconsModule, NbCardModule,MatDialogModule,NbUserModule,
-    FormsModule,MatInputModule,NbInputModule,NbSelectModule,CommonModule,MatFormFieldModule,NbAutocompleteModule
+    FormsModule,MatInputModule,NbInputModule,NbSelectModule,CommonModule,MatFormFieldModule,NbAutocompleteModule,
+    HttpClientModule,CommonModule,NbAlertModule,NbCheckboxModule,NbFormFieldModule
+
+
+
+
+
+
 
   ],
   providers: [provideNgxMask()],

@@ -10,7 +10,7 @@ export class PessoaCadastrarComponent {
 
   pessoa: Pessoa = {
     nome: "",
-    cpf: 0,
+    cpf: "0",
     email: "",
     perfil: ""
 

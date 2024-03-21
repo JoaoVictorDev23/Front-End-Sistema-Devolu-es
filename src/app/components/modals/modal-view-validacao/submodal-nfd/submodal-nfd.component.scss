@@ -31,7 +31,7 @@ label {
   color: #676060;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 718px) {
   .labelcte {
     flex-direction: row;
   }
@@ -41,7 +41,7 @@ label {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 718px) {
   .labelcte {
     display: flex;
     flex-direction: row;
@@ -124,4 +124,7 @@ mat-dialog-actions {
 .img-chat{
   margin-top: 2rem;
   margin-left: 20rem;
+}
+.flex{
+  display: flex;
 }
