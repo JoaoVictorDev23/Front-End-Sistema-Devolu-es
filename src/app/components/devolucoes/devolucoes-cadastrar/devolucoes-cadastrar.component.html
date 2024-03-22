@@ -20,10 +20,10 @@
 
               <div class="form-group-cte">
                 <input type="number" nbInput placeholder="" id="filial" name="filial"
-                  [(ngModel)]="notaFiscal.dados.filial" required>
-                <input type="number" nbInput placeholder="" id="serie" name="serie" [(ngModel)]="notaFiscal.dados.serie"
-                  required>
-                <input type="number" nbInput placeholder="" id="cte" name="cte" [(ngModel)]="notaFiscal.dados.cte"
+                  [(ngModel)]="notaFiscal.dadosNfdDTO.filial" required>
+                <input type="number" nbInput placeholder="" id="serie" name="serie"
+                  [(ngModel)]="notaFiscal.dadosNfdDTO.serie" required>
+                <input type="number" nbInput placeholder="" id="cte" name="cte" [(ngModel)]="notaFiscal.dadosNfdDTO.cte"
                   required>
               </div>
             </div>
@@ -36,7 +36,7 @@
 
               <div class="form-group">
                 <input type="number" nbInput fullWidth id="numeroNfd" placeholder=""
-                  [(ngModel)]="notaFiscal.dados.numeroNfd" name="numeroNfd" required class="input-nfd">
+                  [(ngModel)]="notaFiscal.dadosNfdDTO.numeroNfd" name="numeroNfd" required class="input-nfd">
               </div>
 
             </div>
@@ -50,7 +50,7 @@
 
               <div class="form-group">
                 <input type="number" nbInput fullWidth id="numeroNfo" placeholder="" name="numeroNfo"
-                  [(ngModel)]="notaFiscal.dados.numeroNfo" required class="input-nfd">
+                  [(ngModel)]="notaFiscal.dadosNfdDTO.numeroNfo" required class="input-nfd">
               </div>
 
             </div>
@@ -69,7 +69,7 @@
               </div>
 
               <nb-select fullWidth placeholder="Selecione o motivo" class="nb-select-motivo" name="motivo" id="motivo"
-                [(ngModel)]="notaFiscal.dados.motivo" required>
+                [(ngModel)]="notaFiscal.dadosNfdDTO.motivo" required>
                 <nb-option>Nenhuma das alternativas</nb-option>
                 <nb-option value="1">Avaria</nb-option>
                 <nb-option value="2">Falta</nb-option>
@@ -84,7 +84,7 @@
                 </div>
               </div>
               <textarea rows="5" nbInput fullWidth shape="round" id="observacao" placeholder="" name="observacao"
-                required nbInput [(ngModel)]="notaFiscal.dados.observacao" #observacaoInput="ngModel"
+                required nbInput [(ngModel)]="notaFiscal.dadosNfdDTO.observacao" #observacaoInput="ngModel"
                 class="custom-textarea"></textarea>
 
 
@@ -170,19 +170,18 @@
 
             <!-- CLIENTES/PESSOA/MOTORISTA -->
             <div class="col-sm-6">
-              <div class="labelcliente">
-                <label for="cliente.cnpj" class="label" style="margin-right: 290px;">CNPJ</label>
-                <label for="cliente.nome" class="label">Nome do Cliente</label>
+              <div class="form-group">
+                <label class="label">Cliente</label>
               </div>
+            </div>
 
-              <div class="form-group-cliente">
-                <input type="number" nbInput placeholder="" id="cliente.cnpj" name="cliente.cnpj"
-                  [(ngModel)]="notaFiscal.valores.cliente.cnpj" required>
-                <input type="text" nbInput placeholder="" id="cliente.nome" name="cliente.nome"
-                  [(ngModel)]="notaFiscal.valores.cliente.nome" required>
+            <div class="form-group">
 
+              <nb-select fullWidth placeholder="Selecione um Cliente" class="nb-select-motorista" name="cliente.id"
+                [(ngModel)]="notaFiscal.valoresDTO.cliente" required>
+                <nb-option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</nb-option>
+              </nb-select>
 
-              </div>
             </div>
 
 
@@ -195,13 +194,9 @@
 
             <div class="form-group3">
               <nb-select fullWidth placeholder="Selecione um Motorista" class="nb-select-motorista" id="motorista.nome"
-                name="motorista.id" [(ngModel)]="notaFiscal.valores.motorista.id" required>
-                <nb-option>Nenhuma das alternativas</nb-option>
-                <nb-option value="1">Jose</nb-option>
-                <nb-option value="2">Jaun</nb-option>
-                <nb-option value="3">Option 3</nb-option>
+                name="motorista.id" [(ngModel)]="notaFiscal.valoresDTO.motorista" required>
+                <nb-option *ngFor="let motorista of motoristas" [value]="motorista.id">{{ motorista.nome }}</nb-option>
               </nb-select>
-
               <div class="form-group-toggle">
                 <div style="display: flex;">
                   <label class="label" style="margin-bottom: 5px;">Motorista alertou Avaria?</label>
@@ -212,12 +207,11 @@
                 <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorMotorista"
                   style="margin-bottom: 0.7rem !important;">
                   <span nbSpan *ngIf="!debitarValorMotorista" class="visual-text"
-                    [(ngModel)]="notaFiscal.valores.motorista.valorDebitado">Debitar do Motorista:
+                    [(ngModel)]="motorista.debitado">Debitar do Motorista:
                     R${{calcularSomaProdutos()}}</span>
 
                   <input type="number" nbInput *ngIf="debitarValorMotorista" placeholder="Digite o valor"
-                    id="motorista-debitado" name="motorista-debitado"
-                    [(ngModel)]="notaFiscal.valores.motorista.valorDebitado" required
+                    id="motorista-debitado" name="motorista-debitado" [(ngModel)]="motorista.debitado" required
                     style="margin-left:265px; width: 70%">
                 </nb-toggle>
 
@@ -227,7 +221,7 @@
 
             </div>
 
-            <!-- Armazem-->
+            <!-- Comprador-->
             <div class="col-sm-6">
               <div class="form-group">
                 <label class="label">Comprador</label>
@@ -236,17 +230,14 @@
 
             <div class="form-group">
               <nb-select fullWidth placeholder="Selecione um Comprador" id="comprador" class="nb-select-motorista"
-                name="comprador.id" [(ngModel)]="notaFiscal.valores.comprador.id" required>
-                <nb-option>Nenhuma das alternativas</nb-option>
-                <nb-option value="1">Jose</nb-option>
-                <nb-option value="2">Jaun</nb-option>
-                <nb-option value="3">Option 3</nb-option>
+                name="comprador.id" [(ngModel)]="notaFiscal.valoresDTO.pessoa" required>
+                <nb-option *ngFor="let comprador of compradores" [value]="comprador.id">{{ comprador.nome }}</nb-option>
               </nb-select>
 
             </div>
 
 
-            <!-- Comprador-->
+            <!-- Armazem-->
             <div class="col-sm-6">
               <div class="form-group">
                 <label class="label">Armazem</label>
@@ -254,12 +245,9 @@
             </div>
 
             <div class="form-group">
-              <nb-select fullWidth placeholder="Selecione um Armazem" id="armazem" class="nb-select-motorista"
-                name="armazem.id" [(ngModel)]="notaFiscal.valores.armazem.id" required>
-                <nb-option>Nenhuma das alternativas</nb-option>
-                <nb-option value="1">Jose</nb-option>
-                <nb-option value="2">Jaun</nb-option>
-                <nb-option value="3">Option 3</nb-option>
+              <nb-select fullWidth placeholder="Selecione um Armazém" id="armazem" class="nb-select-motorista"
+                name="armazem.id" [(ngModel)]="notaFiscal.valoresDTO.armazem" required>
+                <nb-option *ngFor="let armazem of armazens" [value]="armazem.id">{{ armazem.armazemNome }}</nb-option>
               </nb-select>
 
             </div>

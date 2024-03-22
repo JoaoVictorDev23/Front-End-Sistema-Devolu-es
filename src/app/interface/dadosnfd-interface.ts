@@ -3,14 +3,14 @@ import { Produto } from "./produtos.interface";
 
 export interface DadosNotasFiscais{
 
-      id?:any;
-      numeroNfd: number;
-      filial: number;
-      serie: number;
-      cte: number;
-      numeroNfo: number;
+      dadosnfdId?:any;
+      numeroNfd: String;
+      numeroNfo: String;
+
+      filial: String;
+      serie: String;
+      cte: String;
       observacao: string;
       situacao: string;
-      motivo: Motivo;
-      produtos: Produto[];
+      motivo: number;
 }

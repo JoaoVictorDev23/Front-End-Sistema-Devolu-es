@@ -10,7 +10,8 @@ import { NgForm } from '@angular/forms';
 import { Armazem } from 'src/app/interface/armazem-interface';
 import { Motorista } from 'src/app/interface/motorista-interface';
 import { Cliente } from 'src/app/interface/cliente-interface';
-import { Comprador } from 'src/app/interface/comprador-interface';
+import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
+import { Pessoa } from 'src/app/interface/pessoa-interface';
 
 @Component({
   selector: 'app-devolucoes-cadastrar',
@@ -20,33 +21,56 @@ import { Comprador } from 'src/app/interface/comprador-interface';
 export class DevolucoesCadastrarComponent {
 
   calcularSomaProdutos(): number {
-    return this.notaFiscal.dados.produtos.reduce((total, produto) => total + (produto.valor * produto.quantidade), 0);
+    return this.notaFiscal.produtosDTO.reduce((total, produto) => total + (produto.produtoValor * produto.produtoQuantidade), 0);
+  }
+
+  clientes: Cliente[] = [];
+  motoristas: Motorista[] = [];
+  motivo: Motivo[] = [];
+  armazens: Armazem[] = [];
+  compradores: Pessoa[] = [];
+
+  motorista: Motorista={
+    nome:'',
+    cpf:'',
+    email:'',
+    debitado:0,
   }
 
 
-
   notaFiscal: NotaFiscal = {
-    dados: {
-      filial: 0,
-      serie: 0,
-      cte: 0,
+    dadosNfdDTO: {
+      filial: '',
+      serie: '',
+      cte: '',
       situacao: 'Pendente',
-      numeroNfd: 0,
-      numeroNfo: 0,
+      numeroNfd: '',
+      numeroNfo: '',
       observacao: '',
-      motivo: { codigo: '', descricao: '' },
-      produtos: [] as Produto[]
+      motivo: 0
     },
-    valores: {
+    valoresDTO: {
       valorVenda: 0,
       valorPrejuizo: 0,
       valorArmazem: 0,
-      situacao: 'Pendente',
-      comprador: { nome: '', cpf: 0 },
-      armazem: { nome: '', endereco: '', filial: '' },
-      motorista: { nome: '', cpf: '', valorDebitado: 0 },
-      cliente: { nome: '', cnpj: '', valorDebitado: 0 }
-    }
+      situacaoValores: 'Pendente',
+      pessoa:'0',
+      armazem:0 ,
+      motorista: '0',
+      cliente:'0' ,
+      numeronfd:''
+    },
+    produtosDTO:[
+      {
+        produtoNome: '',
+        produtoQuantidade: 0,
+        produtoValor: 0,
+        situacaoProduto: '',
+        armazemId: 0,
+        numeronfd: ''
+      }
+    ]
+
   };
   debitarValorCliente = false;
   debitarValorMotorista = true;
@@ -57,13 +81,17 @@ export class DevolucoesCadastrarComponent {
 
 
 
-  constructor(private dialogService: NbDialogService) {}
+  constructor(private dialogService: NbDialogService,private nfdService: NfdserviceService) {}
   verdados(){
     console.log(this.notaFiscal);
   }
 
   ngOnInit() {
     this.calcularSomaProdutos();
+    this.getClientes();
+    this.getMotoristas();
+    this.getArmazens();
+    this.getCompradores();
   }
 
   openDialog(): void {
@@ -71,16 +99,16 @@ export class DevolucoesCadastrarComponent {
 
     dialogRef.onClose.subscribe((produto: Produto) => {
       if (produto) {
-        this.notaFiscal.dados.produtos.push({
-          'nome': produto.nome,
-          'quantidade': produto.quantidade,
-          'valor': produto.valor,
-          'situacao': produto.situacao,
-          'armazem':produto.armazem,
-          'numeronfd':produto.numeronfd
+        this.notaFiscal.produtosDTO.push({
+          'produtoNome': produto.produtoNome,
+          'produtoQuantidade': produto.produtoQuantidade,
+          'produtoValor': produto.produtoValor,
+          'situacaoProduto': produto.situacaoProduto,
+          'armazemId':produto.armazemId,
+          'numeronfd':this.notaFiscal.dadosNfdDTO.numeroNfd
         });
 
-        this.dataSource.data = [...this.notaFiscal.dados.produtos];
+        this.dataSource.data = [...this.notaFiscal.produtosDTO];
 
       }
     });
@@ -93,21 +121,59 @@ export class DevolucoesCadastrarComponent {
   }
 
   excluirProduto(produto: Produto): void {
-    const index = this.notaFiscal.dados.produtos.indexOf(produto);
+    const index = this.notaFiscal.produtosDTO.indexOf(produto);
 
     if (index >= 0) {
-      this.notaFiscal.dados.produtos.splice(index, 1);
-      this.dataSource.data = [...this.notaFiscal.dados.produtos];
+      this.notaFiscal.produtosDTO.splice(index, 1);
+      this.dataSource.data = [...this.notaFiscal.produtosDTO];
     }
+  }
+
+  getClientes(): void {
+    this.nfdService.getClientes().subscribe(clientes => {
+      this.clientes = clientes;
+    });
+  }
+
+  getMotoristas(): void {
+    this.nfdService.getMotoristas().subscribe(motoristas => {
+      this.motoristas = motoristas;
+    });
+  }
+
+  getArmazens(): void {
+    this.nfdService.getArmazens().subscribe(armazens => {
+      this.armazens = armazens;
+    });
+  }
+
+  getCompradores(): void {
+    this.nfdService.getCompradores().subscribe(compradores => {
+      this.compradores = compradores;
+    });
+  }
+
+  getMotivos(): void {
+    this.nfdService.getMotivos().subscribe(motivos => {
+      this.motivo = motivos;
+    });
   }
 
 
 
   adicionarNotaFiscal(): void {
-    this.notaFiscal.dados.produtos = this.dataSource.data;
+    this.notaFiscal.produtosDTO = this.dataSource.data;
 
-    // Aqui você pode simular o envio para o backend, por enquanto apenas imprima no console
-    console.log('Nota Fiscal:', this.notaFiscal);
+    this.nfdService.cadastrarNotaFiscal(this.notaFiscal).subscribe(
+      (response) => {
+        console.log('Nota fiscal cadastrada:', response);
+        // Lógica adicional após o cadastro, se necessário
+      },
+      (error) => {
+        console.error('Erro ao cadastrar nota fiscal:', error);
+        // Tratamento de erro, se necessário
+      }
+    );
   }
 
 

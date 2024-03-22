@@ -37,8 +37,7 @@ export class ModalViewArmazemComponent {
 
   ngOnInit() {
     console.log(this.data.armazem);
-    if (this.data.armazem.notasfiscais) {
-      this.dataSource = this.data.armazem.notasfiscais;
+    if (this.data.armazem) {
       this.valorArmazenado = this.calcularTotalArmazenado();
 
     }
@@ -49,8 +48,8 @@ export class ModalViewArmazemComponent {
 
     if (this.expandedElement) {
       // Filtrar produtos com base na notaFiscal selecionada
-      const filteredProducts = this.expandedElement.dados.produtos.filter(
-        (produto) => this.expandedElement && produto.numeronfd === this.expandedElement.dados.numeroNfd
+      const filteredProducts = this.expandedElement.produtosDTO.filter(
+        (produto) => this.expandedElement && produto.numeronfd === this.expandedElement.dadosNfdDTO.numeroNfd
         );
       this.dataSourceProd = [...filteredProducts];
         // Atualizar valorArmazenado do armazem
@@ -67,7 +66,7 @@ export class ModalViewArmazemComponent {
     let totalArmazenado = 0;
 
     if (this.dataSource && this.dataSource.length > 0) {
-      totalArmazenado = this.dataSource.reduce((acc, nf) => acc + nf.valores.valorArmazem, 0);
+      totalArmazenado = this.dataSource.reduce((acc, nf) => acc + nf.valoresDTO.valorArmazem, 0);
     }
 
     return totalArmazenado;

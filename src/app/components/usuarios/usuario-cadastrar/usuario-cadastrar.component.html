@@ -19,7 +19,7 @@
 
             <div style="display: flex !important;">
 
-              <input type="text"  nbInput fullWidth id="usuario.nome" placeholder="" name="nomeusuario" [(ngModel)]="usuario.nome" required>
+              <input type="text"  nbInput fullWidth id="usuario.nome" placeholder="" name="nomeusuario" [(ngModel)]="usuario.name" required>
               <input      inputmode="numeric"
               nbInput
               fullWidth
@@ -48,7 +48,7 @@
               </div>
             </div>
 
-            <nb-select fullWidth id="usuario.perfil" placeholder="Selecione o tipo" class="nb-select" [(ngModel)]="usuario.perfil" name="perfil" required>
+            <nb-select fullWidth id="usuario.perfil" placeholder="Selecione o tipo" class="nb-select" [(ngModel)]="usuario.perfis" name="perfil" required>
               <nb-option>Nenhuma das alternativas</nb-option>
               <nb-option value="role_usuario">Usuário</nb-option>
               <nb-option value="role_administrador">Administrador</nb-option>

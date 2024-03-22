@@ -9,7 +9,7 @@ import { Produto } from '../../../../interface/produtos.interface';
   styleUrls: ['./produtos-dialog.component.scss']
 })
 export class ProdutosDialogComponent {
-  produto: Produto = { nome: '', quantidade: 0, valor: 0 , situacao: 'Pendente', armazem:0,numeronfd:0};
+  produto: Produto = { produtoNome: '', produtoQuantidade: 0, produtoValor: 0 , situacaoProduto: 'Pendente', armazemId:0,numeronfd:'0'};
   isFormValid = false; // Add this variable
 
 
@@ -27,7 +27,7 @@ export class ProdutosDialogComponent {
   }
   checkFormValidity() {
 
-    this.isFormValid = !!(this.produto.nome && this.produto.valor && this.produto.quantidade );
+    this.isFormValid = !!(this.produto.produtoNome && this.produto.produtoValor && this.produto.produtoQuantidade );
   }
 
 

@@ -14,10 +14,10 @@
 
   <div class="form-group-cte" style="margin-left:0.2rem">
     <input type="number" nbInput id="filial" placeholder="" fullWidth name="filial"
-      [(ngModel)]="data.notaFiscal.dados.filial" disabled>
+      [(ngModel)]="data.notaFiscal.dadosNfdDTO.filial" disabled>
     <input type="number" nbInput id="serie" placeholder="" fullWidth name="serie"
-      [(ngModel)]="data.notaFiscal.dados.serie" disabled>
-    <input type="number" nbInput id="cte" placeholder="" fullWidth name="CTE" [(ngModel)]="data.notaFiscal.dados.cte"
+      [(ngModel)]="data.notaFiscal.dadosNfdDTO.serie" disabled>
+    <input type="number" nbInput id="cte" placeholder="" fullWidth name="CTE" [(ngModel)]="data.notaFiscal.dadosNfdDTO.cte"
       disabled>
   </div>
 </div>
@@ -30,9 +30,9 @@
 
 <div style="display: flex; width: 700px;">
   <input type="text" nbInput style="max-width: 49.5%; min-width: 40%;" id="motivo" placeholder="" name="motivo"
-    [(ngModel)]="data.notaFiscal.dados.motivo.descricao" disabled class="input-motivo">
+    [(ngModel)]="data.notaFiscal.dadosNfdDTO.motivo" disabled class="input-motivo">
   <input type="number" nbInput style="max-width: 49.5%; min-width: 40%;" id="numero-nfd" placeholder="" name="numero-nfd"
-    [(ngModel)]="data.notaFiscal.dados.numeroNfd" disabled class="input-nfd">
+    [(ngModel)]="data.notaFiscal.dadosNfdDTO.numeroNfd" disabled class="input-nfd">
 </div>
 
 <!-- Observação -->
@@ -44,7 +44,7 @@
 </div>
 
 <textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" disabled nbInput
-  id="observacao" [(ngModel)]="data.notaFiscal.dados.observacao" #observacaoInput=""
+  id="observacao" [(ngModel)]="data.notaFiscal.dadosNfdDTO.observacao" #observacaoInput=""
   class="custom-textarea"></textarea>
 
 
@@ -56,7 +56,7 @@
 
   <div class="form-group">
     <input type="text" nbInput fullWidth id="cliente" placeholder="" name="nome-cliente"
-      [(ngModel)]="data.notaFiscal.valores.cliente.nome" disabled class="input-nfd">
+      [(ngModel)]="data.notaFiscal.valoresDTO.cliente" disabled class="input-nfd">
   </div>
 </div>
 
@@ -70,7 +70,7 @@
 
 <div class="form-group">
   <input type="text" nbInput fullWidth id="motorista" placeholder="" name="select-motorista"
-    [(ngModel)]="data.notaFiscal.valores.motorista.nome" disabled class="nb-select-motorista">
+    [(ngModel)]="data.notaFiscal.valoresDTO.motorista" disabled class="nb-select-motorista">
 </div>
 <div style="display: flex;">
 
@@ -82,7 +82,7 @@
 
     <div class="form-group">
       <input type="text" nbInput id="cliente-nome" placeholder="" name="cliente-nome"
-        [(ngModel)]="data.notaFiscal.valores.cliente.nome" disabled class="input-nfd">
+        [(ngModel)]="data.notaFiscal.valoresDTO.cliente" disabled class="input-nfd">
     </div>
   </div>
 
@@ -107,9 +107,9 @@
 </div>
 <div class="flex">
   <input type="text" nbInput fullWidth *ngIf="debitarValorMotorista" placeholder="Digite o valor" id="motorista-debitado"
-    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valores.motorista.nome" required>
+    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valoresDTO.motorista" required>
   <input type="number" nbInput fullWidth *ngIf="debitarValorMotorista" placeholder="Digite o valor" id="motorista-debitado"
-    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valores.motorista.valorDebitado" required>
+    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valoresDTO.motorista" required>
 </div>
 
 

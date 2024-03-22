@@ -21,7 +21,7 @@ export class ModalViewDevolucaoExcluirComponent {
   selectedItem = '2';
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = this.data.notaFiscal.dados.produtos;
+  dataSource = this.data.notaFiscal.produtosDTO;
 
   constructor(private dialogRef: MatDialogRef<ModalViewDevolucaoExcluirComponent>,
     private toastrService: NbToastrService,
@@ -78,25 +78,25 @@ calcularValoresTotais() {
   let valorPrejuizo = 0;
   let valorArmazem = 0;
 
-  this.data.notaFiscal.dados.produtos.forEach((produto: Produto) => {
-    switch (produto.situacao) {
+  this.data.notaFiscal.produtosDTO.forEach((produto: Produto) => {
+    switch (produto.situacaoProduto) {
       case 'Em armazem':
-        valorArmazem += produto.quantidade * produto.valor;
+        valorArmazem += produto.produtoQuantidade * produto.produtoValor;
         break;
       case 'Venda':
-        valorVenda += produto.quantidade * produto.valor;
+        valorVenda += produto.produtoQuantidade * produto.produtoValor;
         break;
       case 'Prejuizo':
-        valorPrejuizo += produto.quantidade * produto.valor;
+        valorPrejuizo += produto.produtoQuantidade * produto.produtoValor;
         break;
       default:
         break;
     }
   });
 
-  this.data.notaFiscal.valores.valorArmazem = valorArmazem;
-  this.data.notaFiscal.valores.valorVenda = valorVenda;
-  this.data.notaFiscal.valores.valorPrejuizo = valorPrejuizo;
+  this.data.notaFiscal.valoresDTO.valorArmazem = valorArmazem;
+  this.data.notaFiscal.valoresDTO.valorVenda = valorVenda;
+  this.data.notaFiscal.valoresDTO.valorPrejuizo = valorPrejuizo;
 
 
 }

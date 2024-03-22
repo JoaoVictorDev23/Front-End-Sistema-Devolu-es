@@ -1,6 +1,6 @@
 export interface Motivo{
   id?:number;
-  codigo:string;
-  descricao:string;
+  nomeMotivo:string;
+  descriMotivo:string;
 
 }

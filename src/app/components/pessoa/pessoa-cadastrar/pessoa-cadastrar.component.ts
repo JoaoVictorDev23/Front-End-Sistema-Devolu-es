@@ -12,8 +12,7 @@ export class PessoaCadastrarComponent {
     nome: "",
     cpf: "0",
     email: "",
-    perfil: ""
-
+    debitado: 0
 
 
   }

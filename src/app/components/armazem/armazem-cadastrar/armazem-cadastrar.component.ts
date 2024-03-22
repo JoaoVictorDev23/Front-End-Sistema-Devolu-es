@@ -9,9 +9,9 @@ import { Component } from '@angular/core';
 export class ArmazemCadastrarComponent {
 
   armazem: Armazem = {
-    nome: '',
-    endereco: '',
-    filial: ''
+    armazemNome: '',
+    armazemEndereco: '',
+    armazemFilial: ''
   }
 
   create(){

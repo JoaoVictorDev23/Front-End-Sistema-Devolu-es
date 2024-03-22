@@ -9,7 +9,7 @@
 
 <div class="form-group">
   <input type="text" nbInput fullWidth id="motorista" placeholder="" name="select-motorista"
-    [(ngModel)]="data.notaFiscal.valores.comprador.nome" disabled class="nb-select-motorista">
+    [(ngModel)]="data.notaFiscal.valoresDTO.pessoa" disabled class="nb-select-motorista">
 </div>
 
 
@@ -83,11 +83,11 @@
 
         <div class="form-group-cte">
           <input type="number" nbInput placeholder="" name="valorVenda" disabled id="valorVenda"
-            [(ngModel)]="data.notaFiscal.valores.valorVenda" required>
+            [(ngModel)]="data.notaFiscal.valoresDTO.valorVenda" required>
           <input type="number" nbInput placeholder="" name="valorPrejuizo" disabled id="valorPrejuizo"
-            [(ngModel)]="data.notaFiscal.valores.valorPrejuizo" required>
+            [(ngModel)]="data.notaFiscal.valoresDTO.valorPrejuizo" required>
           <input type="number" nbInput placeholder="" name="valorArmazem" disabled id="valorArmazem"
-            [(ngModel)]="data.notaFiscal.valores.valorArmazem" required>
+            [(ngModel)]="data.notaFiscal.valoresDTO.valorArmazem" required>
         </div>
       </div>
     </div>

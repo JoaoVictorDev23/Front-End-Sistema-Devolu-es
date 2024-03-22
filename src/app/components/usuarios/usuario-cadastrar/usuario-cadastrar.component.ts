@@ -10,11 +10,11 @@ import { Usuario } from 'src/app/interface/usuario-interface';
 export class UsuarioCadastrarComponent {
 
   usuario: Usuario = {
-    nome: "",
+    name: "",
     cpf: "",
     email: "",
     senha:"",
-    perfil: ""
+    perfis: ["ADMINISTRADOR"]
   }
 
   create(){

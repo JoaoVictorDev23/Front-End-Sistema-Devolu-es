@@ -22,10 +22,10 @@
 
           <div class="form-group-cte" style="margin-left:0.2rem">
             <input type="number" nbInput id="filial" placeholder="" fullWidth name="filial"
-              [(ngModel)]="data.notaFiscal.dados.filial" disabled>
+              [(ngModel)]="data.notaFiscal.dadosNfdDTO.filial" disabled>
             <input type="number" nbInput id="serie" placeholder="" fullWidth name="serie"
-              [(ngModel)]="data.notaFiscal.dados.serie" disabled>
-            <input type="number" nbInput id="cte" placeholder="" fullWidth name="CTE" [(ngModel)]="data.notaFiscal.dados.cte"
+              [(ngModel)]="data.notaFiscal.dadosNfdDTO.serie" disabled>
+            <input type="number" nbInput id="cte" placeholder="" fullWidth name="CTE" [(ngModel)]="data.notaFiscal.dadosNfdDTO.cte"
               disabled>
           </div>
         </div>
@@ -38,9 +38,9 @@
 
         <div style="display: flex; width: 750px;">
           <input type="text" nbInput style="max-width: 49.5%; min-width: 40%;" id="motivo" placeholder="" name="motivo"
-            [(ngModel)]="data.notaFiscal.dados.motivo.descricao" disabled class="input-motivo">
+            [(ngModel)]="data.notaFiscal.dadosNfdDTO.motivo" disabled class="input-motivo">
           <input type="number" nbInput id="numero-nfd" placeholder="" name="numero-nfd"
-            [(ngModel)]="data.notaFiscal.dados.numeroNfd" disabled class="input-nfd">
+            [(ngModel)]="data.notaFiscal.dadosNfdDTO.numeroNfd" disabled class="input-nfd">
         </div>
 
         <!-- Observação -->
@@ -52,7 +52,7 @@
         </div>
 
         <textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" disabled nbInput
-          id="observacao" [(ngModel)]="data.notaFiscal.dados.observacao" #observacaoInput=""
+          id="observacao" [(ngModel)]="data.notaFiscal.dadosNfdDTO.observacao" #observacaoInput=""
           class="custom-textarea"></textarea>
 
 
@@ -64,7 +64,7 @@
 
           <div class="form-group">
             <input type="text" nbInput fullWidth id="cliente" placeholder="" name="nome-cliente"
-              [(ngModel)]="data.notaFiscal.valores.cliente.nome" disabled class="input-nfd">
+              [(ngModel)]="data.notaFiscal.valoresDTO.cliente" disabled class="input-nfd">
           </div>
         </div>
 
@@ -78,7 +78,7 @@
 
         <div class="form-group">
           <input type="text" nbInput fullWidth id="motorista" placeholder="" name="select-motorista"
-            [(ngModel)]="data.notaFiscal.valores.motorista.nome" disabled class="nb-select-motorista">
+            [(ngModel)]="data.notaFiscal.valoresDTO.motorista" disabled class="nb-select-motorista">
         </div>
 
         <!-- Comprador-->
@@ -90,7 +90,7 @@
 
         <div class="form-group">
           <input type="text" nbInput fullWidth id="motorista" placeholder="" name="select-motorista"
-            [(ngModel)]="data.notaFiscal.valores.comprador.nome" disabled class="nb-select-motorista">
+            [(ngModel)]="data.notaFiscal.valoresDTO.pessoa" disabled class="nb-select-motorista">
         </div>
 
 
@@ -120,7 +120,7 @@
 
           <div class="form-group">
             <input type="number" nbInput  id="numero-nfd" placeholder="" name="numero-nfd"
-              [(ngModel)]="data.notaFiscal.dados.numeroNfd" disabled class="input-nfd">
+              [(ngModel)]="data.notaFiscal.dadosNfdDTO.numeroNfd" disabled class="input-nfd">
           </div>
         </div>
 
@@ -213,11 +213,11 @@
 
                 <div class="form-group-cte">
                   <input type="number" nbInput placeholder="" name="valorVenda" disabled id="valorVenda"
-                    [(ngModel)]="data.notaFiscal.valores.valorVenda" required>
+                    [(ngModel)]="data.notaFiscal.valoresDTO.valorVenda" required>
                   <input type="number" nbInput placeholder="" name="valorPrejuizo" disabled id="valorPrejuizo"
-                    [(ngModel)]="data.notaFiscal.valores.valorPrejuizo" required>
+                    [(ngModel)]="data.notaFiscal.valoresDTO.valorPrejuizo" required>
                   <input type="number" nbInput placeholder="" name="valorArmazem" disabled id="valorArmazem"
-                    [(ngModel)]="data.notaFiscal.valores.valorArmazem" required>
+                    [(ngModel)]="data.notaFiscal.valoresDTO.valorArmazem" required>
                 </div>
               </div>
             </div>

@@ -9,38 +9,38 @@
     <!--  Numero NFD Column -->
     <ng-container matColumnDef="numeronfd">
       <th mat-header-cell *matHeaderCellDef> Número NF-D </th>
-      <td mat-cell *matCellDef="let element"> {{element.dados.numeroNfd}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.numeroNfd}} </td>
     </ng-container>
 
     <!-- Filial Column -->
     <ng-container matColumnDef="filial">
       <th mat-header-cell *matHeaderCellDef> Filial </th>
-      <td mat-cell *matCellDef="let element"> {{element.dados.filial}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.filial}} </td>
     </ng-container>
 
     <!-- Serie Column -->
     <ng-container matColumnDef="serie">
       <th mat-header-cell *matHeaderCellDef> Serie </th>
-      <td mat-cell *matCellDef="let element"> {{element.dados.serie}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.serie}} </td>
     </ng-container>
 
     <!-- Cte Column -->
     <ng-container matColumnDef="cte">
       <th mat-header-cell *matHeaderCellDef> CTE </th>
-      <td mat-cell *matCellDef="let element"> {{element.dados.cte}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.cte}} </td>
     </ng-container>
 
 
     <!-- Situ Column -->
     <ng-container matColumnDef="situacaonfd">
       <th mat-header-cell *matHeaderCellDef> Situação dos Dados</th>
-      <td mat-cell *matCellDef="let element"> {{element.dados.situacao}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.situacao}} </td>
     </ng-container>
 
           <!-- Situ Column -->
           <ng-container matColumnDef="situacaofinanceiro">
             <th mat-header-cell *matHeaderCellDef> Situação do Financeiro </th>
-            <td mat-cell *matCellDef="let element"> {{element.valores.situacao}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.valoresDTO.situacaoValores}} </td>
           </ng-container>
 
   <!-- Ações Column -->

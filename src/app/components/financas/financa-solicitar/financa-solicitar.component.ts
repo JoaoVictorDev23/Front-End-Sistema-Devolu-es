@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
-import { ModalViewDevolucaoCorrecaoGestorComponent } from '../../modals/modal-view-devolucao-correcao-gestor/modal-view-devolucao-correcao-gestor.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
 import { ModalViewDevolucaoCorrecaoComponent } from '../../modals/modal-view-devolucao-correcao/modal-view-devolucao-correcao.component';
 
 @Component({
@@ -13,128 +13,44 @@ import { ModalViewDevolucaoCorrecaoComponent } from '../../modals/modal-view-dev
   styleUrls: ['./financa-solicitar.component.scss']
 })
 export class FinancaSolicitarComponent implements AfterViewInit {
-  notasFiscais: NotaFiscal[] = []; // Adicione esta propriedade
-
-
+  notasFiscais: NotaFiscal[] = [];
+  dataSource = new MatTableDataSource<NotaFiscal>(this.notasFiscais);
+  displayedColumns: string[] = ['numeronfd', 'filial', 'serie', 'cte', 'situacao', 'acoes'];
+  situacaoPendente = 'Pendente';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService) {
+    this.getAllNotasFiscais();
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
-
   }
 
-displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao', 'acoes'];
-dataSource = new MatTableDataSource();
-situacaoPendente = 'Pendente';
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
-applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-}
-constructor(public dialog: MatDialog) {
-
-  this.notasFiscais = [
-    {
-      dados: {
-        filial: 1,
-        serie: 100,
-        cte: 12345,
-        situacao: 'Pendente',
-        numeroNfd: 123,
-        numeroNfo: 101,
-        observacao: 'Nota fiscal de exemplo 1',
-        motivo: { codigo: 'M001', descricao: 'Erro de digitação' },
-        produtos: [
-          { nome: 'P001', situacao: 'Produto 1', quantidade: 2, valor: 500, armazem: 1, numeronfd: 123 },
-          { nome: 'P002', situacao: 'Produto 2', quantidade: 1, valor: 200, armazem: 1, numeronfd: 123 }
-        ]
+  getAllNotasFiscais() {
+    this.nfdserviceService.getAllNotasFiscais().subscribe(
+      (data: NotaFiscal[]) => {
+        this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores === 'Pendente');
+        this.dataSource.data = this.notasFiscais;
       },
-      valores: {
-        valorVenda: 1500,
-        valorPrejuizo: 50,
-        valorArmazem: 100,
-        situacao: 'Aprovada',
-        comprador: { nome: 'João', cpf: 1234567 },
-        armazem: { nome: 'Armazém A', endereco: 'Rua A, 123', filial: 'Goiania' },
-        motorista: { nome: 'Carlos', cpf: 'ABC123', valorDebitado: 100 },
-        cliente: { nome: 'Cliente 1', cnpj: '123.456.789/0001-01', valorDebitado: 250 }
+      (error) => {
+        console.log('Erro ao obter notas fiscais:', error);
       }
-    },
-    {
-      dados: {
-        filial: 1,
-        serie: 100,
-        cte: 12345,
-        situacao: "Pendente",
-        numeroNfd: 123,
-        numeroNfo: 101,
-        observacao: "Nota fiscal de exemplo 1",
-        motivo: {
-          codigo: "M001",
-          descricao: "Erro de digitação"
-        },
-        produtos: [
-          {
-            nome: "P001",
-            situacao: "Produto 1",
-            quantidade: 2,
-            valor: 500,
-            armazem: 1,
-            numeronfd: 123
-          },
-          {
-            nome: "P002",
-            situacao: "Produto 2",
-            quantidade: 1,
-            valor: 200,
-            armazem: 1,
-            numeronfd: 123
-          }
-        ]
-      },
-      valores: {
-        valorVenda: 1500,
-        valorPrejuizo: 50,
-        valorArmazem: 100,
-        situacao: "Aprovada",
-        armazem: {
-          nome: "Armazém A",
-          endereco: "Rua A, 123",
-          filial: "Goiania"
-        },
-        comprador: {
-          nome: "João",
-          cpf: 1234567
-        },
-        motorista: {
-          nome: "Carlos",
-          cpf: "ABC123",
-          valorDebitado: 100
-        },
-        cliente: {
-          nome: "Cliente 1",
-          cnpj: "123.456.789/0001-01",
-          valorDebitado: 250
-        }
-      }
+    );
+  }
 
-    }
-
-    // Adicione mais notas fiscais conforme necessário
-  ];
-  // Inicialize o dataSource.data com a lista de notas fiscais
-  this.dataSource.data = this.notasFiscais.filter(notaFiscal => notaFiscal.dados.situacao === 'Pendente' || notaFiscal.valores.situacao === 'Pendente');
-}
-
-aprovar(notaFiscal: NotaFiscal) {
-  const dialogRef = this.dialog.open(ModalViewDevolucaoCorrecaoComponent, {data:{notaFiscal: notaFiscal}});
-
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  });
-}
+  aprovar(notaFiscal: NotaFiscal) {
+    const dialogRef = this.dialog.open(ModalViewDevolucaoCorrecaoComponent, { data: { notaFiscal: notaFiscal } });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
