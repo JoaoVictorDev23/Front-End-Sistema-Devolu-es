@@ -15,7 +15,7 @@ import { ModalViewDevolucaoCorrecaoComponent } from '../../modals/modal-view-dev
 export class FinancaSolicitarComponent implements AfterViewInit {
   notasFiscais: NotaFiscal[] = [];
   dataSource = new MatTableDataSource<NotaFiscal>(this.notasFiscais);
-  displayedColumns: string[] = ['numeronfd', 'filial', 'serie', 'cte', 'situacao', 'acoes'];
+  displayedColumns: string[] = ['numeronfd', 'filial', 'serie', 'cte', 'situacaonfd', 'situacaofinanceiro', 'acoes'];
   situacaoPendente = 'Pendente';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

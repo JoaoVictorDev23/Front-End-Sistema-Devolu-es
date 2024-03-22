@@ -4,5 +4,5 @@ export interface Usuario {
   cpf: string;
   email: string;
   senha: string;
-  perfis: string[]; // Alterado para usar um array de strings para os perfis
+  perfis: number[]; // Usando um array de números para os perfis
 }

@@ -19,7 +19,7 @@
             id="pessoa.cpf"
             placeholder=""
             name="cpf"
-            (ngModel)="pessoa.cpf" required
+            [(ngModel)]="pessoa.cpf" required
             mask="000.000.000-00"          >
 
             <label for="pessoa.email" class="label">E-mail</label>
@@ -33,12 +33,12 @@
               </div>
             </div>
 
-            <nb-select fullWidth id="pessoa.perfil" placeholder="Selecione o tipo" class="nb-select" [(ngModel)]="pessoa" name="perfil" required>
+            <nb-select fullWidth id="pessoa.perfil" placeholder="Selecione o tipo" class="nb-select"  name="perfil" required [(ngModel)]="tipoPerfil">
               <nb-option>Nenhuma das alternativas</nb-option>
               <nb-option value="1">Cliente</nb-option>
               <nb-option value="2">Motorista</nb-option>
-              <nb-option value="3">Astroulupitecos</nb-option>
             </nb-select>
+
 
           </div>
 

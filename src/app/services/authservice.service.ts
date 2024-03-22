@@ -76,7 +76,6 @@ extractAuthToken(): string | null {
   if (fullToken) {
     const startIndex = fullToken.indexOf('"token":"') + 9;
     const endIndex = fullToken.indexOf('"', startIndex);
-    console.log(fullToken.substring(startIndex, endIndex));
     return fullToken.substring(startIndex, endIndex);
   } else {
     return null;

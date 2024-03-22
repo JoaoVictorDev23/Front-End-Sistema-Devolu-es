@@ -40,7 +40,7 @@ export class NfdserviceService {
   }
 
   getArmazens(): Observable<Armazem[]> {
-    return this.http.get<Armazem[]>(`${this.apiUrl}/armazens`, { headers: this.getHeaders() });
+    return this.http.get<Armazem[]>(`${this.apiUrl}/armazem/listar`, { headers: this.getHeaders() });
   }
 
   getCompradores(): Observable<Pessoa[]> {

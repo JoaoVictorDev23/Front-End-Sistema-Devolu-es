@@ -26,7 +26,7 @@
               id="usuario.cpf"
               placeholder=""
               name="cpf"
-              (ngModel)="usuario.cpf" required
+              [(ngModel)]="usuario.cpf" required
               mask="000.000.000-00"
               style="margin-left: 5px"
               >
@@ -50,9 +50,9 @@
 
             <nb-select fullWidth id="usuario.perfil" placeholder="Selecione o tipo" class="nb-select" [(ngModel)]="usuario.perfis" name="perfil" required>
               <nb-option>Nenhuma das alternativas</nb-option>
-              <nb-option value="role_usuario">Usuário</nb-option>
-              <nb-option value="role_administrador">Administrador</nb-option>
-              <nb-option value="role_gestor">Gestor</nb-option>
+              <nb-option value='0'>Usuário</nb-option>
+              <nb-option value='1'>Administrador</nb-option>
+              <nb-option value='2'>Gestor</nb-option>
             </nb-select>
 
           </div>

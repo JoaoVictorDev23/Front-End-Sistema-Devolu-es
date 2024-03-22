@@ -36,7 +36,8 @@
 
               <div class="form-group">
                 <input type="number" nbInput fullWidth id="numeroNfd" placeholder=""
-                  [(ngModel)]="notaFiscal.dadosNfdDTO.numeroNfd" name="numeroNfd" required class="input-nfd">
+                  [(ngModel)]="notaFiscal.dadosNfdDTO.numeroNfd" name="numeroNfd" required class="input-nfd"
+                  (ngModelChange)="notaFiscal.valoresDTO.numeronfd = notaFiscal.dadosNfdDTO.numeroNfd">
               </div>
 
             </div>
@@ -67,14 +68,13 @@
                   <label class="label">Motivo</label>
                 </div>
               </div>
-
-              <nb-select fullWidth placeholder="Selecione o motivo" class="nb-select-motivo" name="motivo" id="motivo"
-                [(ngModel)]="notaFiscal.dadosNfdDTO.motivo" required>
-                <nb-option>Nenhuma das alternativas</nb-option>
-                <nb-option value="1">Avaria</nb-option>
-                <nb-option value="2">Falta</nb-option>
-                <nb-option value="3">Devolucao</nb-option>
+            <div class="form-group3">
+              <nb-select fullWidth placeholder="Selecione um Motorista" class="nb-select-motivo" id="motivo.nome"
+                name="motivo.id" [(ngModel)]="notaFiscal.dadosNfdDTO.motivo" required>
+                <nb-option *ngFor="let motivo of motivo" [value]="motivo.motivoId">{{ motivo.nomeMotivo }}</nb-option>
               </nb-select>
+            </div>
+
 
               <!-- Observação -->
 
@@ -113,7 +113,7 @@
               <!-- Nome do Produto -->
               <ng-container matColumnDef="nome">
                 <th mat-header-cell *matHeaderCellDef> Nome Produto </th>
-                <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.produtoNome}} </td>
               </ng-container>
 
               <!-- Adicione uma nova coluna para o ícone de exclusão -->
@@ -131,19 +131,19 @@
               <!-- Quantidade do Produto -->
               <ng-container matColumnDef="quantidade">
                 <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-                <td mat-cell *matCellDef="let element"> {{element.quantidade}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.produtoQuantidade}} </td>
               </ng-container>
 
               <!-- Valor do Produto -->
               <ng-container matColumnDef="valor">
                 <th mat-header-cell *matHeaderCellDef> Valor Unitário </th>
-                <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.produtoValor}} </td>
               </ng-container>
 
               <!--Situacao do Produto -->
               <ng-container matColumnDef="situacao">
                 <th mat-header-cell *matHeaderCellDef> Situação </th>
-                <td mat-cell *matCellDef="let element"> {{element.situacao}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.situacaoProduto}} </td>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -156,7 +156,7 @@
             </table>
 
             <!-- botao de continuar-->
-            <button nbButton nbStepperNext status="success" (click)="verdados()"
+            <button nbButton nbStepperNext status="primary" outline shape="semi-round" (click)="verdados()"
               class="button-concluir">Continuar</button>
           </div>
         </form>
@@ -177,7 +177,7 @@
 
             <div class="form-group">
 
-              <nb-select fullWidth placeholder="Selecione um Cliente" class="nb-select-motorista" name="cliente.id"
+              <nb-select  fullWidth placeholder="Selecione um Cliente" class="nb-select-motorista" name="cliente.id"
                 [(ngModel)]="notaFiscal.valoresDTO.cliente" required>
                 <nb-option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</nb-option>
               </nb-select>
@@ -193,32 +193,10 @@
             </div>
 
             <div class="form-group3">
-              <nb-select fullWidth placeholder="Selecione um Motorista" class="nb-select-motorista" id="motorista.nome"
+              <nb-select required fullWidth placeholder="Selecione um Motorista" class="nb-select-motorista" id="motorista.nome"
                 name="motorista.id" [(ngModel)]="notaFiscal.valoresDTO.motorista" required>
                 <nb-option *ngFor="let motorista of motoristas" [value]="motorista.id">{{ motorista.nome }}</nb-option>
               </nb-select>
-              <div class="form-group-toggle">
-                <div style="display: flex;">
-                  <label class="label" style="margin-bottom: 5px;">Motorista alertou Avaria?</label>
-                  <label class="label" style="margin-bottom: 5px;" *ngIf="debitarValorMotorista">Debitar Valor do
-                    Motorista?</label>
-                </div>
-
-                <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorMotorista"
-                  style="margin-bottom: 0.7rem !important;">
-                  <span nbSpan *ngIf="!debitarValorMotorista" class="visual-text"
-                    [(ngModel)]="motorista.debitado">Debitar do Motorista:
-                    R${{calcularSomaProdutos()}}</span>
-
-                  <input type="number" nbInput *ngIf="debitarValorMotorista" placeholder="Digite o valor"
-                    id="motorista-debitado" name="motorista-debitado" [(ngModel)]="motorista.debitado" required
-                    style="margin-left:265px; width: 70%">
-                </nb-toggle>
-
-              </div>
-
-
-
             </div>
 
             <!-- Comprador-->
@@ -229,7 +207,7 @@
             </div>
 
             <div class="form-group">
-              <nb-select fullWidth placeholder="Selecione um Comprador" id="comprador" class="nb-select-motorista"
+              <nb-select required fullWidth placeholder="Selecione um Comprador" id="comprador" class="nb-select-motorista"
                 name="comprador.id" [(ngModel)]="notaFiscal.valoresDTO.pessoa" required>
                 <nb-option *ngFor="let comprador of compradores" [value]="comprador.id">{{ comprador.nome }}</nb-option>
               </nb-select>
@@ -245,16 +223,17 @@
             </div>
 
             <div class="form-group">
-              <nb-select fullWidth placeholder="Selecione um Armazém" id="armazem" class="nb-select-motorista"
+              <nb-select required fullWidth placeholder="Selecione um Armazém" id="armazem" class="nb-select-motorista"
                 name="armazem.id" [(ngModel)]="notaFiscal.valoresDTO.armazem" required>
-                <nb-option *ngFor="let armazem of armazens" [value]="armazem.id">{{ armazem.armazemNome }}</nb-option>
+                <nb-option *ngFor="let armazem of armazens" [value]="armazem.armazemId">{{ armazem.armazemNome }}
+                </nb-option>
               </nb-select>
 
             </div>
 
             <!-- botao de continuar-->
-            <button nbButton nbStepperNext (click)="verdados()" [disabled]="!movieForm.valid" status="primary"
-              class="button-step2">Continuar</button>
+            <button nbButton nbStepperNext (click)="adicionarNotaFiscal()" [disabled]="!movieForm.valid"
+              status="success" shape="semi-round"  class="button-step2">Cadastrar</button>
 
           </div>
         </form>
@@ -264,8 +243,14 @@
       <!-- Ultima etapa do formulario e a solicitação de cadastro novamente-->
       <nb-step [hidden]="true">
         <div class="step-container">
-          <h3>Cadastro completo!</h3>
-          <button nbButton status="success" (click)="stepper.reset()">Cadastrar novamente?</button>
+          <h3 style="margin-left: 25vh; margin-bottom: 25vh;">Cadastro concluído!</h3>
+
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <button nbButton status="primary" (click)="stepper.reset()" style="margin-right: 10px;">Novo Cadastro</button>
+            <button nbButton status="info" outline (click)="navegarParaTelaInicial()" style="margin-right: 10px;">Tela Inicial</button>
+            <button nbButton status="success" (click)="navegarParaGerarFinancas()" style="margin-right: 10px;">Cadastrar Valores</button>
+          </div>
+
         </div>
       </nb-step>
     </nb-stepper>

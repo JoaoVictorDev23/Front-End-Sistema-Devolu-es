@@ -2,14 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_CONFIG } from 'src/app/config/api.config';
 import { AuthService } from '../authservice.service';
-import { Usuario } from 'src/app/interface/usuario-interface';
+import { Motorista } from 'src/app/interface/motorista-interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceUsuarioService {
-  private apiUrl = `${API_CONFIG.baseUrl}/usuarios`; // Use a URL da API a partir da configuração
+export class MotoristaService {
+  private apiUrl = `${API_CONFIG.baseUrl}/motorista`; // Use a URL da API a partir da configuração
 
   authToken: string | null;
 
@@ -17,7 +17,7 @@ export class ServiceUsuarioService {
     this.authToken = this.authService.extractAuthToken();
   }
 
-  cadastrarUsuario(usuario: Usuario): Observable<Usuario>{
+  cadastrarmotorista(motorista: Motorista): Observable<Motorista>{
 
     if(!this.authToken){
       throw new Error('Token JWT não encontrado, refaça o Login!');
@@ -25,7 +25,7 @@ export class ServiceUsuarioService {
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authToken}`);
 
-    return this.http.post<Usuario>(this.apiUrl, usuario, { headers });
+    return this.http.post<Motorista>(this.apiUrl, motorista, { headers });
 
   }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { NbToastrService } from '@nebular/theme';
 import { Pessoa } from 'src/app/interface/pessoa-interface';
 import { Usuario } from 'src/app/interface/usuario-interface';
+import { ServiceUsuarioService } from 'src/app/services/usuario/service-usuario.service';
 
 @Component({
   selector: 'app-usuario-cadastrar',
@@ -9,16 +11,34 @@ import { Usuario } from 'src/app/interface/usuario-interface';
 })
 export class UsuarioCadastrarComponent {
 
+  constructor(private usuarioService: ServiceUsuarioService,
+    private toastrService: NbToastrService){
+
+  }
+
   usuario: Usuario = {
     name: "",
     cpf: "",
     email: "",
     senha:"",
-    perfis: ["ADMINISTRADOR"]
+    perfis: [0]
+
   }
 
   create(){
-    console.log(this.usuario);
-  }
+    this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
+      response =>{
+        this.toastrService.success("Usuário cadastrado com sucesso!", "Sucesso");
+      },
+      error =>{
+        if(error.error && error.error.message){
+          this.toastrService.warning(error.error.message, "Erro");
+        }
+        else{
+          this.toastrService.warning('Erro ao Cadastrar Usuário.!', "Erro");
+        }
+      }
+    )
 
+}
 }

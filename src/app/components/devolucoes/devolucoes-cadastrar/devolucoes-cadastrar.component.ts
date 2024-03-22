@@ -1,7 +1,7 @@
 import { Motivo } from './../../../interface/motivo-interface';
 import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { NbDialogService, NbStepperComponent } from '@nebular/theme';
+import { NbDialogService, NbStepperComponent, NbToastrService } from '@nebular/theme';
 import { ProdutosDialogComponent } from './produtos-dialog/produtos-dialog.component';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
 import { Produto } from '../../../interface/produtos.interface';
@@ -12,6 +12,7 @@ import { Motorista } from 'src/app/interface/motorista-interface';
 import { Cliente } from 'src/app/interface/cliente-interface';
 import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
 import { Pessoa } from 'src/app/interface/pessoa-interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-devolucoes-cadastrar',
@@ -61,14 +62,7 @@ export class DevolucoesCadastrarComponent {
       numeronfd:''
     },
     produtosDTO:[
-      {
-        produtoNome: '',
-        produtoQuantidade: 0,
-        produtoValor: 0,
-        situacaoProduto: '',
-        armazemId: 0,
-        numeronfd: ''
-      }
+
     ]
 
   };
@@ -81,7 +75,10 @@ export class DevolucoesCadastrarComponent {
 
 
 
-  constructor(private dialogService: NbDialogService,private nfdService: NfdserviceService) {}
+  constructor(private dialogService: NbDialogService,
+    private nfdService: NfdserviceService,
+    private toastrService:NbToastrService,
+    private router:Router) {}
   verdados(){
     console.log(this.notaFiscal);
   }
@@ -91,6 +88,7 @@ export class DevolucoesCadastrarComponent {
     this.getClientes();
     this.getMotoristas();
     this.getArmazens();
+    this.getMotivos();
     this.getCompradores();
   }
 
@@ -156,6 +154,7 @@ export class DevolucoesCadastrarComponent {
   getMotivos(): void {
     this.nfdService.getMotivos().subscribe(motivos => {
       this.motivo = motivos;
+      console.log(motivos);
     });
   }
 
@@ -165,16 +164,33 @@ export class DevolucoesCadastrarComponent {
     this.notaFiscal.produtosDTO = this.dataSource.data;
 
     this.nfdService.cadastrarNotaFiscal(this.notaFiscal).subscribe(
-      (response) => {
-        console.log('Nota fiscal cadastrada:', response);
-        // Lógica adicional após o cadastro, se necessário
+      response => {
+        // Handle success response
+        this.toastrService.success('Nota de Devolução cadastrado com sucesso.!', 'Sucesso');
+        // Você pode adicionar lógica adicional aqui, como redirecionar para outra página
       },
-      (error) => {
-        console.error('Erro ao cadastrar nota fiscal:', error);
-        // Tratamento de erro, se necessário
+      error => {
+        // Handle error response
+        if (error.error && error.error.message) {
+          this.toastrService.warning(error.error.message, 'Erro'); // Exibe a mensagem de erro para o usuário usando Toastr
+        } else {
+          this.toastrService.warning('Erro ao cadastrar Devolução.!', 'Erro'); // Caso a mensagem de erro específica não esteja disponível, exibe uma mensagem padrão
+        }
+
+        // Você pode exibir uma mensagem de erro para o usuário aqui
       }
     );
   }
+  navegarParaGerarFinancas() {
+    this.router.navigate(['/gerarfinancas']);
+  }
+  navegarParaTelaInicial() {
+    this.router.navigate(['/home']);
+  }
+  navegarNovoCadastro(){
+    this.router.navigate(['/devolucao/cadastrar']);
+  }
+
 
 
 }

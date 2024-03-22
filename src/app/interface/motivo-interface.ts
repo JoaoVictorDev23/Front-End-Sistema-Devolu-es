@@ -1,5 +1,5 @@
 export interface Motivo{
-  id?:number;
+  motivoId?:number;
   nomeMotivo:string;
   descriMotivo:string;
 
