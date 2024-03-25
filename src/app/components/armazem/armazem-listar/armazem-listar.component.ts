@@ -1,3 +1,4 @@
+import { ArmazemCadastrarService } from './../../../services/armazem/armazem-cadastrar.service';
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,11 +31,9 @@ export class ArmazemListarComponent implements AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,private armazemService:ArmazemCadastrarService) {
     // Popule a lista de armazéns conforme necessário
-    this.armazens = [
-
-    ];
+    this.getAllarmazem();
     // Inicialize o dataSource.data com a lista de armazéns
     this.dataSource.data = this.armazens;
   }
@@ -47,5 +46,18 @@ export class ArmazemListarComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+
+  getAllarmazem() {
+    this.armazemService.getAllarmazem().subscribe(
+      (data: Armazem[]) => {
+        this.armazens = data;
+        this.dataSource.data = this.armazens; // Atualiza os dados do dataSource
+      },
+      (error) => {
+        console.log('Erro ao obter Armazens!', error);
+      }
+    );
   }
 }

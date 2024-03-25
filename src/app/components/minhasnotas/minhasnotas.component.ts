@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
 import { ModalViewDevolucaoExcluirComponent } from '../modals/modal-view-devolucao-excluir/modal-view-devolucao-excluir.component';
 import { ModalDevolucaoEditComponent } from '../modals/modal-devolucao-edit/modal-devolucao-edit.component';
+import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
 
 @Component({
   selector: 'app-minhasnotas',
@@ -28,20 +29,16 @@ export class MinhasnotasComponent implements AfterViewInit {
 
   }
 
-displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','valorVenda','valorPrejuizo','valorArmazem', 'acoes'];
+  displayedColumns: string[] = ['numeronfd', 'filial', 'serie', 'cte', 'situacaonfd', 'situacaofinanceiro', 'acoes'];
 dataSource = new MatTableDataSource();
 
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
-constructor(public dialog: MatDialog) {
 
-  this.notasFiscais = [
-  ];
-
-  // Inicialize o dataSource.data com a lista de notas fiscais
-  this.dataSource.data = this.notasFiscais.filter(notaFiscal => notaFiscal.dadosNfdDTO.situacao === 'Pendente' || notaFiscal.valoresDTO.situacaoValores === 'Pendente');
+constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService) {
+  this.getAllNotasFiscais();
 }
 
 openDialog(notaFiscal: NotaFiscal) {
@@ -64,6 +61,18 @@ openDialogAtualizar(notaFiscal: NotaFiscal) {
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);
   });
+}
+
+getAllNotasFiscais() {
+  this.nfdserviceService.getAllNotasFiscais().subscribe(
+    (data: NotaFiscal[]) => {
+      this.notasFiscais = data;
+      this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores !== 'Pendente' && nota.dadosNfdDTO.situacao !=='Pendente');
+    },
+    (error) => {
+      console.log('Erro ao obter notas fiscais:', error);
+    }
+  );
 }
 
 }

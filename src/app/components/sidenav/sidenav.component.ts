@@ -2,6 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { NB_WINDOW, NbMenuItem, NbMenuService,NbToastrService } from '@nebular/theme';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
+import { Usuario } from 'src/app/interface/usuario-interface';
+import { ServiceUsuarioService } from 'src/app/services/usuario/service-usuario.service';
 
 
 @Component({
@@ -28,7 +30,7 @@ export class SidenavComponent {
           children: [
             { title: 'Visualizar NF-D', link: '/devolucoes/listar', icon: 'eye-outline'},
             { title: 'Cadastrar NF-D', link: '/devolucao/cadastrar',icon:'plus-circle-outline'},
-            { title: 'Validação NF-D',  link: '/gerarfinancas',      icon:'checkmark-square-outline'},
+            { title: 'Gerar Validação',  link: '/gerarfinancas',      icon:'checkmark-square-outline'},
           ]
         },
         {
@@ -45,11 +47,6 @@ export class SidenavComponent {
         link: '/pessoa'
 
        },
-       {title:'Cadastro de Usuário',
-       icon: 'person-add',
-       link: '/usuario'
-
-      },
        { title:'Cadastro de Motivos',
          icon: 'message-circle-outline',
          link: '/motivo/cadastrar'
@@ -57,7 +54,7 @@ export class SidenavComponent {
       ],
     },
     {
-      title: 'Painel de Aprovação',
+      title: 'Painel de Gestor',
       icon: 'file-text-outline',
       children: [
         {
@@ -68,15 +65,20 @@ export class SidenavComponent {
         },
         { title: 'Validações Pendentes', link: '/aprovacao',icon:'checkmark-square-outline' },
 
+        {title:'Cadastro de Usuário',
+        icon: 'person-add',
+        link: '/usuario'
+       },
+
       ],
     },
 
     {
-      title: 'Área Pessoal',
+      title: 'Minha Área',
       icon: 'person-outline',
       children:[
         {
-          title:'Minhas NFs',
+          title:'NFs Validadas',
           link: '/minhasnotas',
           icon: 'list-outline'
 
@@ -118,14 +120,17 @@ export class SidenavComponent {
 
 
   items2 = [
-    { title: 'Minhas NFs', link:'/minhasnotas-correcao' },
+    { title: 'Minhas NFs', link:'/minhasnotas' },
+    { title: 'NFs Pendentes', link:'/minhasnotas-correcao' },
     { title: 'Sair', link:'/login' },
   ];
 
   constructor(private nbMenuService: NbMenuService,    private toastrService: NbToastrService, // Adicione NbToastrService aqui
+              private userService: ServiceUsuarioService
   ) {
   }
   ngOnInit() {
+    this.loadUser();
     this.nbMenuService.onItemClick()
       .pipe(
         filter(({ tag }) => tag === 'my-context-menu'),
@@ -149,4 +154,26 @@ export class SidenavComponent {
   }
 
 
-}
+  usuario: Usuario = {
+    name:'',
+    cpf:'',
+    email:'',
+    perfis:[0],
+    senha:''
+  }
+
+  loadUser() {
+
+      this.userService.getUserByEmail().subscribe(
+        (user: Usuario) => {
+          this.usuario =  user; // Armazene os dados do Pessoa na variável local
+        },
+        (error) => {
+          console.error('Erro ao carregar dados do Pessoa:', error);
+        }
+      );
+    }
+  }
+
+
+

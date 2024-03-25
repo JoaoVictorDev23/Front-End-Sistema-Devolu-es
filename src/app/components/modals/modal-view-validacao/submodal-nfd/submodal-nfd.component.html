@@ -30,7 +30,7 @@
 
 <div style="display: flex; width: 700px;">
   <input type="text" nbInput style="max-width: 49.5%; min-width: 40%;" id="motivo" placeholder="" name="motivo"
-    [(ngModel)]="data.notaFiscal.dadosNfdDTO.motivo" disabled class="input-motivo">
+  [value]="motivo?.nomeMotivo" disabled class="input-motivo">
   <input type="number" nbInput style="max-width: 49.5%; min-width: 40%;" id="numero-nfd" placeholder="" name="numero-nfd"
     [(ngModel)]="data.notaFiscal.dadosNfdDTO.numeroNfd" disabled class="input-nfd">
 </div>
@@ -47,69 +47,32 @@
   id="observacao" [(ngModel)]="data.notaFiscal.dadosNfdDTO.observacao" #observacaoInput=""
   class="custom-textarea"></textarea>
 
-
-<!-- Nome do Cliente -->
-<div class="col-sm-6">
-  <div class="form-group">
-    <label for="cliente" class="label">Cliente</label>
+  <!--Cliente Nome-->
+  <div class="flex">
+    <label class="label" style="margin-bottom: 5px; margin-right: 19rem !important;" >Cliente</label>
+    <label class="label" style="margin-bottom: 5px;">Debitado do Cliente</label>
+  </div>
+  <div class="flex">
+    <input type="text" nbInput fullWidth placeholder="Digite o valor" id="cliente"
+      name="cliente-debitado" [value]="cliente?.nome" disabled  required>
+    <input type="number" nbInput fullWidth placeholder="Digite o valor" id="cliente-debitado"
+      name="cliente-debitado" [value]="cliente?.debitado" disabled required>
   </div>
 
-  <div class="form-group">
-    <input type="text" nbInput fullWidth id="cliente" placeholder="" name="nome-cliente"
-      [(ngModel)]="data.notaFiscal.valoresDTO.cliente" disabled class="input-nfd">
-  </div>
-</div>
 
 
 <!-- Motorista-->
-<div class="col-sm-6">
-  <div class="form-group">
-    <label for="motorista" class="label">Motorista</label>
-  </div>
-</div>
-
-<div class="form-group">
-  <input type="text" nbInput fullWidth id="motorista" placeholder="" name="select-motorista"
-    [(ngModel)]="data.notaFiscal.valoresDTO.motorista" disabled class="nb-select-motorista">
-</div>
-<div style="display: flex;">
-
-  <!--Cliente Nome-->
-  <div class="col-sm-6">
-    <div class="form-group">
-      <label for="numero-nfd" class="label">Cliente</label>
-    </div>
-
-    <div class="form-group">
-      <input type="text" nbInput id="cliente-nome" placeholder="" name="cliente-nome"
-        [(ngModel)]="data.notaFiscal.valoresDTO.cliente" disabled class="input-nfd">
-    </div>
-  </div>
-
-  <!-- Cliente Debitado -->
-  <div style="margin-left:2.8rem; margin-top: 3px;">
-    <label class="label" style="margin-bottom: 5px;">Débitado do cliente?</label>
-
-    <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorCliente"
-      style="margin-bottom: 0.7rem !important;">
-      <input nbInput type="number" id="valorDebitadoCliente" *ngIf="debitarValorCliente" class="visual-text" >
-    </nb-toggle>
-
-  </div>
-
-</div>
-
 
 
 <div class="flex">
-  <label class="label" style="margin-bottom: 5px; margin-right: 18rem !important;" *ngIf="debitarValorMotorista">Motorista</label>
-  <label class="label" style="margin-bottom: 5px;" *ngIf="debitarValorMotorista">Debitado do Motorista</label>
+  <label class="label" style="margin-bottom: 5px; margin-right: 18rem !important;" >Motorista</label>
+  <label class="label" style="margin-bottom: 5px;" >Debitado do Motorista</label>
 </div>
 <div class="flex">
-  <input type="text" nbInput fullWidth *ngIf="debitarValorMotorista" placeholder="Digite o valor" id="motorista-debitado"
-    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valoresDTO.motorista" required>
-  <input type="number" nbInput fullWidth *ngIf="debitarValorMotorista" placeholder="Digite o valor" id="motorista-debitado"
-    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valoresDTO.motorista" required>
+  <input type="text" nbInput fullWidth disabled placeholder="Digite o valor" id="motorista-debitado"
+    name="motorista-debitado" [value]="motorista?.nome" disabled required>
+  <input type="number" nbInput fullWidth  placeholder="Digite o valor" id="motorista-debitado"
+    name="motorista-debitado" [value]="motorista?.debitado"disabled required>
 </div>
 
 
@@ -117,9 +80,12 @@
 
 <mat-dialog-actions align="end" class="configurationbutton">
   <!-- Botões-->
-  <button nbButton status="danger"  shape="semi-round"  style="border: 2px solid white;">Rejeitar</button>
-  <button nbButton status="warning" shape="semi-round" style="border: 2px solid white;">Correção</button>
-  <button nbButton status="success" shape="semi-round"  style="border: 2px solid white;">Aprovar</button>
+  <button nbButton status="danger"  shape="semi-round" outline  style="margin-right:1.5px;"
+  (click)="rejeitarSituacao(data.notaFiscal.dadosNfdDTO.dadosnfdId)" >Rejeitar</button>
+  <button nbButton status="warning" shape="semi-round" outline style="margin-right:1.5px;"
+  (click)="correcaoSituacao(data.notaFiscal.dadosNfdDTO.dadosnfdId)">Correção</button>
+  <button nbButton status="success" shape="semi-round" outline
+  (click)="aprovarSituacao(data.notaFiscal.dadosNfdDTO.dadosnfdId)">Aprovar</button>
 </mat-dialog-actions>
 
 

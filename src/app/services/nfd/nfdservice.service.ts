@@ -9,6 +9,8 @@ import { Motorista } from 'src/app/interface/motorista-interface';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
 import { Pessoa } from 'src/app/interface/pessoa-interface';
 import { AuthService } from '../authservice.service';
+import { ValoresNotaFiscal } from 'src/app/interface/financeironfd-interface';
+import { DadosNotasFiscais } from 'src/app/interface/dadosnfd-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -55,13 +57,53 @@ export class NfdserviceService {
     return this.http.post<any>(`${this.apiUrl}/nota/criar`, notaFiscal, { headers: this.getHeaders() });
   }
 
-// Método para obter todas as notas fiscais
-getAllNotasFiscais(): Observable<NotaFiscal[]> {
-  return this.http.get<NotaFiscal[]>(`${this.apiUrl}/nota/listar`, { headers: this.getHeaders() })
-    .pipe(
-      tap(data => {
-        console.log('Dados recebidos do backend:', data);
-      })
-    );
-}
+  // Método para obter todas as notas fiscais de acordo com usuario logado
+  getAllNotasFiscais(): Observable<NotaFiscal[]> {
+    return this.http.get<NotaFiscal[]>(`${this.apiUrl}/nota/listar`, { headers: this.getHeaders() });
+
+  }
+
+  //Metodo para obter todas independente.
+  getAllNotasFiscaisByAll(): Observable<NotaFiscal[]> {
+    return this.http.get<NotaFiscal[]>(`${this.apiUrl}/nota/listar/todas`, { headers: this.getHeaders() });
+
+  }
+  findByCliente(id: String): Observable<Cliente> {
+    const headers = this.getHeaders();
+    return this.http.get<Cliente>(`${this.apiUrl}/cliente/${id}`, { headers });
+  }
+  findByMotorista(id: String): Observable<Motorista> {
+    const headers = this.getHeaders();
+    return this.http.get<Motorista>(`${this.apiUrl}/motorista/${id}`, { headers });
+  }
+  findByPessoa(id: String): Observable<Pessoa> {
+    const headers = this.getHeaders();
+    return this.http.get<Pessoa>(`${this.apiUrl}/pessoa/${id}`, { headers });
+  }
+  findByMotivo(id: Number): Observable<Motivo> {
+    const headers = this.getHeaders();
+    return this.http.get<Motivo>(`${this.apiUrl}/motivo/${id}`, { headers });
+  }
+  updateSituacao(id: string, situacao: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/nfd/dados/${id}`, situacao, { headers: this.getHeaders() });
+  }
+  updateSituacaoValores(id: string, situacao: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/valoresnfd/${id}`, situacao, { headers: this.getHeaders() });
+  }
+
+  updateValores(valoresNFDDTO: ValoresNotaFiscal) {
+    console.log(valoresNFDDTO);
+    return this.http.put(`${this.apiUrl}/valoresnfd/update/${valoresNFDDTO.id}`, valoresNFDDTO, { headers: this.getHeaders() });
+  }
+  updateDebitadoCliente(id: number, debitado: number) {
+    return this.http.put(`${this.apiUrl}/cliente/${id}`, debitado, { headers: this.getHeaders() });
+  }
+  updateDebitadoMotorista(id: number, debitado: number) {
+    return this.http.put(`${this.apiUrl}/motorista/${id}`, debitado, { headers: this.getHeaders() });
+  }
+  updateDados(DadosDto: DadosNotasFiscais) {
+    return this.http.put(`${this.apiUrl}/nfd/dados/update/${DadosDto.dadosnfdId}`, DadosDto, { headers: this.getHeaders() });
+  }
+
+
 }

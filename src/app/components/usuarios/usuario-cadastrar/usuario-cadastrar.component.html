@@ -58,7 +58,7 @@
           </div>
 
           <div>
-            <button nbButton fullWidth (click)="create()" status="success">Cadastrar</button>
+            <button nbButton shape="semi-round"  fullWidth (click)="create()"[disabled]="!nameForm.valid" status="success">Cadastrar</button>
           </div>
 
         </div>

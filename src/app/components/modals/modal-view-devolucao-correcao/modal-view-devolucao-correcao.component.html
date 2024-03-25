@@ -4,230 +4,34 @@
       <ng-template mat-tab-label>
         Aprovação
       </ng-template>
-
-
       <img src="/assets/img/dadosnfd.png" alt="Imagem em erro!" class="img-aba1">
+
+
 
       <mat-dialog-content class="mat-typography">
 
-        <div class="col-sm-6">
-          <div class="labelcte">
-            <label for="filial" class="label">Filial</label>
-
-            <label for="serie" class="label">Serie</label>
-
-            <label for="cte" class="label">CTE</label>
-
-          </div>
-
-          <div class="form-group-cte" style="margin-left:0.2rem">
-            <input type="number" nbInput id="filial" placeholder="" fullWidth name="filial"
-              [(ngModel)]="data.notaFiscal.dadosNfdDTO.filial" disabled>
-            <input type="number" nbInput id="serie" placeholder="" fullWidth name="serie"
-              [(ngModel)]="data.notaFiscal.dadosNfdDTO.serie" disabled>
-            <input type="number" nbInput id="cte" placeholder="" fullWidth name="CTE" [(ngModel)]="data.notaFiscal.dadosNfdDTO.cte"
-              disabled>
-          </div>
-        </div>
         <!-- Numero NFD-->
 
-        <div style="display: flex; width: 768px; ">
-          <label for="motivo" class="label">Motivo</label>
-          <label for="numero-nfd" class="label" style="margin-left: 8.5rem;">Número NFd</label>
+        <div style="display: flex; width: 100%; ">
+          <label for="numero-nfd" class="label" style="margin-right:15rem;">Selecione uma Validação</label>
         </div>
 
-        <div style="display: flex; width: 750px;">
-          <input type="text" nbInput style="max-width: 49.5%; min-width: 40%;" id="motivo" placeholder="" name="motivo"
-            [(ngModel)]="data.notaFiscal.dadosNfdDTO.motivo" disabled class="input-motivo">
-          <input type="number" nbInput id="numero-nfd" placeholder="" name="numero-nfd"
-            [(ngModel)]="data.notaFiscal.dadosNfdDTO.numeroNfd" disabled class="input-nfd">
-        </div>
-
-        <!-- Observação -->
-
-        <div class="col-sm-6">
-          <div class="form-group" style="margin-bottom: -1px;">
-            <label for="observacao" class="label">Observações</label>
-          </div>
-        </div>
-
-        <textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" disabled nbInput
-          id="observacao" [(ngModel)]="data.notaFiscal.dadosNfdDTO.observacao" #observacaoInput=""
-          class="custom-textarea"></textarea>
-
-
-        <!-- Nome do Cliente -->
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="cliente" class="label">Cliente</label>
-          </div>
-
-          <div class="form-group">
-            <input type="text" nbInput fullWidth id="cliente" placeholder="" name="nome-cliente"
-              [(ngModel)]="data.notaFiscal.valoresDTO.cliente" disabled class="input-nfd">
-          </div>
+        <div style="display: flex; width: 100%;">
+          <nb-select placeholder="Validações" [(selected)]="selectedItem">
+            <nb-option value="">Selecione uma opção</nb-option>
+            <nb-option value="nfd">Validar NF-D</nb-option>
+            <nb-option value="valores">Validar Valores</nb-option>
+          </nb-select>
         </div>
 
 
-        <!-- Motorista-->
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="motorista" class="label">Motorista</label>
-          </div>
+        <div *ngIf="selectedItem === 'nfd'" style="margin-top:1rem">
+          <app-submodal-solicitar-nfd></app-submodal-solicitar-nfd>
         </div>
 
-        <div class="form-group">
-          <input type="text" nbInput fullWidth id="motorista" placeholder="" name="select-motorista"
-            [(ngModel)]="data.notaFiscal.valoresDTO.motorista" disabled class="nb-select-motorista">
+        <div *ngIf="selectedItem === 'valores'" style="margin-top:1rem">
+          <app-submodal-solicitar-financeiro></app-submodal-solicitar-financeiro>
         </div>
-
-        <!-- Comprador-->
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="comprador" class="label">Comprador</label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <input type="text" nbInput fullWidth id="motorista" placeholder="" name="select-motorista"
-            [(ngModel)]="data.notaFiscal.valoresDTO.pessoa" disabled class="nb-select-motorista">
-        </div>
-
-
-      </mat-dialog-content>
-    </mat-tab>
-
-    <!-- Financeiro -->
-
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Financeiro
-      </ng-template>
-
-
-      <img src="/assets/img/dadosnfd.png" alt="Imagem em erro!" class="img-aba1">
-
-      <mat-dialog-content class="mat-typography">
-
-
-        <div style="display: flex;">
-
-           <!-- Numero NFD-->
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="numero-nfd" class="label">Número NFd</label>
-          </div>
-
-          <div class="form-group">
-            <input type="number" nbInput  id="numero-nfd" placeholder="" name="numero-nfd"
-              [(ngModel)]="data.notaFiscal.dadosNfdDTO.numeroNfd" disabled class="input-nfd">
-          </div>
-        </div>
-
-        <!-- Cliente Debitado -->
-        <div style="margin-left:1rem; margin-top: 3px;">
-          <label class="label" style="margin-bottom: 5px;">Débitado do cliente?</label>
-
-          <nb-toggle labelPosition="right" status="primary" [(checked)]="debitarValorCliente" style="margin-bottom: 0.7rem !important;">
-            <input nbInput  type="number" id="valorDebitadoCliente" *ngIf="debitarValorCliente" class="visual-text" fullWidth>
-          </nb-toggle>
-
-        </div>
-
-        </div>
-
-
-
-
-        <!-- TABELA PRODUTOS-->
-
-        <button nbButton outline shape="semi-round" status="info" class="button-adicionar-prod" (click)="openDialog()">Adicionar
-          Produto</button>
-
-        <table mat-table [dataSource]="dataSource">
-
-
-
-          <!-- Coluna Nome Produto -->
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> Nome do Produto</th>
-            <td mat-cell *matCellDef="let element" style="width: 25% !important;"> {{element.nome}} </td>
-          </ng-container>
-
-          <!-- Coluna Valor produto-->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Valor </th>
-            <td mat-cell *matCellDef="let element" style="width: 25% !important;">
-              <input [(ngModel)]="element.valor"
-              type="number" style="width: 75%;"
-              (blur)="compararValores(element)"/> </td>
-          </ng-container>
-
-          <!-- Coluna Quantidade produto -->
-          <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-            <td mat-cell *matCellDef="let element" style="width: 25% !important;">
-              <input [(ngModel)]="element.quantidade" type="number" style="width: 75%;"
-              (blur)="compararValores(element)" /> </td>
-          </ng-container>
-
-          <!-- Coluna situação produto -->
-          <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Situação </th>
-            <td mat-cell *matCellDef="let element" style="width: 25% !important;">
-              <nb-select
-              style="width: 100% !important; margin-right: 0 !important;"
-              placeholder="Select Showcase"
-              [(selected)]="element.situacao"
-              (selectedChange)="calcularValoresTotais()" >
-
-                <nb-option value="Pendente">Pendente</nb-option>
-                <nb-option value="Em armazem">Em Armazém</nb-option>
-                <nb-option value="Venda">Venda</nb-option>
-                <nb-option value="Prejuizo">Prejuízo</nb-option>
-
-              </nb-select>
-            </td>
-          </ng-container>
-
-          <!-- fim das colunas-->
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <!-- card  vendas totais-->
-
-        <nb-card style="margin-top: 2rem !important;" class="mat-elevation-z2">
-          <nb-card-body>
-            <div class="row">
-
-              <!-- Venda-prejuizo-estoque -->
-              <div class="col-sm-6">
-                <div class="labelvendas">
-                  <label for="valorVenda" class="label" style="margin-right: 170px;">Valor Venda</label>
-
-                  <label for="valorPrejuizo" class="label" style="margin-right: 158px;">Valor Prejuizo</label>
-
-                  <label for="valorArmazem" class="label">Valor em Armazém</label>
-
-                </div>
-
-                <div class="form-group-cte">
-                  <input type="number" nbInput placeholder="" name="valorVenda" disabled id="valorVenda"
-                    [(ngModel)]="data.notaFiscal.valoresDTO.valorVenda" required>
-                  <input type="number" nbInput placeholder="" name="valorPrejuizo" disabled id="valorPrejuizo"
-                    [(ngModel)]="data.notaFiscal.valoresDTO.valorPrejuizo" required>
-                  <input type="number" nbInput placeholder="" name="valorArmazem" disabled id="valorArmazem"
-                    [(ngModel)]="data.notaFiscal.valoresDTO.valorArmazem" required>
-                </div>
-              </div>
-            </div>
-
-          </nb-card-body>
-        </nb-card>
-
-
-
-
       </mat-dialog-content>
     </mat-tab>
     <!-- chat -->
@@ -262,10 +66,10 @@
 
 
 
-  <!-- Seção do chat -->
   <mat-dialog-actions align="end" class="configurationbutton">
     <!-- Botões-->
-    <button nbButton fullWidth status="warning" (click)="voltar()" style="border: 2px solid white;">Enviar Correção</button>
+
+    <button nbButton status="info" shape="semi-round" fullWidth (click)="voltar()" style="border: 2px solid white;">Voltar</button>
   </mat-dialog-actions>
 
 </div>

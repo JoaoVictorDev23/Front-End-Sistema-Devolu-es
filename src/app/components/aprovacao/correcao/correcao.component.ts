@@ -13,6 +13,7 @@ import { Armazem } from 'src/app/interface/armazem-interface';
 import { Motorista } from 'src/app/interface/motorista-interface';
 import { Cliente } from 'src/app/interface/cliente-interface';
 import { Produto } from 'src/app/interface/produtos.interface';
+import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
 
 
 
@@ -30,6 +31,7 @@ export class CorrecaoComponent implements AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -37,21 +39,30 @@ export class CorrecaoComponent implements AfterViewInit{
 
   }
 
-  displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','valorVenda','valorPrejuizo','valorArmazem', 'acoes'];
+  displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','situacaovalores','valorVenda','valorPrejuizo','valorArmazem','cadastradopor','acoes'];
   dataSource = new MatTableDataSource();
 
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
-constructor(public dialog: MatDialog) {
-
-  this.notasFiscais = [
-  ];
-
-  // Inicialize o dataSource.data com a lista de notas fiscais
-  this.dataSource.data = this.notasFiscais;
+constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService) {
+  this.getAllNotasFiscaisByAll(); // Chama o método para obter as notas fiscais
 }
+
+getAllNotasFiscaisByAll() {
+  this.nfdserviceService.getAllNotasFiscaisByAll().subscribe(
+    (data: NotaFiscal[]) => {
+      this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores !== 'Pendente' && nota.dadosNfdDTO.situacao !=='Pendente');
+      this.dataSource.data = this.notasFiscais;
+    },
+    (error) => {
+      console.log('Erro ao obter notas fiscais:', error);
+    }
+  );
+}
+
+
 
 openDialog(notaFiscal: NotaFiscal) {
   const dialogRef = this.dialog.open(ModalViewDevolucaoCorrecaoGestorComponent, {data:{notaFiscal: notaFiscal}});

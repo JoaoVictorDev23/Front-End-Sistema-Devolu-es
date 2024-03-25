@@ -4,6 +4,8 @@ import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
 import { Produto } from 'src/app/interface/produtos.interface';
 import { ProdutosDialogComponent } from 'src/app/components/devolucoes/devolucoes-cadastrar/produtos-dialog/produtos-dialog.component';
+import { Pessoa } from 'src/app/interface/pessoa-interface';
+import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
 
 @Component({
   selector: 'app-submodal-financeiro',
@@ -14,9 +16,14 @@ export class SubmodalFinanceiroComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = this.data.notaFiscal.produtosDTO;
 
+  pessoa: Pessoa | undefined; // Declare a propriedade cliente aqui
+
+
 
   constructor(private dialogRef: MatDialogRef<SubmodalFinanceiroComponent>,
     private toastrService: NbToastrService,private dialogService: NbDialogService,
+    private NfdService: NfdserviceService, // Injete o serviço ClienteService
+
     @Inject(MAT_DIALOG_DATA) public data: { notaFiscal: NotaFiscal } ) {
 
      }
@@ -81,6 +88,46 @@ openDialog(): void {
       this.dataSource = [...this.data.notaFiscal.produtosDTO];
     }
   });
+}
+loadPessoa() {
+  const PessoaId = this.data.notaFiscal.valoresDTO.pessoa; // Obtenha o ID do Pessoa da nota fiscal
+  if (PessoaId) {
+    this.NfdService.findByPessoa(PessoaId).subscribe(
+      (Pessoa: Pessoa) => {
+        this.pessoa = Pessoa; // Armazene os dados do Pessoa na variável local
+      },
+      (error) => {
+        console.error('Erro ao carregar dados do Pessoa:', error);
+      }
+    );
+  }
+}
+    // Métodos para atualizar a situação ao clicar nos botões
+    aprovarSituacao(id: string) {
+      this.atualizarSituacao(id, 'APROVADA');
+    }
+
+    correcaoSituacao(id: string) {
+      this.atualizarSituacao(id, 'CORRECAO');
+    }
+
+    rejeitarSituacao(id: string) {
+      this.atualizarSituacao(id, 'REJEITADA');
+    }
+
+private atualizarSituacao(id: string, situacao: string) {
+  this.NfdService.updateSituacaoValores(id, situacao).subscribe(
+    () => {
+      // Sucesso na atualização
+      this.toastrService.success('Situação atualizada com sucesso!', 'Sucesso');
+      this.dialogRef.close();
+    },
+    (error) => {
+      // Erro na atualização
+      this.toastrService.danger('Erro ao atualizar situação.', 'Erro');
+      console.error('Erro ao atualizar situação:', error);
+    }
+  );
 }
 
 }

@@ -5,71 +5,60 @@
 
 <div class="mat-elevation-z4">
   <table mat-table [dataSource]="dataSource" style="border: 1px solid  #e2dfdf;">
-
-    <!--  Numero NFD Column -->
     <ng-container matColumnDef="numeronfd">
-      <th mat-header-cell *matHeaderCellDef> Número NFd </th>
-      <td mat-cell *matCellDef="let element"> {{element.dados.numeroNfd}} </td>
+      <th mat-header-cell *matHeaderCellDef> Número NF-D </th>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.numeroNfd}} </td>
     </ng-container>
 
     <!-- Filial Column -->
     <ng-container matColumnDef="filial">
       <th mat-header-cell *matHeaderCellDef> Filial </th>
-      <td mat-cell *matCellDef="let element"> {{element.filial}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.filial}} </td>
     </ng-container>
 
     <!-- Serie Column -->
     <ng-container matColumnDef="serie">
       <th mat-header-cell *matHeaderCellDef> Serie </th>
-      <td mat-cell *matCellDef="let element"> {{element.serie}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.serie}} </td>
     </ng-container>
 
     <!-- Cte Column -->
     <ng-container matColumnDef="cte">
       <th mat-header-cell *matHeaderCellDef> CTE </th>
-      <td mat-cell *matCellDef="let element"> {{element.cte}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.cte}} </td>
     </ng-container>
 
 
     <!-- Situ Column -->
-    <ng-container matColumnDef="situacao">
-      <th mat-header-cell *matHeaderCellDef> Situação </th>
-      <td mat-cell *matCellDef="let element"> {{element.situacao}} </td>
+    <ng-container matColumnDef="situacaonfd">
+      <th mat-header-cell *matHeaderCellDef> Situação dos Dados</th>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.situacao}} </td>
     </ng-container>
 
-    <!-- ValorVenda Column -->
-    <ng-container matColumnDef="valorVenda">
-      <th mat-header-cell *matHeaderCellDef> Valor de Venda </th>
-      <td mat-cell *matCellDef="let element"> {{element.valorVenda}} </td>
+    <!-- Situ Column -->
+    <ng-container matColumnDef="situacaofinanceiro">
+      <th mat-header-cell *matHeaderCellDef> Situação do Financeiro </th>
+      <td mat-cell *matCellDef="let element"> {{element.valoresDTO.situacaoValores}} </td>
     </ng-container>
 
-    <!-- ValorPrejuizo Column -->
-    <ng-container matColumnDef="valorPrejuizo">
-      <th mat-header-cell *matHeaderCellDef> Valor de Prejuizo </th>
-      <td mat-cell *matCellDef="let element"> {{element.valorPrejuizo}} </td>
+    <!-- Ações Column -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <button nbButton (click)="openDialog(element)" size="small" status="warning"
+          style="padding:5px; margin-right: 3px;" outline>
+          <nb-icon icon="eye-outline"></nb-icon>
+        </button>
+        <!-- <button nbButton (click)="openDialogExcluir(element)" size="small" status="danger"
+          style="padding:5px; margin-right: 3px;" outline>
+          <nb-icon icon="trash-2-outline"></nb-icon>
+        </button> -->
+        <button nbButton (click)="openDialogAtualizar(element)" size="small" status="info"
+          style="padding:5px; margin-right: 3px;" outline>
+          <nb-icon icon="edit-2-outline"></nb-icon>
+        </button>
+      </td>
     </ng-container>
-
-    <!-- ValorValorArmazem Column -->
-    <ng-container matColumnDef="valorArmazem">
-      <th mat-header-cell *matHeaderCellDef> Valor em Armazém </th>
-      <td mat-cell *matCellDef="let element"> {{element.valorArmazem}} </td>
-    </ng-container>
-
-  <!-- Ações Column -->
-  <ng-container matColumnDef="acoes">
-    <th mat-header-cell *matHeaderCellDef> Ações </th>
-    <td mat-cell *matCellDef="let element">
-      <button nbButton  (click)="openDialog(element)" size="small" status="warning"  style="padding:5px; margin-right: 3px;"  outline>
-        <nb-icon icon="eye-outline" ></nb-icon>
-      </button>
-      <button nbButton  (click)="openDialogExcluir(element)"size="small" status="danger"  style="padding:5px; margin-right: 3px;"  outline>
-        <nb-icon icon="trash-2-outline" ></nb-icon>
-      </button>
-      <button nbButton  (click)="openDialogAtualizar(element)"size="small" status="info"  style="padding:5px; margin-right: 3px;"  outline>
-        <nb-icon icon="edit-2-outline" ></nb-icon>
-      </button>
-    </td>
-  </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

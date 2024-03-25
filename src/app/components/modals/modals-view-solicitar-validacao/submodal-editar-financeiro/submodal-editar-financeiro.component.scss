@@ -113,10 +113,13 @@ mat-dialog-actions {
   margin-top: 1rem;
 
   // Estilize os botões
-  button {
-    margin-right: 1px;
-  }
+
 }
 .flex{
   display: flex;
+}
+.aviso-pequeno {
+  font-size: 12px;
+  margin-top: 4px;
+  color: #999; /* Cor do texto do aviso */
 }

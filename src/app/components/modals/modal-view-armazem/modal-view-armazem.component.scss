@@ -1,87 +1,124 @@
 .mat-dialog-container {
-  max-width: 800px; /* Ajuste o valor conforme necessário */
+  background-color: #fff; // Cor de fundo
+  padding: 20px; // Espaçamento interno
+
+  .mat-dialog-content {
+    font-size: 1em; // Tamanho do conteúdo
+    margin-bottom: 20px; // Espaçamento inferior do conteúdo
+  }
+
 }
 
-.modalarmazem {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%; /* Garante que a classe modalarmazem ocupe 100% da largura */
+input[type="number"],
+input[type="text"] {
+  width: 99%;
+  padding: 5px;
+  border: 1px solid #a59e9e;
+  border-radius: 8px;
+  margin-top: 1px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  color: #a59e9e;
 }
 
-.col-sm-12 {
-  flex: 0 calc(100%);
-  margin-bottom: 3rem;
+nb-select {
+  width: 99% !important;
+  padding: 2px;
+  border: 1px solid #a59e9e;
+  border-radius: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  color: #a59e9e;
 }
 
-.col-sm-6 {
-  flex: 0 0 calc(50% - 15px); /* Isso cria duas colunas com margem entre elas */
-  margin-bottom: 15px; /* Adicione margem inferior entre as linhas */
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  margin-left: 4px;
+  margin-right: 185px;
+  font-weight: bold;
+  color: #676060;
 }
 
-.input-nome-armazem,
-.input-valor-armazenado,
-.input-endereco,
-.nb-select-motorista {
-  width: 100%; /* Garante largura total para os campos de entrada e select */
+@media (max-width: 768px) {
+  .labelcte {
+    flex-direction: row;
+  }
 }
 
-.mat-table {
-  width: 100%;
-}
+@media (min-width: 768px) {
+  .labelcte {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1px;
+    /* Ajuste para espaçamento */
+    align-items: center;
+  }
 
-.mat-row,
-.mat-header-row {
-  display: flex;
-  width: 100%;
-}
+  .form-group-cte {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-.mat-cell,
-.mat-header-cell {
-  flex: 1;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-
-img{
-  margin-top: 1rem;
-  margin-left: 24rem;
-  margin-bottom: 1rem;
+  .form-group-cte>input,
+  .form-group-cte>nb-select {
+    flex-basis: 32.45%;
+    /* Ajuste conforme necessário para larguras dos rótulos */
+  }
 }
 
 table {
-  width: 100%;
+  margin-top: 3rem;
 }
 
-tr.example-detail-row {
-  height: 0;
+.custom-textarea {
+  resize: none; // Impede a redimensionamento
+  max-width: 100%; // Largura máxima
+  max-height: 150px; // Altura máxima (ajuste conforme necessário)
+
+  // Estilos adicionais, se necessário
+  border: 1px solid #a59e9e;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  color: #666363;
 }
 
-tr.example-element-row:not(.example-expanded-row):hover {
-  background: whitesmoke;
+h1 {
+  font-size: 1.5em; // Tamanho do título
+  margin-bottom: 10px; // Espaçamento inferior do título
+  margin-left: 10rem;
 }
 
-tr.example-element-row:not(.example-expanded-row):active {
-  background: #efefef;
+// Estilos da imagem
+img {
+  margin-bottom: 1rem;
+  margin-left: 19rem;
+  margin-top: 2rem;
 }
 
-.example-element-row td {
-  border-bottom-width: 0;
+
+nb-chat {
+  width: 700px;
+  height: 100%;
+  margin-top: 1rem;
+
 }
 
+// Adicione esta parte para centralizar os botões
+mat-dialog-actions {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 
+  // Adicione margem superior para separação
+  margin-top: 1rem;
 
-.example-element-symbol {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: normal;
-}
-
-.example-element-description {
-  padding: 16px;
-}
-
-.example-element-description-attribution {
-  opacity: 0.5;
+  // Estilize os botões
+  button {
+    width: 100%;
+    margin-right: 1px;
+  }
 }

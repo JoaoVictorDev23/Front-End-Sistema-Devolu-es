@@ -9,61 +9,71 @@
     <!--  Numero NFD Column -->
     <ng-container matColumnDef="numeronfd">
       <th mat-header-cell *matHeaderCellDef> Número NFd </th>
-      <td mat-cell *matCellDef="let element"> {{element.numeroNfd}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.numeroNfd}} </td>
     </ng-container>
 
     <!-- Filial Column -->
     <ng-container matColumnDef="filial">
       <th mat-header-cell *matHeaderCellDef> Filial </th>
-      <td mat-cell *matCellDef="let element"> {{element.filial}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.filial}} </td>
     </ng-container>
 
     <!-- Serie Column -->
     <ng-container matColumnDef="serie">
       <th mat-header-cell *matHeaderCellDef> Serie </th>
-      <td mat-cell *matCellDef="let element"> {{element.serie}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.serie}} </td>
     </ng-container>
 
     <!-- Cte Column -->
     <ng-container matColumnDef="cte">
       <th mat-header-cell *matHeaderCellDef> CTE </th>
-      <td mat-cell *matCellDef="let element"> {{element.cte}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.cte}} </td>
     </ng-container>
 
 
     <!-- Situ Column -->
     <ng-container matColumnDef="situacao">
-      <th mat-header-cell *matHeaderCellDef> Situação </th>
-      <td mat-cell *matCellDef="let element"> {{element.situacao}} </td>
+      <th mat-header-cell *matHeaderCellDef> Situação dos Dados</th>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.situacao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="situacaovalores">
+      <th mat-header-cell *matHeaderCellDef> Situação do Financeiro </th>
+      <td mat-cell *matCellDef="let element"> {{element.valoresDTO.situacaoValores}} </td>
     </ng-container>
 
     <!-- ValorVenda Column -->
     <ng-container matColumnDef="valorVenda">
       <th mat-header-cell *matHeaderCellDef> Valor de Venda </th>
-      <td mat-cell *matCellDef="let element"> {{element.valorVenda}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.valoresDTO.valorVenda}} </td>
     </ng-container>
 
     <!-- ValorPrejuizo Column -->
     <ng-container matColumnDef="valorPrejuizo">
       <th mat-header-cell *matHeaderCellDef> Valor de Prejuizo </th>
-      <td mat-cell *matCellDef="let element"> {{element.valorPrejuizo}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.valoresDTO.valorPrejuizo}} </td>
     </ng-container>
 
     <!-- ValorValorArmazem Column -->
     <ng-container matColumnDef="valorArmazem">
       <th mat-header-cell *matHeaderCellDef> Valor em Armazém </th>
-      <td mat-cell *matCellDef="let element"> {{element.valorArmazem}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.valoresDTO.valorArmazem}} </td>
+    </ng-container>
+    <!-- ValorValorArmazem Column -->
+    <ng-container matColumnDef="cadastradopor">
+      <th mat-header-cell *matHeaderCellDef> Valor em Armazém </th>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.cadastradoPor}} </td>
     </ng-container>
 
-  <!-- Ações Column -->
-  <ng-container matColumnDef="acoes">
-    <th mat-header-cell *matHeaderCellDef> Ações </th>
-    <td mat-cell *matCellDef="let element">
-      <button nbButton (click)="openDialog(element)" size="small" status="warning"  style="padding:3px;"  outline>
-        <nb-icon icon="eye-outline" ></nb-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Ações Column -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <button nbButton (click)="openDialog(element)" size="small" status="warning" style="padding:3px;" outline>
+          <nb-icon icon="eye-outline"></nb-icon>
+        </button>
+      </td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

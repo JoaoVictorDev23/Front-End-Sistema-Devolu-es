@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
 import { ModalViewDevolucaoCorrecaoGestorComponent } from '../../modals/modal-view-devolucao-correcao-gestor/modal-view-devolucao-correcao-gestor.component';
+import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
 
 
 @Component({
@@ -27,21 +28,16 @@ export class AprovacaoComponent implements AfterViewInit {
 
   }
 
-displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','valorVenda','valorPrejuizo','valorArmazem', 'acoes'];
+  displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','situacaovalores','valorVenda','valorPrejuizo','valorArmazem','cadastradopor','acoes'];
 dataSource = new MatTableDataSource();
 
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
-constructor(public dialog: MatDialog) {
-
-  this.notasFiscais = [
-  ];
-
-
-  // Inicialize o dataSource.data com a lista de notas fiscais
-  this.dataSource.data = this.notasFiscais.filter(notaFiscal => notaFiscal.dadosNfdDTO.situacao === 'Pendente' || notaFiscal.valoresDTO.situacaoValores === 'Pendente');}
+constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService) {
+  this.getAllNotasFiscaisByAll(); // Chama o método para obter as notas fiscais
+}
 
 aprovar(notaFiscal: NotaFiscal) {
   const dialogRef = this.dialog.open(ModalViewDevolucaoCorrecaoGestorComponent, {data:{notaFiscal: notaFiscal}});
@@ -49,5 +45,16 @@ aprovar(notaFiscal: NotaFiscal) {
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);
   });
+}
+getAllNotasFiscaisByAll() {
+  this.nfdserviceService.getAllNotasFiscais().subscribe(
+    (data: NotaFiscal[]) => {
+      this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores === 'Pendente' || nota.dadosNfdDTO.situacao ==='Pendente');
+      this.dataSource.data = this.notasFiscais;
+    },
+    (error) => {
+      console.log('Erro ao obter notas fiscais:', error);
+    }
+  );
 }
 }

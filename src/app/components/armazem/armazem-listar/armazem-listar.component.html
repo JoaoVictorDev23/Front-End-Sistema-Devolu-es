@@ -8,27 +8,20 @@
     <!--  Numero NFD Column -->
     <ng-container matColumnDef="armazem">
       <th mat-header-cell *matHeaderCellDef> Armazém </th>
-      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.armazemNome}} </td>
     </ng-container>
 
     <!-- Filial Column -->
     <ng-container matColumnDef="filial">
       <th mat-header-cell *matHeaderCellDef> Filial </th>
-      <td mat-cell *matCellDef="let element"> {{element.filial}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.armazemFilial}} </td>
     </ng-container>
 
     <!-- Filial Column -->
     <ng-container matColumnDef="endereco">
       <th mat-header-cell *matHeaderCellDef> Endereço </th>
-      <td mat-cell *matCellDef="let element"> {{element.endereco}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.armazemEndereco}} </td>
     </ng-container>
-
-      <!-- Filial Column -->
-      <ng-container matColumnDef="valorarmazenado">
-        <th mat-header-cell *matHeaderCellDef> Valor Armazenado </th>
-        <td mat-cell *matCellDef="let element"> {{element.valorarmazenado}} </td>
-      </ng-container>
-
 
 
   <!-- Ações Column -->

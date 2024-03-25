@@ -1,6 +1,6 @@
 
 <nb-card size="large">
-  <nb-card-header  style="margin: auto;">Cadastro de Armazém</nb-card-header>
+  <nb-card-header  style="margin: auto;"><img src="/assets/img/armazem.png" alt=""></nb-card-header>
   <nb-card-body>
 
     <form #nameForm="ngForm" class="step-container">
@@ -22,7 +22,7 @@
           </div>
 
           <div>
-            <button nbButton fullWidth (click)="create()" status="success">Cadastrar</button>
+            <button nbButton fullWidth shape="semi-round" (click)="create()" [disabled]="!nameForm.valid" status="success">Cadastrar</button>
           </div>
 
         </div>

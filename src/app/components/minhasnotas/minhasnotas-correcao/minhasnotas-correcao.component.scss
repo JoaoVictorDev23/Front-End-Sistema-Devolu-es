@@ -1,3 +1,6 @@
+.mat-mdc-paginator-page-size-label {
+  display: none!important;
+}
 table {
   width: 100%;
   margin-top: -2rem;
@@ -25,8 +28,7 @@ button{
   box-shadow: none; /* Remove qualquer sombra */
 
   /* Ajusta o espaçamento e a cor do ícone */
-  margin: 0;
-  padding: 0;
+
   color: #464646;
 
   /* ajuste de ponteiro*/
@@ -55,7 +57,7 @@ color: red;
 
 }
 .view{
-color: #464646;
+  color: #a99f9f;
 }
 
 mat-radio-button {

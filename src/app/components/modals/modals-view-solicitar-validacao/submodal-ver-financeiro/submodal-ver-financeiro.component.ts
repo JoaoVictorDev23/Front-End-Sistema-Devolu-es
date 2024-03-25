@@ -3,7 +3,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { ProdutosDialogComponent } from 'src/app/components/devolucoes/devolucoes-cadastrar/produtos-dialog/produtos-dialog.component';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
+import { Pessoa } from 'src/app/interface/pessoa-interface';
 import { Produto } from 'src/app/interface/produtos.interface';
+import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
 
 @Component({
   selector: 'app-submodal-ver-financeiro',
@@ -14,12 +16,14 @@ export class SubmodalVerFinanceiroComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = this.data.notaFiscal.produtosDTO;
 
-  debitarValorMotorista = true;
-  debitarValorCliente = false;
+  pessoa: Pessoa | undefined; // Declare a propriedade cliente aqui
+
 
 
   constructor(private dialogRef: MatDialogRef<SubmodalVerFinanceiroComponent>,
     private toastrService: NbToastrService,private dialogService: NbDialogService,
+    private NfdService: NfdserviceService, // Injete o serviço ClienteService
+
     @Inject(MAT_DIALOG_DATA) public data: { notaFiscal: NotaFiscal } ) {
 
      }
@@ -33,13 +37,13 @@ calcularValoresTotais() {
   this.data.notaFiscal.produtosDTO.forEach((produto: Produto) => {
     switch (produto.situacaoProduto) {
       case 'Em armazem':
-        valorArmazem += produto.produtoQuantidade * produto.produtoValor;
+        valorArmazem +=produto.produtoQuantidade * produto.produtoValor;
         break;
       case 'Venda':
-        valorVenda += produto.produtoQuantidade * produto.produtoValor;
+        valorVenda +=produto.produtoQuantidade * produto.produtoValor;
         break;
       case 'Prejuizo':
-        valorPrejuizo += produto.produtoQuantidade * produto.produtoValor;
+        valorPrejuizo +=produto.produtoQuantidade * produto.produtoValor;
         break;
       default:
         break;
@@ -73,7 +77,7 @@ openDialog(): void {
     if (produto) {
       this.data.notaFiscal.produtosDTO.push({
         'produtoNome': produto.produtoNome,
-        'produtoQuantidade': produto.produtoQuantidade,
+        'produtoQuantidade':produto.produtoQuantidade,
         'produtoValor': produto.produtoValor,
         'situacaoProduto': produto.situacaoProduto,
         'armazemId': produto.armazemId,
@@ -84,6 +88,19 @@ openDialog(): void {
       this.dataSource = [...this.data.notaFiscal.produtosDTO];
     }
   });
+}
+loadPessoa() {
+  const PessoaId = this.data.notaFiscal.valoresDTO.pessoa; // Obtenha o ID do Pessoa da nota fiscal
+  if (PessoaId) {
+    this.NfdService.findByPessoa(PessoaId).subscribe(
+      (Pessoa: Pessoa) => {
+        this.pessoa = Pessoa; // Armazene os dados do Pessoa na variável local
+      },
+      (error) => {
+        console.error('Erro ao carregar dados do Pessoa:', error);
+      }
+    );
+  }
 }
 
 }
