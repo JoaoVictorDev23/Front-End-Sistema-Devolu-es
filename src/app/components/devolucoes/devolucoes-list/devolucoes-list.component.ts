@@ -9,6 +9,7 @@ import { ModalDevolucoesViewComponent } from '../../modals/modal-view-devolucoes
 import { ModalViewDevolucaoExcluirComponent } from '../../modals/modal-view-devolucao-excluir/modal-view-devolucao-excluir.component';
 import { ModalDevolucaoEditComponent } from '../../modals/modal-devolucao-edit/modal-devolucao-edit.component';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-devolucoes-list',
@@ -23,7 +24,7 @@ export class DevolucoesListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService) {
+  constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService,private router: Router) {
     this.getAllNotasFiscais(); // Chama o método para obter as notas fiscais
   }
 
@@ -44,6 +45,9 @@ export class DevolucoesListComponent implements AfterViewInit {
         this.dataSource.data = this.notasFiscais; // Atualiza os dados do dataSource
       },
       (error) => {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([this.router.url]);
+        });
         console.log('Erro ao obter notas fiscais:', error);
       }
     );

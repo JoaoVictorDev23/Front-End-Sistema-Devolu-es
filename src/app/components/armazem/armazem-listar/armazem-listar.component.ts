@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ModalViewArmazemComponent } from '../../modals/modal-view-armazem/modal-view-armazem.component';
 import { Armazem } from 'src/app/interface/armazem-interface'; // Importe a interface Armazem
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-armazem-listar',
@@ -31,7 +32,7 @@ export class ArmazemListarComponent implements AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor(public dialog: MatDialog,private armazemService:ArmazemCadastrarService) {
+  constructor(public dialog: MatDialog,private armazemService:ArmazemCadastrarService,private router:Router) {
     // Popule a lista de armazéns conforme necessário
     this.getAllarmazem();
     // Inicialize o dataSource.data com a lista de armazéns
@@ -56,6 +57,9 @@ export class ArmazemListarComponent implements AfterViewInit {
         this.dataSource.data = this.armazens; // Atualiza os dados do dataSource
       },
       (error) => {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([this.router.url]);
+        });
         console.log('Erro ao obter Armazens!', error);
       }
     );

@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
 import { Usuario } from 'src/app/interface/usuario-interface';
 import { ServiceUsuarioService } from 'src/app/services/usuario/service-usuario.service';
+import { AuthService } from 'src/app/services/authservice.service';
 
 
 @Component({
@@ -51,11 +52,18 @@ export class SidenavComponent {
          icon: 'message-circle-outline',
          link: '/motivo/cadastrar'
        },
+       {
+        title:'Cadastro de Cliente',
+        icon:'car-outline',
+        link:'/cliente/cadastrar'
+
+       },
       ],
     },
     {
       title: 'Painel de Gestor',
       icon: 'file-text-outline',
+      hidden: !this.authService.hasPermission(['0','2']),
       children: [
         {
           title: 'NFs Validadas',
@@ -126,7 +134,7 @@ export class SidenavComponent {
   ];
 
   constructor(private nbMenuService: NbMenuService,    private toastrService: NbToastrService, // Adicione NbToastrService aqui
-              private userService: ServiceUsuarioService
+              private userService: ServiceUsuarioService,private authService:AuthService
   ) {
   }
   ngOnInit() {

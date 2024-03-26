@@ -8,6 +8,7 @@ import { NotaFiscal } from 'src/app/interface/nfd-interface';
 import { ModalViewDevolucaoExcluirComponent } from '../modals/modal-view-devolucao-excluir/modal-view-devolucao-excluir.component';
 import { ModalDevolucaoEditComponent } from '../modals/modal-devolucao-edit/modal-devolucao-edit.component';
 import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-minhasnotas',
@@ -37,7 +38,7 @@ applyFilter(event: Event) {
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
 
-constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService) {
+constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService, private router:Router) {
   this.getAllNotasFiscais();
 }
 
@@ -70,6 +71,9 @@ getAllNotasFiscais() {
       this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores !== 'Pendente' && nota.dadosNfdDTO.situacao !=='Pendente');
     },
     (error) => {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate([this.router.url]);
+      });
       console.log('Erro ao obter notas fiscais:', error);
     }
   );

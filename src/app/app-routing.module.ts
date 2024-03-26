@@ -20,6 +20,7 @@ import { FinancaSolicitarComponent } from './components/financas/financa-solicit
 import { UsuarioCadastrarComponent } from './components/usuarios/usuario-cadastrar/usuario-cadastrar.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
+import { ClienteCadastrarComponent } from './components/cliente/cliente-cadastrar/cliente-cadastrar.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,8 @@ const routes: Routes = [
       {path:'motivo/cadastrar', component:MotivoCadastrarComponent},
 
       {path:'pessoa', component: PessoaCadastrarComponent},
+
+      {path:'cliente/cadastrar',component:ClienteCadastrarComponent},
 
       {path:'armazem/cadastrar', component:ArmazemCadastrarComponent},
       {path:'armazem/listar', component:ArmazemListarComponent},

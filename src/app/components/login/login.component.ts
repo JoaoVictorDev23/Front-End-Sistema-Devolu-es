@@ -62,7 +62,13 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
-        this.toastr.danger('Falha ao fazer login. Verifique suas credenciais.', 'Erro no login');
+        if (error.status === 400) {
+          this.toastr.warning('Credenciais inválidas. Verifique seu email e senha.', 'Erro no login');
+        } else if (error.status === 401) {
+          this.toastr.warning('Requisição inválida. Verifique os dados enviados.', 'Erro no login');
+        } else {
+          this.toastr.warning('Falha ao fazer login. Tente novamente mais tarde.', 'Erro no login');
+        }
         console.error('Erro ao fazer login:', error);
       }
     );

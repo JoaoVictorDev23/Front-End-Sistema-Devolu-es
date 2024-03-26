@@ -40,26 +40,9 @@
       <td mat-cell *matCellDef="let element"> {{element.valoresDTO.situacaoValores}} </td>
     </ng-container>
 
-    <!-- ValorVenda Column -->
-    <ng-container matColumnDef="valorVenda">
-      <th mat-header-cell *matHeaderCellDef> Valor de Venda </th>
-      <td mat-cell *matCellDef="let element"> {{element.valoresDTO.valorVenda}} </td>
-    </ng-container>
-
-    <!-- ValorPrejuizo Column -->
-    <ng-container matColumnDef="valorPrejuizo">
-      <th mat-header-cell *matHeaderCellDef> Valor de Prejuizo </th>
-      <td mat-cell *matCellDef="let element"> {{element.valoresDTO.valorPrejuizo}} </td>
-    </ng-container>
-
-    <!-- ValorValorArmazem Column -->
-    <ng-container matColumnDef="valorArmazem">
-      <th mat-header-cell *matHeaderCellDef> Valor em Armazém </th>
-      <td mat-cell *matCellDef="let element"> {{element.valoresDTO.valorArmazem}} </td>
-    </ng-container>
     <!-- ValorValorArmazem Column -->
     <ng-container matColumnDef="cadastradopor">
-      <th mat-header-cell *matHeaderCellDef> Valor em Armazém </th>
+      <th mat-header-cell *matHeaderCellDef> Cadastrado Por </th>
       <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.cadastradoPor}} </td>
     </ng-container>
     <!-- Ações Column -->

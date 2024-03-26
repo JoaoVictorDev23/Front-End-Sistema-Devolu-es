@@ -78,6 +78,7 @@ import { SubmodalEditarNfdComponent } from './components/modals/modals-view-soli
 import { UsuarioCadastrarComponent } from './components/usuarios/usuario-cadastrar/usuario-cadastrar.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ClienteCadastrarComponent } from './components/cliente/cliente-cadastrar/cliente-cadastrar.component';
 
 
 @NgModule({
@@ -117,6 +118,7 @@ import { HttpClientModule } from '@angular/common/http';
     SubmodalEditarNfdComponent,
     UsuarioCadastrarComponent,
     LoginComponent,
+    ClienteCadastrarComponent,
 
 
 

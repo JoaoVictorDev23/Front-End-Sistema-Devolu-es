@@ -28,7 +28,7 @@ export class AprovacaoComponent implements AfterViewInit {
 
   }
 
-  displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','situacaovalores','valorVenda','valorPrejuizo','valorArmazem','cadastradopor','acoes'];
+  displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','situacaovalores','cadastradopor','acoes'];
 dataSource = new MatTableDataSource();
 
 applyFilter(event: Event) {
@@ -47,7 +47,7 @@ aprovar(notaFiscal: NotaFiscal) {
   });
 }
 getAllNotasFiscaisByAll() {
-  this.nfdserviceService.getAllNotasFiscais().subscribe(
+  this.nfdserviceService.getAllNotasFiscaisByAll().subscribe(
     (data: NotaFiscal[]) => {
       this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores === 'Pendente' || nota.dadosNfdDTO.situacao ==='Pendente');
       this.dataSource.data = this.notasFiscais;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
 import { Pessoa } from 'src/app/interface/pessoa-interface';
 import { Usuario } from 'src/app/interface/usuario-interface';
@@ -12,7 +13,7 @@ import { ServiceUsuarioService } from 'src/app/services/usuario/service-usuario.
 export class UsuarioCadastrarComponent {
 
   constructor(private usuarioService: ServiceUsuarioService,
-    private toastrService: NbToastrService){
+    private toastrService: NbToastrService,private router:Router){
 
   }
 
@@ -29,10 +30,13 @@ export class UsuarioCadastrarComponent {
     this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
       response =>{
         this.toastrService.success("Usuário cadastrado com sucesso!", "Sucesso");
+        this.router.navigate(['home']);
+
       },
       error =>{
         if(error.error && error.error.message){
           this.toastrService.warning(error.error.message, "Erro");
+
         }
         else{
           this.toastrService.warning('Erro ao Cadastrar Usuário.!', "Erro");

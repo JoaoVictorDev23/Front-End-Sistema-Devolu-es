@@ -39,7 +39,7 @@ export class CorrecaoComponent implements AfterViewInit{
 
   }
 
-  displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','situacaovalores','valorVenda','valorPrejuizo','valorArmazem','cadastradopor','acoes'];
+  displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','situacaovalores','cadastradopor','acoes'];
   dataSource = new MatTableDataSource();
 
 applyFilter(event: Event) {
