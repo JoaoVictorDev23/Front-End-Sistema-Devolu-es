@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -132,7 +133,7 @@ import { ClienteCadastrarComponent } from './components/cliente/cliente-cadastra
     NbLayoutModule, NbButtonModule, BrowserAnimationsModule,NbStepperModule,NbContextMenuModule ,NbWindowModule,
     NbThemeModule.forRoot({ name: 'default' }), NbEvaIconsModule, NbCardModule,MatDialogModule,NbUserModule,
     FormsModule,MatInputModule,NbInputModule,NbSelectModule,CommonModule,MatFormFieldModule,NbAutocompleteModule,
-    HttpClientModule,CommonModule,NbAlertModule,NbCheckboxModule,NbFormFieldModule
+    HttpClientModule,CommonModule,NbAlertModule,NbCheckboxModule,NbFormFieldModule,MatProgressSpinnerModule
 
 
 

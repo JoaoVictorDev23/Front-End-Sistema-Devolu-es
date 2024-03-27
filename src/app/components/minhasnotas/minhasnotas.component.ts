@@ -9,6 +9,7 @@ import { ModalViewDevolucaoExcluirComponent } from '../modals/modal-view-devoluc
 import { ModalDevolucaoEditComponent } from '../modals/modal-devolucao-edit/modal-devolucao-edit.component';
 import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
 import { Router } from '@angular/router';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-minhasnotas',
@@ -17,6 +18,7 @@ import { Router } from '@angular/router';
 })
 export class MinhasnotasComponent implements AfterViewInit {
   notasFiscais: NotaFiscal[] = []; // Adicione esta propriedade
+  loading: boolean = true; // Variável para controlar o estado de carregamento
 
 
 
@@ -31,52 +33,78 @@ export class MinhasnotasComponent implements AfterViewInit {
   }
 
   displayedColumns: string[] = ['numeronfd', 'filial', 'serie', 'cte', 'situacaonfd', 'situacaofinanceiro', 'acoes'];
-dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource();
 
-applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-}
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
 
-constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService, private router:Router) {
-  this.getAllNotasFiscais();
-}
+    this.dataSource.filter = filterValue;
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      const notaFiscal = data as NotaFiscal;
+      return (
+        notaFiscal.valoresDTO.cadastradopor.toLowerCase().includes(filter) ||
+        notaFiscal.dadosNfdDTO.numeroNfd.toLowerCase().includes(filter)
+      );
+    };
+  }
 
-openDialog(notaFiscal: NotaFiscal) {
-  const dialogRef = this.dialog.open(ModalDevolucoesViewComponent, {data:{notaFiscal: notaFiscal}});
+  constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService, private router: Router, private toastrService: NbToastrService) {
+    this.getAllNotasFiscais();
+  }
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  });
-}
-openDialogExcluir(notaFiscal: NotaFiscal) {
-  const dialogRef = this.dialog.open(ModalViewDevolucaoExcluirComponent, {data:{notaFiscal: notaFiscal}});
+  openDialog(notaFiscal: NotaFiscal) {
+    const dialogRef = this.dialog.open(ModalDevolucoesViewComponent, { data: { notaFiscal: notaFiscal } });
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  });
-}
-openDialogAtualizar(notaFiscal: NotaFiscal) {
-  const dialogRef = this.dialog.open(ModalDevolucaoEditComponent, {data:{notaFiscal: notaFiscal}});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  openDialogExcluir(notaFiscal: NotaFiscal) {
+    const dialogRef = this.dialog.open(ModalViewDevolucaoExcluirComponent, { data: { notaFiscal: notaFiscal } });
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  });
-}
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  openDialogAtualizar(notaFiscal: NotaFiscal) {
+    const dialogRef = this.dialog.open(ModalDevolucaoEditComponent, { data: { notaFiscal: notaFiscal } });
 
-getAllNotasFiscais() {
-  this.nfdserviceService.getAllNotasFiscais().subscribe(
-    (data: NotaFiscal[]) => {
-      this.notasFiscais = data;
-      this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores !== 'Pendente' && nota.dadosNfdDTO.situacao !=='Pendente');
-    },
-    (error) => {
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate([this.router.url]);
-      });
-      console.log('Erro ao obter notas fiscais:', error);
-    }
-  );
-}
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  getAllNotasFiscais() {
+    this.nfdserviceService.getAllNotasFiscais().subscribe(
+      (data: NotaFiscal[] | null) => {
+        try {
+          if (data) {
+            this.notasFiscais = data.filter(
+              nota =>
+                nota.valoresDTO.situacaoValores !== 'Pendente' &&
+                nota.dadosNfdDTO.situacao !== 'Pendente'
+            );
+            this.dataSource.data = this.notasFiscais;
+          } else {
+            throw new Error('Array de notas fiscais é nulo.');
+          }
+        } catch (error) {
+          console.log('Erro ao filtrar notas fiscais:', error);
+          this.toastrService.danger('Erro ao filtrar notas fiscais.', 'Erro');
+        } finally {
+          this.loading = false; // Finaliza o estado de carregamento após tentar obter e filtrar os dados
+        }
+      },
+      (error) => {
+        console.log('Erro ao obter notas fiscais:', error);
+        this.toastrService.danger('Erro ao obter notas fiscais.', 'Erro');
+        this.loading = false; // Finaliza o estado de carregamento em caso de erro
+      }
+    );
+  }
+
+
+
+
 
 }

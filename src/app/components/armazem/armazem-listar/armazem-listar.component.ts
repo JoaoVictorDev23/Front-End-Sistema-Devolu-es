@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class ArmazemListarComponent implements AfterViewInit {
   armazens: Armazem[] = []; // Adicione esta propriedade
+  loading: boolean = true; // Variável para controlar o estado de carregamento
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -55,10 +56,14 @@ export class ArmazemListarComponent implements AfterViewInit {
       (data: Armazem[]) => {
         this.armazens = data;
         this.dataSource.data = this.armazens; // Atualiza os dados do dataSource
+        this.loading = false; // Finaliza o estado de carregamento após obter os dados
+
       },
       (error) => {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate([this.router.url]);
+          this.loading = false; // Finaliza o estado de carregamento após obter os dados
+
         });
         console.log('Erro ao obter Armazens!', error);
       }

@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ModalDevolucoesViewComponent } from '../../modals/modal-view-devolucoes/modal-devolucoes-view/modal-devolucoes-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalViewDevolucaoCorrecaoComponent } from '../../modals/modal-view-devolucao-correcao/modal-view-devolucao-correcao.component';
@@ -22,7 +22,8 @@ import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
   templateUrl: './correcao.component.html',
   styleUrls: ['./correcao.component.scss']
 })
-export class CorrecaoComponent implements AfterViewInit{
+export class CorrecaoComponent implements AfterViewInit {
+  loading: boolean = true; // Variável para controlar o estado de carregamento
 
   notasFiscais: NotaFiscal[] = []; // Adicione esta propriedade
 
@@ -39,38 +40,51 @@ export class CorrecaoComponent implements AfterViewInit{
 
   }
 
-  displayedColumns: string[] = ['numeronfd', 'filial','serie','cte', 'situacao','situacaovalores','cadastradopor','acoes'];
+  displayedColumns: string[] = ['numeronfd', 'filial', 'serie', 'cte', 'situacao', 'situacaovalores', 'cadastradopor', 'acoes'];
   dataSource = new MatTableDataSource();
 
-applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-}
-constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService) {
-  this.getAllNotasFiscaisByAll(); // Chama o método para obter as notas fiscais
-}
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
 
-getAllNotasFiscaisByAll() {
-  this.nfdserviceService.getAllNotasFiscaisByAll().subscribe(
-    (data: NotaFiscal[]) => {
-      this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores !== 'Pendente' && nota.dadosNfdDTO.situacao !=='Pendente');
-      this.dataSource.data = this.notasFiscais;
-    },
-    (error) => {
-      console.log('Erro ao obter notas fiscais:', error);
-    }
-  );
-}
+    this.dataSource.filter = filterValue;
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      const notaFiscal = data as NotaFiscal;
+      return (
+        notaFiscal.valoresDTO.cadastradopor.toLowerCase().includes(filter) ||
+        notaFiscal.dadosNfdDTO.numeroNfd.toLowerCase().includes(filter)
+      );
+    };
+  }
 
 
+  constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService) {
+    this.getAllNotasFiscaisByAll(); // Chama o método para obter as notas fiscais
+  }
+  getAllNotasFiscaisByAll() {
+    this.loading = true; // Inicia o estado de carregamento
 
-openDialog(notaFiscal: NotaFiscal) {
-  const dialogRef = this.dialog.open(ModalViewDevolucaoCorrecaoGestorComponent, {data:{notaFiscal: notaFiscal}});
+    this.nfdserviceService.getAllNotasFiscaisByAll().subscribe(
+      (data: NotaFiscal[]) => {
+        this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores !== 'Pendente' || nota.dadosNfdDTO.situacao !== 'Pendente');
+        this.dataSource.data = this.notasFiscais;
+        this.loading = false; // Finaliza o estado de carregamento após obter os dados
+      },
+      (error) => {
+        console.log('Erro ao obter notas fiscais:', error);
+        this.loading = false; // Finaliza o estado de carregamento em caso de erro
+      }
+    );
+  }
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  });
-}
+
+
+  openDialog(notaFiscal: NotaFiscal) {
+    const dialogRef = this.dialog.open(ModalViewDevolucaoCorrecaoGestorComponent, { data: { notaFiscal: notaFiscal } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
 }
 
