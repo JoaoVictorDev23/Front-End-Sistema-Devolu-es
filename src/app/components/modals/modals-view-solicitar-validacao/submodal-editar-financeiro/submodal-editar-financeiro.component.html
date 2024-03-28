@@ -109,7 +109,7 @@
     <nb-option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</nb-option>
   </nb-select>
     <input type="number" nbInput fullWidth placeholder="Digite o valor" id="cliente-debitado"
-      name="cliente-debitado" [(ngModel)]="cliente.debitado"   required>
+      name="cliente-debitado" [(ngModel)]="data.notaFiscal.valoresDTO.debitadoCliente"   required>
   </div>
 
 
@@ -127,7 +127,7 @@
   <nb-option *ngFor="let motorista of motoristas" [value]="motorista.id">{{ motorista.nome }}</nb-option>
 </nb-select>
   <input type="number" nbInput fullWidth  placeholder="Digite o valor" id="motorista-debitado"
-    name="motorista-debitado" [(ngModel)]="motorista.debitado" required>
+    name="motorista-debitado" [(ngModel)]="data.notaFiscal.valoresDTO.debitadoMotorista" required>
 </div>
 
 

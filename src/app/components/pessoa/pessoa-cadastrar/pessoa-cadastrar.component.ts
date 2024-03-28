@@ -19,18 +19,14 @@ export class PessoaCadastrarComponent {
   motorista: Motorista = {
     nome: "",
     cpf: "",
-    email: "",
-    debitado: 0
-
+    email: ""
 
   }
 
   pessoa: Pessoa = {
     nome: "",
     cpf: "",
-    email: "",
-    debitado: 0
-
+    email: ""
 
 
   }
@@ -73,7 +69,6 @@ createMotorista(){
   this.motorista.nome = this.pessoa.nome;
   this.motorista.cpf = this.pessoa.cpf;
   this.motorista.email = this.pessoa.email;
-  this.motorista.debitado = this.motorista.debitado;
 
   this.motoristaService.cadastrarmotorista(this.motorista).subscribe(
     response =>{

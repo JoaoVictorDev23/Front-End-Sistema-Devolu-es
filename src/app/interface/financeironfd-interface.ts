@@ -14,6 +14,8 @@ export interface ValoresNotaFiscal {
   cliente: String;
   pessoa: string;
   numeronfd:String;
+  debitadoCliente:number;
+  debitadoMotorista:number;
   cadastradopor?:any;
   atualizadopor?:any;
 }

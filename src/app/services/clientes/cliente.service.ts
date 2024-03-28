@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClienteService {
-  private apiUrl = `${API_CONFIG.baseUrl}/cliente`; // Use a URL da API a partir da configuração
+  private apiUrl = `${API_CONFIG.baseUrl}/cliente/cadastrar`; // Use a URL da API a partir da configuração
 
   authToken: string | null;
 

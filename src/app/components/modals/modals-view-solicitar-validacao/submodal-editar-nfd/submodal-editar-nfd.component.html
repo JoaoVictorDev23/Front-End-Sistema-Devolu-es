@@ -37,6 +37,25 @@
     [(ngModel)]="data.notaFiscal.dadosNfdDTO.numeroNfd" disabled class="input-nfd">
 </div>
 
+<!-- Opções de Status-->
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="label">Status</label>
+  </div>
+</div>
+<div class="form-group3">
+  <nb-select fullWidth placeholder="Selecione um Status" [(ngModel)]="data.notaFiscal.dadosNfdDTO.status" required>
+    <nb-option value="Pendente">Pendente</nb-option>
+    <nb-option value="Processando">Processando</nb-option>
+    <nb-option value="Em espera">Em espera</nb-option>
+    <nb-option value="Finalizado">Finalizado</nb-option>
+    <nb-option value="Devolução">Devolução</nb-option>
+  </nb-select>
+</div>
+
+
+
 <!-- Observação -->
 
 <div class="col-sm-6">

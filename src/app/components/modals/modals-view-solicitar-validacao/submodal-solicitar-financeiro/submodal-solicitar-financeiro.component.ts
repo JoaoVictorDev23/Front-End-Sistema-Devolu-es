@@ -23,13 +23,13 @@ export class SubmodalSolicitarFinanceiroComponent {
   compradores: Pessoa[] = [];
 
   clientes: Cliente[] = [];
-  cliente: Cliente = { id: undefined, cnpj: '', nome: '', debitado: 0 };
-  pessoa: Pessoa = { nome: '', cpf: '', email: '', debitado: 0 }; // Declare a propriedade cliente aqui
+  cliente: Cliente = { id: undefined, cnpj: '', nome: ''};
+  pessoa: Pessoa = { nome: '', cpf: '', email: ''}; // Declare a propriedade cliente aqui
 
   motivo: Motivo | undefined; // Declare a propriedade cliente aqui
 
   motoristas: Motorista[] = [];
-  motorista: Motorista = { nome: '', email: '', cpf: '', debitado: 0 } // Declare a propriedade cliente aqui
+  motorista: Motorista = { nome: '', email: '', cpf: ''} // Declare a propriedade cliente aqui
 
   ngOnInit() {
     this.getCompradores();
@@ -150,8 +150,6 @@ export class SubmodalSolicitarFinanceiroComponent {
       () => {
         // Sucesso na atualização
         this.toastrService.success('Alteração realizada com sucesso!', 'Sucesso');
-        this.updateDebitadoCliente();
-        this.updateDebitadoMotorista();
         this.dialogRef.close();
       },
       (error) => {
@@ -162,46 +160,7 @@ export class SubmodalSolicitarFinanceiroComponent {
     );
   }
 
-  // Método para atualizar o débito do cliente
-  updateDebitadoCliente() {
-    if (this.cliente && this.cliente.id !== undefined && this.cliente.debitado !== undefined) {
-      // Atualize o débito do cliente chamando o serviço correspondente
-      this.NfdService.updateDebitadoCliente(this.cliente.id, this.cliente.debitado!).subscribe(
-        () => {
-          // Sucesso na atualização do débito do cliente
-          this.toastrService.success('Débito do cliente atualizado com sucesso!', 'Sucesso');
-          this.dialogRef.close();
-        },
-        (error) => {
-          // Erro na atualização do débito do cliente
-          this.toastrService.danger('Erro ao atualizar o débito do cliente.', 'Erro');
-          console.error('Erro ao atualizar o débito do cliente:', error);
-        }
-      );
-    } else {
-      console.error('Cliente não encontrado ou dados inválidos.');
-    }
-  }
-  // Método para atualizar o débito do Motorista
-  updateDebitadoMotorista() {
-    if (this.motorista && this.motorista.id !== undefined && this.motorista.debitado !== undefined) {
-      // Atualize o débito do Motorista chamando o serviço correspondente
-      this.NfdService.updateDebitadoMotorista(this.motorista.id, this.motorista.debitado!).subscribe(
-        () => {
-          // Sucesso na atualização do débito do Motorista
-          this.toastrService.success('Débito do Motorista atualizado com sucesso!', 'Sucesso');
-          this.dialogRef.close();
-        },
-        (error) => {
-          // Erro na atualização do débito do Motorista
-          this.toastrService.danger('Erro ao atualizar o débito do Motorista.', 'Erro');
-          console.error('Erro ao atualizar o débito do Motorista:', error);
-        }
-      );
-    } else {
-      console.error('Motorista não encontrado ou dados inválidos.');
-    }
-  }
+
 
   // Método para carregar os dados do cliente
   loadCliente() {

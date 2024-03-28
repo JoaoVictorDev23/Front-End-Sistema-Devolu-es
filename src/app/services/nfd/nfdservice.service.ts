@@ -95,12 +95,7 @@ export class NfdserviceService {
     console.log(valoresNFDDTO);
     return this.http.put(`${this.apiUrl}/valoresnfd/update/${valoresNFDDTO.id}`, valoresNFDDTO, { headers: this.getHeaders() });
   }
-  updateDebitadoCliente(id: number, debitado: number) {
-    return this.http.put(`${this.apiUrl}/cliente/${id}`, debitado, { headers: this.getHeaders() });
-  }
-  updateDebitadoMotorista(id: number, debitado: number) {
-    return this.http.put(`${this.apiUrl}/motorista/${id}`, debitado, { headers: this.getHeaders() });
-  }
+
   updateDados(DadosDto: DadosNotasFiscais) {
     return this.http.put(`${this.apiUrl}/nfd/dados/update/${DadosDto.dadosnfdId}`, DadosDto, { headers: this.getHeaders() });
   }

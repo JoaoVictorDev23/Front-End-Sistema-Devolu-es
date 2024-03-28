@@ -3,6 +3,4 @@ export interface Motorista {
   nome: string;
   email: string;
   cpf: string;
-  debitado: number;
-
 }

@@ -14,6 +14,8 @@ export interface DadosNotasFiscais{
       situacao: string;
       motivo: number;
 
+      status: String;
+
       cadastradopor?:any;
       atualizadopor?:any;
 }

@@ -34,6 +34,23 @@
   <input type="number" nbInput style="max-width: 49.5%; min-width: 40%;" id="numero-nfd" placeholder="" name="numero-nfd"
     [(ngModel)]="data.notaFiscal.dadosNfdDTO.numeroNfd" disabled class="input-nfd">
 </div>
+<!-- Opções de Status-->
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="label">Status</label>
+  </div>
+</div>
+<div class="form-group3">
+  <nb-select fullWidth placeholder="Selecione um Status" [(ngModel)]="data.notaFiscal.dadosNfdDTO.status" disabled required>
+    <nb-option value="Pendente">Pendente</nb-option>
+    <nb-option value="Processando">Processando</nb-option>
+    <nb-option value="Em espera">Em espera</nb-option>
+    <nb-option value="Finalizado">Finalizado</nb-option>
+    <nb-option value="Devolução">Devolução</nb-option>
+  </nb-select>
+</div>
+
 
 <!-- Observação -->
 
@@ -50,13 +67,13 @@
   <!--Cliente Nome-->
   <div class="flex">
     <label class="label" style="margin-bottom: 5px; margin-right: 19rem !important;" >Cliente</label>
-    <label class="label" style="margin-bottom: 5px;">Debitado do Cliente</label>
+    <label class="label" style="margin-bottom: 5px;">Debitado pelo Cliente</label>
   </div>
   <div class="flex">
     <input type="text" nbInput fullWidth placeholder="Digite o valor" id="cliente"
       name="cliente-debitado" [value]="cliente?.nome" disabled  required>
     <input type="number" nbInput fullWidth placeholder="Digite o valor" id="cliente-debitado"
-      name="cliente-debitado" [value]="cliente?.debitado" disabled required>
+      name="cliente-debitado" [value]="data.notaFiscal.valoresDTO.debitadoCliente" disabled required>
   </div>
 
 
@@ -72,7 +89,7 @@
   <input type="text" nbInput fullWidth disabled placeholder="Digite o valor" id="motorista-debitado"
     name="motorista-debitado" [value]="motorista?.nome" disabled required>
   <input type="number" nbInput fullWidth  placeholder="Digite o valor" id="motorista-debitado"
-    name="motorista-debitado" [value]="motorista?.debitado"disabled required>
+    name="motorista-debitado" [value]="data.notaFiscal.valoresDTO.debitadoMotorista"disabled required>
 </div>
 
 

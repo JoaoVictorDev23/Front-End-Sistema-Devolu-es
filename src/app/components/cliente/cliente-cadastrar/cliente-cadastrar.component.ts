@@ -19,7 +19,6 @@ export class ClienteCadastrarComponent {
   cliente: Cliente = {
     nome: "",
     cnpj: "",
-    debitado: 0
   }
   create(){
     this.clienteService.cadastrarcliente(this.cliente).subscribe(

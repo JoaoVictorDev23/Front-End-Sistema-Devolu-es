@@ -68,12 +68,28 @@
                   <label class="label">Motivo</label>
                 </div>
               </div>
-            <div class="form-group3">
-              <nb-select fullWidth placeholder="Selecione um Motorista" class="nb-select-motivo" id="motivo.nome"
-                name="motivo.id" [(ngModel)]="notaFiscal.dadosNfdDTO.motivo" required>
-                <nb-option *ngFor="let motivo of motivo" [value]="motivo.motivoId">{{ motivo.nomeMotivo }}</nb-option>
-              </nb-select>
-            </div>
+              <div class="form-group3">
+                <nb-select fullWidth placeholder="Selecione um Motivo" class="nb-select-motivo" id="motivo.nome"
+                  name="motivo.id" [(ngModel)]="notaFiscal.dadosNfdDTO.motivo" required>
+                  <nb-option *ngFor="let motivo of motivo" [value]="motivo.motivoId">{{ motivo.nomeMotivo }}</nb-option>
+                </nb-select>
+              </div>
+              <!-- Opções de Status-->
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="label">Status</label>
+                </div>
+              </div>
+              <div class="form-group3">
+                <nb-select fullWidth placeholder="Selecione um Status" [(ngModel)]="notaFiscal.dadosNfdDTO.status" required>
+                  <nb-option value="Pendente">Pendente</nb-option>
+                  <nb-option value="Processando">Processando</nb-option>
+                  <nb-option value="Em espera">Em espera</nb-option>
+                  <nb-option value="Finalizado">Finalizado</nb-option>
+                  <nb-option value="Devolução">Devolução</nb-option>
+                </nb-select>
+              </div>
 
 
               <!-- Observação -->
@@ -177,7 +193,7 @@
 
             <div class="form-group">
 
-              <nb-select  fullWidth placeholder="Selecione um Cliente" class="nb-select-motorista" name="cliente.id"
+              <nb-select fullWidth placeholder="Selecione um Cliente" class="nb-select-motorista" name="cliente.id"
                 [(ngModel)]="notaFiscal.valoresDTO.cliente" required>
                 <nb-option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</nb-option>
               </nb-select>
@@ -193,8 +209,8 @@
             </div>
 
             <div class="form-group3">
-              <nb-select required fullWidth placeholder="Selecione um Motorista" class="nb-select-motorista" id="motorista.nome"
-                name="motorista.id" [(ngModel)]="notaFiscal.valoresDTO.motorista" required>
+              <nb-select required fullWidth placeholder="Selecione um Motorista" class="nb-select-motorista"
+                id="motorista.nome" name="motorista.id" [(ngModel)]="notaFiscal.valoresDTO.motorista" required>
                 <nb-option *ngFor="let motorista of motoristas" [value]="motorista.id">{{ motorista.nome }}</nb-option>
               </nb-select>
             </div>
@@ -207,8 +223,8 @@
             </div>
 
             <div class="form-group">
-              <nb-select required fullWidth placeholder="Selecione um Comprador" id="comprador" class="nb-select-motorista"
-                name="comprador.id" [(ngModel)]="notaFiscal.valoresDTO.pessoa" required>
+              <nb-select required fullWidth placeholder="Selecione um Comprador" id="comprador"
+                class="nb-select-motorista" name="comprador.id" [(ngModel)]="notaFiscal.valoresDTO.pessoa" required>
                 <nb-option *ngFor="let comprador of compradores" [value]="comprador.id">{{ comprador.nome }}</nb-option>
               </nb-select>
 
@@ -232,8 +248,8 @@
             </div>
 
             <!-- botao de continuar-->
-            <button nbButton nbStepperNext (click)="adicionarNotaFiscal()" [disabled]="!movieForm.valid"
-              status="success" shape="semi-round"  class="button-step2">Cadastrar</button>
+            <button nbButton nbStepperNext (click)="adicionarNotaFiscal()" [disabled]="!nameForm.valid"
+              status="success" shape="semi-round" class="button-step2">Cadastrar</button>
 
           </div>
         </form>
@@ -246,9 +262,12 @@
           <h3 style="margin-left: 25vh; margin-bottom: 25vh;">Cadastro concluído!</h3>
 
           <div style="display: flex; justify-content: space-between; width: 100%;">
-            <button nbButton status="primary" (click)="stepper.reset()" style="margin-right: 10px;">Novo Cadastro</button>
-            <button nbButton status="info" outline (click)="navegarParaTelaInicial()" style="margin-right: 10px;">Tela Inicial</button>
-            <button nbButton status="success" (click)="navegarParaGerarFinancas()" style="margin-right: 10px;">Cadastrar Valores</button>
+            <button nbButton status="primary" (click)="stepper.reset()" style="margin-right: 10px;">Novo
+              Cadastro</button>
+            <button nbButton status="info" outline (click)="navegarParaTelaInicial()" style="margin-right: 10px;">Tela
+              Inicial</button>
+            <button nbButton status="success" (click)="navegarParaGerarFinancas()" style="margin-right: 10px;">Cadastrar
+              Valores</button>
           </div>
 
         </div>

@@ -35,16 +35,15 @@ export class MinhasnotasCorrecaoComponent implements AfterViewInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
 
     this.dataSource.filter = filterValue;
     this.dataSource.filterPredicate = (data: any, filter: string) => {
-      const notaFiscal = data as NotaFiscal;
+      const searchString = filter.toLowerCase();
+
       return (
-        notaFiscal.valoresDTO.cadastradopor.toLowerCase().includes(filter) ||
-        notaFiscal.dadosNfdDTO.numeroNfd.toLowerCase().includes(filter)
+        data.dadosNfdDTO.numeroNfd.toLowerCase().includes(searchString)
       );
     };
   }

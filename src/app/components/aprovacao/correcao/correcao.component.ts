@@ -48,13 +48,14 @@ export class CorrecaoComponent implements AfterViewInit {
 
     this.dataSource.filter = filterValue;
     this.dataSource.filterPredicate = (data: any, filter: string) => {
-      const notaFiscal = data as NotaFiscal;
+      const searchString = filter.toLowerCase();
+
       return (
-        notaFiscal.valoresDTO.cadastradopor.toLowerCase().includes(filter) ||
-        notaFiscal.dadosNfdDTO.numeroNfd.toLowerCase().includes(filter)
+        data.dadosNfdDTO.numeroNfd.toLowerCase().includes(searchString)
       );
     };
   }
+
 
 
   constructor(public dialog: MatDialog, private nfdserviceService: NfdserviceService) {

@@ -31,12 +31,6 @@ export class DevolucoesCadastrarComponent {
   armazens: Armazem[] = [];
   compradores: Pessoa[] = [];
 
-  motorista: Motorista={
-    nome:'',
-    cpf:'',
-    email:'',
-    debitado:0,
-  }
 
 
   notaFiscal: NotaFiscal = {
@@ -48,7 +42,9 @@ export class DevolucoesCadastrarComponent {
       numeroNfd: '',
       numeroNfo: '',
       observacao: '',
-      motivo: 0
+      motivo: 0,
+      status:''
+
     },
     valoresDTO: {
       valorVenda: 0,
@@ -59,6 +55,8 @@ export class DevolucoesCadastrarComponent {
       armazem:0 ,
       motorista: '0',
       cliente:'0' ,
+      debitadoCliente:0,
+      debitadoMotorista:0,
       numeronfd:''
     },
     produtosDTO:[
