@@ -24,6 +24,7 @@ export class ClienteCadastrarComponent {
     this.clienteService.cadastrarcliente(this.cliente).subscribe(
       response =>{
         this.toastrService.success("Comprador cadastrado com sucesso!", "Sucesso");
+        
       },
       error =>{
         if(error.error && error.error.message){

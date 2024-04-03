@@ -31,7 +31,7 @@ export class SidenavComponent {
           children: [
             { title: 'Visualizar NF-D', link: '/devolucoes/listar', icon: 'eye-outline'},
             { title: 'Cadastrar NF-D', link: '/devolucao/cadastrar',icon:'plus-circle-outline'},
-            { title: 'Gerar Validação',  link: '/gerarfinancas',      icon:'checkmark-square-outline'},
+            { title: 'Inserir Valores',  link: '/gerarfinancas',      icon:'checkmark-square-outline'},
           ]
         },
         {
@@ -130,6 +130,7 @@ export class SidenavComponent {
   items2 = [
     { title: 'Minhas NFs', link:'/minhasnotas' },
     { title: 'NFs Pendentes', link:'/minhasnotas-correcao' },
+    { title: 'Alterar Senha'},
     { title: 'Sair', link:'/login' },
   ];
 

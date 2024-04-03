@@ -9,25 +9,29 @@ import { map, startWith } from 'rxjs/operators';
 import { Produto } from 'src/app/interface/produtos.interface';
 import { NbToastrService } from '@nebular/theme';
 import { NotaFiscal } from 'src/app/interface/nfd-interface';
+import { Usuario } from 'src/app/interface/usuario-interface';
+import { ServiceUsuarioService } from 'src/app/services/usuario/service-usuario.service';
 
 
 
 export interface ChatMessage {
-  text: string;
+  message: string;
+  type: 'text',
+  nfdVinculada: String; // NFD vinculada
   date: Date;
   reply: boolean;
-  type: 'text' | 'file';
-  files?: {
-    url: string;
-    type: string;
-    icon: string;
-  }[];
+
+  sender: string; // Email do remetente
   user: {
     name: string;
-    avatar: string;
   };
 }
-
+export interface Mensagems {
+  message: string;
+  usuario: string;
+  nfdVinculada: String;
+  datahora: Date;
+}
 @Component({
   selector: 'app-modal-devolucao-edit',
   templateUrl: './modal-devolucao-edit.component.html',
@@ -44,7 +48,7 @@ export class ModalDevolucaoEditComponent  {
   dataSource = this.data.notaFiscal.produtosDTO;
 
   constructor(private dialogRef: MatDialogRef<ModalDevolucaoEditComponent>,
-    private toastrService: NbToastrService,
+    private toastrService: NbToastrService,private userService: ServiceUsuarioService,
     @Inject(MAT_DIALOG_DATA) public data: { notaFiscal: NotaFiscal } ) {
 
      }
@@ -71,25 +75,87 @@ export class ModalDevolucaoEditComponent  {
   }
   //Logica de envio de mensagem e Mecanismos do CHat
 
-
   messages: ChatMessage[] = [];
+  mensagemDTO: Mensagems = {
+    message:'',
+    usuario:'',
+    nfdVinculada:this.data.notaFiscal.dadosNfdDTO.numeroNfd,
+    datahora:new Date()
+  }
 
   sendMessage(event: any): void {
     if (event.message) {
-      this.messages.push({
-        text: event.message,
-        date: new Date(),
+      const newMessage: ChatMessage = {
+        message: event.message,
         type: 'text',
-        reply: false, // Add this line to fix the error
-        user: {
-          name: 'User', // Replace with actual user name
-          avatar: '', // Leave it empty for now
-        },
-      });
+        reply: true,
+        user: { name: this.usuario.email }, // Substitua pelo nome do usuário real
+        nfdVinculada: this.data.notaFiscal.dadosNfdDTO.numeroNfd , // Substitua pela NFD real vinculada
+        date: new Date(),
+        sender: this.usuario.email // Email do remetente
+
+      };
+      this.mensagemDTO.usuario = this.usuario.email;
+      this.mensagemDTO.message = event.message;
+      this.criarMensagem();
+      this.messages.push(newMessage);
+
     } else {
-      this.toastrService.danger('Please enter a message', 'Error');
+      this.toastrService.danger('Por favor, digite uma mensagem', 'Erro');
     }
   }
+  usuario: Usuario = {
+    name: '',
+    cpf: '',
+    email: '',
+    perfis: [0],
+    senha: ''
+  }
+  loadUser() {
+
+    this.userService.getUserByEmail().subscribe(
+      (user: Usuario) => {
+        this.usuario =  user; // Armazene os dados do Pessoa na variável local
+
+      },
+      (error) => {
+        console.error('Erro ao carregar dados do Pessoa:', error);
+      }
+    );
+  }
+  criarMensagem() {
+    const chatMessageDTO: Mensagems =  this.mensagemDTO;
+    this.userService.createMessage(chatMessageDTO).subscribe(
+      () => {
+        console.log('Mensagem criada com sucesso!');
+        // Realizar ações adicionais após a criação da mensagem
+      },
+      error => {
+        console.error('Erro ao criar mensagem:', error);
+      }
+    );
+  }
+  fetchChatMessages(): void {
+    this.userService.getMessagesByNfd(this.data.notaFiscal.dadosNfdDTO.numeroNfd).subscribe(
+      (messages: Mensagems[]) => {
+        // Process and assign fetched messages to this.messages array
+        this.messages = messages.map((msg) => ({
+          message: msg.message,
+          type: 'text',
+          user: { name: msg.usuario },
+          nfdVinculada: msg.nfdVinculada,
+          date: msg.datahora, // Você pode modificar isso conforme o formato real da data da sua API
+          sender: msg.usuario, // Email do remetente da mensagem
+          reply: msg.usuario === this.usuario.email, // Set reply based on sender email
+
+        }));
+      console.log(messages)},
+      (error) => {
+        console.error('Erro ao buscar mensagens de chat:', error);
+      }
+    );
+  }
+
 
 
 //calcular

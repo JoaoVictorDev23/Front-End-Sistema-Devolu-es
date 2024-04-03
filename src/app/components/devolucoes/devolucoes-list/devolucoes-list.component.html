@@ -12,24 +12,6 @@
       <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.numeroNfd}} </td>
     </ng-container>
 
-    <!-- Filial Column -->
-    <ng-container matColumnDef="filial">
-      <th mat-header-cell *matHeaderCellDef> Filial </th>
-      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.filial}} </td>
-    </ng-container>
-
-    <!-- Serie Column -->
-    <ng-container matColumnDef="serie">
-      <th mat-header-cell *matHeaderCellDef> Serie </th>
-      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.serie}} </td>
-    </ng-container>
-
-    <!-- Cte Column -->
-    <ng-container matColumnDef="cte">
-      <th mat-header-cell *matHeaderCellDef> CTE </th>
-      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.cte}} </td>
-    </ng-container>
-
 
     <!-- Situ Column -->
     <ng-container matColumnDef="situacaonfd">
@@ -43,6 +25,17 @@
             <td mat-cell *matCellDef="let element"> {{element.valoresDTO.situacaoValores}} </td>
           </ng-container>
 
+              <!-- cadastradopor Column -->
+    <ng-container matColumnDef="cadastradopor">
+      <th mat-header-cell *matHeaderCellDef> Cadastrado Por </th>
+      <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.cadastradoPor}} </td>
+    </ng-container>
+
+                  <!-- atualizadoPor Column -->
+                  <ng-container matColumnDef="atualizadopor">
+                    <th mat-header-cell *matHeaderCellDef> Atualizado Por </th>
+                    <td mat-cell *matCellDef="let element"> {{element.dadosNfdDTO.atualizadoPor}} </td>
+                  </ng-container>
   <!-- Ações Column -->
   <ng-container matColumnDef="acoes">
     <th mat-header-cell *matHeaderCellDef> Ações </th>

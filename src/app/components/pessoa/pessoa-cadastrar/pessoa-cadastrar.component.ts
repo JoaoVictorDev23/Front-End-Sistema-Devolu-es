@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
 import { Motorista } from 'src/app/interface/motorista-interface';
 import { Pessoa } from 'src/app/interface/pessoa-interface';
@@ -13,7 +14,7 @@ import { MotoristaService } from 'src/app/services/motorista/motorista.service';
 export class PessoaCadastrarComponent {
 
   constructor(private pessoaService: CompradorService, private motoristaService: MotoristaService,
-    private toastrService: NbToastrService){
+    private toastrService: NbToastrService, private router:Router){
 
   }
   motorista: Motorista = {
@@ -52,6 +53,11 @@ export class PessoaCadastrarComponent {
     this.pessoaService.cadastrarpessoa(this.pessoa).subscribe(
       response =>{
         this.toastrService.success("Comprador cadastrado com sucesso!", "Sucesso");
+        setTimeout(() => {
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/pessoa']); // Navega para a rota de cadastro de armazém
+          });
+        }, 1000); 
       },
       error =>{
         if(error.error && error.error.message){
@@ -73,10 +79,16 @@ createMotorista(){
   this.motoristaService.cadastrarmotorista(this.motorista).subscribe(
     response =>{
       this.toastrService.success("Motorista cadastrado com sucesso!", "Sucesso");
+      setTimeout(() => {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/pessoa']); // Navega para a rota de cadastro de armazém
+        });
+      }, 1000); 
     },
     error =>{
       if(error.error && error.error.message){
         this.toastrService.warning(error.error.message, "Erro");
+
       }
       else{
         this.toastrService.warning('Erro ao Cadastrar Motorista.!', "Erro");

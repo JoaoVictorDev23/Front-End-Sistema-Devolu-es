@@ -30,7 +30,11 @@ export class UsuarioCadastrarComponent {
     this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
       response =>{
         this.toastrService.success("Usuário cadastrado com sucesso!", "Sucesso");
-        this.router.navigate(['home']);
+        setTimeout(() => {
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/usuario']); // Navega para a rota de cadastro de armazém
+          });
+        }, 1000); 
 
       },
       error =>{

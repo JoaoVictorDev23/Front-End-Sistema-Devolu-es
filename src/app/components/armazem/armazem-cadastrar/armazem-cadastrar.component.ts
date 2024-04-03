@@ -2,6 +2,7 @@ import { ArmazemCadastrarService } from 'src/app/services/armazem/armazem-cadast
 import { Armazem } from './../../../interface/armazem-interface';
 import { Component } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-armazem-cadastrar',
@@ -10,7 +11,7 @@ import { NbToastrService } from '@nebular/theme';
 })
 export class ArmazemCadastrarComponent {
 
-  constructor(private armazemService: ArmazemCadastrarService, private toastrService: NbToastrService) {} // Substitua armazemService pelo nome do seu serviço real
+  constructor(private armazemService: ArmazemCadastrarService, private toastrService: NbToastrService, private router: Router) {} // Substitua armazemService pelo nome do seu serviço real
 
   armazem: Armazem = {
     armazemNome: '',
@@ -25,7 +26,12 @@ export class ArmazemCadastrarComponent {
       response => {
         // Handle success response
         this.toastrService.success('Armazem cadastrado com sucesso!', 'Sucesso');
-        // Você pode adicionar lógica adicional aqui, como redirecionar para outra página
+        // Recarrega a página após o toastr ser exibido
+        setTimeout(() => {
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/armazem/cadastrar']); // Navega para a rota de cadastro de armazém
+          });
+        }, 1000); 
       },
       error => {
         // Handle error response

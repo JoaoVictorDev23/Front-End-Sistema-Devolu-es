@@ -25,6 +25,7 @@
     "@nebular/eva-icons": "11.0.1",
     "@nebular/theme": "^11.0.1",
     "@vamidicreations/ng2-smart-table": "^15.0.0",
+    "chart.js": "^4.4.2",
     "eva-icons": "^1.1.3",
     "ng2-completer": "^9.0.1",
     "ngx-mask": "^15.2.3",

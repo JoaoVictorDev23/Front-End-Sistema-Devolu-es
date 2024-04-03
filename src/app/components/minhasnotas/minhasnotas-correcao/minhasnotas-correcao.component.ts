@@ -55,7 +55,7 @@ export class MinhasnotasCorrecaoComponent implements AfterViewInit{
           if (data) {
             this.notasFiscais = data.filter(
               nota =>
-                nota.valoresDTO.situacaoValores === 'Pendente' &&
+                nota.valoresDTO.situacaoValores === 'Pendente' ||
                 nota.dadosNfdDTO.situacao === 'Pendente'
             );
             this.dataSource.data = this.notasFiscais;

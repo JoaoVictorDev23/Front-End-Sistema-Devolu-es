@@ -18,4 +18,6 @@ export interface DadosNotasFiscais{
 
       cadastradopor?:any;
       atualizadopor?:any;
+
+      data: Date;
 }

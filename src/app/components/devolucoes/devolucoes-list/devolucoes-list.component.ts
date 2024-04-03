@@ -24,7 +24,7 @@ export class DevolucoesListComponent implements AfterViewInit {
 
   notasFiscais: NotaFiscal[] = [];
   dataSource = new MatTableDataSource<NotaFiscal>(this.notasFiscais);
-  displayedColumns: string[] = ['numeronfd', 'filial', 'serie', 'cte', 'situacaonfd', 'situacaofinanceiro', 'acoes'];
+  displayedColumns: string[] = ['numeronfd', 'situacaonfd', 'situacaofinanceiro','cadastradopor', 'atualizadopor','acoes'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -53,7 +53,7 @@ export class DevolucoesListComponent implements AfterViewInit {
   }
 
   getAllNotasFiscais() {
-    this.nfdserviceService.getAllNotasFiscais().subscribe(
+    this.nfdserviceService.getAllNotasFiscaisByAll().subscribe(
       (data: NotaFiscal[] | null) => {
         try {
           if (data) {

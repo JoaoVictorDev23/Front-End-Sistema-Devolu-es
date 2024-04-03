@@ -1,0 +1,38 @@
+
+.card-container {
+  height: 600px;
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+
+  .input-container {
+  
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .graph-card {
+    display: flex;
+    width: 100%;
+
+    .graph-item {
+      margin-top:5px;
+      margin-left: 2rem;
+      width: 48%; /* Defina o tamanho desejado para os cards */
+      max-width: 720px; /* Defina o tamanho máximo */
+      height: 460px; /* Defina a altura desejada */
+
+    }
+
+
+    .canvas-container {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      flex: 1; /* Ocupa todo o espaço disponível */
+      height: 370px; /* Ajuste conforme necessário */
+    }
+  }
+}

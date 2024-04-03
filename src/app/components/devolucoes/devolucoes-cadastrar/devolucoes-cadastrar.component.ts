@@ -43,7 +43,9 @@ export class DevolucoesCadastrarComponent {
       numeroNfo: '',
       observacao: '',
       motivo: 0,
-      status:''
+      status:'',
+      data: new Date()
+
 
     },
     valoresDTO: {
@@ -57,7 +59,8 @@ export class DevolucoesCadastrarComponent {
       cliente:'0' ,
       debitadoCliente:0,
       debitadoMotorista:0,
-      numeronfd:''
+      numeronfd:'',
+      data: new Date()
     },
     produtosDTO:[
 
@@ -66,7 +69,7 @@ export class DevolucoesCadastrarComponent {
   };
   debitarValorCliente = false;
   debitarValorMotorista = true;
-  linearMode = false;
+  linearMode = true;
 
   displayedColumns: string[] = ['nome', 'quantidade', 'valor', 'situacao', 'acao'];
   dataSource = new MatTableDataSource<Produto>();

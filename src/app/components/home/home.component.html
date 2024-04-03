@@ -1,5 +1,30 @@
-<nb-card size="medium">
-  <nb-card-body>
-    <img src="/assets/img/manutencao.jpg" alt="" style="width: 100%; height: 95%;">
+<nb-card size="medium" class="card-container">
+  <nb-card-body class="card-content">
+    <div class="input-container">
+      <input nbInput type="date" [(ngModel)]="dataInicial" style="margin-left: 2rem;">
+      <input nbInput type="date" [(ngModel)]="dataFinal" style="margin-left: 1rem;">
+      <button nbButton (click)="filtrarDados()" style="margin-left: 10px;">Filtrar</button>
+    </div>
+    <div class="graph-card">
+      <nb-card size="tiny" class="graph-item">
+        <nb-card-header style="display: flex; align-self: center;">Gráfico de Valores Totais entre Datas</nb-card-header>
+        <nb-card-body>
+          <div class="canvas-container">
+            <canvas id="canvas" width="400" height="400"></canvas>
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <nb-card size="tiny" class="graph-item">
+        <nb-card-header style="display: flex; align-self: center;">Gráfico de Notas por Situações</nb-card-header>
+        <nb-card-body>
+          <div class="canvas-container" *ngIf="!chartSituacoes">
+            <p style="text-align: center;">Não há notas cadastradas por você.</p>
+          </div>
+          <div class="canvas-container" >
+            <canvas id="canvasSituacoes" width="400" height="400"></canvas>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
   </nb-card-body>
 </nb-card>

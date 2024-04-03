@@ -80,7 +80,8 @@ import { UsuarioCadastrarComponent } from './components/usuarios/usuario-cadastr
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ClienteCadastrarComponent } from './components/cliente/cliente-cadastrar/cliente-cadastrar.component';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -133,7 +134,8 @@ import { ClienteCadastrarComponent } from './components/cliente/cliente-cadastra
     NbLayoutModule, NbButtonModule, BrowserAnimationsModule,NbStepperModule,NbContextMenuModule ,NbWindowModule,
     NbThemeModule.forRoot({ name: 'default' }), NbEvaIconsModule, NbCardModule,MatDialogModule,NbUserModule,
     FormsModule,MatInputModule,NbInputModule,NbSelectModule,CommonModule,MatFormFieldModule,NbAutocompleteModule,
-    HttpClientModule,CommonModule,NbAlertModule,NbCheckboxModule,NbFormFieldModule,MatProgressSpinnerModule
+    HttpClientModule,CommonModule,NbAlertModule,NbCheckboxModule,NbFormFieldModule,
+    MatProgressSpinnerModule,MatNativeDateModule,MatDatepickerModule
 
 
 

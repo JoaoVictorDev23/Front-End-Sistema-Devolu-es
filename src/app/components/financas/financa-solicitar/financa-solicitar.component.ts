@@ -32,8 +32,16 @@ export class FinancaSolicitarComponent implements AfterViewInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+    this.dataSource.filter = filterValue;
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      const searchString = filter.toLowerCase();
+
+      return (
+        data.dadosNfdDTO.numeroNfd.toLowerCase().includes(searchString)
+      );
+    };
   }
 
   getAllNotasFiscais() {

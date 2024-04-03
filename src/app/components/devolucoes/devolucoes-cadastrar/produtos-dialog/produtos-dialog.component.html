@@ -2,9 +2,16 @@
   <nb-card-header>Adicione produtos a sua nota:</nb-card-header>
   <nb-card-body>
     <div class="row">
+      <label class="label">Nome do Produto</label>
       <input [(ngModel)]="produto.produtoNome" nbInput placeholder="Nome do Produto" required (ngModelChange)="checkFormValidity()">
+
+      <label class="label">Valor do Produto</label>
       <input [(ngModel)]="produto.produtoValor" type="number" nbInput placeholder="Valor do Produto" required (ngModelChange)="checkFormValidity()">
+
+      <label class="label">Quantidade do Produto</label>
       <input [(ngModel)]="produto.produtoQuantidade" type="number" nbInput placeholder="Quantidade" required (ngModelChange)="checkFormValidity()">
+
+      <label class="label">Situação do Produto</label>
       <input [(ngModel)]="produto.situacaoProduto" type="text" nbInput placeholder="Pendente" disabled value="Pendente">
 
     </div>

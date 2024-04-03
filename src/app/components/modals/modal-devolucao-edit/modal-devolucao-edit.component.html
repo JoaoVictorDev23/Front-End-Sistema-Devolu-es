@@ -47,14 +47,14 @@
         <nb-chat title="Comentários & Correções" size="large" style="text-align: center;"
           noMessagesPlaceholder="Envie a primeira mensagem.">
 
-
-          <nb-chat-message *ngFor="let msg of messages" [type]="msg.type" [message]="msg.text" [sender]="msg.user.name"
-            [date]="msg.date"></nb-chat-message>
-
+          <nb-chat-message *ngFor="let msg of messages" [type]="msg.type" [message]="msg.message" [sender]="msg.sender"
+            [date]="msg.date" [reply]="msg.reply">
+          </nb-chat-message>
 
           <nb-chat-form (send)="sendMessage($event)" [dropFiles]="false" messagePlaceholder="Digite sua mensagem">
           </nb-chat-form>
         </nb-chat>
+
 
       </mat-dialog-content>
 

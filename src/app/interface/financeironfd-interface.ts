@@ -18,4 +18,5 @@ export interface ValoresNotaFiscal {
   debitadoMotorista:number;
   cadastradopor?:any;
   atualizadopor?:any;
+  data:Date;
 }
