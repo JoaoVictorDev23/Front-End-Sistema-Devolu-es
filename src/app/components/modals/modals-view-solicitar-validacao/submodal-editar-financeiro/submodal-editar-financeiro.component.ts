@@ -23,7 +23,7 @@ export class SubmodalEditarFinanceiroComponent {
   compradores: Pessoa[] = [];
 
   clientes: Cliente[] = [];
-  cliente: Cliente = { id: undefined, cnpj: '', nome: '' };
+  cliente: Cliente = {  nome: '',cnpj: ''};
   pessoa: Pessoa = { nome: '', cpf: '', email: '' }; // Declare a propriedade cliente aqui
 
   motivo: Motivo | undefined; // Declare a propriedade cliente aqui
@@ -36,6 +36,11 @@ export class SubmodalEditarFinanceiroComponent {
     this.getMotoristas();
     this.getClientes();
 
+    
+    this.loadCliente();
+    this.loadMotorista();
+    this.loadPessoa();
+
   }
 
 
@@ -44,10 +49,6 @@ export class SubmodalEditarFinanceiroComponent {
     private NfdService: NfdserviceService, // Injete o serviço ClienteService
 
     @Inject(MAT_DIALOG_DATA) public data: { notaFiscal: NotaFiscal }) {
-
-    this.loadCliente();
-    this.loadMotorista();
-    this.loadPessoa();
 
   }
 
@@ -126,21 +127,10 @@ export class SubmodalEditarFinanceiroComponent {
       }
     });
   }
-  loadPessoa() {
-    const PessoaId = this.data.notaFiscal.valoresDTO.pessoa; // Obtenha o ID do Pessoa da nota fiscal
-    if (PessoaId) {
-      this.NfdService.findByPessoa(PessoaId).subscribe(
-        (Pessoa: Pessoa) => {
-          this.pessoa = Pessoa; // Armazene os dados do Pessoa na variável local
-        },
-        (error) => {
-          console.error('Erro ao carregar dados do Pessoa:', error);
-        }
-      );
-    }
-  }
+
 
   UpdateValores(valoresDTO: ValoresNotaFiscal) {
+    console.log(valoresDTO);
     this.atualizarValores(valoresDTO);
   }
 
@@ -166,12 +156,26 @@ export class SubmodalEditarFinanceiroComponent {
     const clienteId = this.data.notaFiscal.valoresDTO.cliente; // Obtenha o ID do cliente da nota fiscal
     if (clienteId) {
       this.NfdService.findByCliente(clienteId).subscribe(
-        (cliente: Cliente) => {
-          this.cliente = cliente; // Armazene os dados do cliente na variável local
-          this.data.notaFiscal.valoresDTO.cliente = cliente.id!.toString();
+        (Cliente: Cliente) => {
+          this.cliente = Cliente; // Armazene os dados do cliente na variável local
+          this.data.notaFiscal.valoresDTO.cliente = Cliente.id!;
         },
         (error) => {
           console.error('Erro ao carregar dados do cliente:', error);
+        }
+      );
+    }
+  }
+  loadPessoa() {
+    const PessoaId = this.data.notaFiscal.valoresDTO.pessoa; // Obtenha o ID do Pessoa da nota fiscal
+    if (PessoaId) {
+      this.NfdService.findByPessoa(PessoaId).subscribe(
+        (Pessoa: Pessoa) => {
+          this.pessoa = Pessoa; // Armazene os dados do Pessoa na variável local
+          this.data.notaFiscal.valoresDTO.pessoa = Pessoa.id!;
+        },
+        (error) => {
+          console.error('Erro ao carregar dados do Pessoa:', error);
         }
       );
     }

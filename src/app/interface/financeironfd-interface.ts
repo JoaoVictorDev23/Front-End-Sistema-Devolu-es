@@ -11,7 +11,7 @@ export interface ValoresNotaFiscal {
   situacaoValores: string;
   armazem: number;
   motorista: String;
-  cliente: String;
+  cliente: number;
   pessoa: string;
   numeronfd:String;
   debitadoCliente:number;

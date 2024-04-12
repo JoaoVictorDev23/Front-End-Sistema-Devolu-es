@@ -1,0 +1,277 @@
+<nb-card>
+  <nb-card-body>
+
+    <nb-stepper #stepper [linear]="linearMode">
+      <!-- Primeira Etapa do Formulario ABAIXO:-->
+      <nb-step [stepControl]="nameForm">
+        <form #nameForm="ngForm" class="step-container" #stepperForm="ngForm">
+          <div class="row">
+
+            <!-- Filial - Serie - CTE -->
+            <div class="col-sm-6">
+              <div class="labelcte">
+                <label for="filial" class="label">Filial</label>
+
+                <label for="serie" class="label">Serie</label>
+
+                <label for="cte" class="label">CTE</label>
+
+              </div>
+
+              <div class="form-group-cte">
+                <input type="number" nbInput placeholder="" id="filial" name="filial"
+                  [(ngModel)]="notaFiscal.dadosNfdDTO.filial" required>
+                <input type="number" nbInput placeholder="" id="serie" name="serie"
+                  [(ngModel)]="notaFiscal.dadosNfdDTO.serie" required>
+                <input type="number" nbInput placeholder="" id="cte" name="cte" [(ngModel)]="notaFiscal.dadosNfdDTO.cte"
+                  required>
+              </div>
+            </div>
+
+            <!-- Numero NFd -->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="numeroNfd" class="label">Número da NF de Devolução</label>
+              </div>
+
+              <div class="form-group">
+                <input type="number" nbInput fullWidth id="numeroNfd" placeholder=""
+                  [(ngModel)]="notaFiscal.dadosNfdDTO.numeroNfd" name="numeroNfd" required class="input-nfd"
+                  (ngModelChange)="notaFiscal.valoresDTO.numeronfd = notaFiscal.dadosNfdDTO.numeroNfd">
+              </div>
+
+            </div>
+
+
+            <!-- Numero NFO -->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="numeroNfo" class="label">Número da NF de Origem</label>
+              </div>
+
+              <div class="form-group">
+                <input type="number" nbInput fullWidth id="numeroNfo" placeholder="" name="numeroNfo"
+                  [(ngModel)]="notaFiscal.dadosNfdDTO.numeroNfo" required class="input-nfd">
+              </div>
+
+            </div>
+
+            <!-- Opções de Armazem -->
+
+            <div class="col-sm-6">
+
+
+              <!-- Opções de Motivo-->
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="label">Motivo</label>
+                </div>
+              </div>
+              <div class="form-group3">
+                <nb-select fullWidth placeholder="Selecione um Motivo" class="nb-select-motivo" id="motivo.nome"
+                  name="motivo.id" [(ngModel)]="notaFiscal.dadosNfdDTO.motivo" required>
+                  <nb-option *ngFor="let motivo of motivo" [value]="motivo.motivoId">{{ motivo.nomeMotivo }}</nb-option>
+                </nb-select>
+              </div>
+              <!-- Opções de Status-->
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="label">Status</label>
+                </div>
+              </div>
+              <div class="form-group3">
+                <nb-select fullWidth placeholder="Selecione um Status" [(ngModel)]="notaFiscal.dadosNfdDTO.status" required>
+                  <nb-option value="Pendente">Pendente</nb-option>
+                  <nb-option value="Processando">Processando</nb-option>
+                  <nb-option value="Em espera">Em espera</nb-option>
+                  <nb-option value="Finalizado">Finalizado</nb-option>
+                  <nb-option value="Devolução">Devolução</nb-option>
+                </nb-select>
+              </div>
+
+
+              <!-- Observação -->
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="observacao" class="label">Observações</label>
+                </div>
+              </div>
+              <textarea rows="5" nbInput fullWidth shape="round" id="observacao" placeholder="" name="observacao"
+                required nbInput [(ngModel)]="notaFiscal.dadosNfdDTO.observacao" #observacaoInput="ngModel"
+                class="custom-textarea"></textarea>
+
+
+
+            </div>
+          </div>
+          <!--    -->
+
+          <button nbButton outline shape="semi-round" nbStepperNext (click)="verdados()" [disabled]="!nameForm.valid"
+            status="primary">Continuar</button>
+        </form>
+      </nb-step>
+
+      <!-- Segunda Etapa do Formulario -->
+      <nb-step [stepControl]="somethingForm">
+        <!-- Definindo os campos no formulario da Segunda etapa-->
+        <form #somethingForm="ngForm">
+          <div>
+            <button nbButton outline shape="semi-round" status="info" class="button-adicionar-prod"
+              (click)="openDialog()">Adicionar
+              Produto</button>
+
+            <table mat-table [dataSource]="dataSource">
+
+
+              <!-- Nome do Produto -->
+              <ng-container matColumnDef="nome">
+                <th mat-header-cell *matHeaderCellDef> Nome Produto </th>
+                <td mat-cell *matCellDef="let element"> {{element.produtoNome}} </td>
+              </ng-container>
+
+              <!-- Adicione uma nova coluna para o ícone de exclusão -->
+              <ng-container matColumnDef="acao">
+                <th mat-header-cell *matHeaderCellDef> Ação </th>
+                <td mat-cell *matCellDef="let element">
+
+                  <button nbButton status="danger" (click)="excluirProduto(element)" class="button-excluir-prod">
+                    <i class="material-icons delete">delete</i>
+                  </button>
+                </td>
+              </ng-container>
+
+
+              <!-- Quantidade do Produto -->
+              <ng-container matColumnDef="quantidade">
+                <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+                <td mat-cell *matCellDef="let element"> {{element.produtoQuantidade}} </td>
+              </ng-container>
+
+              <!-- Valor do Produto -->
+              <ng-container matColumnDef="valor">
+                <th mat-header-cell *matHeaderCellDef> Valor Unitário </th>
+                <td mat-cell *matCellDef="let element"> {{element.produtoValor}} </td>
+              </ng-container>
+
+              <!--Situacao do Produto -->
+              <ng-container matColumnDef="situacao">
+                <th mat-header-cell *matHeaderCellDef> Situação </th>
+                <td mat-cell *matCellDef="let element"> {{element.situacaoProduto}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+
+              </tr>
+            </table>
+
+            <!-- botao de continuar-->
+            <button nbButton nbStepperNext status="primary" outline shape="semi-round" (click)="verdados()"
+              class="button-concluir">Continuar</button>
+          </div>
+        </form>
+      </nb-step>
+
+      <!-- Terceira etapa do formulario-->
+      <nb-step [stepControl]="movieForm">
+        <!-- Definindo os campos no formulario da segunda etapa-->
+        <form #movieForm="ngForm" class="step-container2">
+          <div class="row">
+
+            <!-- CLIENTES/PESSOA/MOTORISTA -->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="label">Cliente</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+
+              <nb-select fullWidth placeholder="Selecione um Cliente" class="nb-select-motorista" name="cliente.id"
+                [(ngModel)]="notaFiscal.valoresDTO.cliente" required>
+                <nb-option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</nb-option>
+              </nb-select>
+
+            </div>
+
+
+            <!-- Motorista-->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="label">Motorista</label>
+              </div>
+            </div>
+
+            <div class="form-group3">
+              <nb-select required fullWidth placeholder="Selecione um Motorista" class="nb-select-motorista"
+                id="motorista.nome" name="motorista.id" [(ngModel)]="notaFiscal.valoresDTO.motorista" required>
+                <nb-option *ngFor="let motorista of motoristas" [value]="motorista.id">{{ motorista.nome }}</nb-option>
+              </nb-select>
+            </div>
+
+            <!-- Comprador-->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="label">Comprador</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <nb-select required fullWidth placeholder="Selecione um Comprador" id="comprador"
+                class="nb-select-motorista" name="comprador.id" [(ngModel)]="notaFiscal.valoresDTO.pessoa" required>
+                <nb-option *ngFor="let comprador of compradores" [value]="comprador.id">{{ comprador.nome }}</nb-option>
+              </nb-select>
+
+            </div>
+
+
+            <!-- Armazem-->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="label">Armazem</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <nb-select required fullWidth placeholder="Selecione um Armazém" id="armazem" class="nb-select-motorista"
+                name="armazem.id" [(ngModel)]="notaFiscal.valoresDTO.armazem" required>
+                <nb-option *ngFor="let armazem of armazens" [value]="armazem.armazemId">{{ armazem.armazemNome }}
+                </nb-option>
+              </nb-select>
+
+            </div>
+
+            <!-- botao de continuar-->
+            <button nbButton nbStepperNext (click)="adicionarNotaFiscal()" [disabled]="!nameForm.valid"
+              status="success" shape="semi-round" class="button-step2">Cadastrar</button>
+
+          </div>
+        </form>
+
+      </nb-step>
+
+      <!-- Ultima etapa do formulario e a solicitação de cadastro novamente-->
+      <nb-step [hidden]="true">
+        <div class="step-container">
+          <h3 style="margin-left: 25vh; margin-bottom: 25vh;">Cadastro concluído!</h3>
+
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <button nbButton status="primary" (click)="stepper.reset()" style="margin-right: 10px;">Novo
+              Cadastro</button>
+            <button nbButton status="info" outline (click)="navegarParaTelaInicial()" style="margin-right: 10px;">Tela
+              Inicial</button>
+            <button nbButton status="success" (click)="navegarParaGerarFinancas()" style="margin-right: 10px;">Cadastrar
+              Valores</button>
+          </div>
+
+        </div>
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>

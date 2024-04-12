@@ -1,0 +1,56 @@
+<input nbInput (keyup)="applyFilter($event)" placeholder="Ex. '123'" #input style="margin-bottom:3rem; background-color: #ffffff; border: 1px solid #e2dfdf; height: 2.5rem; width: 55rem;" class="mat-elevation-z1">
+
+<div class="mat-elevation-z4" >
+
+
+  <table mat-table [dataSource]="dataSource"  style="border: 1px solid  #e2dfdf; ">
+
+    <!--  Numero NFD Column -->
+    <ng-container matColumnDef="armazem">
+      <th mat-header-cell *matHeaderCellDef> Armazém </th>
+      <td mat-cell *matCellDef="let element"> {{element.armazemNome}} </td>
+    </ng-container>
+
+    <!-- Filial Column -->
+    <ng-container matColumnDef="filial">
+      <th mat-header-cell *matHeaderCellDef> Filial </th>
+      <td mat-cell *matCellDef="let element"> {{element.armazemFilial}} </td>
+    </ng-container>
+
+    <!-- Filial Column -->
+    <ng-container matColumnDef="endereco">
+      <th mat-header-cell *matHeaderCellDef> Endereço </th>
+      <td mat-cell *matCellDef="let element"> {{element.armazemEndereco}} </td>
+    </ng-container>
+
+
+  <!-- Ações Column -->
+  <ng-container matColumnDef="acoes">
+    <th mat-header-cell *matHeaderCellDef> Ações </th>
+    <td mat-cell *matCellDef="let element">
+      <button nbButton (click)="openDialog(element)" size="small" status="warning"  style="padding:5px; margin-right: 3px;"  outline>
+        <nb-icon icon="eye-outline" ></nb-icon>
+      </button>
+
+    </td>
+  </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Pesquisa não localizada</td>
+    </tr>
+  </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"  style="border: 1px solid #e2dfdf; "></mat-paginator>
+
+
+
+
+</div>
+<div *ngIf="loading" class="loading-spinner-overlay">
+  <mat-spinner diameter="50"></mat-spinner>
+  <p>Carregando dados...</p>
+</div>

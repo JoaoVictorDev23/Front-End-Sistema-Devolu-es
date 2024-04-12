@@ -13,6 +13,8 @@ import { Cliente } from 'src/app/interface/cliente-interface';
 import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
 import { Pessoa } from 'src/app/interface/pessoa-interface';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from 'src/app/services/authservice.service';
 
 @Component({
   selector: 'app-devolucoes-cadastrar',
@@ -44,7 +46,8 @@ export class DevolucoesCadastrarComponent {
       observacao: '',
       motivo: 0,
       status:'',
-      data: new Date()
+      data: new Date(),
+      anexo:''
 
 
     },
@@ -56,7 +59,7 @@ export class DevolucoesCadastrarComponent {
       pessoa:'0',
       armazem:0 ,
       motorista: '0',
-      cliente:'0' ,
+      cliente:0 ,
       debitadoCliente:0,
       debitadoMotorista:0,
       numeronfd:'',
@@ -74,12 +77,16 @@ export class DevolucoesCadastrarComponent {
   displayedColumns: string[] = ['nome', 'quantidade', 'valor', 'situacao', 'acao'];
   dataSource = new MatTableDataSource<Produto>();
 
+  authToken: string | null;
 
 
   constructor(private dialogService: NbDialogService,
     private nfdService: NfdserviceService,
     private toastrService:NbToastrService,
-    private router:Router) {}
+    private router:Router,
+    private http: HttpClient, private authService: AuthService) {
+      this.authToken = this.authService.extractAuthToken();
+    }
   verdados(){
     console.log(this.notaFiscal);
   }
@@ -91,6 +98,14 @@ export class DevolucoesCadastrarComponent {
     this.getArmazens();
     this.getMotivos();
     this.getCompradores();
+  }
+
+  todosCamposSelecionados(): boolean {
+    return (
+      this.notaFiscal.valoresDTO.cliente !== 0 &&
+      this.notaFiscal.valoresDTO.motorista !== "0" &&
+      this.notaFiscal.valoresDTO.pessoa !== "0"
+    );
   }
 
   openDialog(): void {
@@ -163,6 +178,8 @@ export class DevolucoesCadastrarComponent {
 
   adicionarNotaFiscal(): void {
     this.notaFiscal.produtosDTO = this.dataSource.data;
+    this.uploadFile();
+
 
     this.nfdService.cadastrarNotaFiscal(this.notaFiscal).subscribe(
       response => {
@@ -192,6 +209,40 @@ export class DevolucoesCadastrarComponent {
     this.router.navigate(['/devolucao/cadastrar']);
   }
 
+
+  // Parte de Anexos
+  selectedFile: File | undefined;
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0] as File;
+  }
+
+  uploadFile() {
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+      this.notaFiscal.dadosNfdDTO.anexo = this.selectedFile?.name;
+
+      this.http.post(`http://192.168.100.127:8090/nfd/dados/upload`, formData, { headers: this.getHeaders() }).subscribe(
+        (response) => {
+          console.log('Arquivo enviado com sucesso:', response);
+        },
+        (error) => {
+          console.error('Erro ao enviar arquivo:', error);
+        }
+      );
+    }
+
+  }
+  private getHeaders(): HttpHeaders {
+    // Verifica se o token JWT foi extraído corretamente
+    if (!this.authToken) {
+      throw new Error('Token JWT não encontrado.');
+    }
+
+    // Cria os headers com apenas o token JWT no header Authorization
+    return new HttpHeaders().set('Authorization', `Bearer ${this.authToken}`);
+  }
 
 
 }

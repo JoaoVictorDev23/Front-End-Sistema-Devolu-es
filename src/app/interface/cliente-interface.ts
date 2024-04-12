@@ -1,6 +1,7 @@
 export interface Cliente {
-  id?: number; // Identificador único do cliente
+  id?: number; 
+  nome: string;// Identificador único do cliente
   cnpj: string;
-  nome: string;
+
 
 }

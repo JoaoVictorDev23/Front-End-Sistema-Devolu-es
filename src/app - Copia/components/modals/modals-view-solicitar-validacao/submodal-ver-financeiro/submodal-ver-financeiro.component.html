@@ -1,0 +1,97 @@
+
+
+<!-- Comprador-->
+<div class="col-sm-6">
+  <div class="form-group">
+    <label for="comprador" class="label">Comprador</label>
+  </div>
+</div>
+
+<div class="form-group">
+  <input type="text" nbInput fullWidth id="motorista" placeholder="" name="select-motorista"
+  [value]="pessoa?.nome" disabled class="nb-select-motorista">
+</div>
+
+
+
+
+<!-- TABELA PRODUTOS-->
+
+
+<table mat-table [dataSource]="dataSource">
+
+
+
+  <!-- Coluna Nome Produto -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> Nome do Produto</th>
+    <td mat-cell *matCellDef="let element" style="width: 25% !important;"> {{element.produtoNome}} </td>
+  </ng-container>
+
+  <!-- Coluna Valor produto-->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Valor </th>
+    <td mat-cell *matCellDef="let element" style="width: 25% !important;">
+      <input [(ngModel)]="element.produtoValor" type="number" style="width: 75%;" disabled/> </td>
+  </ng-container>
+
+  <!-- Coluna Quantidade produto -->
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+    <td mat-cell *matCellDef="let element" style="width: 25% !important;">
+      <input [(ngModel)]="element.produtoQuantidade" type="number" style="width: 75%;" disabled/>
+    </td>
+  </ng-container>
+
+  <!-- Coluna situação produto -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> Situação </th>
+    <td mat-cell *matCellDef="let element" style="width: 25% !important;">
+      <nb-select style="width: 100% !important; margin-right: 0 !important;" placeholder="Selecione uma situação"
+        [(selected)]="element.situacaoProduto" (selectedChange)="calcularValoresTotais()" disabled>
+
+        <nb-option value="Pendente">Pendente</nb-option>
+        <nb-option value="Em armazem">Em Armazém</nb-option>
+        <nb-option value="Venda">Venda</nb-option>
+        <nb-option value="Prejuizo">Prejuízo</nb-option>
+
+      </nb-select>
+    </td>
+  </ng-container>
+
+  <!-- fim das colunas-->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<!-- card  vendas totais-->
+
+<nb-card style="margin-top: 2rem !important;" class="mat-elevation-z2">
+  <nb-card-body>
+    <div class="row">
+
+      <!-- Venda-prejuizo-estoque -->
+      <div class="col-sm-6">
+        <div class="labelcte">
+          <label for="valorVenda" class="label" style="margin-right: 170px;">Valor Venda</label>
+
+          <label for="valorPrejuizo" class="label" style="margin-right: 158px;">Valor Prejuizo</label>
+
+          <label for="valorArmazem" class="label">Valor em Armazém</label>
+
+        </div>
+
+
+
+        <div class="form-group-cte">
+          <input type="number" nbInput placeholder="" name="valorVenda" disabled id="valorVenda"
+            [(ngModel)]="data.notaFiscal.valoresDTO.valorVenda" required>
+          <input type="number" nbInput placeholder="" name="valorPrejuizo" disabled id="valorPrejuizo"
+            [(ngModel)]="data.notaFiscal.valoresDTO.valorPrejuizo" required>
+          <input type="number" nbInput placeholder="" name="valorArmazem" disabled id="valorArmazem"
+            [(ngModel)]="data.notaFiscal.valoresDTO.valorArmazem" required>
+        </div>
+      </div>
+    </div>
+
+  </nb-card-body>
+</nb-card>

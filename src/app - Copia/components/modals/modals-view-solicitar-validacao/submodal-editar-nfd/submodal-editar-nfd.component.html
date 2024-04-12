@@ -1,0 +1,79 @@
+
+
+
+
+<div class="col-sm-6">
+  <div class="labelcte">
+    <label for="filial" class="label">Filial</label>
+
+    <label for="serie" class="label">Serie</label>
+
+    <label for="cte" class="label">CTE</label>
+
+  </div>
+
+  <div class="form-group-cte" style="margin-left:0.2rem">
+    <input type="number" nbInput id="filial" placeholder="" fullWidth name="filial"
+      [(ngModel)]="data.notaFiscal.dadosNfdDTO.filial" disabled>
+    <input type="number" nbInput id="serie" placeholder="" fullWidth name="serie"
+      [(ngModel)]="data.notaFiscal.dadosNfdDTO.serie" disabled>
+    <input type="number" nbInput id="cte" placeholder="" fullWidth name="CTE" [(ngModel)]="data.notaFiscal.dadosNfdDTO.cte"
+      disabled>
+  </div>
+</div>
+<!-- Numero NFD-->
+
+<div style="display: flex; width: 700px; ">
+  <label for="motivo" class="label">Motivo</label>
+  <label for="numero-nfd" class="label" style="margin-left: 6.5rem;">Número NFd</label>
+</div>
+
+<div style="display: flex; width: 700px;">
+  <nb-select fullWidth placeholder="Selecione um Motivo" class="nb-select-motivo" id="motivo.nome"
+  name="motivo.id" [(ngModel)]="data.notaFiscal.dadosNfdDTO.motivo" required>
+  <nb-option *ngFor="let motivo of motivos" [value]="motivo.motivoId">{{ motivo.nomeMotivo }}</nb-option>
+</nb-select>
+  <input type="number" nbInput style="max-width: 49.5%; min-width: 40%;" id="numero-nfd" placeholder="" name="numero-nfd"
+    [(ngModel)]="data.notaFiscal.dadosNfdDTO.numeroNfd" disabled class="input-nfd">
+</div>
+
+<!-- Opções de Status-->
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="label">Status</label>
+  </div>
+</div>
+<div class="form-group3">
+  <nb-select fullWidth placeholder="Selecione um Status" [(ngModel)]="data.notaFiscal.dadosNfdDTO.status" required>
+    <nb-option value="Pendente">Pendente</nb-option>
+    <nb-option value="Processando">Processando</nb-option>
+    <nb-option value="Em espera">Em espera</nb-option>
+    <nb-option value="Finalizado">Finalizado</nb-option>
+    <nb-option value="Devolução">Devolução</nb-option>
+  </nb-select>
+</div>
+
+
+
+<!-- Observação -->
+
+<div class="col-sm-6">
+  <div class="form-group" style="margin-bottom: -1px;">
+    <label for="observacao" class="label">Observações</label>
+  </div>
+</div>
+
+<textarea rows="5" nbInput fullWidth shape="round" disabled placeholder="" name="observacao"  nbInput
+  id="observacao" [(ngModel)]="data.notaFiscal.dadosNfdDTO.observacao" #observacaoInput=""
+  class="custom-textarea"></textarea>
+
+
+
+<mat-dialog-actions align="end" class="configurationbutton">
+  <div class="aviso-pequeno">*Atualização sujeita a validação do seu gestor</div>
+  <button nbButton status="success" shape="semi-round" fullWidth outline
+  (click)="atualizarDados(data.notaFiscal.dadosNfdDTO)">Realizar Atualização</button>
+</mat-dialog-actions>
+
+

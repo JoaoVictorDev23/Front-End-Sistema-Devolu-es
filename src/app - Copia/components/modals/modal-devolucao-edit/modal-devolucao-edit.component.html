@@ -1,0 +1,75 @@
+<div style="max-width: 768px; min-width: 768px;">
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Aprovação
+      </ng-template>
+      <img src="/assets/img/dadosnfd.png" alt="Imagem em erro!" class="img-aba1">
+
+
+
+      <mat-dialog-content class="mat-typography">
+
+        <!-- Numero NFD-->
+
+        <div style="display: flex; width: 100%; ">
+          <label for="numero-nfd" class="label" style="margin-right:15rem;">Selecione uma Validação</label>
+        </div>
+
+        <div style="display: flex; width: 100%;">
+          <nb-select placeholder="Validações" [(selected)]="selectedItem">
+            <nb-option value="">Selecione uma opção</nb-option>
+            <nb-option value="nfd">Editar NF-D</nb-option>
+            <nb-option value="valores">Editar Valores</nb-option>
+          </nb-select>
+        </div>
+
+
+        <div *ngIf="selectedItem === 'nfd'" style="margin-top:1rem">
+          <app-submodal-editar-nfd></app-submodal-editar-nfd>
+        </div>
+
+        <div *ngIf="selectedItem === 'valores'" style="margin-top:1rem">
+          <app-submodal-editar-financeiro></app-submodal-editar-financeiro>
+        </div>
+      </mat-dialog-content>
+    </mat-tab>
+    <!-- chat -->
+    <mat-tab class="custom-tab">
+      <ng-template mat-tab-label>
+        Chat
+      </ng-template>
+
+      <img src="/assets/img/CHAT.png" alt="Imagem em erro!" class="img-chat">
+
+      <mat-dialog-content class="mat-typography">
+
+        <nb-chat title="Comentários & Correções" size="large" style="text-align: center;"
+          noMessagesPlaceholder="Envie a primeira mensagem.">
+
+
+          <nb-chat-message *ngFor="let msg of messages" [type]="msg.type" [message]="msg.text" [sender]="msg.user.name"
+            [date]="msg.date"></nb-chat-message>
+
+
+          <nb-chat-form (send)="sendMessage($event)" [dropFiles]="false" messagePlaceholder="Digite sua mensagem">
+          </nb-chat-form>
+        </nb-chat>
+
+      </mat-dialog-content>
+
+    </mat-tab>
+
+
+
+  </mat-tab-group>
+
+
+
+  <mat-dialog-actions align="end" class="configurationbutton">
+    <!-- Botões-->
+
+    <button nbButton status="info" shape="semi-round" fullWidth (click)="voltar()" style="border: 2px solid white;">Voltar</button>
+  </mat-dialog-actions>
+
+</div>

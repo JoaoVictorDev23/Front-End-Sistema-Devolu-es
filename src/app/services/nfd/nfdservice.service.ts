@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { API_CONFIG } from 'src/app/config/api.config';
@@ -20,6 +20,7 @@ export class NfdserviceService {
   authToken: string | null;
 
   constructor(private http: HttpClient, private authService: AuthService) {
+
     this.authToken = this.authService.extractAuthToken();
   }
 
@@ -68,7 +69,7 @@ export class NfdserviceService {
     return this.http.get<NotaFiscal[]>(`${this.apiUrl}/nota/listar/todas`, { headers: this.getHeaders() });
 
   }
-  findByCliente(id: String): Observable<Cliente> {
+  findByCliente(id: Number): Observable<Cliente> {
     const headers = this.getHeaders();
     return this.http.get<Cliente>(`${this.apiUrl}/cliente/${id}`, { headers });
   }
@@ -99,6 +100,18 @@ export class NfdserviceService {
   updateDados(DadosDto: DadosNotasFiscais) {
     return this.http.put(`${this.apiUrl}/nfd/dados/update/${DadosDto.dadosnfdId}`, DadosDto, { headers: this.getHeaders() });
   }
+// Service para baixar o arquivo
+downloadFile(anexo: string): Observable<any> {
+  const headers = this.getHeaders();
+  const url = `${this.apiUrl}/nfd/dados/download?anexo=${anexo}`;
+
+  return this.http.get(url, {
+    headers: this.getHeaders(),
+    responseType: 'blob' // Espera uma resposta do tipo Blob (arquivo binário)
+  });
+}
+
+
 
 
 }

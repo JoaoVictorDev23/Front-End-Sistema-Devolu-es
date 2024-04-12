@@ -1,0 +1,55 @@
+<nb-card size="large">
+  <nb-card-header style="margin: auto;"><img src="/assets/img/cadastrodeparceiro.png" alt=""></nb-card-header>
+  <nb-card-body>
+
+    <form #nameForm="ngForm" class="step-container">
+      <div class="row">
+
+        <!-- CADASTRO DE ARMAZENS ONDE SERÁ ARMAZENADO CARGAS EM AVARIAS  -->
+        <div class="col-sm-6">
+
+          <div class="form-group-cte">
+            <label for="pessoa.nome" class="label">Nome</label>
+            <input type="text"  nbInput fullWidth id="pessoa.nome" placeholder="" name="nomepessoa" [(ngModel)]="pessoa.nome" required>
+
+            <label for="pessoa.cpf" class="label">CPF</label>
+            <input      inputmode="numeric"
+            nbInput
+            fullWidth
+            id="pessoa.cpf"
+            placeholder=""
+            name="cpf"
+            [(ngModel)]="pessoa.cpf" required
+            mask="000.000.000-00"          >
+
+            <label for="pessoa.email" class="label">E-mail</label>
+            <input type="text" nbInput fullWidth id="pessoa.email" placeholder="" name="email" [(ngModel)]="pessoa.email" required>
+
+            <!-- Opções de Status-->
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="label">Perfil de:</label>
+              </div>
+            </div>
+
+            <nb-select fullWidth id="pessoa.perfil" placeholder="Selecione o tipo" class="nb-select"  name="perfil" required [(ngModel)]="tipoPerfil">
+              <nb-option>Nenhuma das alternativas</nb-option>
+              <nb-option value="1">Comprador</nb-option>
+              <nb-option value="2">Motorista</nb-option>
+            </nb-select>
+
+
+          </div>
+
+          <div>
+            <button nbButton shape="semi-round" [disabled]="!nameForm.valid" fullWidth (click)="create()" status="success">Cadastrar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+  </nb-card-body>
+</nb-card>

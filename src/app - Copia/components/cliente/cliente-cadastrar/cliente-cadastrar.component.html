@@ -1,0 +1,37 @@
+<nb-card size="large">
+  <nb-card-header style="margin: auto;"><img src="/assets/img/cadastrodeparceiro.png" alt=""></nb-card-header>
+  <nb-card-body>
+
+    <form #nameForm="ngForm" class="step-container">
+      <div class="row">
+
+        <!-- CADASTRO DE ARMAZENS ONDE SERÁ ARMAZENADO CARGAS EM AVARIAS  -->
+        <div class="col-sm-6">
+
+          <div class="form-group-cte">
+            <label for="cliente.nome" class="label">Nome</label>
+            <input type="text"  nbInput fullWidth id="cliente.nome" placeholder="" name="nomecliente" [(ngModel)]="cliente.nome" required>
+
+            <label for="cliente.cnpj" class="label">CNPJ</label>
+            <input      inputmode="numeric"
+            nbInput
+            fullWidth
+            id="cliente.cnpj"
+            placeholder=""
+            name="cnpj"
+            [(ngModel)]="cliente.cnpj" required
+            mask="00.000.000/0000-00"         >
+
+          </div>
+
+          <div>
+            <button nbButton shape="semi-round" [disabled]="!nameForm.valid" fullWidth (click)="create()" status="success">Cadastrar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+  </nb-card-body>
+</nb-card>

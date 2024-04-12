@@ -1,0 +1,16 @@
+<nb-card>
+  <nb-card-header>Adicione produtos a sua nota:</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <input [(ngModel)]="produto.produtoNome" nbInput placeholder="Nome do Produto" required (ngModelChange)="checkFormValidity()">
+      <input [(ngModel)]="produto.produtoValor" type="number" nbInput placeholder="Valor do Produto" required (ngModelChange)="checkFormValidity()">
+      <input [(ngModel)]="produto.produtoQuantidade" type="number" nbInput placeholder="Quantidade" required (ngModelChange)="checkFormValidity()">
+      <input [(ngModel)]="produto.situacaoProduto" type="text" nbInput placeholder="Pendente" disabled value="Pendente">
+
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="cancel" nbButton outline shape="semi-round" status="danger" (click)="cancel()">Cancelar</button>
+    <button nbButton outline shape="semi-round" status="success" (click)="submit()" [disabled]="!isFormValid">Cadastrar</button>
+  </nb-card-footer>
+</nb-card>

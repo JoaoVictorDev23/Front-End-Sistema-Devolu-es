@@ -23,7 +23,7 @@ export class ClienteCadastrarComponent {
   create(){
     this.clienteService.cadastrarcliente(this.cliente).subscribe(
       response =>{
-        this.toastrService.success("Comprador cadastrado com sucesso!", "Sucesso");
+        this.toastrService.success("Cliente cadastrado com sucesso!", "Sucesso");
         
       },
       error =>{
@@ -31,7 +31,7 @@ export class ClienteCadastrarComponent {
           this.toastrService.warning(error.error.message, "Erro");
         }
         else{
-          this.toastrService.warning('Erro ao Cadastrar Comprador.!', "Erro");
+          this.toastrService.warning('Erro ao Cadastrar Cliente.!', "Erro");
         }
       }
     )

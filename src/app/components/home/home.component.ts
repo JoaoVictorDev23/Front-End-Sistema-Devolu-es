@@ -9,6 +9,7 @@ import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  totalNotas: number = 0;
 
   chart: any;
   chartSituacoes: any;
@@ -68,7 +69,7 @@ export class HomeComponent implements OnInit {
     this.chart = new Chart('canvas', {
       type: 'bar',
       data: {
-        labels: ['Valor Total'],
+        labels: [''],
         datasets: [{
           label: 'Valor de Venda',
           data: [this.totalValorVenda],
@@ -94,6 +95,14 @@ export class HomeComponent implements OnInit {
           y: {
             beginAtZero: true
           }
+        },
+        plugins:{
+          legend:{
+            position:'bottom',
+            align: 'start',
+            
+
+          }
         }
       }
     });
@@ -102,45 +111,45 @@ export class HomeComponent implements OnInit {
   inicializarGraficoSituacoes(): void {
     this.nfdserviceService.getAllNotasFiscais().subscribe(
       (notasFiscais: NotaFiscal[]) => {
+        this.totalNotas = notasFiscais.length; // Atualiza o total de notas
+  
         console.log('Dados do Gráfico 2:', notasFiscais); // Adiciona o console.log para verificar os dados recebidos
   
         if (notasFiscais && notasFiscais.length > 0) {
           // Calcular a quantidade de notas em cada situação
-          const pendentes = notasFiscais.filter(nota => nota.valoresDTO.situacaoValores === 'Pendente'   || nota.dadosNfdDTO.situacao ==='Pendente').length;
-          const aprovadas = notasFiscais.filter(nota => nota.valoresDTO.situacaoValores === 'APROVADA'   && nota.dadosNfdDTO.situacao ==='APROVADA').length;
-          const rejeitadas = notasFiscais.filter(nota => nota.valoresDTO.situacaoValores === 'REJEITADA' || nota.dadosNfdDTO.situacao ==='REJEITADA').length;
-          const correcoes = notasFiscais.filter(nota => nota.valoresDTO.situacaoValores === 'CORRECAO'   || nota.dadosNfdDTO.situacao ==='CORRECAO').length;
-          
-
+          const pendentes = notasFiscais.filter(nota => nota.valoresDTO.situacaoValores === 'Pendente' || nota.dadosNfdDTO.situacao === 'Pendente').length;
+          const aprovadas = notasFiscais.filter(nota => nota.valoresDTO.situacaoValores === 'APROVADA' && nota.dadosNfdDTO.situacao === 'APROVADA').length;
+          const rejeitadas = notasFiscais.filter(nota => nota.valoresDTO.situacaoValores === 'REJEITADA' && nota.dadosNfdDTO.situacao === 'REJEITADA').length;
+          const correcoes = notasFiscais.filter(nota => nota.valoresDTO.situacaoValores === 'CORRECAO' || nota.dadosNfdDTO.situacao === 'CORRECAO').length;
+  
           // Configure o gráfico 2 com os dados calculados
           this.chartSituacoes = new Chart('canvasSituacoes', {
-            type: 'bar',
+            type: 'pie',
             data: {
-              labels: ['Pendentes', 'Aprovadas', 'Rejeitadas', 'Correções'],
+              labels: ['Pendentes', 'Aprovadas', 'Correções', 'Rejeitadas'],
               datasets: [{
                 label: 'Quantidade de Notas por Situação',
-                data: [pendentes, aprovadas, rejeitadas,correcoes],
+                data: [pendentes, aprovadas, correcoes, rejeitadas], // Ajuste para corrigir a ordem dos dados
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(75, 192, 192, 0.2)',
                   'rgba(255, 205, 86, 0.2)',
                   'rgba(54, 162, 235, 0.2)'
-
                 ],
                 borderColor: [
                   'rgba(255, 99, 132, 1)',
                   'rgba(75, 192, 192, 1)',
                   'rgba(255, 205, 86, 1)',
                   'rgba(54, 162, 235, 1)'
-
                 ],
                 borderWidth: 1
               }]
             },
             options: {
-              scales: {
-                y: {
-                  beginAtZero: true
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  align: 'start'
                 }
               }
             }

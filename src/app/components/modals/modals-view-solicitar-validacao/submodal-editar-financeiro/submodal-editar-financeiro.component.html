@@ -8,7 +8,7 @@
 </div>
 
 <div class="form-group">
-  <nb-select required fullWidth placeholder="Selecione um Comprador" id="comprador" class="nb-select-motorista"
+  <nb-select required fullWidth placeholder="Selecione um Comprador" id="comprador.nome" class="nb-select-motorista"
   name="comprador.id" [(ngModel)]="data.notaFiscal.valoresDTO.pessoa" required>
   <nb-option *ngFor="let comprador of compradores" [value]="comprador.id">{{ comprador.nome }}</nb-option>
 </nb-select>
@@ -53,7 +53,7 @@
       <nb-select style="width: 100% !important; margin-right: 0 !important;" placeholder="Selecione uma situação"
         [(selected)]="element.situacaoProduto" (selectedChange)="calcularValoresTotais()">
 
-        <nb-option value="Pendente">Pendente</nb-option>
+        <nb-option value="Descarte">Descarte</nb-option>
         <nb-option value="Em armazem">Em Armazém</nb-option>
         <nb-option value="Venda">Venda</nb-option>
         <nb-option value="Prejuizo">Prejuízo</nb-option>
@@ -103,11 +103,11 @@
   <!--Cliente Nome-->
   <div class="flex">
     <label class="label" style="margin-bottom: 5px; margin-right: 19rem !important;" >Cliente</label>
-    <label class="label" style="margin-bottom: 5px;">Debitado do Cliente</label>
+    <label class="label" style="margin-bottom: 5px;">Debitado pelo Cliente</label>
   </div>
   <div class="flex">
-    <nb-select  fullWidth placeholder="Selecione um Cliente" class="nb-select-motorista" name="cliente.id"
-    [(ngModel)]="cliente.id" required>
+    <nb-select required fullWidth placeholder="Selecione um Cliente" class="nb-select-motorista" id="cliente.nome"
+    name="cliente.id" [(ngModel)]="data.notaFiscal.valoresDTO.cliente" required>
     <nb-option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</nb-option>
   </nb-select>
     <input type="number" nbInput fullWidth placeholder="Digite o valor" id="cliente-debitado"

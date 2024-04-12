@@ -65,6 +65,9 @@ export class ModalDevolucoesViewComponent {
   }
 
   ngOnInit(): void {
+    this.loadUser();
+    this.fetchChatMessages();
+
 
   }
   //Logica de envio de mensagem e Mecanismos do CHat

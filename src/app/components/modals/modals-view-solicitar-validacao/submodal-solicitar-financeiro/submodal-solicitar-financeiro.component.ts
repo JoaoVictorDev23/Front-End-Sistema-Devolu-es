@@ -23,7 +23,7 @@ export class SubmodalSolicitarFinanceiroComponent {
   compradores: Pessoa[] = [];
 
   clientes: Cliente[] = [];
-  cliente: Cliente = { id: undefined, cnpj: '', nome: ''};
+  cliente: Cliente = { cnpj: '', nome: ''};
   pessoa: Pessoa = { nome: '', cpf: '', email: ''}; // Declare a propriedade cliente aqui
 
   motivo: Motivo | undefined; // Declare a propriedade cliente aqui
@@ -169,7 +169,7 @@ export class SubmodalSolicitarFinanceiroComponent {
       this.NfdService.findByCliente(clienteId).subscribe(
         (cliente: Cliente) => {
           this.cliente = cliente; // Armazene os dados do cliente na variável local
-          this.data.notaFiscal.valoresDTO.cliente = cliente.id!.toString();
+          this.data.notaFiscal.valoresDTO.cliente = cliente.id!;
         },
         (error) => {
           console.error('Erro ao carregar dados do cliente:', error);

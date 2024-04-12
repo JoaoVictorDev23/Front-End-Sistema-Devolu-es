@@ -1,0 +1,188 @@
+/* Geral para o card e seus elementos */
+nb-card {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+nb-card-body {
+  padding: 20px;
+}
+
+.step-container {
+  margin-left: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+
+/* Rótulos e Inputs */
+label {
+  display: block;
+  margin-bottom: -0.2rem;
+  margin-left: 4px;
+  margin-right: 185px;
+  font-weight: bold;
+  color: #676060;
+}
+
+input[type="number"],input[type="text"] {
+  width: 99%;
+  padding: 5px;
+  border: 1px solid #a59e9e;
+  border-radius: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  color: #a59e9e;
+}
+nb-select {
+  width: 99% !important;
+  padding: 2px;
+  border: 1px solid #a59e9e;
+  border-radius: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  color: #a59e9e;
+}
+
+/* Botão */
+button {
+  width: 99.9%;
+  padding: 10px 20px;
+  background-color: #004a45; /* Correção para o botão "Continuar" */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.button-step2{
+  width: 99% !important;
+}
+
+.button-concluir {
+  margin-top: 1.2rem;
+  width: 100% !important;
+}
+.button-adicionar-prod{
+  width: 100% !important;
+  margin-bottom: 1rem;
+
+}
+.button-excluir-prod{
+  margin-left: -.7rem;
+  width: 50% !important;
+}
+
+
+/* Layout Responsivo para rótulos e inputs */
+@media (min-width: 768px) {
+  .labelcte {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Ajuste para espaçamento */
+    align-items: center;
+  }
+  .labelvendas {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Ajuste para espaçamento */
+    align-items: center;
+  }
+
+
+
+  .labelcliente {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Ajuste para espaçamento */
+    align-items: center;
+  }
+
+
+  .form-group-cte {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+
+  .form-group-cte > input,
+  .form-group-cte > nb-select {
+    flex-basis: 32.45%; /* Ajuste conforme necessário para larguras dos rótulos */
+  }
+}
+/* Responsividade do Formulário */
+@media (max-width: 768px) {
+  .step-container {
+    flex-direction: column;
+  }
+
+  .labelcte {
+    flex-direction: row;
+  }
+
+
+}
+
+.custom-textarea {
+  resize: none; // Impede a redimensionamento
+  max-width: 100%; // Largura máxima
+  max-height: 150px; // Altura máxima (ajuste conforme necessário)
+
+  // Estilos adicionais, se necessário
+  border: 1px solid #a59e9e;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  color:#666363;
+
+}
+
+.render
+ {
+
+    margin-bottom:2rem
+
+  }
+
+  mat-table{
+    width: 100%;
+  }
+
+/* Adicione estas regras ao seu arquivo SCSS */
+
+/* Ajuste de tamanho para input e nb-select na segunda etapa */
+.step-container2 {
+  .form-group-cliente > input,
+  .nb-select-motorista {
+    width: 97% !important; /* Reduzindo 2% do tamanho original */
+  }
+  button{
+    width: 97% !important;
+    margin-top: 10px;
+  }
+
+  nb-toggle{
+    margin-bottom: 5px !important;
+
+  }
+
+
+}
+.visual-text {
+  font-family: 'Arial', sans-serif; // Substitua 'Arial' pelo nome da fonte desejada
+  font-size: 12px; // Ajuste o tamanho da fonte conforme necessário
+  color: #333;
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  margin-top: 5px;
+}

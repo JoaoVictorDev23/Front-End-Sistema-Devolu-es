@@ -1,0 +1,30 @@
+<nb-card size="large">
+  <nb-card-header style="margin: auto;"><img src="/assets/img/cadastromotivos.png" alt=""></nb-card-header>
+  <nb-card-body>
+
+    <form #nameForm="ngForm" class="step-container" (ngSubmit)="cadastrarMotivo()">
+      <div class="row">
+
+        <!-- FORM MOTIVOS DAS DEVOLUÇÕES -->
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label for="motivo" class="label">Motivo:</label>
+            <input style="margin-top:5px;margin-bottom: 5px;" type="text" nbInput fullWidth id="motivo" placeholder="" name="motivo" [(ngModel)]="motivo.nomeMotivo" required>
+
+            <label for="descricaoMotivo" class="label">Descrição do Motivo:</label>
+            <textarea rows="5" nbInput fullWidth id="descricaoMotivo" shape="round" placeholder="" name="descricaoMotivo" [(ngModel)]="motivo.descriMotivo" required nbInput
+              #observacaoInput="ngModel" class="custom-textarea"></textarea>
+          </div>
+
+          <div>
+            <button nbButton fullWidth shape="semi-round" [disabled]="!nameForm.valid" type="submit" status="success">Cadastrar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+  </nb-card-body>
+</nb-card>

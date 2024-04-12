@@ -1,0 +1,102 @@
+<div class="col-sm-6">
+  <div class="labelcte">
+    <label for="filial" class="label">Filial</label>
+
+    <label for="serie" class="label">Serie</label>
+
+    <label for="cte" class="label">CTE</label>
+
+  </div>
+
+  <div class="form-group-cte" style="margin-left:0.2rem">
+    <input type="number" nbInput id="filial" placeholder="" fullWidth name="filial"
+      [(ngModel)]="data.notaFiscal.dadosNfdDTO.filial" disabled>
+    <input type="number" nbInput id="serie" placeholder="" fullWidth name="serie"
+      [(ngModel)]="data.notaFiscal.dadosNfdDTO.serie" disabled>
+    <input type="number" nbInput id="cte" placeholder="" fullWidth name="CTE"
+      [(ngModel)]="data.notaFiscal.dadosNfdDTO.cte" disabled>
+  </div>
+</div>
+<!-- Numero NFD-->
+
+<div style="display: flex; width: 700px; ">
+  <label for="motivo" class="label">Motivo</label>
+  <label for="numero-nfd" class="label" style="margin-left: 6.5rem;">Número NFd</label>
+</div>
+
+<div style="display: flex; width: 700px;">
+  <input type="text" nbInput style="max-width: 49.5%; min-width: 40%;" id="motivo" placeholder="" name="motivo"
+    [value]="motivo?.nomeMotivo" disabled class="input-motivo">
+  <input type="number" nbInput style="max-width: 49.5%; min-width: 40%;" id="numero-nfd" placeholder=""
+    name="numero-nfd" [(ngModel)]="data.notaFiscal.dadosNfdDTO.numeroNfd" disabled class="input-nfd">
+</div>
+<!-- Opções de Status-->
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="label">Status</label>
+  </div>
+</div>
+<div class="form-group3">
+  <nb-select fullWidth placeholder="Selecione um Status" [(ngModel)]="data.notaFiscal.dadosNfdDTO.status" required>
+    <nb-option value="Pendente">Pendente</nb-option>
+    <nb-option value="Processando">Processando</nb-option>
+    <nb-option value="Em espera">Em espera</nb-option>
+    <nb-option value="Finalizado">Finalizado</nb-option>
+    <nb-option value="Devolução">Devolução</nb-option>
+  </nb-select>
+</div>
+
+
+
+<!-- Observação -->
+
+<div class="col-sm-6">
+  <div class="form-group" style="margin-bottom: -1px;">
+    <label for="observacao" class="label">Observações</label>
+  </div>
+</div>
+
+<textarea rows="5" nbInput fullWidth shape="round" placeholder="" name="observacao" disabled nbInput id="observacao"
+  [(ngModel)]="data.notaFiscal.dadosNfdDTO.observacao" #observacaoInput="" class="custom-textarea"></textarea>
+
+<!--Cliente Nome-->
+<div class="flex">
+  <label class="label" style="margin-bottom: 5px; margin-right: 19rem !important;">Cliente</label>
+  <label class="label" style="margin-bottom: 5px;">Debitado pelo Cliente</label>
+</div>
+<div class="flex">
+  <input type="text" nbInput fullWidth placeholder="Digite o valor" id="cliente" name="cliente-debitado"
+    [value]="cliente?.nome" disabled required>
+  <input type="number" nbInput fullWidth placeholder="Digite o valor" id="cliente-debitado" name="cliente-debitado"
+    [value]="data.notaFiscal.valoresDTO.debitadoCliente" disabled required>
+</div>
+
+
+
+<!-- Motorista-->
+
+
+<div class="flex">
+  <label class="label" style="margin-bottom: 5px; margin-right: 18rem !important;">Motorista</label>
+  <label class="label" style="margin-bottom: 5px;">Debitado do Motorista</label>
+</div>
+<div class="flex">
+  <input type="text" nbInput fullWidth disabled placeholder="Digite o valor" id="motorista-debitado"
+    name="motorista-debitado" [value]="motorista?.nome" disabled required>
+  <input type="number" nbInput fullWidth placeholder="Digite o valor" id="motorista-debitado" name="motorista-debitado"
+    [value]="data.notaFiscal.valoresDTO.debitadoMotorista" disabled required>
+</div>
+
+
+
+
+<mat-dialog-actions align="end" class="configurationbutton">
+  <!-- Botões-->
+  <button nbButton status="danger" shape="semi-round" outline style="margin-right:1.5px;"
+    (click)="rejeitarSituacao(data.notaFiscal.dadosNfdDTO.dadosnfdId)">Rejeitar</button>
+  <button nbButton status="warning" shape="semi-round" outline style="margin-right:1.5px;"
+    (click)="correcaoSituacao(data.notaFiscal.dadosNfdDTO.dadosnfdId)">Correção</button>
+  <button nbButton status="success" shape="semi-round" outline
+    (click)="aprovarSituacao(data.notaFiscal.dadosNfdDTO.dadosnfdId)">Aprovar</button>
+</mat-dialog-actions>

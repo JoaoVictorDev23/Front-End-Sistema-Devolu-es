@@ -20,4 +20,5 @@ export interface DadosNotasFiscais{
       atualizadopor?:any;
 
       data: Date;
+      anexo: string;
 }
