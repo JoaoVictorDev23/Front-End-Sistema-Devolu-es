@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { Observable, forkJoin } from 'rxjs';
 import { ProdutosDialogComponent } from 'src/app/components/devolucoes/devolucoes-cadastrar/produtos-dialog/produtos-dialog.component';
 import { Cliente } from 'src/app/interface/cliente-interface';
 import { ValoresNotaFiscal } from 'src/app/interface/financeironfd-interface';
@@ -17,7 +18,7 @@ import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
   styleUrls: ['./submodal-editar-financeiro.component.scss']
 })
 export class SubmodalEditarFinanceiroComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['produtonome','produtodesconto','produtovalor', 'produtoquantidade','produtosituacao'];
   dataSource = this.data.notaFiscal.produtosDTO;
 
   compradores: Pessoa[] = [];
@@ -36,7 +37,7 @@ export class SubmodalEditarFinanceiroComponent {
     this.getMotoristas();
     this.getClientes();
 
-    
+
     this.loadCliente();
     this.loadMotorista();
     this.loadPessoa();
@@ -68,34 +69,39 @@ export class SubmodalEditarFinanceiroComponent {
       this.motoristas = motoristas;
     });
   }
-  //calcular
-  calcularValoresTotais() {
-    let valorVenda = 0;
-    let valorPrejuizo = 0;
-    let valorArmazem = 0;
+//calcular
+calcularValoresTotais() {
+  let valorVenda = 0;
+  let valorPrejuizo = 0;
+  let valorArmazem = 0;
+  let valorDesconto = 0;
 
-    this.data.notaFiscal.produtosDTO.forEach((produto: Produto) => {
-      switch (produto.situacaoProduto) {
-        case 'Em armazem':
-          valorArmazem += produto.produtoQuantidade * produto.produtoValor;
-          break;
-        case 'Venda':
-          valorVenda += produto.produtoQuantidade * produto.produtoValor;
-          break;
-        case 'Prejuizo':
-          valorPrejuizo += produto.produtoQuantidade * produto.produtoValor;
-          break;
-        default:
-          break;
-      }
-    });
+  this.data.notaFiscal.produtosDTO.forEach((produto: Produto) => {
+    switch (produto.situacaoProduto) {
+      case 'Em armazem':
+        valorArmazem += produto.produtoQuantidade * produto.produtoValor;
+        break;
+      case 'Venda':
 
-    this.data.notaFiscal.valoresDTO.valorArmazem = valorArmazem;
-    this.data.notaFiscal.valoresDTO.valorVenda = valorVenda;
-    this.data.notaFiscal.valoresDTO.valorPrejuizo = valorPrejuizo;
+        valorVenda += produto.produtoQuantidade * produto.produtoValor;
+        valorDesconto = (valorVenda * produto.produtoDesconto) / 100;
+
+        valorVenda -= valorDesconto;
+        break;
+      case 'Prejuizo':
+        valorPrejuizo += produto.produtoQuantidade * produto.produtoValor;
+        break;
+      default:
+        break;
+    }
+  });
+
+  this.data.notaFiscal.valoresDTO.valorArmazem = valorArmazem;
+  this.data.notaFiscal.valoresDTO.valorVenda = valorVenda;
+  this.data.notaFiscal.valoresDTO.valorPrejuizo = valorPrejuizo;
 
 
-  }
+}
 
   compararValores(element: any) {
     const valorOriginal = element.valor;
@@ -117,6 +123,7 @@ export class SubmodalEditarFinanceiroComponent {
           'produtoNome': produto.produtoNome,
           'produtoQuantidade': produto.produtoQuantidade,
           'produtoValor': produto.produtoValor,
+          'produtoDesconto':produto.produtoDesconto,
           'situacaoProduto': produto.situacaoProduto,
           'armazemId': produto.armazemId,
           'numeronfd': produto.numeronfd
@@ -139,13 +146,39 @@ export class SubmodalEditarFinanceiroComponent {
     this.NfdService.updateValores(valoresDTO).subscribe(
       () => {
         // Sucesso na atualização
-        this.toastrService.success('Alteração realizada com sucesso!', 'Sucesso');
+        this.toastrService.success('Valores atualizados com sucesso!', 'Sucesso');
         this.dialogRef.close();
       },
       (error) => {
         // Erro na atualização
-        this.toastrService.danger('Erro ao atualizar.', 'Erro');
-        console.error('Erro ao atualizar:', error);
+        this.toastrService.danger('Erro ao atualizar valores.', 'Erro');
+        console.error('Erro ao atualizar valores:', error);
+      }
+    );
+  }
+
+  atualizarProdutosEValores(produtosDTOList: Produto[], valoresDTO: ValoresNotaFiscal) {
+    console.log(produtosDTOList);
+      // Definir produto_nfd para cada produto
+  const numeroNfd = this.data.notaFiscal.dadosNfdDTO.numeroNfd;
+  produtosDTOList.forEach(produto => {
+    produto.numeronfd = numeroNfd;
+  });
+
+
+    this.NfdService.updateProdutos(produtosDTOList).subscribe(
+      response => {
+        this.atualizarValores(valoresDTO);
+        // Trate a resposta aqui, se necessário
+        this.toastrService.success('Produtos atualizados com sucesso!', 'Sucesso');
+
+        console.log('Produtos atualizados com sucesso:', response);
+      },
+      error => {
+        // Trate erros aqui, se necessário
+        this.toastrService.danger('Erro ao atualizar Produtos.', 'Erro');
+
+        console.error('Erro ao atualizar produtos:', error);
       }
     );
   }
@@ -166,6 +199,7 @@ export class SubmodalEditarFinanceiroComponent {
       );
     }
   }
+
   loadPessoa() {
     const PessoaId = this.data.notaFiscal.valoresDTO.pessoa; // Obtenha o ID do Pessoa da nota fiscal
     if (PessoaId) {

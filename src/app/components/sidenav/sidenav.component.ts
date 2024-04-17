@@ -62,7 +62,7 @@ export class SidenavComponent {
     },
     {
       title: 'Painel de Gestor',
-      icon: 'file-text-outline',
+      icon: 'layers-outline',
       hidden: !this.authService.hasPermission(['0','2']),
       children: [
         {
@@ -100,7 +100,18 @@ export class SidenavComponent {
 
       ]
     },
+    {
+      title: 'Relátorios',
+      icon: 'file-text-outline',
+      children:[
+        {
+          title:'Planilhas',
+          link: '/relatorios/excel',
+          icon: 'npm-outline'
 
+        },
+      ]
+    },
     {
       title: 'Informações',
       icon: 'alert-circle-outline',
@@ -182,6 +193,7 @@ export class SidenavComponent {
         }
       );
     }
+
   }
 
 

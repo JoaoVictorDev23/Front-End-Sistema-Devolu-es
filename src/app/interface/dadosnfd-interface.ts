@@ -4,7 +4,7 @@ import { Produto } from "./produtos.interface";
 export interface DadosNotasFiscais{
 
       dadosnfdId?:any;
-      numeroNfd: String;
+      numeroNfd: string;
       numeroNfo: String;
 
       filial: String;
@@ -21,4 +21,5 @@ export interface DadosNotasFiscais{
 
       data: Date;
       anexo: string;
+
 }

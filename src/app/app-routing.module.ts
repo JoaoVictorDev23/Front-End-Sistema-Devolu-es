@@ -21,6 +21,7 @@ import { UsuarioCadastrarComponent } from './components/usuarios/usuario-cadastr
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ClienteCadastrarComponent } from './components/cliente/cliente-cadastrar/cliente-cadastrar.component';
+import { ExcelComponent } from './components/relatorios/excel/excel.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,7 @@ const routes: Routes = [
       {path:'minhasnotas-correcao',component:MinhasnotasCorrecaoComponent},
 
       {path:'gerarfinancas', component:FinancaSolicitarComponent},
+      {path:'relatorios/excel', component:ExcelComponent},
 
       {path:'usuario', component:UsuarioCadastrarComponent},
 

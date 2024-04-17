@@ -82,6 +82,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClienteCadastrarComponent } from './components/cliente/cliente-cadastrar/cliente-cadastrar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ExcelComponent } from './components/relatorios/excel/excel.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     UsuarioCadastrarComponent,
     LoginComponent,
     ClienteCadastrarComponent,
-
+    ExcelComponent
 
 
   ],

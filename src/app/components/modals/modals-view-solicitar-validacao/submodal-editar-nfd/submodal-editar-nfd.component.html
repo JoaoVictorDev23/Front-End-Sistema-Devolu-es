@@ -67,6 +67,7 @@
 <textarea rows="5" nbInput fullWidth shape="round"  placeholder="" name="observacao"  nbInput
   id="observacao" [(ngModel)]="data.notaFiscal.dadosNfdDTO.observacao" #observacaoInput=""
   class="custom-textarea"></textarea>
+  <button nbButton shape="semi-round" (click)="fazerDownload(data.notaFiscal.dadosNfdDTO.numeroNfd)" style="margin-top: 1rem;">Baixar Arquivo</button>
 
 
 

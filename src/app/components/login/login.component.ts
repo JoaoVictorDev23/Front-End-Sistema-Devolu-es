@@ -75,6 +75,7 @@ export class LoginComponent implements OnInit {
   }
   clearLocalStorage(): void {
     localStorage.clear();
+
   }
 
 }

@@ -103,11 +103,9 @@
                 required nbInput [(ngModel)]="notaFiscal.dadosNfdDTO.observacao" #observacaoInput="ngModel"
                 class="custom-textarea"></textarea>
 
-
+                <input nbInput shape="semi-round" type="file" (change)="onFileChange($event)" multiple style="margin-bottom: 1rem;">
 
             </div>
-            <input nbInput type="file" (change)="onFileSelected($event)">
-
           </div>
           <!--    -->
 
@@ -248,7 +246,7 @@
               </nb-select>
 
             </div>
-
+            
             <!-- botao de continuar-->
             <button nbButton nbStepperNext (click)="adicionarNotaFiscal()" [disabled]="!todosCamposSelecionados()"
               status="success" shape="semi-round" class="button-step2">Cadastrar</button>

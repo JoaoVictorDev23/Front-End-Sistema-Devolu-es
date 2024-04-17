@@ -47,7 +47,7 @@ export class FinancaSolicitarComponent implements AfterViewInit {
   getAllNotasFiscais() {
     this.nfdserviceService.getAllNotasFiscais().subscribe(
       (data: NotaFiscal[]) => {
-        this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores === 'Pendente');
+        this.notasFiscais = data.filter(nota => nota.valoresDTO.situacaoValores === 'Aguardando Valores');
         this.dataSource.data = this.notasFiscais;
       },
       (error) => {

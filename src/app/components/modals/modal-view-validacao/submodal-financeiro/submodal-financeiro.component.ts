@@ -79,6 +79,7 @@ openDialog(): void {
         'produtoNome': produto.produtoNome,
         'produtoQuantidade':produto.produtoQuantidade,
         'produtoValor': produto.produtoValor,
+        'produtoDesconto':produto.produtoDesconto,
         'situacaoProduto': produto.situacaoProduto,
         'armazemId': produto.armazemId,
         'numeronfd': produto.numeronfd

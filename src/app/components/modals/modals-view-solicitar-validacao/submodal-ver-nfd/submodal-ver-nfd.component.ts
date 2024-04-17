@@ -89,24 +89,28 @@ loadMotivo() {
     );
   }
 }
-// Em algum método do componente que precise fazer o download
-fazerDownload(anexo: string) {
-  this.NfdService.downloadFile(anexo).subscribe(
+// Em algum método do componente que precisa fazer o download do arquivo zipado
+fazerDownload(numeroNfd: string) {
+  this.NfdService.downloadFile(numeroNfd).subscribe(
     (data: Blob) => {
       // Cria um objeto URL a partir do Blob para criar o link de download
       const url = window.URL.createObjectURL(data);
       const a = document.createElement('a');
       a.href = url;
-      a.download = anexo ; // Defina o nome do arquivo aqui
+      a.download = 'arquivos.zip'; // Defina o nome do arquivo zipado aqui
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url); // Libera a URL criada para o Blob
     },
     error => {
-      console.error('Erro ao baixar o arquivo:', error);
+      console.error('Erro ao baixar o arquivo zipado:', error);
       // Lógica de tratamento de erro, se necessário
+      this.toastrService.danger("Erro ao baixar o arquivo zipado","Erro");
     }
   );
 }
+
+
+
 }

@@ -15,8 +15,6 @@
 </div>
 
 
-
-
 <!-- TABELA PRODUTOS-->
 
 <button nbButton outline shape="semi-round" fullWidth status="info" class="button-adicionar-prod" (click)="openDialog()"
@@ -26,31 +24,38 @@
 
 
   <!-- Coluna Nome Produto -->
-  <ng-container matColumnDef="position">
+  <ng-container matColumnDef="produtonome">
     <th mat-header-cell *matHeaderCellDef> Nome do Produto</th>
-    <td mat-cell *matCellDef="let element" style="width: 25% !important;"> {{element.produtoNome}} </td>
+    <td mat-cell *matCellDef="let element" style="width: 15% !important;"> {{element.produtoNome}} </td>
   </ng-container>
+
+
+    <!-- Coluna Valor produto-->
+    <ng-container matColumnDef="produtodesconto">
+      <th mat-header-cell *matHeaderCellDef> Desconto </th>
+      <td mat-cell *matCellDef="let element" style="width: 15% !important;">
+        <input [(ngModel)]="element.produtoDesconto" type="number" style="width: 75%;" (input)="calcularValoresTotais()" /> </td>
+    </ng-container>
 
   <!-- Coluna Valor produto-->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Valor </th>
-    <td mat-cell *matCellDef="let element" style="width: 25% !important;">
-      <input [(ngModel)]="element.produtoValor" type="number" style="width: 75%;" (blur)="compararValores(element)" /> </td>
+  <ng-container matColumnDef="produtovalor">
+    <th mat-header-cell *matHeaderCellDef> Valor Produto </th>
+    <td mat-cell *matCellDef="let element" style="width: 30% !important;">
+      <input [(ngModel)]="element.produtoValor" type="number" style="width: 85%;" (input)="calcularValoresTotais()" /> </td>
   </ng-container>
-
   <!-- Coluna Quantidade produto -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-    <td mat-cell *matCellDef="let element" style="width: 25% !important;">
-      <input [(ngModel)]="element.produtoQuantidade" type="number" style="width: 75%;" (blur)="compararValores(element)" />
+  <ng-container matColumnDef="produtoquantidade">
+    <th mat-header-cell *matHeaderCellDef> Quant.</th>
+    <td mat-cell *matCellDef="let element" style="width: 20% !important;">
+      <input [(ngModel)]="element.produtoQuantidade" type="number" style="width: 75%;" (input)="calcularValoresTotais()" />
     </td>
   </ng-container>
 
   <!-- Coluna situação produto -->
-  <ng-container matColumnDef="symbol">
+  <ng-container matColumnDef="produtosituacao">
     <th mat-header-cell *matHeaderCellDef> Situação </th>
-    <td mat-cell *matCellDef="let element" style="width: 25% !important;">
-      <nb-select style="width: 100% !important; margin-right: 0 !important;" placeholder="Selecione uma situação"
+    <td mat-cell *matCellDef="let element" style="width: 20% !important;">
+      <nb-select style=" margin-right: 0 !important;" placeholder="Selecione uma situação"
         [(selected)]="element.situacaoProduto" (selectedChange)="calcularValoresTotais()">
 
         <nb-option value="Descarte">Descarte</nb-option>
@@ -138,6 +143,5 @@
 <mat-dialog-actions align="end" class="configurationbutton">
   <div class="aviso-pequeno">*Atualização sujeita a validação do seu gestor</div>
   <button nbButton status="success" shape="semi-round" fullWidth outline
-  (click)="UpdateValores(data.notaFiscal.valoresDTO)">Realizar Atualização</button>
+  (click)="atualizarProdutosEValores(data.notaFiscal.produtosDTO, data.notaFiscal.valoresDTO)">Realizar Atualização</button>
 </mat-dialog-actions>
-

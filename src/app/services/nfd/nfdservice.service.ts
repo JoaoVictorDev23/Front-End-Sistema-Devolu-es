@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { API_CONFIG } from 'src/app/config/api.config';
@@ -11,6 +11,7 @@ import { Pessoa } from 'src/app/interface/pessoa-interface';
 import { AuthService } from '../authservice.service';
 import { ValoresNotaFiscal } from 'src/app/interface/financeironfd-interface';
 import { DadosNotasFiscais } from 'src/app/interface/dadosnfd-interface';
+import { Produto } from 'src/app/interface/produtos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,6 @@ export class NfdserviceService {
   authToken: string | null;
 
   constructor(private http: HttpClient, private authService: AuthService) {
-
     this.authToken = this.authService.extractAuthToken();
   }
 
@@ -100,14 +100,41 @@ export class NfdserviceService {
   updateDados(DadosDto: DadosNotasFiscais) {
     return this.http.put(`${this.apiUrl}/nfd/dados/update/${DadosDto.dadosnfdId}`, DadosDto, { headers: this.getHeaders() });
   }
-// Service para baixar o arquivo
-downloadFile(anexo: string): Observable<any> {
+  updateProdutos(ProdutosDto: Produto[]) {
+    return this.http.put(`${this.apiUrl}/produtos/atualizar`, ProdutosDto, { headers: this.getHeaders() });
+  }
+  //service para upload de arquivos:
+  uploadFiles(files: FileList, numeroNfd: string): Observable<any> {
+
+
+    const formData: FormData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i], files[i].name);
+    }
+    formData.append('numeroNfd', numeroNfd);
+
+    const url = `${this.apiUrl}/nfd/dados/upload`; // Endpoint no backend para o upload
+    const headers = this.getHeaders(); // Obtenha os headers de autenticação aqui
+
+    return this.http.post(url, formData, { headers: headers });
+  }
+
+// Service para baixar o arquivo zipado
+downloadFile(numeroNfd: string): Observable<any> {
   const headers = this.getHeaders();
-  const url = `${this.apiUrl}/nfd/dados/download?anexo=${anexo}`;
+  const url = `${this.apiUrl}/nfd/dados/download/${numeroNfd}`;
 
   return this.http.get(url, {
     headers: this.getHeaders(),
     responseType: 'blob' // Espera uma resposta do tipo Blob (arquivo binário)
+  });
+}
+gerarExcel(nomeArquivo: string): Observable<ArrayBuffer> { // Corrigindo o tipo de retorno para Observable<ArrayBuffer>
+  const url = `${this.apiUrl}/nota/gerar-excel?nomeArquivo=${nomeArquivo}`;
+  const headers = this.getHeaders();
+  return this.http.post(url, { nomeArquivo }, {
+    headers,
+    responseType: 'arraybuffer' // Não é necessário 'as json' aqui
   });
 }
 

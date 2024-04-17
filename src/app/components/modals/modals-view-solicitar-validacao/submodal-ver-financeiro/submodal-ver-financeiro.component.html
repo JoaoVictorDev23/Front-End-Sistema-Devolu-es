@@ -23,32 +23,39 @@
 
 
   <!-- Coluna Nome Produto -->
-  <ng-container matColumnDef="position">
+  <ng-container matColumnDef="produtonome">
     <th mat-header-cell *matHeaderCellDef> Nome do Produto</th>
-    <td mat-cell *matCellDef="let element" style="width: 25% !important;"> {{element.produtoNome}} </td>
+    <td mat-cell *matCellDef="let element" style="width: 15% !important;"> {{element.produtoNome}} </td>
   </ng-container>
+
+
+    <!-- Coluna Valor produto-->
+    <ng-container matColumnDef="produtodesconto">
+      <th mat-header-cell *matHeaderCellDef> Desconto </th>
+      <td mat-cell *matCellDef="let element" style="width: 15% !important;">
+        <input [(ngModel)]="element.produtoDesconto" type="number" style="width: 75%;" disabled (input)="calcularValoresTotais()" /> </td>
+    </ng-container>
 
   <!-- Coluna Valor produto-->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Valor </th>
-    <td mat-cell *matCellDef="let element" style="width: 25% !important;">
-      <input [(ngModel)]="element.produtoValor" type="number" style="width: 75%;" disabled/> </td>
+  <ng-container matColumnDef="produtovalor">
+    <th mat-header-cell *matHeaderCellDef> Valor Produto </th>
+    <td mat-cell *matCellDef="let element" style="width: 30% !important;">
+      <input [(ngModel)]="element.produtoValor" type="number" style="width: 85%;" disabled (input)="calcularValoresTotais()" /> </td>
   </ng-container>
-
   <!-- Coluna Quantidade produto -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-    <td mat-cell *matCellDef="let element" style="width: 25% !important;">
-      <input [(ngModel)]="element.produtoQuantidade" type="number" style="width: 75%;" disabled/>
+  <ng-container matColumnDef="produtoquantidade">
+    <th mat-header-cell *matHeaderCellDef> Quant.</th>
+    <td mat-cell *matCellDef="let element" style="width: 20% !important;">
+      <input [(ngModel)]="element.produtoQuantidade" type="number" style="width: 75%;" disabled (input)="calcularValoresTotais()" />
     </td>
   </ng-container>
 
   <!-- Coluna situação produto -->
-  <ng-container matColumnDef="symbol">
+  <ng-container matColumnDef="produtosituacao">
     <th mat-header-cell *matHeaderCellDef> Situação </th>
-    <td mat-cell *matCellDef="let element" style="width: 25% !important;">
-      <nb-select style="width: 100% !important; margin-right: 0 !important;" placeholder="Selecione uma situação"
-        [(selected)]="element.situacaoProduto" (selectedChange)="calcularValoresTotais()" disabled>
+    <td mat-cell *matCellDef="let element" style="width: 20% !important;" disabled>
+      <nb-select style=" margin-right: 0 !important;" placeholder="Selecione uma situação"
+        [(selected)]="element.situacaoProduto" (selectedChange)="calcularValoresTotais()">
 
         <nb-option value="Descarte">Descarte</nb-option>
         <nb-option value="Em armazem">Em Armazém</nb-option>

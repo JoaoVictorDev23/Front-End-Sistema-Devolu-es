@@ -13,7 +13,7 @@ import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
   styleUrls: ['./submodal-ver-financeiro.component.scss']
 })
 export class SubmodalVerFinanceiroComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['produtonome','produtodesconto','produtovalor', 'produtoquantidade','produtosituacao'];
   dataSource = this.data.notaFiscal.produtosDTO;
 
   pessoa: Pessoa | undefined; // Declare a propriedade cliente aqui
@@ -79,6 +79,7 @@ openDialog(): void {
         'produtoNome': produto.produtoNome,
         'produtoQuantidade':produto.produtoQuantidade,
         'produtoValor': produto.produtoValor,
+        'produtoDesconto':produto.produtoDesconto,
         'situacaoProduto': produto.situacaoProduto,
         'armazemId': produto.armazemId,
         'numeronfd': produto.numeronfd

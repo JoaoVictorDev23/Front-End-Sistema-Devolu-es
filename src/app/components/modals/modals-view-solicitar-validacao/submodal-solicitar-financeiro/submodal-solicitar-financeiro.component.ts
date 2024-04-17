@@ -17,7 +17,7 @@ import { NfdserviceService } from 'src/app/services/nfd/nfdservice.service';
   styleUrls: ['./submodal-solicitar-financeiro.component.scss']
 })
 export class SubmodalSolicitarFinanceiroComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['produtonome', 'produtovalor', 'produtodesconto', 'produtoquantidade','produtosituacao'];
   dataSource = this.data.notaFiscal.produtosDTO;
 
   compradores: Pessoa[] = [];
@@ -72,6 +72,7 @@ export class SubmodalSolicitarFinanceiroComponent {
     let valorVenda = 0;
     let valorPrejuizo = 0;
     let valorArmazem = 0;
+    let valorDesconto = 0;
 
     this.data.notaFiscal.produtosDTO.forEach((produto: Produto) => {
       switch (produto.situacaoProduto) {
@@ -79,7 +80,11 @@ export class SubmodalSolicitarFinanceiroComponent {
           valorArmazem += produto.produtoQuantidade * produto.produtoValor;
           break;
         case 'Venda':
+
           valorVenda += produto.produtoQuantidade * produto.produtoValor;
+          valorDesconto = (valorVenda * produto.produtoDesconto) / 100;
+
+          valorVenda -= valorDesconto;
           break;
         case 'Prejuizo':
           valorPrejuizo += produto.produtoQuantidade * produto.produtoValor;
@@ -116,6 +121,7 @@ export class SubmodalSolicitarFinanceiroComponent {
           'produtoNome': produto.produtoNome,
           'produtoQuantidade': produto.produtoQuantidade,
           'produtoValor': produto.produtoValor,
+          'produtoDesconto':produto.produtoDesconto,
           'situacaoProduto': produto.situacaoProduto,
           'armazemId': produto.armazemId,
           'numeronfd': produto.numeronfd
@@ -149,13 +155,39 @@ export class SubmodalSolicitarFinanceiroComponent {
     this.NfdService.updateValores(valoresDTO).subscribe(
       () => {
         // Sucesso na atualização
-        this.toastrService.success('Alteração realizada com sucesso!', 'Sucesso');
+        this.toastrService.success('Valores atualizados com sucesso!', 'Sucesso');
         this.dialogRef.close();
       },
       (error) => {
         // Erro na atualização
-        this.toastrService.danger('Erro ao atualizar.', 'Erro');
-        console.error('Erro ao atualizar:', error);
+        this.toastrService.danger('Erro ao atualizar valores.', 'Erro');
+        console.error('Erro ao atualizar valores:', error);
+      }
+    );
+  }
+
+  atualizarProdutosEValores(produtosDTOList: Produto[], valoresDTO: ValoresNotaFiscal) {
+    console.log(produtosDTOList);
+      // Definir produto_nfd para cada produto
+  const numeroNfd = this.data.notaFiscal.dadosNfdDTO.numeroNfd;
+  produtosDTOList.forEach(produto => {
+    produto.numeronfd = numeroNfd;
+  });
+
+
+    this.NfdService.updateProdutos(produtosDTOList).subscribe(
+      response => {
+        this.atualizarValores(valoresDTO);
+        // Trate a resposta aqui, se necessário
+        this.toastrService.success('Produtos atualizados com sucesso!', 'Sucesso');
+
+        console.log('Produtos atualizados com sucesso:', response);
+      },
+      error => {
+        // Trate erros aqui, se necessário
+        this.toastrService.danger('Erro ao atualizar Produtos.', 'Erro');
+
+        console.error('Erro ao atualizar produtos:', error);
       }
     );
   }

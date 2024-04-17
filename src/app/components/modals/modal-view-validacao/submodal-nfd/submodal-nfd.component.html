@@ -72,8 +72,6 @@
     [value]="data.notaFiscal.valoresDTO.debitadoCliente" disabled required>
 </div>
 
-
-
 <!-- Motorista-->
 
 
@@ -88,8 +86,7 @@
     [value]="data.notaFiscal.valoresDTO.debitadoMotorista" disabled required>
 </div>
 
-
-
+<button nbButton shape="semi-round" (click)="fazerDownload(data.notaFiscal.dadosNfdDTO.anexo)" style="margin-top: 1rem;">Baixar Arquivo</button>
 
 <mat-dialog-actions align="end" class="configurationbutton">
   <!-- Botões-->

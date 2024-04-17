@@ -7,6 +7,7 @@ export interface Produto {
   produtoNome: string;
   produtoQuantidade: number;
   produtoValor: number;
+  produtoDesconto:number;
   situacaoProduto: string;
   armazemId:number;
   numeronfd: String;

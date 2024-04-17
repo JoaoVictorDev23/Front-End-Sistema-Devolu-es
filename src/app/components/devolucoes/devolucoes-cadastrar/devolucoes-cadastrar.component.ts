@@ -27,6 +27,9 @@ export class DevolucoesCadastrarComponent {
     return this.notaFiscal.produtosDTO.reduce((total, produto) => total + (produto.produtoValor * produto.produtoQuantidade), 0);
   }
 
+
+
+
   clientes: Cliente[] = [];
   motoristas: Motorista[] = [];
   motivo: Motivo[] = [];
@@ -55,7 +58,7 @@ export class DevolucoesCadastrarComponent {
       valorVenda: 0,
       valorPrejuizo: 0,
       valorArmazem: 0,
-      situacaoValores: 'Pendente',
+      situacaoValores: 'Aguardando Valores',
       pessoa:'0',
       armazem:0 ,
       motorista: '0',
@@ -104,7 +107,8 @@ export class DevolucoesCadastrarComponent {
     return (
       this.notaFiscal.valoresDTO.cliente !== 0 &&
       this.notaFiscal.valoresDTO.motorista !== "0" &&
-      this.notaFiscal.valoresDTO.pessoa !== "0"
+      this.notaFiscal.valoresDTO.pessoa !== "0" &&
+      this.notaFiscal.valoresDTO.armazem !== 0
     );
   }
 
@@ -117,6 +121,7 @@ export class DevolucoesCadastrarComponent {
           'produtoNome': produto.produtoNome,
           'produtoQuantidade': produto.produtoQuantidade,
           'produtoValor': produto.produtoValor,
+          'produtoDesconto':produto.produtoDesconto,
           'situacaoProduto': produto.situacaoProduto,
           'armazemId':produto.armazemId,
           'numeronfd':this.notaFiscal.dadosNfdDTO.numeroNfd
@@ -178,7 +183,7 @@ export class DevolucoesCadastrarComponent {
 
   adicionarNotaFiscal(): void {
     this.notaFiscal.produtosDTO = this.dataSource.data;
-    this.uploadFile();
+    this.uploadFiles();
 
 
     this.nfdService.cadastrarNotaFiscal(this.notaFiscal).subscribe(
@@ -211,38 +216,34 @@ export class DevolucoesCadastrarComponent {
 
 
   // Parte de Anexos
-  selectedFile: File | undefined;
+  numeroNota: string = ''; // Variável para armazenar o número da nota fiscal
 
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0] as File;
+  filesToUpload: FileList | null = null;
+
+  onFileChange(event: any) {
+    this.filesToUpload = event.target.files;
   }
 
-  uploadFile() {
-    if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('file', this.selectedFile);
-      this.notaFiscal.dadosNfdDTO.anexo = this.selectedFile?.name;
-
-      this.http.post(`http://192.168.100.127:8090/nfd/dados/upload`, formData, { headers: this.getHeaders() }).subscribe(
-        (response) => {
-          console.log('Arquivo enviado com sucesso:', response);
+  uploadFiles() {
+    this.numeroNota = this.notaFiscal.dadosNfdDTO.numeroNfd;
+    if (this.filesToUpload && this.numeroNota) {
+      this.nfdService.uploadFiles(this.filesToUpload, this.numeroNota).subscribe(
+        response => {
+          console.log('Arquivos enviados com sucesso!', response);
+          // Lógica adicional após o upload, se necessário
+          this.toastrService.info("Anexos salvos com sucesso!","Atenção:")
         },
-        (error) => {
-          console.error('Erro ao enviar arquivo:', error);
+        error => {
+          console.error('Erro ao enviar arquivos:', error);
+          // Lógica de tratamento de erro, se necessário
+
         }
       );
+    } else {
+      console.warn('Selecione arquivos e informe o número da nota fiscal.');
     }
-
   }
-  private getHeaders(): HttpHeaders {
-    // Verifica se o token JWT foi extraído corretamente
-    if (!this.authToken) {
-      throw new Error('Token JWT não encontrado.');
-    }
-
-    // Cria os headers com apenas o token JWT no header Authorization
-    return new HttpHeaders().set('Authorization', `Bearer ${this.authToken}`);
-  }
-
+  
+  
 
 }
